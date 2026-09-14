@@ -12,6 +12,7 @@
   --soft-red: #f9ebeb;
   --soft-blue: #eaf2f6;
   --soft-green: #edf3ec;
+  --page-gutter: clamp(1.25rem, 5vw, 5.5rem);
   --display: 'Arial Narrow', 'Helvetica Neue', sans-serif;
   --body: 'Helvetica Neue', 'Avenir Next', Arial, sans-serif;
 }
@@ -34,7 +35,7 @@ img { display: block; max-width: 100%; }
 
 :focus-visible { outline: 3px solid var(--steel); outline-offset: 3px; }
 
-.container { width: min(1160px, calc(100% - 2.5rem)); margin-inline: auto; }
+.container { margin-inline: auto; padding-inline: var(--page-gutter); width: 100%; }
 
 .eyebrow {
   color: var(--red);
@@ -81,7 +82,6 @@ img { display: block; max-width: 100%; }
 .page-grid { display: grid; gap: 1.1rem; grid-template-columns: repeat(12, minmax(0, 1fr)); }
 
 @media (max-width: 720px) {
-  .container { width: min(100% - 2rem, 1160px); }
   .section { padding: 4rem 0; }
 }
 

@@ -20,4 +20,14 @@ describe('base del sitio Tu Bombero', () => {
     expect(home).toContain('Equipos y soluciones contra incendio');
     expect(home).toContain('Catálogo por necesidad');
   });
+
+  it('usa una composición editorial de ancho fluido en la portada', () => {
+    const globalStyles = readFileSync(projectPath('src/styles/global.css'), 'utf8');
+    const home = readFileSync(projectPath('src/pages/index.astro'), 'utf8');
+
+    expect(globalStyles).toContain('--page-gutter: clamp(1.25rem, 5vw, 5.5rem);');
+    expect(globalStyles).toContain('padding-inline: var(--page-gutter);');
+    expect(home).toContain('grid-template-columns: 5fr 7fr;');
+    expect(home).toContain('quick-nav__items');
+  });
 });

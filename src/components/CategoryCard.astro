@@ -21,8 +21,8 @@ const { title, description, tag, image, imageAlt, index } = Astro.props;
 </article>
 
 <style>
-  .category-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; transition: box-shadow .2s ease, transform .2s ease; }
-  .category-card:hover { box-shadow: 0 2px 8px rgba(28, 36, 40, .04); transform: translateY(-2px); }
+  .category-card { background: var(--surface); border: 1px solid var(--line); overflow: hidden; transition: background .2s ease, transform .2s ease; }
+  .category-card:hover { background: var(--soft-blue); transform: translateY(-2px); }
   .category-card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
   .category-card__body { padding: 1.25rem 1.3rem 1.45rem; }
   .category-card p { color: var(--red); font-size: .68rem; font-weight: 800; letter-spacing: .11em; margin: 0 0 .7rem; text-transform: uppercase; }
