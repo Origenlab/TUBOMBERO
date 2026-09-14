@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+
+:root {
+  --canvas: #fafaf8;
+  --surface: #ffffff;
+  --ink: #1c2428;
+  --muted: #687278;
+  --line: #e5e8e7;
+  --red: #b63636;
+  --red-dark: #942a2a;
+  --steel: #2c6384;
+  --soft-red: #f9ebeb;
+  --soft-blue: #eaf2f6;
+  --soft-green: #edf3ec;
+  --display: 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  --body: 'Helvetica Neue', 'Avenir Next', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { display: block; max-width: 100%; }
+
+:focus-visible { outline: 3px solid var(--steel); outline-offset: 3px; }
+
+.container { width: min(1160px, calc(100% - 2.5rem)); margin-inline: auto; }
+
+.eyebrow {
+  color: var(--red);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.section { padding: 6rem 0; }
+
+.section-title {
+  max-width: 16ch;
+  margin: .6rem 0 1rem;
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  letter-spacing: -.055em;
+  line-height: .97;
+}
+
+.section-copy { max-width: 62ch; color: var(--muted); }
+
+.action {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  border-radius: 5px;
+  background: var(--ink);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+  padding: .8rem 1.1rem;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.action:hover { background: #303b40; }
+.action:active { transform: scale(.98); }
+
+.action--outline { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+.action--outline:hover { background: var(--surface); }
+
+.page-grid { display: grid; gap: 1.1rem; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+@media (max-width: 720px) {
+  .container { width: min(100% - 2rem, 1160px); }
+  .section { padding: 4rem 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { animation: enter .6s cubic-bezier(.16, 1, .3, 1) both; }
+  @keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+}

@@ -1,0 +1,34 @@
+---
+import { NAVIGATION, SITE } from '../config/site';
+---
+
+<header class="header">
+  <div class="notice"><div class="container">{SITE.coverage}</div></div>
+  <div class="container header__row">
+    <a class="brand" href="/" aria-label="Tu Bombero, inicio">
+      <span class="brand__mark" aria-hidden="true">TB</span>
+      <span><strong>Tu</strong><b>Bombero</b></span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul class="nav">
+        {NAVIGATION.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="header__quote" href="#cotizar">Cotizar</a>
+  </div>
+</header>
+
+<style>
+  .notice { background: var(--ink); color: #dfe5e6; font-size: .72rem; letter-spacing: .09em; padding: .45rem 0; text-transform: uppercase; }
+  .header { background: color-mix(in srgb, var(--canvas) 94%, transparent); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
+  .header__row { align-items: center; display: flex; gap: 2rem; justify-content: space-between; min-height: 74px; }
+  .brand { align-items: center; display: inline-flex; font-family: var(--display); font-size: 1.25rem; gap: .65rem; letter-spacing: -.06em; line-height: .86; text-transform: uppercase; }
+  .brand strong { display: block; font-weight: 400; }
+  .brand b { color: var(--red); font-weight: 800; }
+  .brand__mark { align-items: center; background: var(--red); border-radius: 4px; color: white; display: inline-flex; font-family: var(--body); font-size: .7rem; font-weight: 800; height: 30px; justify-content: center; letter-spacing: -.04em; width: 30px; }
+  .nav { display: flex; font-size: .86rem; font-weight: 600; gap: 1.35rem; list-style: none; margin: 0; padding: 0; }
+  .nav a:hover { color: var(--red); }
+  .header__quote { border: 1px solid var(--ink); border-radius: 4px; font-size: .8rem; font-weight: 700; padding: .57rem .8rem; }
+  .header__quote:hover { background: var(--ink); color: white; }
+  @media (max-width: 800px) { .nav { display: none; } .header__row { min-height: 64px; } }
+</style>

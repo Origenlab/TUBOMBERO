@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import { SITE } from '../config/site';
+import { buildMeta, organizationSchema, websiteSchema } from '../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+}
+
+const { title, description, path } = Astro.props;
+const meta = buildMeta({ title, description, path });
+const schema = [organizationSchema(), websiteSchema()];
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={meta.canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={meta.canonical} />
+    <title>{meta.title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body><slot /></body>
+</html>

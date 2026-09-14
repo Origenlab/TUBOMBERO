@@ -1,0 +1,39 @@
+---
+import { NAVIGATION, SITE } from '../config/site';
+---
+
+<footer id="contacto" class="footer">
+  <div class="container footer__grid">
+    <div>
+      <a class="footer__brand" href="/">Tu<span>Bombero</span></a>
+      <p>{SITE.description}</p>
+      <small>{SITE.contactStatus}</small>
+    </div>
+    <div>
+      <h2>Explora</h2>
+      <ul>{NAVIGATION.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2>Cobertura</h2>
+      <p>{SITE.coverage}</p>
+      <p class="footer__note">Las ubicaciones, horarios y canales de atención se integrarán al confirmar los datos comerciales.</p>
+    </div>
+  </div>
+  <div class="container footer__bottom">© {new Date().getFullYear()} {SITE.name}. Todos los derechos reservados.</div>
+</footer>
+
+<style>
+  .footer { background: var(--ink); color: #d9e0e1; padding-top: 4.5rem; }
+  .footer__grid { display: grid; gap: 3rem; grid-template-columns: 1.5fr .8fr 1fr; padding-bottom: 3.5rem; }
+  .footer__brand { color: #fff; font-family: var(--display); font-size: 2rem; font-weight: 800; letter-spacing: -.07em; text-transform: uppercase; }
+  .footer__brand span { color: #ef7c7c; }
+  .footer p, .footer li { color: #aebbbe; font-size: .9rem; }
+  .footer h2 { color: #fff; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+  .footer ul { list-style: none; margin: 1rem 0 0; padding: 0; }
+  .footer li + li { margin-top: .45rem; }
+  .footer a:hover { color: #fff; }
+  .footer small { color: #efb2b2; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+  .footer__note { max-width: 34ch; }
+  .footer__bottom { border-top: 1px solid rgba(255,255,255,.12); color: #8f9a9d; font-size: .75rem; padding: 1.2rem 0; }
+  @media (max-width: 720px) { .footer__grid { grid-template-columns: 1fr; } }
+</style>
