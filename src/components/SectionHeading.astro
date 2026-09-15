@@ -1,17 +1,75 @@
 ---
-interface Props { eyebrow?: string; title: string; titleAccent?: string; desc?: string; layout?: 'simple' | 'duo'; align?: 'left' | 'center'; body?: string[]; dark?: boolean; }
-const { eyebrow, title, titleAccent, desc, layout = 'simple', align = 'left', body = [], dark = false } = Astro.props;
+// SectionHeading.astro — Encabezado de sección reutilizable: eyebrow con barra de acento, H2 con segunda línea resaltada, descripción. ORIGEN: PROYECTORED/src/components/ui/SectionHeader.astro + SectionHeaderDuo.astro (fusionados: layout 'simple' centrado/izquierda y layout 'duo' en dos columnas).
+// COMPLEMENTO TÍTULO (duo): IZQ = eyebrow + título + desc (el bloque de título completo); DER = body[] (párrafos que explican el módulo). Un solo componente para TODOS los títulos → menos código y peso. En 'simple' el desc va bajo el título como siempre.
+// Componente atómico de UI — sin dependencias de config. Estilos scoped con tokens.
+export interface Props {
+  id?: string
+  eyebrow?: string
+  /** Primera línea del título (obligatoria). */
+  title: string
+  /** Segunda línea, resaltada con color de acento. */
+  titleAccent?: string
+  desc?: string
+  /** 'simple' (1 columna) | 'duo' (título a la izquierda, body a la derecha). */
+  layout?: 'simple' | 'duo'
+  /** Sólo para 'simple': alineación. */
+  align?: 'center' | 'left'
+  /** Sólo para 'duo': párrafos de la columna derecha. */
+  body?: string[]
+  /** true → texto claro sobre fondo oscuro. */
+  dark?: boolean
+  /** Etiqueta semántica del encabezado de bloque. */
+  as?: 'h2' | 'h3'
+}
+const { id, eyebrow, title, titleAccent, desc, layout = 'simple', align = 'center', body = [], dark = false, as = 'h2' } = Astro.props
+const effectiveLayout = layout === 'duo' && body.length === 0 ? 'simple' : layout
+const Tag = as
 ---
-<header class:list={['section-heading', `section-heading--${layout}`, `section-heading--${align}`, dark && 'section-heading--dark']}><div><p class="eyebrow">{eyebrow}</p><h2>{title}{titleAccent && <><br /><span>{titleAccent}</span></>}</h2>{desc && <p class="section-heading__desc">{desc}</p>}</div>{layout === 'duo' && body.length > 0 && <div class="section-heading__body">{body.map((text) => <p>{text}</p>)}</div>}</header>
+
+<header class:list={['sech', `sech--${effectiveLayout}`, effectiveLayout === 'simple' && `sech--${align}`, { 'sech--dark': dark }]}> 
+  <div class="sech__head">
+    {eyebrow && <p class="sech__eyebrow"><span class="sech__eyebrow-bar" aria-hidden="true"></span>{eyebrow}</p>}
+    <Tag class="sech__title" id={id}>
+      {title}{titleAccent && <><br /><span class="sech__accent">{titleAccent}</span></>}
+    </Tag>
+    {desc && <p class="sech__desc">{desc}</p>}
+  </div>
+  {effectiveLayout === 'duo' && body.length > 0 && (
+    <div class="sech__body">
+      {body.map((p: string) => <p class="sech__body-p">{p}</p>)}
+    </div>
+  )}
+</header>
+
 <style>
-  .section-heading { margin-bottom: var(--sp-8); }
-  .section-heading--duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 7vw, 6rem); align-items: end; }
-  .section-heading h2 { margin: 0; font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3.25rem); line-height: var(--leading-tight); letter-spacing: -.03em; }
-  .section-heading h2 span { color: var(--c-primary); }
-  .section-heading__desc, .section-heading__body p { color: var(--c-ink-2); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
-  .section-heading__body { display: grid; gap: var(--sp-3); }
-  .section-heading__body p { margin: 0; font-size: var(--text-base); }
-  .section-heading--dark h2 { color: var(--c-white); }
-  .section-heading--dark .section-heading__desc, .section-heading--dark .section-heading__body p { color: rgb(255 255 255 / .7); }
-  @media (max-width: 768px) { .section-heading--duo { grid-template-columns: 1fr; align-items: start; gap: var(--sp-4); } }
+  .sech { margin-bottom: var(--sp-8, 2rem); }
+  .sech__eyebrow { display: inline-flex; align-items: center; gap: var(--sp-2, .5rem); font-size: var(--text-xs, .8125rem); font-weight: var(--weight-bold, 700); text-transform: uppercase; letter-spacing: .08em; color: var(--color-red, var(--c-primary, var(--c-primary))); margin: 0 0 var(--sp-3, .75rem); }
+  .sech__eyebrow-bar { width: 20px; height: 2px; background: currentColor; border-radius: 2px; }
+  .sech__title { font-size: var(--text-3xl, clamp(2rem, 3.5vw, 3rem)); font-weight: var(--weight-black, 800); line-height: var(--leading-tight, 1.2); letter-spacing: -.02em; color: var(--c-ink, var(--color-gray-900, var(--c-ink-2))); margin: 0; }
+  .sech__accent { color: var(--color-red, var(--c-primary, var(--c-primary))); }
+  .sech__desc { font-size: var(--text-lg, 1.125rem); color: var(--text-muted, var(--c-muted, var(--c-muted))); line-height: var(--leading-relaxed, 1.7); margin: var(--sp-4, 1rem) 0 0; max-width: 60ch; }
+
+  /* simple */
+  .sech--center { text-align: center; }
+  .sech--center .sech__eyebrow { justify-content: center; }
+  .sech--center .sech__desc { margin-inline: auto; }
+  .sech--left { text-align: left; }
+
+  /* duo: 2 columnas alineadas verticalmente (centradas entre sí). Cada columna
+     agrupa sus elementos JUNTOS, separados por un salto de línea uniforme (gap). */
+  .sech--duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .sech--duo .sech__desc { max-width: none; }
+  .sech--duo .sech__head { display: flex; flex-direction: column; gap: var(--sp-4, 1rem); }
+  .sech--duo .sech__head .sech__eyebrow { margin-bottom: 0; }
+  .sech--duo .sech__head .sech__desc { margin-top: 0; }
+  .sech__body { display: flex; flex-direction: column; gap: var(--sp-4, 1rem); }
+  .sech__body-p { font-size: var(--text-base, 1.0625rem); color: var(--text-muted, var(--c-muted, var(--c-muted))); line-height: var(--leading-relaxed, 1.7); margin: 0; }
+
+  /* dark */
+  .sech--dark .sech__title { color: var(--c-white); }
+  .sech--dark .sech__desc, .sech--dark .sech__body-p { color: rgba(255,255,255,.75); }
+
+  @media (max-width: 768px) {
+    .sech--duo { grid-template-columns: 1fr; gap: var(--sp-5, 1.25rem); align-items: start; }
+  }
 </style>

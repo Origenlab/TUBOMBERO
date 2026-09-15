@@ -26,7 +26,7 @@ describe('contrato de homologación TUBOMBERO', () => {
   });
 
   it('usa la identidad visual roja de Gama y una sola familia Inter', () => {
-    expect(read('src/styles/tokens.css')).toContain('--c-primary: #C41E3A');
+    expect(read('src/styles/tokens.css')).toContain('--c-primary: #D71920');
     expect(read('astro.config.mjs')).toMatch(/name:\s*['"]Inter['"]/);
     expect(read('astro.config.mjs')).not.toMatch(/name:\s*['"]Outfit['"]/);
   });

@@ -154,7 +154,13 @@ export type ProductCategory = (typeof TAXONOMY.categories)[number];
 export type Service = (typeof TAXONOMY.services)[number];
 export type Sector = (typeof TAXONOMY.sectors)[number];
 export type CoverageState = (typeof TAXONOMY.coverageStates)[number];
-export type NavItem = { label: string; href: string };
+export type NavItem = {
+  label: string;
+  href: string;
+  panel?: 'mega' | 'dropdown';
+  allLabel?: string;
+  items?: readonly { label: string; href: string; desc?: string }[];
+};
 
 export const NAV: readonly NavItem[] = [
   { label: 'Productos', href: '/productos' },

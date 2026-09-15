@@ -8,7 +8,7 @@ import SectionHeading from '@components/SectionHeading.astro';
 import SectionMenu from '@components/SectionMenu.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import PageLayout from '@layouts/PageLayout.astro';
-import { CATEGORIES, PROCESS, SERVICES, SITE } from '@config/site';
+import { CATEGORIES, PROCESS, SERVICES, SITE, SECTORS } from '@config/site';
 
 const menuItems = [
   { label: 'Catálogo', href: '#catalogo', sub: 'Catálogo por necesidad' },
@@ -25,13 +25,12 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     title="Equipos y soluciones"
     accent=" contra incendio"
     after="para operar con mayor preparación."
-    coverage="Cobertura · Cobertura comercial prevista para toda la República Mexicana · Toda la República Mexicana"
+    coverage="Cobertura comercial prevista para toda la República Mexicana."
     subtitle="Explora un catálogo pensado para organizaciones, brigadas y proyectos que buscan orientar su compra en todo México."
     descRight={[
-      SITE.description,
-      'Las ubicaciones, horarios y canales de atención se integrarán al confirmar los datos comerciales.',
+      'En Tu Bombero reunimos en un solo catálogo el equipo contra incendio que una organización necesita para proteger a su gente, sus instalaciones y su operación: extintores y equipo de respuesta inicial, componentes para sistemas contra incendio —redes hidráulicas, mangueras, hidrantes, válvulas y gabinetes—, detección y alarma, señalización y evacuación, y equipo para bomberos y brigadas. Cada familia está organizada por necesidad para que encuentres más rápido lo que tu instalación requiere.',
+      'El catálogo está pensado para industria y manufactura, construcción, comercio y oficinas, hospitalidad y salud, almacenes y logística, y cuerpos de Protección Civil en toda la República Mexicana. Nuestras líneas de servicio —asesoría técnica, instalación de sistemas, mantenimiento y capacitación— buscan acompañarte antes, durante y después de la compra, para que cada decisión sobre equipo contra incendio se tome con criterio técnico y no solo por precio.',
     ]}
-    image={{ src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Técnico revisando un gabinete y red contra incendio' }}
     ctas={[{ text: 'Solicitar información', href: '/contacto' }, { text: 'Explorar catálogo', href: '#catalogo', variant: 'outline' }]}
   />
 
@@ -44,7 +43,6 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
         title="Encuentra el equipo según el punto que necesitas atender."
         desc="La primera versión organiza el catálogo en seis familias para que la navegación sea clara desde el inicio. Las fichas técnicas y referencias reales se incorporarán a partir del inventario confirmado."
         layout="duo"
-        body={[SITE.description, 'Canal de contacto pendiente']}
       />
       <div class="category-grid">
         {CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} badge={category.tag} blurb={category.description} index={index} />)}
@@ -55,13 +53,13 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   <section id="sectores" class="section sectors">
     <div class="container sectors__grid">
       <div><p class="eyebrow">Soluciones por sector</p><h2 class="section-title">Un punto de partida para cada operación.</h2></div>
-      <div><p class="section-copy">El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere.</p><ul>{['Industria y manufactura', 'Construcción e infraestructura', 'Comercio y oficinas', 'Hospitalidad y salud', 'Protección Civil y bomberos', 'Almacenes y logística'].map((sector, index) => <li><span>0{index + 1}</span>{sector}<b aria-hidden="true">↗</b></li>)}</ul></div>
+      <div><p class="section-copy">El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere.</p><ul>{SECTORS.map((sector, index) => <li><span>0{index + 1}</span>{sector.label}<b aria-hidden="true">↗</b></li>)}</ul></div>
     </div>
   </section>
 
   <section id="servicios" class="section">
     <div class="container">
-      <SectionHeading eyebrow="Servicios" title="Acompañamiento antes, durante y después de la selección." desc="Las líneas de servicio se presentan como un mapa comercial. El alcance concreto de cada una se publicará al confirmar las capacidades operativas y comerciales de Tu Bombero." layout="duo" body={[SERVICES[0].desc, SERVICES[3].desc]} />
+      <SectionHeading eyebrow="Servicios" title="Acompañamiento antes, durante y después de la selección." desc="Las líneas de servicio se presentan como un mapa comercial. El alcance concreto de cada una se publicará al confirmar las capacidades operativas y comerciales de Tu Bombero." layout="duo" />
       <a class="service-link" href="#servicios">Ver servicios</a>
       <div class="service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href="/servicios" />)}</div>
     </div>
@@ -72,7 +70,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     title="Preparación visible"
     titleAccent="desde el primer vistazo."
     description="Protección personal, equipo de respiración, accesorios y herramientas de apoyo estarán agrupados en una sección dedicada para facilitar la consulta técnica y comercial."
-    features={[{ label: 'Protección personal' }, { label: 'Rescate y accesorios' }, { label: 'Equipo para bomberos y brigadas' }]}
+    features={[{ label: 'Protección personal', desc: 'Equipo para respuesta especializada.' }, { label: 'Rescate y accesorios', desc: 'Apoyo operativo y preparación.' }, { label: 'Equipo para bomberos y brigadas', desc: 'Consulta técnica y comercial.' }]}
     imgMain={{ src: '/images/home/epp-y-rescate.avif', alt: 'Equipo de protección personal y rescate para bomberos' }}
     imgA={{ src: '/images/home/extintores-y-emergencia.avif', alt: 'Extintores y elementos de emergencia' }}
     imgB={{ src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Inspección de equipo contra incendio' }}
@@ -92,11 +90,12 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
 
   <ProcessSteps eyebrow="Ruta de atención" title="De una necesidad a" titleAccent="una conversación clara." desc="Un camino sencillo para ubicar el equipo y servicio que se requiere." steps={steps} />
 
-  <CTABanner id="cotizar" heading="Cuéntanos qué necesitas proteger." desc="Estamos preparando los canales de atención. Cuando compartas el teléfono, WhatsApp o correo comercial, esta sección quedará conectada para iniciar cada solicitud con contexto. Para publicar el acceso de cotización necesitamos confirmar un dato real de contacto." btns={[{ label: 'Solicitar información', href: '/contacto', primary: true }]} badge="Canal de contacto pendiente" variant="dark" />
+  <CTABanner id="cotizar" heading="Cuéntanos qué necesitas proteger." desc="Estamos preparando los canales de atención. Cuando compartas el teléfono, WhatsApp o correo comercial, esta sección quedará conectada para iniciar cada solicitud con contexto. Para publicar el acceso de cotización necesitamos confirmar un dato real de contacto." btns={[{ label: 'Solicitar información', href: '/contacto', primary: true }]} badge="Canal de contacto pendiente · Canales de atención en configuración" variant="dark" />
 </PageLayout>
 
 <style>
-  .category-grid, .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+  .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-5); }
+  .service-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-5); }
   .section--surface, .sectors { background: var(--c-surface); }
   .sectors { border-block: var(--border); }
   .sectors__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); }
@@ -110,6 +109,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   .guide-grid h3 { margin: var(--sp-5) 0 auto; font-family: var(--font-heading); font-size: var(--text-lg); line-height: var(--leading-snug); }
    .guide-grid a { color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
    .service-link { display: inline-flex; margin: 0 0 var(--sp-5); color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
-  @media (max-width: 900px) { .category-grid, .service-grid { grid-template-columns: repeat(2, 1fr); } .sectors__grid { grid-template-columns: 1fr; } .guide-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1100px) { .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 900px) { .sectors__grid { grid-template-columns: 1fr; } .guide-grid { grid-template-columns: 1fr; } }
   @media (max-width: 640px) { .category-grid, .service-grid { grid-template-columns: 1fr; } }
 </style>
