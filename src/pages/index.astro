@@ -1,8 +1,7 @@
 ---
 import CategoryCard from '@components/CategoryCard.astro';
 import CategoryFeature from '@components/CategoryFeature.astro';
-import CTABanner from '@components/CTABanner.astro';
-import FAQAccordion from '@components/FAQAccordion.astro';
+import FAQWithContact from '@components/FAQWithContact.astro';
 import Hero from '@components/Hero.astro';
 import ProcessSteps from '@components/ProcessSteps.astro';
 import SectionHeading from '@components/SectionHeading.astro';
@@ -97,25 +96,26 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     </div>
   </section>
 
-  <section id="preguntas-frecuentes" class="section">
-    <div class="container">
-      <SectionHeading eyebrow="Preguntas frecuentes" title="Preguntas frecuentes sobre protección contra incendios" desc="Respuestas breves a las dudas más comunes antes de elegir equipo o sistemas contra incendios." layout="duo" body={["Estas respuestas son orientativas; la selección final del equipo depende del análisis de riesgo de cada inmueble y de la normativa local aplicable."]} />
-      <FAQAccordion title="" bare
-        emitSchema={false}
-        items={[
-          { question: '¿Qué es la protección contra incendios?', answer: 'Es el conjunto de medidas, equipos y sistemas que buscan prevenir un incendio, detectarlo a tiempo, controlarlo y proteger a las personas y los bienes mientras se evacua el inmueble. Incluye la protección activa, la protección pasiva y la preparación de las brigadas.' },
-          { question: '¿Cuáles son los tipos de protección contra incendios?', answer: 'Se agrupan en tres: la protección activa, que actúa sobre el fuego (extintores, hidrantes, rociadores y sistemas de detección y alarma); la protección pasiva, que confina el fuego y el humo mediante materiales y elementos con resistencia al fuego; y la prevención, que incluye señalización, rutas de evacuación, simulacros y capacitación.' },
-          { question: '¿Qué dice la NOM-002-STPS-2010?', answer: 'Es la Norma Oficial Mexicana que establece las condiciones de seguridad para la prevención y protección contra incendios en los centros de trabajo. Pide clasificar el riesgo de incendio, contar con equipos y sistemas acordes con ese riesgo, mantenerlos en condiciones, integrar brigadas y realizar simulacros.' },
-          { question: '¿Qué equipo contra incendios necesita una empresa?', answer: 'Depende del riesgo de incendio, del tamaño del inmueble y de los materiales que se manejan. Como base suelen requerirse extintores adecuados al tipo de fuego, detección y alarma, señalización de rutas y salidas de emergencia y, en instalaciones de mayor riesgo, sistemas fijos como hidrantes o rociadores automáticos.' },
-          { question: '¿Cada cuánto se revisan los sistemas contra incendios?', answer: 'De forma periódica, según lo que indiquen la normativa aplicable y el fabricante de cada equipo. Llevar un registro de revisiones y mantenimientos ayuda a demostrar que el equipo está en condiciones durante las verificaciones de Protección Civil y de la autoridad laboral.' },
-        ]}
-      />
-    </div>
-  </section>
+  <FAQWithContact
+    id="preguntas-frecuentes"
+    eyebrow="Preguntas frecuentes"
+    title="Preguntas frecuentes sobre"
+    titleAccent="protección contra incendios."
+    desc="Respuestas breves a las dudas más comunes antes de elegir equipo o sistemas contra incendios."
+    body={["Antes de cotizar conviene entender qué exige la normativa, qué tipos de protección existen y qué equipo corresponde al riesgo de tu inmueble. Reunimos aquí las respuestas a las preguntas que más se repiten al planear la protección contra incendios de una empresa.", "Estas respuestas son orientativas: la selección final del equipo depende del análisis de riesgo de cada instalación y de la normativa local aplicable. Si tu caso no aparece, usa el formulario de cotización y describe tu necesidad con el mayor detalle posible."]}
+    items={[
+      { question: '¿Qué es la protección contra incendios?', answer: 'Es el conjunto de medidas, equipos y sistemas que buscan prevenir un incendio, detectarlo a tiempo, controlarlo y proteger a las personas y los bienes mientras se evacua el inmueble. Incluye la protección activa, la protección pasiva y la preparación de las brigadas.' },
+      { question: '¿Cuáles son los tipos de protección contra incendios?', answer: 'Se agrupan en tres: la protección activa, que actúa sobre el fuego (extintores, hidrantes, rociadores y sistemas de detección y alarma); la protección pasiva, que confina el fuego y el humo mediante materiales y elementos con resistencia al fuego; y la prevención, que incluye señalización, rutas de evacuación, simulacros y capacitación.' },
+      { question: '¿Qué dice la NOM-002-STPS-2010?', answer: 'Es la Norma Oficial Mexicana que establece las condiciones de seguridad para la prevención y protección contra incendios en los centros de trabajo. Pide clasificar el riesgo de incendio, contar con equipos y sistemas acordes con ese riesgo, mantenerlos en condiciones, integrar brigadas y realizar simulacros.' },
+      { question: '¿Qué equipo contra incendios necesita una empresa?', answer: 'Depende del riesgo de incendio, del tamaño del inmueble y de los materiales que se manejan. Como base suelen requerirse extintores adecuados al tipo de fuego, detección y alarma, señalización de rutas y salidas de emergencia y, en instalaciones de mayor riesgo, sistemas fijos como hidrantes o rociadores automáticos.' },
+      { question: '¿Cada cuánto se revisan los sistemas contra incendios?', answer: 'De forma periódica, según lo que indiquen la normativa aplicable y el fabricante de cada equipo. Llevar un registro de revisiones y mantenimientos ayuda a demostrar que el equipo está en condiciones durante las verificaciones de Protección Civil y de la autoridad laboral.' },
+      { question: '¿Qué extintor conviene para cada tipo de fuego?', answer: 'Depende del material que puede arder. El polvo químico seco (PQS) es el más versátil para oficinas, comercios e industria; el agente húmedo o tipo K se usa en cocinas con aceites; el CO2 y los agentes limpios protegen equipo eléctrico y electrónico; y la espuma AFFF se emplea donde hay líquidos inflamables.' },
+      { question: '¿Qué señalización de protección civil necesita un inmueble?', answer: 'La NOM-003-SEGOB-2011 define colores, formas y símbolos de las señales de protección civil. En la práctica se requieren señales de ruta de evacuación, salidas de emergencia, ubicación de extintores y equipo contra incendio, punto de reunión y avisos de precaución, colocadas a la vista y en los puntos de decisión del recorrido.' },
+    ]}
+  />
 
   <ProcessSteps eyebrow="Ruta de atención" title="Cómo solicitar tu equipo" titleAccent="contra incendios en tres pasos." desc="Un camino sencillo para ubicar el equipo y servicio que se requiere." steps={steps} body={["Solicitar información sobre equipo contra incendio no debería ser complicado. La ruta de atención de Tu Bombero divide el proceso en tres pasos claros para que sepas en todo momento qué sigue y qué datos conviene tener a la mano.", "Primero describes tu instalación o proyecto, después revisas las familias de equipo y los servicios que aplican a tu caso y, finalmente, defines el siguiente paso comercial con una necesidad bien planteada, lo que agiliza la respuesta y evita cotizaciones imprecisas."]} />
 
-  <CTABanner id="cotizar" heading="Cuéntanos qué necesitas proteger." desc="Nuestros canales de atención se están habilitando. Mientras tanto, reúne el tipo de instalación, su superficie aproximada y el equipo con el que ya cuentas: con esa información tu cotización será más rápida y precisa." btns={[{ label: 'Cotizar protección contra incendios', href: '/contacto', primary: true }]} badge="Canal de contacto pendiente · Canales de atención en configuración" variant="dark" />
 </PageLayout>
 
 <style>

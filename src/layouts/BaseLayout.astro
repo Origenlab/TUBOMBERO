@@ -127,9 +127,6 @@ const jsonLd = buildSchema(pageType, schemaData);
     <link rel="alternate" hreflang="es-MX" href={meta.canonical} />
     <link rel="alternate" hreflang="x-default" href={meta.canonical} />
 
-    {/* ── RSS alternate (O2): descubrimiento del feed por lectores y crawlers ── */}
-    <link rel="alternate" type="application/rss+xml" title={`Blog de ${SITE.name}`} href="/rss.xml" />
-
     {/* ── Open Graph (derivado de los campos planos de buildMeta) ── */}
     <meta property="og:type" content={meta.type} />
     <meta property="og:title" content={meta.title} />
@@ -153,9 +150,7 @@ const jsonLd = buildSchema(pageType, schemaData);
     <meta name="twitter:image:alt" content={meta.title} />
 
     {/* ── Iconos y manifest ── */}
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="var(--c-ink)" />
 

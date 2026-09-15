@@ -45,9 +45,10 @@ describe('contrato de homologación TUBOMBERO', () => {
   it('mantiene el contrato sin Tailwind y conserva los ids de la portada', () => {
     expect(read('package.json')).not.toMatch(/tailwind/i);
     const home = read('src/pages/index.astro');
-    for (const id of ['catalogo', 'sectores', 'servicios', 'guias', 'cotizar']) {
+    for (const id of ['catalogo', 'sectores', 'servicios', 'guias']) {
       expect(home).toContain(`id="${id}"`);
     }
+    expect(read('src/components/FAQWithContact.astro')).toContain('id="cotizar"');
     expect(read('src/components/Footer.astro')).toContain('id="contacto"');
   });
 
@@ -68,8 +69,20 @@ describe('contrato de homologación TUBOMBERO', () => {
   it('incluye la sección FAQ canónica en la portada sin schema FAQPage', () => {
     const home = read('src/pages/index.astro');
     expect(home).toContain("id=\"preguntas-frecuentes\"");
-    expect(home).toContain("import FAQAccordion from '@components/FAQAccordion.astro';");
-    expect(home).toContain('emitSchema={false}');
+    expect(home).toContain("import FAQWithContact from '@components/FAQWithContact.astro';");
+    expect(read('src/components/FAQWithContact.astro')).toContain('openFirst');
     expect(home).toContain('¿Qué es la protección contra incendios?');
+  });
+
+  it('mantiene el formulario de cotización deshabilitado sin WhatsApp y limpia el footer', () => {
+    const faq = read('src/components/FAQWithContact.astro');
+    const footer = read('src/components/Footer.astro');
+    expect(faq).toContain('waNumber?: string');
+    expect(faq).toContain('disabled={!waReady}');
+    expect(faq).toContain('Canal de WhatsApp en configuración.');
+    expect(footer).toContain('href="/servicios"');
+    expect(footer).toContain('href="/#sectores"');
+    expect(footer).not.toContain('href="/blog"');
+    expect(footer).toContain('Toda la República Mexicana');
   });
 });
