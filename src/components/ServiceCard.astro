@@ -15,7 +15,7 @@ interface Props {
   /** true → CTA estilo WhatsApp (verde) + target _blank. */
   whatsapp?: boolean
 }
-const { title, description, href, icon, image, imageAlt, badge, ctaLabel = 'Ver servicio', whatsapp = false } = Astro.props
+const { title, description, href, icon, image, imageAlt, badge, ctaLabel = title, whatsapp = false } = Astro.props
 ---
 
 <article class="scard" aria-label={title}>

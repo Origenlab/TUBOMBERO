@@ -3,8 +3,8 @@
  * scripts/audit-meta.mjs — gate de SEO técnico (longitudes title/description)
  * ----------------------------------------------------------------------------
  * REGLA: cada página en src/pages/ debe tener <title> ≤60 chars y meta
- * description ≤155 chars. Espejo de los límites publicados en
- * `src/lib/seo.ts` (META_TITLE_MAX=60, META_DESC_MAX=155 vía metaAuditBasic).
+ * description ≤160 chars. Espejo de los límites publicados en
+ * `src/lib/seo.ts` (META_TITLE_MAX=60, META_DESC_MAX=160 vía buildMeta).
  *
  * USO:  npm run audit:meta
  *
@@ -30,7 +30,7 @@ const PAGES_DIR = path.join(ROOT, 'src', 'pages');
 
 // Límites — espejo de src/lib/seo.ts (META_TITLE_MAX, META_DESC_MAX).
 const TITLE_MAX = 60;
-const DESC_MAX = 155;
+const DESC_MAX = 160;
 
 // ── walk recursivo de .astro ────────────────────────────────────────────────
 function walk(dir) {

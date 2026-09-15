@@ -7,9 +7,9 @@ export function getStaticPaths() {
 }
 const { category } = Astro.props;
 ---
-<PageLayout title={`${category.label} | Tu Bombero`} description={`${category.description} Fichas técnicas en preparación.`} pageType="category" noindex breadcrumbs={[{ label: 'Productos', href: '/productos' }, { label: category.label }]}>
-  <section class="category-hero"><div class="container"><p class="eyebrow">Categoría de productos</p><h1>{category.label}</h1><p>{category.description}</p><span class="status">Fichas técnicas en preparación</span></div></section>
-  <section class="section"><div class="container empty-state"><h2>Estamos preparando esta categoría</h2><p>Las fichas técnicas y referencias reales se incorporarán a partir del inventario confirmado.</p><ul class="subcategory-list" aria-label={`Subcategorías de ${category.label}`}>{category.subcategories.map((subcategory) => <li>{subcategory}</li>)}</ul><a href="/contacto">Solicitar información <span aria-hidden="true">→</span></a></div></section>
+<PageLayout title={category.seoTitle} description={category.seoDescription} pageType="category" noindex breadcrumbs={[{ label: 'Productos', href: '/productos' }, { label: category.label }]}>
+  <section class="category-hero"><div class="container"><p class="eyebrow">Categoría de productos</p><h1>{category.label}</h1><p>{category.seoDescription}</p><span class="status">Fichas técnicas en preparación</span></div></section>
+  <section class="section"><div class="container empty-state"><h2>Estamos preparando esta categoría</h2><p>Las fichas técnicas y referencias reales se incorporarán a partir del inventario confirmado.</p><ul class="subcategory-list" aria-label={`Subcategorías de ${category.label}`}>{category.subcategories.map((subcategory) => <li>{subcategory}</li>)}</ul><a href="/contacto">{`Cotizar ${category.cta.toLocaleLowerCase("es-MX")}`} <span aria-hidden="true">→</span></a></div></section>
 </PageLayout>
 <style>
   .category-hero { padding-block: clamp(4rem, 9vw, 7rem); background: var(--c-ink); color: var(--c-white); }

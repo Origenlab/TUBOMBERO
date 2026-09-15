@@ -380,7 +380,7 @@ export type MetaOutput = {
  * - title: keyword-first, marca añadida solo si ≤60 chars.
  * - description: recortada a ≤160 con lógica de oración/palabra.
  * - canonical/image: absolutas y con trailing slash según política.
- * - robots: 'noindex,nofollow' si noindex; si no, directiva index completa.
+ * - robots: 'noindex,follow' si noindex; si no, directiva index completa.
  */
 export function buildMeta(input: MetaInput): MetaOutput {
   return {
@@ -390,7 +390,7 @@ export function buildMeta(input: MetaInput): MetaOutput {
     image: absImage(input.image) ?? absImage(SITE.seo?.image) ?? `${SITE.url}/og.jpg`,
     type: input.type ?? 'website',
     robots: input.noindex
-      ? 'noindex,nofollow'
+      ? 'noindex,follow'
       : 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1',
     locale: SITE.locale?.replace('-', '_') ?? 'es_MX',
     siteName: SITE.name,

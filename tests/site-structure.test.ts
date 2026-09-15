@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { CONTACT, NAV, SITE, TAXONOMY } from '../src/config/site';
+import { CONTACT, KEYWORDS, NAV, SITE, TAXONOMY } from '../src/config/site';
 
 const root = resolve(import.meta.dirname, '..');
 const read = (file: string) => readFileSync(resolve(root, file), 'utf8');
@@ -56,5 +56,20 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read('src/pages/index.astro')).toContain('class="grid-4 category-grid"');
     expect(read('src/pages/productos/index.astro')).toContain('class="grid-4"');
     expect(read('src/pages/servicios/index.astro')).toContain('class="grid-4"');
+  });
+
+  it('expone las metas SEO aprobadas y conserva enlazado interno en noindex', () => {
+    expect(SITE.seo.title).toBe('Protección contra incendios: equipo y sistemas en México');
+    expect(SITE.seo.description).toBe('Equipo y sistemas de protección contra incendios para empresas: extintores, alarmas, detectores de humo, hidrantes, señalización y equipo para brigadas.');
+    expect(KEYWORDS).toEqual(['protección contra incendios', 'equipo contra incendios', 'sistemas contra incendios']);
+    expect(read('src/lib/seo.ts')).toContain("? 'noindex,follow'");
+  });
+
+  it('incluye la sección FAQ canónica en la portada sin schema FAQPage', () => {
+    const home = read('src/pages/index.astro');
+    expect(home).toContain("id=\"preguntas-frecuentes\"");
+    expect(home).toContain("import FAQAccordion from '@components/FAQAccordion.astro';");
+    expect(home).toContain('emitSchema={false}');
+    expect(home).toContain('¿Qué es la protección contra incendios?');
   });
 });

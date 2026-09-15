@@ -60,7 +60,7 @@ const {
   disabled = false,
 } = Astro.props;
 const eager = index < 4; // las 4 primeras tarjetas (1.ª fila) cargan imagen sin lazy.
-const resolvedCtaLabel = ctaLabel ?? 'Ver categoría';
+const resolvedCtaLabel = ctaLabel ?? label;
 // 'disabled' (p. ej. módulo 'próximo'): ni la imagen ni los chips enlazan (evita 404s).
 const MediaTag = disabled ? "div" : "a";
 const ChipTag = disabled ? "span" : "a";

@@ -2,6 +2,7 @@
 import CategoryCard from '@components/CategoryCard.astro';
 import CategoryFeature from '@components/CategoryFeature.astro';
 import CTABanner from '@components/CTABanner.astro';
+import FAQAccordion from '@components/FAQAccordion.astro';
 import Hero from '@components/Hero.astro';
 import ProcessSteps from '@components/ProcessSteps.astro';
 import SectionHeading from '@components/SectionHeading.astro';
@@ -13,40 +14,40 @@ import { CATEGORIES, PROCESS, SERVICES, SECTORS } from '@config/site';
 const menuItems = [
   { label: 'Catálogo', href: '#catalogo', sub: 'Catálogo por necesidad' },
   { label: 'Sectores', href: '#sectores', sub: 'Soluciones por sector' },
-  { label: 'Servicios', href: '#servicios', sub: 'Lo que ofreces · Ver servicios' },
+  { label: 'Servicios', href: '#servicios', sub: 'Lo que ofrecemos' },
   { label: 'Guías', href: '#guias', sub: 'Guías técnicas' },
 ];
 const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, title, desc }));
 ---
 
-<PageLayout title="Equipos y soluciones contra incendio | Tu Bombero" description="Equipo contra incendio, extintores y sistemas para organizaciones, brigadas y proyectos que buscan orientar su compra en toda la República Mexicana." pageType="home">
+<PageLayout title="Protección contra incendios: equipo y sistemas en México" description="Equipo y sistemas de protección contra incendios para empresas: extintores, alarmas, detectores de humo, hidrantes, señalización y equipo para brigadas." pageType="home">
   <Hero
-    badge="Equipamiento y soluciones"
-    title="Equipos y soluciones"
-    accent=" contra incendio"
-    after="para operar con mayor preparación."
+    badge="Protección contra incendios"
+    title="Protección"
+    accent=" contra incendios"
+    after="con equipo y sistemas para tu empresa."
     coverage="Cobertura comercial prevista para toda la República Mexicana."
-    subtitle="Explora un catálogo pensado para organizaciones, brigadas y proyectos que buscan orientar su compra en todo México."
+    subtitle="Extintores, sistemas de detección y alarma, red contra incendios, señalización y equipo para brigadas, organizados por necesidad para empresas e instalaciones de todo México."
     descRight={[
-      'En Tu Bombero reunimos en un solo catálogo el equipo contra incendio que una organización necesita para proteger a su gente, sus instalaciones y su operación: extintores y equipo de respuesta inicial, componentes para sistemas contra incendio —redes hidráulicas, mangueras, hidrantes, válvulas y gabinetes—, detección y alarma, señalización y evacuación, y equipo para bomberos y brigadas. Cada familia está organizada por necesidad para que encuentres más rápido lo que tu instalación requiere.',
-      'El catálogo está pensado para industria y manufactura, construcción, comercio y oficinas, hospitalidad y salud, almacenes y logística, y cuerpos de Protección Civil en toda la República Mexicana. Nuestras líneas de servicio —asesoría técnica, instalación de sistemas, mantenimiento y capacitación— buscan acompañarte antes, durante y después de la compra, para que cada decisión sobre equipo contra incendio se tome con criterio técnico y no solo por precio.',
+      'La protección contra incendios de un centro de trabajo combina medidas activas —extintores, sistemas de detección y alarma, hidrantes y rociadores— con medidas de protección pasiva y preventiva, como la señalización, las rutas de evacuación y la preparación de las brigadas. En Tu Bombero reunimos ese equipo contra incendios en un solo catálogo, organizado por necesidad, para que cada riesgo de incendio tenga una respuesta clara.',
+      'La NOM-002-STPS-2010 establece que los centros de trabajo en México cuenten con equipos y sistemas de protección contra incendios acordes con su nivel de riesgo. Por eso el catálogo está pensado para industria, construcción, comercio, hospitalidad, salud, logística y Protección Civil, con líneas de servicio —asesoría técnica, instalación, mantenimiento y capacitación— que acompañan cada decisión con criterio técnico.',
     ]}
-    ctas={[{ text: 'Solicitar información', href: '/contacto' }, { text: 'Explorar catálogo', href: '#catalogo', variant: 'outline' }]}
+    ctas={[{ text: 'Cotizar equipo contra incendios', href: '/contacto' }, { text: 'Catálogo de protección contra incendios', href: '#catalogo', variant: 'outline' }]}
   />
 
-  <SectionMenu items={menuItems} cta={{ label: 'Cotizar', href: '/contacto', sub: 'Solicitar información' }} />
+  <SectionMenu items={menuItems} cta={{ label: 'Cotizar equipo', href: '/contacto', sub: 'Protección contra incendios' }} />
 
   <section id="catalogo" class="section section--surface">
     <div class="container">
       <SectionHeading
         eyebrow="Catálogo"
-        title="Encuentra el equipo según el punto que necesitas atender."
-        desc="La primera versión organiza el catálogo en ocho familias para que la navegación sea clara desde el inicio. Las fichas técnicas y referencias reales se incorporarán a partir del inventario confirmado."
+        title="Equipo contra incendios organizado por necesidad"
+        desc="Ocho familias de equipo y sistemas de protección contra incendios para ubicar en pocos clics lo que tu instalación requiere; las fichas técnicas se publican conforme se confirma el inventario."
         layout="duo"
         body={["Elegir equipo contra incendio empieza por entender qué riesgo se quiere cubrir. Por eso el catálogo de Tu Bombero se ordena por necesidad y no por marca: extintores y equipo de respuesta inicial, sistemas contra incendio, gabinetes e hidrantes, detección y alarma, equipo de protección para bomberos, herramientas de entrada forzada, rescate y señalización de evacuación.", "Cada familia reúne sus subcategorías principales para que compradores, jefes de brigada y responsables de seguridad ubiquen en pocos clics el equipo que su instalación requiere y lleguen a la cotización con una idea clara de lo que necesitan, sin perder tiempo entre listados genéricos."]}
       />
       <div class="grid-4 category-grid">
-        {CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} imagePosition={category.imagePosition} badge={category.tag} blurb={category.description} subcategories={category.subcategories} index={index} />)}
+        {CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} imagePosition={category.imagePosition} badge={category.tag} blurb={category.description} subcategories={category.subcategories} ctaLabel={category.cta} index={index} />)}
       </div>
     </div>
   </section>
@@ -54,7 +55,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   <CategoryFeature
     eyebrow="Respuesta inicial"
     title="Extintores"
-    titleAccent="y emergencia."
+    titleAccent="para cada tipo de riesgo."
     description="Equipos portátiles, gabinetes, señalización y elementos de respuesta inicial. Un extintor adecuado, en el lugar correcto y con el agente indicado para cada riesgo es la primera línea de defensa de cualquier instalación: permite controlar un conato de incendio en sus primeros segundos, antes de que comprometa a las personas, los bienes o la operación. En Tu Bombero organizamos esta familia por tipo de agente para que identifiques con claridad qué extintor corresponde a oficinas, almacenes, cocinas, áreas eléctricas o zonas con líquidos inflamables."
     features={[
       { label: 'Extintores CO₂', desc: 'Para áreas eléctricas y equipos sensibles.' },
@@ -65,51 +66,67 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     imgMain={{ src: '/images/categorias/extintores-pqs-co2-y-agua.avif', alt: 'Extintores de polvo químico seco, CO₂ y agua en un almacén' }}
     imgA={{ src: '/images/categorias/extintor-espuma-afff.avif', alt: 'Extintor de espuma AFFF en una nave industrial' }}
     imgB={{ src: '/images/categorias/extintor-polvo-quimico-seco-pqs.avif', alt: 'Extintor de polvo químico seco PQS montado en una columna' }}
-    ctaLabel="Ver categoría"
+    ctaLabel="Extintores contra incendio"
     ctaHref="/productos/extintores-y-emergencia"
   />
 
   <section id="sectores" class="section sectors">
     <div class="container">
-      <SectionHeading eyebrow="Soluciones por sector" title="Un punto de partida para cada operación." desc="El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere." layout="duo" body={["Una planta de manufactura, un hospital, un centro comercial y un almacén no enfrentan los mismos riesgos de incendio ni operan en las mismas condiciones. Las rutas por sector ayudan a identificar qué equipo contra incendio y qué servicios son más relevantes para cada tipo de instalación.", "Desde industria y construcción hasta hospitalidad, salud, logística, educación, energía y cuerpos de Protección Civil, cada sector funciona como punto de partida para orientar la compra con criterio técnico y con el lenguaje propio de cada operación."]} />
+        <SectionHeading eyebrow="Soluciones por sector" title="Protección contra incendios para cada tipo de instalación" desc="Cada sector tiene riesgos de incendio, normativas y condiciones de operación distintas; estas rutas ayudan a ubicar el equipo y los servicios que corresponden a tu inmueble." layout="duo" body={["Una planta de manufactura, un hospital, un centro comercial y un almacén no enfrentan los mismos riesgos de incendio ni operan en las mismas condiciones. Las rutas por sector ayudan a identificar qué equipo contra incendio y qué servicios son más relevantes para cada tipo de instalación.", "Desde industria y construcción hasta hospitalidad, salud, logística, educación, energía y cuerpos de Protección Civil, cada sector funciona como punto de partida para orientar la compra con criterio técnico y con el lenguaje propio de cada operación."]} />
       <div class="grid-4 sector-grid">{SECTORS.map((sector, index) => <article class="sector-card"><span class="sector-card__icon" aria-hidden="true">{sector.icon === 'cross' ? '✚' : sector.icon === 'flame' ? '♨' : sector.icon === 'shield' ? '⬟' : sector.icon === 'briefcase' ? '▣' : sector.icon === 'school' ? '⌂' : '▤'}</span><span class="sector-card__num">0{index + 1}</span><span class="sector-card__label">{sector.label}</span><b aria-hidden="true">↗</b></article>)}</div>
     </div>
   </section>
 
   <section id="servicios" class="section">
     <div class="container">
-      <SectionHeading eyebrow="Servicios" title="Acompañamiento antes, durante y después de la selección." desc="Las líneas de servicio se presentan como un mapa comercial. El alcance concreto de cada una se publicará al confirmar las capacidades operativas y comerciales de Tu Bombero." layout="duo" body={["Comprar equipo contra incendio es solo una parte de la protección de una instalación: el equipo debe elegirse bien, instalarse correctamente, mantenerse en condiciones y ser utilizado por personas preparadas. Las líneas de servicio de Tu Bombero se organizan alrededor de ese ciclo completo.", "Asesoría técnica para seleccionar el equipo, instalación de sistemas contra incendio, mantenimiento para la continuidad operativa y capacitación para brigadas: cuatro frentes pensados para que cada inversión en seguridad se traduzca en una respuesta más ordenada ante una emergencia."]} />
-      <a class="service-link" href="#servicios">Ver servicios</a>
-      <div class="grid-4 service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href="/servicios" />)}</div>
+      <SectionHeading eyebrow="Servicios" title="Asesoría, instalación y mantenimiento de sistemas contra incendios" desc="Cuatro líneas de servicio que acompañan cada etapa: elegir el equipo, instalarlo, mantenerlo en condiciones y preparar a las personas que lo utilizarán." layout="duo" body={["Comprar equipo contra incendio es solo una parte de la protección de una instalación: el equipo debe elegirse bien, instalarse correctamente, mantenerse en condiciones y ser utilizado por personas preparadas. Las líneas de servicio de Tu Bombero se organizan alrededor de ese ciclo completo.", "Asesoría técnica para seleccionar el equipo, instalación de sistemas contra incendio, mantenimiento para la continuidad operativa y capacitación para brigadas: cuatro frentes pensados para que cada inversión en seguridad se traduzca en una respuesta más ordenada ante una emergencia."]} />
+      <a class="service-link" href="/servicios">Servicios de protección contra incendios</a>
+      <div class="grid-4 service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href="/servicios" ctaLabel={service.cta} />)}</div>
     </div>
   </section>
 
   <CategoryFeature
     eyebrow="Equipo para bomberos y brigadas"
-    title="Preparación visible"
-    titleAccent="desde el primer vistazo."
-    description="Protección personal, equipo de respiración, accesorios y herramientas de apoyo estarán agrupados en una sección dedicada para facilitar la consulta técnica y comercial."
-    features={[{ label: 'Protección personal', desc: 'Equipo para respuesta especializada.' }, { label: 'Rescate y accesorios', desc: 'Apoyo operativo y preparación.' }, { label: 'Equipo para bomberos y brigadas', desc: 'Consulta técnica y comercial.' }]}
+    title="Equipo de protección"
+    titleAccent="para brigadas y bomberos."
+    description="Protección personal, equipo de respiración, herramientas y accesorios de rescate agrupados en un mismo lugar para facilitar la consulta técnica y comercial de brigadas industriales y cuerpos de respuesta."
+    features={[{ label: 'Equipo de protección personal', desc: 'Cascos, trajes, guantes, botas y respiración.' }, { label: 'Herramientas para bomberos', desc: 'Entrada forzada, ventilación y corte.' }, { label: 'Rescate y accesorios', desc: 'Cuerdas, camillas, botiquines y bolsas.' }]}
     imgMain={{ src: '/images/home/epp-y-rescate.avif', alt: 'Equipo de protección personal y rescate para bomberos' }}
     imgA={{ src: '/images/home/extintores-y-emergencia.avif', alt: 'Extintores y elementos de emergencia' }}
     imgB={{ src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Inspección de equipo contra incendio' }}
-    ctaLabel="Solicitar orientación"
-    ctaHref="/contacto"
+    ctaLabel="Equipo de protección para brigadas"
+    ctaHref="/productos/equipo-para-bomberos-y-brigadas"
     surface
   />
 
   <section id="guias" class="section section--surface">
     <div class="container">
-      <SectionHeading eyebrow="Guías técnicas" title="Contenido que ayuda a empezar la conversación correcta." desc="El centro de recursos se construirá con artículos revisados antes de su publicación. Desde ahora, el sitio reserva sus rutas principales para no depender únicamente de un catálogo." layout="duo" body={["Una buena cotización empieza con buenas preguntas. Las guías técnicas de Tu Bombero explican de forma práctica cómo identificar una familia de equipo, qué información reunir antes de solicitar precios y cómo elegir el tipo de extintor según el riesgo de cada área.", "Son recursos pensados para responsables de compras, seguridad industrial y Protección Civil que necesitan tomar decisiones informadas sobre equipo contra incendio, con contenido revisado antes de su publicación y enfocado en resolver dudas reales de la operación diaria."]} />
+      <SectionHeading eyebrow="Guías técnicas" title="Guías sobre protección contra incendios" desc="Artículos prácticos, revisados antes de publicarse, para resolver dudas frecuentes sobre equipo, normativa y cotización." layout="duo" body={["Una buena cotización empieza con buenas preguntas. Las guías técnicas de Tu Bombero explican de forma práctica cómo identificar una familia de equipo, qué información reunir antes de solicitar precios y cómo elegir el tipo de extintor según el riesgo de cada área.", "Son recursos pensados para responsables de compras, seguridad industrial y Protección Civil que necesitan tomar decisiones informadas sobre equipo contra incendio, con contenido revisado antes de su publicación y enfocado en resolver dudas reales de la operación diaria."]} />
       <div class="grid-4 guide-grid">
-        {['Cómo identificar una familia de equipo contra incendio', 'Qué información preparar antes de solicitar una cotización', 'Cómo organizar la consulta de una necesidad de protección', 'Cómo elegir el tipo de extintor según el riesgo de tu instalación'].map((title, index) => <article><span>0{index + 1}</span><h3>{title}</h3><a href="/contacto">Solicitar información <b aria-hidden="true">→</b></a></article>)}
+        {[['Cómo identificar una familia de equipo contra incendio', 'Guía de equipo contra incendio'], ['Qué información preparar antes de solicitar una cotización', 'Cotización de equipo contra incendios'], ['Cómo organizar la consulta de una necesidad de protección', 'Consulta de protección contra incendios'], ['Cómo elegir el tipo de extintor según el riesgo de tu instalación', 'Guía para elegir extintor']].map(([title, cta], index) => <article><span>0{index + 1}</span><h3>{title}</h3><a href="/contacto">{cta} <b aria-hidden="true">→</b></a></article>)}
       </div>
     </div>
   </section>
 
-  <ProcessSteps eyebrow="Ruta de atención" title="De una necesidad a" titleAccent="una conversación clara." desc="Un camino sencillo para ubicar el equipo y servicio que se requiere." steps={steps} body={["Solicitar información sobre equipo contra incendio no debería ser complicado. La ruta de atención de Tu Bombero divide el proceso en tres pasos claros para que sepas en todo momento qué sigue y qué datos conviene tener a la mano.", "Primero describes tu instalación o proyecto, después revisas las familias de equipo y los servicios que aplican a tu caso y, finalmente, defines el siguiente paso comercial con una necesidad bien planteada, lo que agiliza la respuesta y evita cotizaciones imprecisas."]} />
+  <section id="preguntas-frecuentes" class="section">
+    <div class="container">
+      <SectionHeading eyebrow="Preguntas frecuentes" title="Preguntas frecuentes sobre protección contra incendios" desc="Respuestas breves a las dudas más comunes antes de elegir equipo o sistemas contra incendios." layout="duo" body={["Estas respuestas son orientativas; la selección final del equipo depende del análisis de riesgo de cada inmueble y de la normativa local aplicable."]} />
+      <FAQAccordion title="" bare
+        emitSchema={false}
+        items={[
+          { question: '¿Qué es la protección contra incendios?', answer: 'Es el conjunto de medidas, equipos y sistemas que buscan prevenir un incendio, detectarlo a tiempo, controlarlo y proteger a las personas y los bienes mientras se evacua el inmueble. Incluye la protección activa, la protección pasiva y la preparación de las brigadas.' },
+          { question: '¿Cuáles son los tipos de protección contra incendios?', answer: 'Se agrupan en tres: la protección activa, que actúa sobre el fuego (extintores, hidrantes, rociadores y sistemas de detección y alarma); la protección pasiva, que confina el fuego y el humo mediante materiales y elementos con resistencia al fuego; y la prevención, que incluye señalización, rutas de evacuación, simulacros y capacitación.' },
+          { question: '¿Qué dice la NOM-002-STPS-2010?', answer: 'Es la Norma Oficial Mexicana que establece las condiciones de seguridad para la prevención y protección contra incendios en los centros de trabajo. Pide clasificar el riesgo de incendio, contar con equipos y sistemas acordes con ese riesgo, mantenerlos en condiciones, integrar brigadas y realizar simulacros.' },
+          { question: '¿Qué equipo contra incendios necesita una empresa?', answer: 'Depende del riesgo de incendio, del tamaño del inmueble y de los materiales que se manejan. Como base suelen requerirse extintores adecuados al tipo de fuego, detección y alarma, señalización de rutas y salidas de emergencia y, en instalaciones de mayor riesgo, sistemas fijos como hidrantes o rociadores automáticos.' },
+          { question: '¿Cada cuánto se revisan los sistemas contra incendios?', answer: 'De forma periódica, según lo que indiquen la normativa aplicable y el fabricante de cada equipo. Llevar un registro de revisiones y mantenimientos ayuda a demostrar que el equipo está en condiciones durante las verificaciones de Protección Civil y de la autoridad laboral.' },
+        ]}
+      />
+    </div>
+  </section>
 
-  <CTABanner id="cotizar" heading="Cuéntanos qué necesitas proteger." desc="Estamos preparando los canales de atención. Cuando compartas el teléfono, WhatsApp o correo comercial, esta sección quedará conectada para iniciar cada solicitud con contexto. Para publicar el acceso de cotización necesitamos confirmar un dato real de contacto." btns={[{ label: 'Solicitar información', href: '/contacto', primary: true }]} badge="Canal de contacto pendiente · Canales de atención en configuración" variant="dark" />
+  <ProcessSteps eyebrow="Ruta de atención" title="Cómo solicitar tu equipo" titleAccent="contra incendios en tres pasos." desc="Un camino sencillo para ubicar el equipo y servicio que se requiere." steps={steps} body={["Solicitar información sobre equipo contra incendio no debería ser complicado. La ruta de atención de Tu Bombero divide el proceso en tres pasos claros para que sepas en todo momento qué sigue y qué datos conviene tener a la mano.", "Primero describes tu instalación o proyecto, después revisas las familias de equipo y los servicios que aplican a tu caso y, finalmente, defines el siguiente paso comercial con una necesidad bien planteada, lo que agiliza la respuesta y evita cotizaciones imprecisas."]} />
+
+  <CTABanner id="cotizar" heading="Cuéntanos qué necesitas proteger." desc="Nuestros canales de atención se están habilitando. Mientras tanto, reúne el tipo de instalación, su superficie aproximada y el equipo con el que ya cuentas: con esa información tu cotización será más rápida y precisa." btns={[{ label: 'Cotizar protección contra incendios', href: '/contacto', primary: true }]} badge="Canal de contacto pendiente · Canales de atención en configuración" variant="dark" />
 </PageLayout>
 
 <style>

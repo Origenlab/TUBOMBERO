@@ -8,15 +8,15 @@ export const SITE = {
   locale: 'es-MX',
   description: 'Equipos y soluciones contra incendio para organizaciones que requieren orientar su compra en México.',
   contactStatus: 'Canales de atención en configuración',
-  defaultImage: '/images/home/hero-inspeccion-equipo-contra-incendio.avif',
+  defaultImage: '/images/og/proteccion-contra-incendios-tubombero.png',
   trailingSlash: 'never' as const,
   searchUrl: undefined as string | undefined,
   allowSelfReviews: false,
   themeColor: 'rgb(196 30 58)',
   seo: {
-    title: 'Equipos y soluciones contra incendio | Tu Bombero',
-    description: 'Equipo contra incendio, extintores y sistemas para organizaciones, brigadas y proyectos que buscan orientar su compra en toda la República Mexicana.',
-    image: '/images/home/hero-inspeccion-equipo-contra-incendio.avif',
+    title: 'Protección contra incendios: equipo y sistemas en México',
+    description: 'Equipo y sistemas de protección contra incendios para empresas: extintores, alarmas, detectores de humo, hidrantes, señalización y equipo para brigadas.',
+    image: '/images/og/proteccion-contra-incendios-tubombero.png',
     titleMaxLength: 60,
     descriptionMaxLength: 160,
     appendBrand: false,
@@ -39,9 +39,9 @@ export const SITE = {
 } as const;
 
 export const KEYWORDS = [
-  'equipo contra incendio',
-  'extintores y sistemas contra incendio',
-  'equipo para bomberos',
+  'protección contra incendios',
+  'equipo contra incendios',
+  'sistemas contra incendios',
 ] as const;
 
 export const CONTACT = {
@@ -68,7 +68,10 @@ const categories = [
   {
     slug: 'extintores-y-emergencia',
     label: 'Extintores y emergencia',
+    cta: 'Extintores contra incendio',
     description: 'Equipos portátiles, gabinetes, señalización y elementos de respuesta inicial.',
+    seoTitle: 'Extintores contra incendio: PQS, CO₂, espuma AFFF y agua',
+    seoDescription: 'Extintores contra incendio de polvo químico seco (PQS), CO₂, espuma AFFF y agua, además de gabinetes y señalización para la respuesta inicial en tu empresa.',
     tag: 'Respuesta inicial',
     image: '/images/categorias/extintores-y-equipo-de-emergencia.avif',
     imageAlt: 'Extintores y gabinete contra incendio en interior claro',
@@ -78,7 +81,10 @@ const categories = [
   {
     slug: 'sistemas-contra-incendio',
     label: 'Sistemas contra incendio',
+    cta: 'Red contra incendios',
     description: 'Componentes para redes hidráulicas, mangueras, hidrantes, válvulas y gabinetes.',
+    seoTitle: 'Red contra incendios: mangueras, válvulas y conexiones',
+    seoDescription: 'Componentes para la red contra incendios: mangueras, boquillas y chiflones, válvulas, conexiones y adaptadores para sistemas hidráulicos de protección.',
     tag: 'Infraestructura',
     image: '/images/categorias/sistemas-contra-incendio-mangueras-hidrantes.avif',
     imageAlt: 'Técnico revisando un gabinete y red contra incendio',
@@ -88,7 +94,10 @@ const categories = [
   {
     slug: 'gabinetes-e-hidrantes',
     label: 'Gabinetes e hidrantes',
+    cta: 'Gabinetes contra incendio',
     description: 'Gabinetes, hidrantes y estaciones de manguera para tener el equipo listo y a la vista en cada nivel de la instalación.',
+    seoTitle: 'Gabinetes contra incendio y estaciones de manguera',
+    seoDescription: 'Gabinetes contra incendio para manguera y extintor, hidrantes y estaciones de manguera para tener el equipo listo y visible en cada nivel del inmueble.',
     tag: 'Almacenamiento',
     image: '/images/categorias/gabinetes-e-hidrantes-contra-incendio.avif',
     imageAlt: 'Gabinetes e hidrantes contra incendio',
@@ -98,7 +107,10 @@ const categories = [
   {
     slug: 'deteccion-y-alarma',
     label: 'Detección y alarma',
+    cta: 'Detección y alarma de incendios',
     description: 'Equipos para detección, notificación y respuesta coordinada ante una condición de riesgo.',
+    seoTitle: 'Sistemas de detección y alarma de incendios',
+    seoDescription: 'Sistemas de detección y alarma de incendios: detectores de humo y de temperatura, paneles de control, sirenas y estrobos para alertar a tiempo al personal.',
     tag: 'Detección',
     image: '/images/home/hero-inspeccion-equipo-contra-incendio.avif',
     imageAlt: 'Equipos de seguridad contra incendio en un entorno limpio',
@@ -108,7 +120,10 @@ const categories = [
   {
     slug: 'equipo-para-bomberos-y-brigadas',
     label: 'Equipo para bomberos y brigadas',
+    cta: 'Equipo de protección para brigadas',
     description: 'Protección personal, respiración, herramientas y equipo de apoyo para respuesta especializada.',
+    seoTitle: 'Equipo de protección personal para brigadas',
+    seoDescription: 'Equipo de protección personal para brigadas y bomberos: cascos, trajes estructurales, guantes, botas y equipos de respiración para respuesta especializada.',
     tag: 'Protección personal',
     image: '/images/categorias/equipo-de-proteccion-para-bomberos.avif',
     imageAlt: 'Traje estructural de protección para bombero',
@@ -118,7 +133,10 @@ const categories = [
   {
     slug: 'herramientas-para-bomberos',
     label: 'Herramientas para bomberos',
+    cta: 'Herramientas para bomberos',
     description: 'Herramientas de mano para entrada forzada, ventilación y remoción de obstáculos durante la respuesta.',
+    seoTitle: 'Herramientas para bomberos: hachas y barras Halligan',
+    seoDescription: 'Herramientas para bomberos y brigadas: barras Halligan, hachas, ganchos, pértigas y herramientas de corte para entrada forzada y ventilación en emergencias.',
     tag: 'Entrada forzada',
     image: '/images/categorias/herramientas-para-bomberos-hacha-halligan.avif',
     imageAlt: 'Hacha y herramienta Halligan para bomberos',
@@ -128,7 +146,10 @@ const categories = [
   {
     slug: 'rescate-y-accesorios',
     label: 'Rescate y accesorios',
+    cta: 'Equipo de rescate para brigadas',
     description: 'Accesorios y equipo complementario para apoyo operativo, rescate y preparación.',
+    seoTitle: 'Equipo de rescate y accesorios para brigadas',
+    seoDescription: 'Equipo de rescate y accesorios para brigadas: cuerdas y arneses, camillas, botiquines y bolsas de equipo para apoyo operativo durante una emergencia.',
     tag: 'Operación',
     image: '/images/home/epp-y-rescate.avif',
     imageAlt: 'Bolsa de rescate y equipo de protección personal',
@@ -138,7 +159,10 @@ const categories = [
   {
     slug: 'senalizacion-y-evacuacion',
     label: 'Señalización y evacuación',
+    cta: 'Señalamientos de protección civil',
     description: 'Elementos para comunicar rutas, salidas y puntos de seguridad dentro de una instalación.',
+    seoTitle: 'Señalamientos de protección civil y evacuación',
+    seoDescription: 'Señalamientos de protección civil para rutas de evacuación, salidas de emergencia, puntos de reunión y ubicación de equipos, con señales fotoluminiscentes.',
     tag: 'Prevención',
     image: '/images/home/extintores-y-emergencia.avif',
     imageAlt: 'Señalización de salida y equipo contra incendio',
@@ -148,10 +172,10 @@ const categories = [
 ] as const;
 
 const services = [
-  { id: 'venta-y-asesoria-tecnica', label: 'Venta y asesoría técnica', desc: 'Acompañamiento para identificar la familia de equipo adecuada para cada necesidad.' },
-  { id: 'instalacion-de-sistemas', label: 'Instalación de sistemas', desc: 'Soluciones para proyectos que requieren integrar equipos de protección contra incendio.' },
-  { id: 'mantenimiento', label: 'Mantenimiento', desc: 'Atención a necesidades de revisión, reposición y continuidad operativa.' },
-  { id: 'capacitacion', label: 'Capacitación', desc: 'Orientación para fortalecer la preparación de brigadas y equipos de trabajo.' },
+  { id: 'venta-y-asesoria-tecnica', cta: 'Asesoría en equipo contra incendios', label: 'Venta y asesoría técnica', desc: 'Acompañamiento para identificar la familia de equipo adecuada para cada necesidad.' },
+  { id: 'instalacion-de-sistemas', cta: 'Instalación de sistemas contra incendios', label: 'Instalación de sistemas', desc: 'Soluciones para proyectos que requieren integrar equipos de protección contra incendio.' },
+  { id: 'mantenimiento', cta: 'Mantenimiento de equipo contra incendios', label: 'Mantenimiento', desc: 'Atención a necesidades de revisión, reposición y continuidad operativa.' },
+  { id: 'capacitacion', cta: 'Capacitación de brigadas contra incendios', label: 'Capacitación', desc: 'Orientación para fortalecer la preparación de brigadas y equipos de trabajo.' },
 ] as const;
 
 const sectors = [
@@ -197,8 +221,8 @@ export type NavItem = {
 };
 
 export const NAV: readonly NavItem[] = [
-  { label: 'Productos', href: '/productos' },
-  { label: 'Servicios', href: '/servicios' },
+  { label: 'Productos', href: '/productos', allLabel: 'Catálogo de equipo contra incendios' },
+  { label: 'Servicios', href: '/servicios', allLabel: 'Servicios de protección contra incendios' },
   { label: 'Sectores', href: '/#sectores' },
   { label: 'Guías', href: '/#guias' },
   { label: 'Nosotros', href: '/nosotros' },

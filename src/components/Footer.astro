@@ -69,7 +69,7 @@ const ARROW = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" strok
           <Fragment set:html={WA_SVG} />Cotizar por WhatsApp
         </a>)}
         <a href="/contacto" class="footer__btn footer__btn--ghost">
-          Ir a contacto<Fragment set:html={ARROW} />
+          Contacto para cotizar equipo<Fragment set:html={ARROW} />
         </a>
       </div>
     </div>
@@ -147,7 +147,7 @@ const ARROW = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" strok
       <nav class="footer__col" aria-label="Productos">
         <h3 class="footer__col-heading"><span class="footer__col-heading-accent" aria-hidden="true"></span>Productos</h3>
         <ul class="footer__nav-list" role="list">
-          <li><a href="/productos" class="footer__nav-link footer__nav-link--all">Ver catálogo completo<Fragment set:html={ARROW} /></a></li>
+          <li><a href="/productos" class="footer__nav-link footer__nav-link--all">Catálogo de equipo contra incendios<Fragment set:html={ARROW} /></a></li>
           {PRODUCT_CATEGORIES.map((cat) => (
             <li><a href={`/productos/${cat.slug}`} class="footer__nav-link">{cat.label}{(cat as any).badge && <span class="footer__nav-badge">{(cat as any).badge}</span>}</a></li>
           ))}
@@ -188,10 +188,10 @@ const ARROW = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" strok
         <h3 class="footer__col-heading"><span class="footer__col-heading-accent" aria-hidden="true"></span>Empresa</h3>
         <ul class="footer__nav-list" role="list">
           <li><a href="/nosotros" class="footer__nav-link">Nosotros</a></li>
-          <li><a href="/servicios" class="footer__nav-link">Todos los servicios</a></li>
+          <li><a href="/servicios" class="footer__nav-link">Servicios de protección contra incendios</a></li>
           <li><a href="/blog" class="footer__nav-link">Blog</a></li>
           <li><a href="/contacto" class="footer__nav-link">Contacto</a></li>
-          <li><a href={waDefault ?? '/contacto'} class="footer__nav-link" target={waDefault ? '_blank' : undefined} rel={waDefault ? 'noopener noreferrer' : undefined}>Solicitar información</a></li>
+          <li><a href={waDefault ?? '/contacto'} class="footer__nav-link" target={waDefault ? '_blank' : undefined} rel={waDefault ? 'noopener noreferrer' : undefined}>Cotizar equipo contra incendios</a></li>
         </ul>
       </nav>
 

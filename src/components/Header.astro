@@ -90,7 +90,7 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
             {item.panel === 'dropdown' && (
               <div class="drop-panel" id={navId(item.label)} role="region" aria-label={item.label} aria-hidden="true">
                 <div class="drop-panel__inner">
-                  <a href={item.href} class="drop-panel__header">{item.allLabel ?? 'Ver todo'} →</a>
+                  <a href={item.href} class="drop-panel__header">{item.allLabel ?? item.label} →</a>
                   {(item.items ?? []).map((sub) => (
                     <a href={sub.href} class="drop-panel__link">
                       <span class="drop-panel__link-label">{sub.label}</span>
@@ -105,9 +105,9 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
       </ul>
     </nav>
 
-    <a href={headerWaUrl ?? '/contacto'} class="hdr-cta" target={headerWaUrl ? '_blank' : undefined} rel={headerWaUrl ? 'noopener noreferrer' : undefined} aria-label="Solicitar información">
+    <a href={headerWaUrl ?? '/contacto'} class="hdr-cta" target={headerWaUrl ? '_blank' : undefined} rel={headerWaUrl ? 'noopener noreferrer' : undefined} aria-label="Cotizar equipo contra incendios">
       {guia && <span class="hdr-mark hdr-mark--cta" aria-hidden="true">4</span>}
-      {headerWaUrl ? <Fragment set:html={WA_SVG} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} Cotizar
+      {headerWaUrl ? <Fragment set:html={WA_SVG} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} Cotizar equipo
     </a>
 
     <button class="hdr-burger" id="hdr-burger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="hdr-mobile-nav">
@@ -122,7 +122,7 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
       <div class="mega-panel__inner">
         <div class="mega-panel__top">
           <span class="mega-panel__label">{item.label}</span>
-          <a href={item.href} class="mega-panel__all">{item.allLabel ?? 'Ver todo'} →</a>
+          <a href={item.href} class="mega-panel__all">{item.allLabel ?? item.label} →</a>
         </div>
         <ul class="mega-grid" role="list">
           {(item.items ?? []).map((sub) => (
@@ -175,7 +175,7 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
           <button class="mob-item__trigger" aria-expanded="false"><span>{item.label}</span><svg class="mob-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="mob-item__panel">
             <div class="mob-item__panel-inner">
-              <a href={item.href} class="mob-item__all">{item.allLabel ?? 'Ver todo'}</a>
+              <a href={item.href} class="mob-item__all">{item.allLabel ?? item.label}</a>
               {(item.items ?? []).map((sub) => (<a href={sub.href} class="mob-item__link">{sub.label}</a>))}
             </div>
           </div>
@@ -189,7 +189,7 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
   <div class="mob-foot">
     <div class="mob-foot__cta">
       <a href={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ?? '/contacto'} class="mob-cta" target={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? '_blank' : undefined} rel={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? 'noopener noreferrer' : undefined}>
-        <Fragment set:html={WA_SVG} /> Cotizar
+        {waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) && <Fragment set:html={WA_SVG} />} Cotizar equipo contra incendios
       </a>
       {telUrl() && <a href={telUrl()} class="mob-call" aria-label={`Llamar al ${CONTACT.phone}`}>
         <Fragment set:html={PHONE_SVG} /> Llamar
