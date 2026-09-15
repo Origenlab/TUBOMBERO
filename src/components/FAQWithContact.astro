@@ -51,6 +51,15 @@ const waReady = Boolean(waNumber)
     <div class="fwc__grid">
       <div class="fwc__col-faq">
         <FAQAccordion items={items} title="" bare openFirst />
+        <div class="fwc__help">
+          <p class="fwc__help-eyebrow">¿No encuentras tu respuesta?</p>
+          <p class="fwc__help-title">Te orientamos para elegir el equipo contra incendios adecuado.</p>
+          <p class="fwc__help-text">Revisa las familias de equipo organizadas por necesidad o conoce los servicios de instalación, mantenimiento y capacitación. Si tu caso es particular, completa el formulario de cotización con el detalle de tu instalación.</p>
+          <div class="fwc__help-actions">
+            <a class="fwc__help-btn fwc__help-btn--primary" href="/#catalogo">Catálogo de equipo contra incendios</a>
+            <a class="fwc__help-btn" href="/servicios">Mantenimiento contra incendios</a>
+          </div>
+        </div>
       </div>
 
       <aside id="cotizar" class="fwc__col-form">
@@ -63,16 +72,16 @@ const waReady = Boolean(waNumber)
           </div>
 
           <form id="fwc-form" class="fwc__form">
-            <div class="fwc__field"><label class="fwc__label" for="fwc-name">Nombre completo<span class="fwc__req" aria-hidden="true">*</span></label><input id="fwc-name" name="name" type="text" class="fwc__input" autocomplete="name" required maxlength="100" /></div>
-            <div class="fwc__field"><label class="fwc__label" for="fwc-company">Empresa o institución<span class="fwc__req" aria-hidden="true">*</span></label><input id="fwc-company" name="company" type="text" class="fwc__input" autocomplete="organization" required maxlength="120" /></div>
+            <div class="fwc__row"><div class="fwc__field"><label class="fwc__label" for="fwc-name">Nombre completo<span class="fwc__req" aria-hidden="true">*</span></label><input id="fwc-name" name="name" type="text" class="fwc__input" autocomplete="name" required maxlength="100" /></div>
+            <div class="fwc__field"><label class="fwc__label" for="fwc-company">Empresa o institución<span class="fwc__req" aria-hidden="true">*</span></label><input id="fwc-company" name="company" type="text" class="fwc__input" autocomplete="organization" required maxlength="120" /></div></div>
 
-            <div class="fwc__field"><label class="fwc__label" for="fwc-state">Estado<span class="fwc__req" aria-hidden="true">*</span></label><div class="fwc__select-wrap"><select id="fwc-state" name="state" class="fwc__input fwc__select" required><option value="" disabled selected>Selecciona tu estado…</option>{STATES.map((state) => <option value={state}>{state}</option>)}</select><span class="fwc__chevron" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div></div>
+            <div class="fwc__row"><div class="fwc__field"><label class="fwc__label" for="fwc-state">Estado<span class="fwc__req" aria-hidden="true">*</span></label><div class="fwc__select-wrap"><select id="fwc-state" name="state" class="fwc__input fwc__select" required><option value="" disabled selected>Selecciona…</option>{STATES.map((state) => <option value={state}>{state}</option>)}</select><span class="fwc__chevron" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div></div>
 
-            <div class="fwc__field"><label class="fwc__label" for="fwc-sector">Tipo de instalación</label><div class="fwc__select-wrap"><select id="fwc-sector" name="sector" class="fwc__input fwc__select"><option value="" selected>Selecciona una opción…</option>{SECTORS.map((sector) => <option value={sector.label}>{sector.label}</option>)}</select><span class="fwc__chevron" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div></div>
+            <div class="fwc__field"><label class="fwc__label" for="fwc-sector">Tipo de instalación</label><div class="fwc__select-wrap"><select id="fwc-sector" name="sector" class="fwc__input fwc__select"><option value="" selected>Selecciona…</option>{SECTORS.map((sector) => <option value={sector.label}>{sector.label}</option>)}</select><span class="fwc__chevron" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div></div></div>
 
             <div class="fwc__field"><label class="fwc__label" for="fwc-interest">Equipo o servicio de interés<span class="fwc__req" aria-hidden="true">*</span></label><div class="fwc__select-wrap"><select id="fwc-interest" name="interest" class="fwc__input fwc__select" required><option value="" disabled selected>Selecciona una opción…</option><optgroup label="Categorías">{CATEGORIES.map((category) => <option value={category.label}>{category.label}</option>)}</optgroup><optgroup label="Servicios">{SERVICES.map((service) => <option value={service.label}>{service.label}</option>)}</optgroup></select><span class="fwc__chevron" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div></div>
 
-            <div class="fwc__field"><label class="fwc__label" for="fwc-detail">Detalle de tu necesidad</label><textarea id="fwc-detail" name="detail" class="fwc__input fwc__textarea" placeholder={textareaPlaceholder} rows="4" maxlength="600"></textarea></div>
+            <div class="fwc__field fwc__field--grow"><label class="fwc__label" for="fwc-detail">Detalle de tu necesidad</label><textarea id="fwc-detail" name="detail" class="fwc__input fwc__textarea" placeholder={textareaPlaceholder} rows="4" maxlength="600"></textarea></div>
 
             <button type="submit" class="fwc__btn" disabled={!waReady} aria-disabled={!waReady}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Cotizar equipo contra incendios por WhatsApp</button>
             {!waReady && <p class="fwc__notice" role="status">Canal de WhatsApp en configuración. Pronto podrás enviar tu solicitud desde aquí.</p>}
@@ -104,10 +113,25 @@ const waReady = Boolean(waNumber)
 <style>
   .fwc { padding: var(--section-py) 0; background: var(--c-surface); }
   .fwc__inner { max-width: var(--container-max); margin-inline: auto; padding-inline: var(--container-px); }
-  .fwc__grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-8); align-items: start; }
+  .fwc__grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-8); align-items: stretch; }
+  .fwc__col-faq { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
+  .fwc__col-faq :global(.faq__inner) { max-width: none; padding-inline: 0; }
+  .fwc__col-form { display: flex; min-width: 0; }
   @media (min-width: 1024px) { .fwc__grid { grid-template-columns: minmax(0, 7fr) minmax(20rem, 5fr); gap: var(--sp-10); } }
   .fwc__card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-xl); padding: var(--sp-6); box-shadow: var(--shadow-md); }
-  @media (min-width: 1024px) { .fwc__card { position: sticky; top: calc(var(--stack-height) + var(--sp-5)); } }
+    .fwc__card { display: flex; flex-direction: column; width: 100%; }
+  .fwc__form { flex: 1; }
+  .fwc__row { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); }
+  @media (min-width: 560px) { .fwc__row { grid-template-columns: 1fr 1fr; } }
+  .fwc__help { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--sp-3); padding: var(--sp-6); border-radius: var(--radius-xl); color: var(--c-white); background: radial-gradient(120% 120% at 100% 0%, rgba(var(--c-primary-rgb), .35) 0%, transparent 55%), linear-gradient(135deg, var(--c-black) 0%, var(--c-ink-3) 100%); box-shadow: var(--shadow-md); }
+  .fwc__help-eyebrow { margin: 0; font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: .1em; text-transform: uppercase; color: var(--c-primary-light); }
+  .fwc__help-title { margin: 0; font-size: var(--text-xl); font-weight: var(--weight-bold); line-height: var(--leading-snug); }
+  .fwc__help-text { margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: rgba(255,255,255,.72); }
+  .fwc__help-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-2); }
+  .fwc__help-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .6em 1.1em; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,.28); color: var(--c-white); font-size: var(--text-sm); font-weight: var(--weight-semibold); text-decoration: none; transition: background var(--transition), border-color var(--transition); }
+  .fwc__help-btn:hover { border-color: var(--c-white); background: rgba(255,255,255,.08); }
+  .fwc__help-btn--primary { background: var(--c-primary); border-color: var(--c-primary); }
+  .fwc__help-btn--primary:hover { background: var(--c-primary-dark); border-color: var(--c-primary-dark); }
   .fwc__card-hd { display: flex; align-items: flex-start; gap: var(--sp-3); padding-bottom: var(--sp-5); margin-bottom: var(--sp-5); border-bottom: 1px solid var(--c-border); }
   .fwc__wa-icon { flex-shrink: 0; width: 48px; height: 48px; display: grid; place-items: center; background: var(--c-primary); color: var(--c-white); border-radius: var(--radius-lg); }
   .fwc__eyebrow { margin: 0 0 var(--sp-1); color: var(--c-primary); font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: .1em; text-transform: uppercase; }
@@ -129,5 +153,7 @@ const waReady = Boolean(waNumber)
   .fwc__notice, .fwc__privacy { margin: 0; font-size: var(--text-xs); line-height: var(--leading-normal); text-align: center; color: var(--c-muted); }
   .fwc__notice { padding: var(--sp-3); background: var(--c-primary-tint); border-radius: var(--radius-md); }
   .fwc__privacy { margin-top: calc(var(--sp-1) * -1); }
+  .fwc__field--grow { flex: 1; }
+  .fwc__field--grow .fwc__textarea { flex: 1; }
   @media (prefers-reduced-motion: reduce) { .fwc__btn { transition: none; } .fwc__btn:hover:not(:disabled) { transform: none; } }
 </style>
