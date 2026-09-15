@@ -210,7 +210,7 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
     font-family: var(--font-heading); font-weight: var(--weight-semibold);
     font-size: var(--text-sm); color: var(--c-white); text-decoration: none;
     background: var(--c-primary); border-radius: var(--radius-md);
-    white-space: nowrap;
+    min-height: 2.75rem; text-align: center; line-height: 1.25; text-wrap: balance;
     transition: background var(--transition), gap var(--transition);
   }
   .ccard__cta:hover { background: var(--c-primary-dark); gap: var(--sp-3); }
