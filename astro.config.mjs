@@ -1,9 +1,45 @@
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+// @ts-check
+import { defineConfig, fontProviders } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+
+const categorySlugs = [
+  'extintores-y-emergencia',
+  'sistemas-contra-incendio',
+  'deteccion-y-alarma',
+  'equipo-para-bomberos-y-brigadas',
+  'rescate-y-accesorios',
+  'senalizacion-y-evacuacion',
+];
 
 export default defineConfig({
   site: 'https://tubombero.com',
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  output: 'static',
+  trailingSlash: 'never',
+  build: { format: 'file' },
+  prefetch: { defaultStrategy: 'hover' },
+  redirects: Object.fromEntries(categorySlugs.map((slug) => [`/productos/categoria/${slug}`, `/productos/${slug}`])),
+  fonts: [{
+    name: 'Inter',
+    cssVariable: '--font-body',
+    provider: fontProviders.fontsource(),
+    weights: ['400', '500', '600', '700', '800'],
+    subsets: ['latin', 'latin-ext'],
+    display: 'swap',
+  }],
+  integrations: [sitemap({
+    filter: (page) => !categorySlugs.some((slug) => page.endsWith(`/productos/${slug}`)),
+    serialize(item) {
+      if (item.url === 'https://tubombero.com/') {
+        item.priority = 1;
+        item.changefreq = /** @type {any} */ ('weekly');
+      } else if (item.url.includes('/productos/')) {
+        item.priority = .7;
+        item.changefreq = /** @type {any} */ ('monthly');
+      } else {
+        item.priority = .6;
+        item.changefreq = /** @type {any} */ ('monthly');
+      }
+      return item;
+    },
+  })],
 });

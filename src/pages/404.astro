@@ -1,0 +1,15 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+---
+<PageLayout title="Página no encontrada | Tu Bombero" description="La página que buscas no existe o fue movida." noindex>
+  <section class="not-found"><div class="container"><p class="eyebrow">Error 404</p><h1>Esta dirección no existe</h1><p>La página que buscas fue movida o la URL tiene un error. Puedes volver al inicio o consultar el catálogo.</p><div><a class="primary" href="/">Ir al inicio</a><a href="/productos">Ver productos</a></div></div></section>
+</PageLayout>
+<style>
+  .not-found { padding-block: clamp(5rem, 12vw, 10rem); background: var(--c-ink); color: var(--c-white); }
+  .not-found h1 { margin: 0; font-family: var(--font-heading); font-size: clamp(2.75rem, 7vw, 6rem); line-height: var(--leading-tight); }
+  .not-found p:not(.eyebrow) { max-width: 50ch; color: rgb(255 255 255 / .7); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .not-found .eyebrow { color: var(--c-primary-light); }
+  .not-found div > div { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
+  .not-found a { display: inline-flex; min-height: 3rem; align-items: center; padding: 0 1.25rem; border: 1px solid rgb(255 255 255 / .3); border-radius: var(--radius-md); color: var(--c-white); font-weight: var(--weight-bold); text-decoration: none; }
+  .not-found a.primary { border-color: var(--c-primary); background: var(--c-primary); }
+</style>

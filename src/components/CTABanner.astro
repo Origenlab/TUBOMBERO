@@ -1,0 +1,23 @@
+---
+interface Button { label: string; href?: string; primary?: boolean; external?: boolean; }
+interface Props { id?: string; heading: string; desc?: string; btns?: Button[]; badge?: string; variant?: 'red' | 'dark' | 'light'; }
+const { id, heading, desc, btns = [], badge, variant = 'red' } = Astro.props;
+---
+<section id={id} class:list={['cta-banner', `cta-banner--${variant}`]}><div class="container cta-banner__inner"><div><p class="eyebrow">Cotización</p><h2>{heading}</h2>{desc && <p>{desc}</p>}</div>{btns.length > 0 && <div class="cta-banner__actions">{btns.filter((btn) => btn.href).map((btn) => <a class:list={['cta-btn', btn.primary && 'cta-btn--primary']} href={btn.href} target={btn.external ? '_blank' : undefined} rel={btn.external ? 'noopener noreferrer' : undefined}>{btn.label}<span aria-hidden="true">→</span></a>)}{badge && <small>{badge}</small>}</div>}</div></section>
+<style>
+  .cta-banner { padding-block: var(--sp-10); }
+  .cta-banner--red { background: var(--c-primary); color: var(--c-white); }
+  .cta-banner--dark { background: var(--c-ink); color: var(--c-white); }
+  .cta-banner--light { background: var(--c-surface); }
+  .cta-banner__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-8); }
+  .cta-banner h2 { margin: 0; font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); line-height: var(--leading-tight); }
+  .cta-banner p:not(.eyebrow) { max-width: 55ch; color: rgb(255 255 255 / .8); line-height: var(--leading-relaxed); }
+  .cta-banner--light p:not(.eyebrow) { color: var(--c-ink-2); }
+  .cta-banner--red .eyebrow, .cta-banner--dark .eyebrow { color: var(--c-white); opacity: .78; }
+  .cta-banner__actions { display: grid; gap: var(--sp-3); min-width: 15rem; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); min-height: 3rem; padding: 0 1.25rem; border: 1px solid currentColor; border-radius: var(--radius-md); color: inherit; font-weight: var(--weight-bold); text-decoration: none; }
+  .cta-btn--primary { border-color: var(--c-white); background: var(--c-white); color: var(--c-primary); }
+  .cta-banner--light .cta-btn--primary { border-color: var(--c-primary); background: var(--c-primary); color: var(--c-white); }
+  .cta-banner small { opacity: .75; text-align: center; }
+  @media (max-width: 768px) { .cta-banner__inner { align-items: stretch; flex-direction: column; gap: var(--sp-5); } .cta-banner__actions { min-width: 0; } }
+</style>

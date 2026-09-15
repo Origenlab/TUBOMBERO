@@ -1,33 +1,42 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { CONTACT, NAV, SITE, TAXONOMY } from '../src/config/site';
 
-const projectPath = (path: string) => resolve(process.cwd(), path);
+const root = resolve(import.meta.dirname, '..');
+const read = (file: string) => readFileSync(resolve(root, file), 'utf8');
 
-describe('base del sitio Tu Bombero', () => {
-  it('centraliza la configuración y cuenta con una página de inicio', () => {
-    const configPath = projectPath('src/config/site.ts');
-    const homePath = projectPath('src/pages/index.astro');
-
-    expect(existsSync(configPath)).toBe(true);
-    expect(existsSync(homePath)).toBe(true);
-
-    const config = readFileSync(configPath, 'utf8');
-    const home = readFileSync(homePath, 'utf8');
-
-    expect(config).toContain("name: 'Tu Bombero'");
-    expect(config).toContain("coverage: 'Toda la República Mexicana'");
-    expect(home).toContain('Equipos y soluciones contra incendio');
-    expect(home).toContain('Catálogo por necesidad');
+describe('contrato de homologación TUBOMBERO', () => {
+  it('expone el SSoT de identidad, contacto, taxonomía y navegación', () => {
+    expect(SITE.name).toBe('Tu Bombero');
+    expect(SITE.business).toBeUndefined();
+    expect(SITE.allowSelfReviews).toBe(false);
+    expect(CONTACT.whatsapp).toBeUndefined();
+    expect(TAXONOMY.categories).toHaveLength(6);
+    expect(TAXONOMY.services).toHaveLength(4);
+    expect(TAXONOMY.sectors).toHaveLength(6);
+    expect(NAV.map((item) => item.label)).toEqual([
+      'Productos',
+      'Servicios',
+      'Sectores',
+      'Guías',
+      'Nosotros',
+      'Contacto',
+    ]);
   });
 
-  it('usa una composición editorial de ancho fluido en la portada', () => {
-    const globalStyles = readFileSync(projectPath('src/styles/global.css'), 'utf8');
-    const home = readFileSync(projectPath('src/pages/index.astro'), 'utf8');
+  it('usa la identidad visual roja de Gama y una sola familia Inter', () => {
+    expect(read('src/styles/tokens.css')).toContain('--c-primary: #C41E3A');
+    expect(read('astro.config.mjs')).toMatch(/name:\s*['"]Inter['"]/);
+    expect(read('astro.config.mjs')).not.toMatch(/name:\s*['"]Outfit['"]/);
+  });
 
-    expect(globalStyles).toContain('--page-gutter: clamp(1.25rem, 5vw, 5.5rem);');
-    expect(globalStyles).toContain('padding-inline: var(--page-gutter);');
-    expect(home).toContain('grid-template-columns: 5fr 7fr;');
-    expect(home).toContain('quick-nav__items');
+  it('mantiene el contrato sin Tailwind y conserva los ids de la portada', () => {
+    expect(read('package.json')).not.toMatch(/tailwind/i);
+    const home = read('src/pages/index.astro');
+    for (const id of ['catalogo', 'sectores', 'servicios', 'guias', 'cotizar']) {
+      expect(home).toContain(`id="${id}"`);
+    }
+    expect(read('src/components/Footer.astro')).toContain('id="contacto"');
   });
 });

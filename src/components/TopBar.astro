@@ -1,0 +1,19 @@
+---
+import { CONTACT, SITE } from '@config/site';
+const schedule = CONTACT.schedule?.display;
+---
+<aside class="topbar" aria-label="Información del sitio">
+  <div class="container topbar__inner">
+    <span class="topbar__tagline"><span class="topbar__dot" aria-hidden="true"></span>{SITE.tagline}</span>
+    {schedule && <span class="topbar__item">{schedule}</span>}
+    {CONTACT.email && <a class="topbar__item" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>}
+  </div>
+</aside>
+<style>
+  .topbar { background: var(--c-ink); color: var(--c-white); font-size: var(--text-xs); }
+  .topbar__inner { display: flex; align-items: center; justify-content: space-between; min-height: var(--topbar-height); gap: var(--sp-4); }
+  .topbar__tagline { display: inline-flex; align-items: center; gap: var(--sp-2); font-weight: var(--weight-medium); }
+  .topbar__dot { width: .45rem; height: .45rem; border-radius: var(--radius-full); background: var(--c-primary); }
+  .topbar__item { color: rgb(255 255 255 / .75); text-decoration: none; }
+  @media (max-width: 640px) { .topbar__inner { justify-content: center; } .topbar__item { display: none; } }
+</style>

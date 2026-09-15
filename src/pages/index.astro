@@ -1,176 +1,115 @@
 ---
-import CategoryCard from '../components/CategoryCard.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import { CATEGORIES, PROCESS, SECTORS, SERVICES, SITE } from '../config/site';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryCard from '@components/CategoryCard.astro';
+import CategoryFeature from '@components/CategoryFeature.astro';
+import CTABanner from '@components/CTABanner.astro';
+import Hero from '@components/Hero.astro';
+import ProcessSteps from '@components/ProcessSteps.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import SectionMenu from '@components/SectionMenu.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { CATEGORIES, PROCESS, SERVICES, SITE } from '@config/site';
+
+const menuItems = [
+  { label: 'Catálogo', href: '#catalogo', sub: 'Catálogo por necesidad' },
+  { label: 'Sectores', href: '#sectores', sub: 'Soluciones por sector' },
+  { label: 'Servicios', href: '#servicios', sub: 'Lo que ofreces · Ver servicios' },
+  { label: 'Guías', href: '#guias', sub: 'Guías técnicas' },
+];
+const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, title, desc }));
 ---
 
-<BaseLayout title="Equipos y soluciones contra incendio" description={SITE.description}>
-  <SiteHeader />
-  <main id="contenido">
-    <section class="hero">
-      <div class="container hero__grid">
-        <div class="hero__copy reveal">
-          <p class="eyebrow">Equipamiento y soluciones</p>
-          <h1>Equipos y soluciones contra incendio para operar con mayor preparación.</h1>
-          <p>Explora un catálogo pensado para organizaciones, brigadas y proyectos que buscan orientar su compra en todo México.</p>
-          <div class="hero__actions">
-            <a class="action" href="#catalogo">Explorar catálogo <span aria-hidden="true">→</span></a>
-            <a class="action action--outline" href="#servicios">Ver servicios</a>
-          </div>
-          <p class="hero__status"><span></span> Cobertura comercial prevista para toda la República Mexicana</p>
-        </div>
-        <div class="hero__visual reveal" style="animation-delay: 100ms">
-          <img src="/images/home/hero-inspeccion-equipo-contra-incendio.avif" alt="Técnico revisando un gabinete y red contra incendio" width="1920" height="1080" fetchpriority="high" decoding="async" />
-          <div class="hero__label"><b>Tu Bombero</b><span>Catálogo técnico y soluciones</span></div>
-        </div>
-      </div>
-    </section>
+<PageLayout title="Equipos y soluciones contra incendio | Tu Bombero" description="Equipo contra incendio, extintores y sistemas para organizaciones, brigadas y proyectos que buscan orientar su compra en toda la República Mexicana." pageType="home">
+  <Hero
+    badge="Equipamiento y soluciones"
+    title="Equipos y soluciones"
+    accent=" contra incendio"
+    after="para operar con mayor preparación."
+    coverage="Cobertura · Cobertura comercial prevista para toda la República Mexicana · Toda la República Mexicana"
+    subtitle="Explora un catálogo pensado para organizaciones, brigadas y proyectos que buscan orientar su compra en todo México."
+    descRight={[
+      SITE.description,
+      'Las ubicaciones, horarios y canales de atención se integrarán al confirmar los datos comerciales.',
+    ]}
+    image={{ src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Técnico revisando un gabinete y red contra incendio' }}
+    ctas={[{ text: 'Solicitar información', href: '/contacto' }, { text: 'Explorar catálogo', href: '#catalogo', variant: 'outline' }]}
+  />
 
-    <nav class="quick-nav" aria-label="Accesos rápidos">
-      <div class="container quick-nav__items">
-        <a href="#catalogo">Catálogo por necesidad</a>
-        <a href="#sectores">Soluciones por sector</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#guias">Guías técnicas</a>
-        <a href="#cotizar">Solicitar información</a>
-      </div>
-    </nav>
+  <SectionMenu items={menuItems} cta={{ label: 'Cotizar', href: '/contacto', sub: 'Solicitar información' }} />
 
-    <section id="catalogo" class="section">
-      <div class="container">
-        <SectionHeading eyebrow="Catálogo" title="Encuentra el equipo según el punto que necesitas atender." description="La primera versión organiza el catálogo en seis familias para que la navegación sea clara desde el inicio. Las fichas técnicas y referencias reales se incorporarán a partir del inventario confirmado." />
-        <div class="catalog-grid">
-          {CATEGORIES.map((category, index) => <CategoryCard {...category} index={index} />)}
-        </div>
+  <section id="catalogo" class="section section--surface">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Catálogo"
+        title="Encuentra el equipo según el punto que necesitas atender."
+        desc="La primera versión organiza el catálogo en seis familias para que la navegación sea clara desde el inicio. Las fichas técnicas y referencias reales se incorporarán a partir del inventario confirmado."
+        layout="duo"
+        body={[SITE.description, 'Canal de contacto pendiente']}
+      />
+      <div class="category-grid">
+        {CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} badge={category.tag} blurb={category.description} index={index} />)}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="sectores" class="section sectors">
-      <div class="container sectors__grid">
-        <div>
-          <p class="eyebrow">Soluciones por sector</p>
-          <h2 class="section-title">Un punto de partida para cada operación.</h2>
-        </div>
-        <div>
-          <p class="section-copy">El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere.</p>
-          <ul class="sectors__list">
-            {SECTORS.map((sector, index) => <li><span>0{index + 1}</span>{sector}<b aria-hidden="true">↗</b></li>)}
-          </ul>
-        </div>
-      </div>
-    </section>
+  <section id="sectores" class="section sectors">
+    <div class="container sectors__grid">
+      <div><p class="eyebrow">Soluciones por sector</p><h2 class="section-title">Un punto de partida para cada operación.</h2></div>
+      <div><p class="section-copy">El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere.</p><ul>{['Industria y manufactura', 'Construcción e infraestructura', 'Comercio y oficinas', 'Hospitalidad y salud', 'Protección Civil y bomberos', 'Almacenes y logística'].map((sector, index) => <li><span>0{index + 1}</span>{sector}<b aria-hidden="true">↗</b></li>)}</ul></div>
+    </div>
+  </section>
 
-    <section id="servicios" class="section">
-      <div class="container">
-        <SectionHeading eyebrow="Servicios" title="Acompañamiento antes, durante y después de la selección." description="Las líneas de servicio se presentan como un mapa comercial. El alcance concreto de cada una se publicará al confirmar las capacidades operativas y comerciales de Tu Bombero." />
-        <div class="services-grid">
-          {SERVICES.map((service) => <article class="service"><span>{service.number}</span><h3>{service.title}</h3><p>{service.description}</p></article>)}
-        </div>
-      </div>
-    </section>
+  <section id="servicios" class="section">
+    <div class="container">
+      <SectionHeading eyebrow="Servicios" title="Acompañamiento antes, durante y después de la selección." desc="Las líneas de servicio se presentan como un mapa comercial. El alcance concreto de cada una se publicará al confirmar las capacidades operativas y comerciales de Tu Bombero." layout="duo" body={[SERVICES[0].desc, SERVICES[3].desc]} />
+      <a class="service-link" href="#servicios">Ver servicios</a>
+      <div class="service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href="/servicios" />)}</div>
+    </div>
+  </section>
 
-    <section class="feature">
-      <div class="container feature__grid">
-        <img src="/images/home/epp-y-rescate.avif" alt="Equipo de protección personal y rescate para bomberos" width="1280" height="960" loading="lazy" decoding="async" />
-        <div>
-          <p class="eyebrow">Equipo para bomberos y brigadas</p>
-          <h2 class="section-title">Preparación visible desde el primer vistazo.</h2>
-          <p>Protección personal, equipo de respiración, accesorios y herramientas de apoyo estarán agrupados en una sección dedicada para facilitar la consulta técnica y comercial.</p>
-          <a class="action action--outline" href="#cotizar">Solicitar orientación <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
+  <CategoryFeature
+    eyebrow="Equipo para bomberos y brigadas"
+    title="Preparación visible"
+    titleAccent="desde el primer vistazo."
+    description="Protección personal, equipo de respiración, accesorios y herramientas de apoyo estarán agrupados en una sección dedicada para facilitar la consulta técnica y comercial."
+    features={[{ label: 'Protección personal' }, { label: 'Rescate y accesorios' }, { label: 'Equipo para bomberos y brigadas' }]}
+    imgMain={{ src: '/images/home/epp-y-rescate.avif', alt: 'Equipo de protección personal y rescate para bomberos' }}
+    imgA={{ src: '/images/home/extintores-y-emergencia.avif', alt: 'Extintores y elementos de emergencia' }}
+    imgB={{ src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Inspección de equipo contra incendio' }}
+    ctaLabel="Solicitar orientación"
+    ctaHref="/contacto"
+    surface
+  />
 
-    <section id="guias" class="section guides">
-      <div class="container">
-        <SectionHeading eyebrow="Guías técnicas" title="Contenido que ayuda a empezar la conversación correcta." description="El centro de recursos se construirá con artículos revisados antes de su publicación. Desde ahora, el sitio reserva sus rutas principales para no depender únicamente de un catálogo." />
-        <div class="guide-list">
-          <a href="#cotizar"><span>01</span><strong>Cómo identificar una familia de equipo contra incendio</strong><b aria-hidden="true">→</b></a>
-          <a href="#cotizar"><span>02</span><strong>Qué información preparar antes de solicitar una cotización</strong><b aria-hidden="true">→</b></a>
-          <a href="#cotizar"><span>03</span><strong>Cómo organizar la consulta de una necesidad de protección</strong><b aria-hidden="true">→</b></a>
-        </div>
+  <section id="guias" class="section section--surface">
+    <div class="container">
+      <SectionHeading eyebrow="Guías técnicas" title="Contenido que ayuda a empezar la conversación correcta." desc="El centro de recursos se construirá con artículos revisados antes de su publicación. Desde ahora, el sitio reserva sus rutas principales para no depender únicamente de un catálogo." />
+      <div class="guide-grid">
+        {['Cómo identificar una familia de equipo contra incendio', 'Qué información preparar antes de solicitar una cotización', 'Cómo organizar la consulta de una necesidad de protección'].map((title, index) => <article><span>0{index + 1}</span><h3>{title}</h3><a href="/contacto">Solicitar información <b aria-hidden="true">→</b></a></article>)}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="process">
-      <div class="container process__grid">
-        <div><p class="eyebrow">Ruta de atención</p><h2>De una necesidad a una conversación clara.</h2></div>
-        <ol>{PROCESS.map(([title, description], index) => <li><span>0{index + 1}</span><h3>{title}</h3><p>{description}</p></li>)}</ol>
-      </div>
-    </section>
+  <ProcessSteps eyebrow="Ruta de atención" title="De una necesidad a" titleAccent="una conversación clara." desc="Un camino sencillo para ubicar el equipo y servicio que se requiere." steps={steps} />
 
-    <section id="cotizar" class="quote">
-      <div class="container quote__inner">
-        <div><p class="eyebrow">Cotización</p><h2>Cuéntanos qué necesitas proteger.</h2><p>Estamos preparando los canales de atención. Cuando compartas el teléfono, WhatsApp o correo comercial, esta sección quedará conectada para iniciar cada solicitud con contexto.</p></div>
-        <div class="quote__placeholder"><span>Canal de contacto pendiente</span><p>Para publicar el acceso de cotización necesitamos confirmar un dato real de contacto.</p></div>
-      </div>
-    </section>
-  </main>
-  <SiteFooter />
-</BaseLayout>
+  <CTABanner id="cotizar" heading="Cuéntanos qué necesitas proteger." desc="Estamos preparando los canales de atención. Cuando compartas el teléfono, WhatsApp o correo comercial, esta sección quedará conectada para iniciar cada solicitud con contexto. Para publicar el acceso de cotización necesitamos confirmar un dato real de contacto." btns={[{ label: 'Solicitar información', href: '/contacto', primary: true }]} badge="Canal de contacto pendiente" variant="dark" />
+</PageLayout>
 
 <style>
-  .hero { overflow: hidden; padding: 0 0 5.5rem; }
-  .hero__grid { align-items: stretch; display: grid; gap: clamp(2rem, 4vw, 6rem); grid-template-columns: 5fr 7fr; min-height: min(680px, calc(100dvh - 108px)); }
-  .hero__copy { align-self: center; padding-block: 4rem; }
-  .hero h1 { font-family: var(--display); font-size: clamp(3.35rem, 6vw, 7rem); letter-spacing: -.08em; line-height: .84; margin: .8rem 0 1.5rem; max-width: 9ch; text-wrap: balance; }
-  .hero__copy > p:not(.eyebrow):not(.hero__status) { color: var(--muted); font-size: 1.05rem; max-width: 48ch; }
-  .hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 2rem 0; }
-  .hero__status { align-items: center; color: var(--muted); display: flex; font-size: .76rem; font-weight: 600; gap: .55rem; letter-spacing: .04em; text-transform: uppercase; }
-  .hero__status span { background: var(--red); border-radius: 50%; height: .5rem; width: .5rem; }
-  .hero__visual { margin-right: calc(var(--page-gutter) * -1); min-height: 100%; position: relative; }
-  .hero__visual img { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; }
-  .hero__label { background: var(--surface); bottom: -1px; display: grid; left: 0; padding: 1rem 1.2rem; position: absolute; }
-  .hero__label b { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
-  .hero__label span { color: var(--muted); font-size: .72rem; }
-  .quick-nav { border-block: 1px solid var(--line); background: var(--surface); }
-  .quick-nav .container { padding-inline: 0; }
-  .quick-nav__items { display: grid; grid-template-columns: repeat(5, 1fr); }
-  .quick-nav a { border-left: 1px solid var(--line); font-size: .78rem; font-weight: 700; padding: 1.1rem .8rem; text-align: center; }
-  .quick-nav a:last-child { background: var(--soft-red); color: var(--red); }
-  .catalog-grid { display: grid; gap: 1px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .sectors { background: var(--surface); border-block: 1px solid var(--line); }
-  .sectors__grid { display: grid; gap: 5rem; grid-template-columns: .8fr 1.2fr; }
-  .sectors__list { border-top: 1px solid var(--line); list-style: none; margin: 2rem 0 0; padding: 0; }
-  .sectors__list li { align-items: center; border-bottom: 1px solid var(--line); display: grid; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 600; gap: 1rem; grid-template-columns: 2rem 1fr auto; padding: 1rem 0; }
-  .sectors__list span { color: var(--red); font-size: .7rem; font-weight: 800; letter-spacing: .08em; }
-  .sectors__list b { color: var(--steel); font-size: 1rem; }
-  .services-grid { border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .service { border-left: 1px solid var(--line); padding: 1.3rem; }
-  .service:first-child { border-left: 0; padding-left: 0; }
-  .service span { color: var(--red); font-size: .7rem; font-weight: 800; letter-spacing: .1em; }
-  .service h3 { font-family: var(--display); font-size: 1.45rem; letter-spacing: -.04em; line-height: 1; margin: .9rem 0; }
-  .service p { color: var(--muted); font-size: .87rem; margin: 0; }
-  .feature { background: var(--soft-blue); padding: 5.5rem 0; }
-  .feature__grid { align-items: center; display: grid; gap: 5rem; grid-template-columns: 1fr 1fr; }
-  .feature img { aspect-ratio: 4 / 3; object-fit: cover; }
-  .feature p:not(.eyebrow) { color: var(--muted); max-width: 50ch; }
-  .feature .action { margin-top: 1rem; }
-  .guides { background: var(--surface); }
-  .guide-list { border-top: 1px solid var(--line); }
-  .guide-list a { align-items: center; border-bottom: 1px solid var(--line); display: grid; gap: 1rem; grid-template-columns: 2rem 1fr auto; padding: 1.25rem 0; }
-  .guide-list span { color: var(--red); font-size: .72rem; font-weight: 800; }
-  .guide-list strong { font-family: var(--display); font-size: clamp(1.2rem, 2.3vw, 1.9rem); font-weight: 600; letter-spacing: -.04em; }
-  .guide-list b { color: var(--steel); }
-  .process { background: var(--ink); color: #fff; padding: 5.5rem 0; }
-  .process .eyebrow { color: #ec8989; }
-  .process h2 { font-family: var(--display); font-size: clamp(2.2rem, 4.2vw, 4rem); letter-spacing: -.06em; line-height: .92; max-width: 9ch; }
-  .process__grid { display: grid; gap: 5rem; grid-template-columns: .8fr 1.2fr; }
-  .process ol { list-style: none; margin: 0; padding: 0; }
-  .process li { border-top: 1px solid rgba(255,255,255,.2); display: grid; gap: 1rem; grid-template-columns: 2.5rem 1fr 1.4fr; padding: 1.4rem 0; }
-  .process li span { color: #ec8989; font-size: .72rem; font-weight: 800; }
-  .process h3 { font-family: var(--display); font-size: 1.4rem; letter-spacing: -.04em; margin: 0; }
-  .process li p { color: #b5c0c2; font-size: .85rem; margin: 0; }
-  .quote { background: var(--soft-red); padding: 5.5rem 0; }
-  .quote__inner { align-items: end; display: grid; gap: 4rem; grid-template-columns: 1.3fr .7fr; }
-  .quote h2 { font-family: var(--display); font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -.06em; line-height: .92; margin: .7rem 0 1rem; max-width: 14ch; }
-  .quote p:not(.eyebrow) { color: #5e6568; max-width: 56ch; }
-  .quote__placeholder { background: var(--surface); border: 1px solid #efcdcd; padding: 1.5rem; }
-  .quote__placeholder span { color: var(--red); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-  .quote__placeholder p { font-size: .88rem; margin-bottom: 0; }
-  @media (max-width: 900px) { .hero__grid, .sectors__grid, .feature__grid, .process__grid, .quote__inner { grid-template-columns: 1fr; } .hero__visual { margin-right: calc(var(--page-gutter) * -1); min-height: 430px; } .catalog-grid { grid-template-columns: repeat(2, 1fr); } .services-grid { grid-template-columns: repeat(2, 1fr); } .service:nth-child(3) { border-left: 0; } }
-  @media (max-width: 620px) { .hero { padding-bottom: 4rem; } .hero__grid { gap: 0; min-height: 0; } .hero__copy { padding-block: 3.5rem; } .hero h1 { font-size: clamp(3rem, 15vw, 4.7rem); } .hero__visual { margin-inline: calc(var(--page-gutter) * -1); min-height: 310px; } .quick-nav__items { grid-template-columns: 1fr 1fr; } .quick-nav a { border-bottom: 1px solid var(--line); } .catalog-grid { grid-template-columns: 1fr; } .services-grid { grid-template-columns: 1fr; } .service, .service:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); padding: 1.5rem 0; } .service:first-child { border-top: 0; } .feature { padding: 4rem 0; } .process li { grid-template-columns: 2rem 1fr; } .process li p { grid-column: 2; } }
+  .category-grid, .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+  .section--surface, .sectors { background: var(--c-surface); }
+  .sectors { border-block: var(--border); }
+  .sectors__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); }
+  .sectors ul { margin: var(--sp-6) 0 0; padding: 0; border-top: var(--border); list-style: none; }
+  .sectors li { display: grid; grid-template-columns: 2rem 1fr auto; gap: var(--sp-3); align-items: center; padding: var(--sp-4) 0; border-bottom: var(--border); font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); }
+  .sectors li span { color: var(--c-primary); font-size: var(--text-xs); }
+  .sectors li b { color: var(--c-primary); }
+  .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+  .guide-grid article { display: flex; flex-direction: column; min-height: 14rem; padding: var(--sp-5); border: var(--border); border-radius: var(--radius-lg); background: var(--c-white); box-shadow: var(--shadow-sm); }
+  .guide-grid span { color: var(--c-primary); font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: var(--weight-bold); }
+  .guide-grid h3 { margin: var(--sp-5) 0 auto; font-family: var(--font-heading); font-size: var(--text-lg); line-height: var(--leading-snug); }
+   .guide-grid a { color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
+   .service-link { display: inline-flex; margin: 0 0 var(--sp-5); color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
+  @media (max-width: 900px) { .category-grid, .service-grid { grid-template-columns: repeat(2, 1fr); } .sectors__grid { grid-template-columns: 1fr; } .guide-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .category-grid, .service-grid { grid-template-columns: 1fr; } }
 </style>

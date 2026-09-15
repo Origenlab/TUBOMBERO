@@ -1,0 +1,19 @@
+---
+export interface MenuItem { label: string; href: string; sub?: string; }
+interface Props { items: MenuItem[]; cta?: MenuItem; }
+const { items, cta } = Astro.props;
+---
+<nav class="section-menu" aria-label="Accesos rápidos"><ul class="section-menu__bar">{items.map((item) => <li class="section-menu__cell"><a href={item.href}><strong>{item.label}</strong>{item.sub && <small>{item.sub}</small>}</a></li>)}{cta && <li class="section-menu__cell section-menu__cell--cta"><a href={cta.href}><strong>{cta.label}</strong>{cta.sub && <small>{cta.sub}</small>}</a></li>}</ul></nav>
+<style>
+  .section-menu { border-bottom: var(--border); background: var(--c-white); }
+  .section-menu__bar { display: flex; max-width: var(--container-max); margin: 0 auto; padding: 0; list-style: none; }
+  .section-menu__cell { flex: 1; border-left: var(--border); }
+  .section-menu__cell:last-child { border-right: var(--border); }
+  .section-menu__cell a { display: grid; min-height: 5.5rem; place-content: center; gap: .2rem; padding: var(--sp-3); text-align: center; text-decoration: none; }
+  .section-menu__cell a:hover { background: var(--c-surface); }
+  .section-menu strong { font-family: var(--font-heading); font-size: var(--text-sm); }
+  .section-menu small { color: var(--c-muted); font-size: var(--text-xs); }
+  .section-menu__cell--cta { background: var(--c-primary); border-color: var(--c-primary); color: var(--c-white); }
+  .section-menu__cell--cta small { color: rgb(255 255 255 / .72); }
+  .section-menu__cell--cta a:hover { background: var(--c-primary-dark); }
+</style>

@@ -1,35 +1,28 @@
 {
   "name": "tubombero",
-  "version": "1.0.0",
-  "description": "Sitio de catálogo y soluciones contra incendio de Tu Bombero.",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/check-demo.mjs && astro check && astro build && node scripts/check-url-shape.mjs",
+    "test": "vitest run",
+    "preview": "astro preview",
     "check": "astro check",
-    "test": "vitest run"
+    "audit:meta": "node scripts/audit-meta.mjs",
+    "astro": "astro",
+    "check:demo": "node scripts/check-demo.mjs",
+    "check:url-shape": "node scripts/check-url-shape.mjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Origenlab/TUBOMBERO.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Origenlab/TUBOMBERO/issues"
-  },
-  "homepage": "https://github.com/Origenlab/TUBOMBERO#readme",
   "dependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^6.4.8",
-    "tailwindcss": "^4.3.3"
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.1.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "@types/node": "^26.5.1",
-    "typescript": "^6.0.3",
-    "vite": "^7.3.6",
     "vitest": "^4.1.11"
   }
 }

@@ -1,0 +1,19 @@
+---
+import CategoryCard from '@components/CategoryCard.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { CATEGORIES } from '@config/site';
+---
+<PageLayout title="Productos contra incendio | Tu Bombero" description="Conoce las categorías de equipo contra incendio de Tu Bombero y encuentra una ruta clara para orientar tu compra en México." pageType="category">
+  <section class="page-intro"><div class="container"><p class="eyebrow">Catálogo</p><h1>Productos contra incendio</h1><p>Seis familias para ubicar el equipo que necesitas. Las fichas técnicas se publicarán conforme se confirme el inventario real.</p></div></section>
+  <section class="section"><div class="container"><SectionHeading eyebrow="Categorías" title="Elige el punto de partida." desc="Cada categoría organiza una necesidad distinta de protección, preparación o respuesta." align="left" /><div class="grid">{CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} badge={category.tag} blurb={category.description} index={index} />)}</div></div></section>
+</PageLayout>
+<style>
+  .page-intro { padding-block: clamp(4rem, 9vw, 7rem); background: var(--c-ink); color: var(--c-white); }
+  .page-intro h1 { max-width: 12ch; margin: 0; font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 5rem); line-height: var(--leading-tight); }
+  .page-intro p:last-child { max-width: 58ch; color: rgb(255 255 255 / .74); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .page-intro .eyebrow { color: var(--c-primary-light); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+</style>

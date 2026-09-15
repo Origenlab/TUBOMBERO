@@ -1,0 +1,33 @@
+---
+import { NAV, SITE } from '@config/site';
+---
+<header class="site-header">
+  <div class="container header__inner">
+    <a class="brand" href="/" aria-label={`${SITE.name}, inicio`}>
+      <span class="brand__mark" aria-hidden="true">T</span>
+      <span class="brand__name">Tu <strong>Bombero</strong></span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul class="nav" role="list">
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="header__cta" href="/contacto">Cotizar</a>
+  </div>
+</header>
+<style>
+  .site-header { position: sticky; top: 0; z-index: var(--z-sticky); background: var(--c-white); border-bottom: var(--border); box-shadow: var(--shadow-sm); }
+  .header__inner { display: flex; align-items: center; min-height: var(--header-height); gap: clamp(1rem, 3vw, 3rem); }
+  .brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--c-ink); text-decoration: none; white-space: nowrap; }
+  .brand__mark { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: var(--radius-md); background: var(--c-primary); color: var(--c-white); font-family: var(--font-heading); font-size: 1.25rem; font-weight: var(--weight-bold); }
+  .brand__name { font-family: var(--font-heading); font-size: 1.2rem; letter-spacing: -.02em; }
+  .brand__name strong { font-weight: var(--weight-bold); }
+  nav { margin-inline: auto; }
+  .nav { display: flex; align-items: center; gap: clamp(.75rem, 2.2vw, 2rem); margin: 0; padding: 0; list-style: none; }
+  .nav a { color: var(--c-ink-2); font-size: var(--text-sm); font-weight: var(--weight-semibold); text-decoration: none; }
+  .nav a:hover { color: var(--c-primary); }
+  .header__cta { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 0 1.15rem; border-radius: var(--radius-md); background: var(--c-primary); color: var(--c-white); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; box-shadow: var(--shadow-sm); }
+  .header__cta:hover { background: var(--c-primary-dark); }
+  @media (max-width: 900px) { .nav { gap: .8rem; } .nav a { font-size: var(--text-xs); } }
+  @media (max-width: 700px) { nav { display: none; } .header__cta { margin-left: auto; } }
+</style>

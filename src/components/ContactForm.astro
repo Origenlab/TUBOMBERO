@@ -1,0 +1,6 @@
+---
+import { CONTACT, SITE } from '@config/site';
+const hasChannel = Boolean(CONTACT.email || CONTACT.phone || CONTACT.whatsapp);
+---
+{hasChannel ? <p>Los canales de atención se mostrarán aquí cuando estén habilitados.</p> : <p class="contact-pending">{SITE.contactStatus}.</p>}
+<style>.contact-pending { padding: var(--sp-5); border: var(--border); border-radius: var(--radius-lg); background: var(--c-surface); color: var(--c-ink-2); }</style>

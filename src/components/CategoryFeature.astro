@@ -1,0 +1,24 @@
+---
+interface Image { src: string; alt: string; }
+interface Props { eyebrow: string; title: string; titleAccent?: string; description: string; features: { label: string; desc?: string }[]; imgMain: Image; imgA: Image; imgB: Image; ctaLabel?: string; ctaHref?: string; surface?: boolean; }
+const { eyebrow, title, titleAccent, description, features, imgMain, imgA, imgB, ctaLabel = 'Conocer opciones', ctaHref = '/productos', surface = false } = Astro.props;
+---
+<section class:list={['feature', surface && 'feature--surface']}><div class="container feature__inner"><div><p class="eyebrow">{eyebrow}</p><h2>{title}{titleAccent && <><br /><span>{titleAccent}</span></>}</h2><p class="feature__desc">{description}</p><ul>{features.map((item) => <li><b aria-hidden="true">✓</b><span><strong>{item.label}</strong>{item.desc && ` — ${item.desc}`}</span></li>)}</ul><a class="feature__cta" href={ctaHref}>{ctaLabel}<span aria-hidden="true">→</span></a></div><div class="feature__gallery"><img class="feature__main" src={imgMain.src} alt={imgMain.alt} width="800" height="500" loading="lazy" /><div><img src={imgA.src} alt={imgA.alt} width="400" height="300" loading="lazy" /><img src={imgB.src} alt={imgB.alt} width="400" height="300" loading="lazy" /></div></div></div></section>
+<style>
+  .feature { padding-block: var(--section-py); }
+  .feature--surface { background: var(--c-surface); }
+  .feature__inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 7vw, 6rem); }
+  .feature h2 { margin: 0 0 var(--sp-4); font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3.25rem); line-height: var(--leading-tight); }
+  .feature h2 span { color: var(--c-primary); }
+  .feature__desc { color: var(--c-ink-2); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .feature ul { display: grid; gap: var(--sp-3); margin: var(--sp-5) 0; padding: 0; list-style: none; color: var(--c-ink-2); }
+  .feature li { display: flex; gap: var(--sp-3); align-items: flex-start; }
+  .feature li b { color: var(--c-primary); }
+  .feature__cta { color: var(--c-primary); font-weight: var(--weight-bold); text-decoration: none; }
+  .feature__gallery { display: grid; gap: var(--sp-3); }
+  .feature__gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
+  .feature__main { aspect-ratio: 16 / 10; }
+  .feature__gallery > div { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+  .feature__gallery > div img { aspect-ratio: 4 / 3; }
+  @media (max-width: 768px) { .feature__inner { grid-template-columns: 1fr; } }
+</style>

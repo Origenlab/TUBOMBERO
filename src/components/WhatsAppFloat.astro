@@ -1,0 +1,8 @@
+---
+import { waUrl, WA_MESSAGES } from '@config/site';
+const href = waUrl(WA_MESSAGES.cotizar);
+---
+{href && <a class="wa-float" href={href} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"><span aria-hidden="true">◔</span><span>WhatsApp</span></a>}
+<style>
+  .wa-float { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: calc(var(--z-sticky) + 1); display: inline-flex; align-items: center; gap: var(--sp-2); padding: .8rem 1.1rem; border-radius: var(--radius-full); background: var(--c-wa); color: var(--c-white); font-weight: var(--weight-bold); text-decoration: none; box-shadow: var(--shadow-md); }
+</style>

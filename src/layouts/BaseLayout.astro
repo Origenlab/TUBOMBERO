@@ -1,33 +1,60 @@
 ---
+import { Font } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
+import { SITE } from '@config/site';
+import { buildMeta, buildSchema, type PageType, type SchemaData } from '@lib/seo';
+import '../styles/tokens.css';
 import '../styles/global.css';
-import { SITE } from '../config/site';
-import { buildMeta, organizationSchema, websiteSchema } from '../lib/seo';
+import '../styles/mobile.css';
 
-interface Props {
-  title: string;
-  description: string;
-  path?: string;
+export interface Props {
+  title?: string;
+  keywords?: readonly string[];
+  description?: string;
+  canonical?: string;
+  image?: string;
+  pageType?: PageType;
+  schemaData?: SchemaData;
+  noindex?: boolean;
 }
 
-const { title, description, path } = Astro.props;
-const meta = buildMeta({ title, description, path });
-const schema = [organizationSchema(), websiteSchema()];
+const { title, description, canonical, image, pageType = 'page', schemaData = {}, noindex = false } = Astro.props;
+const meta = buildMeta({ title, description, canonical: canonical ?? Astro.url.pathname, image, type: pageType === 'article' ? 'article' : 'website', noindex });
+const jsonLd = buildSchema(pageType, schemaData);
 ---
 
 <!doctype html>
-<html lang="es-MX">
+<html lang={SITE.lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
     <link rel="canonical" href={meta.canonical} />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE.name} />
+    <meta name="robots" content={meta.robots} />
+    <link rel="alternate" hreflang="es-MX" href={meta.canonical} />
+    <link rel="alternate" hreflang="x-default" href={meta.canonical} />
+    <meta property="og:type" content={meta.type} />
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:url" content={meta.canonical} />
-    <title>{meta.title}</title>
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <meta property="og:image" content={meta.image} />
+    <meta property="og:site_name" content={meta.siteName} />
+    <meta property="og:locale" content={meta.locale} />
+    <meta name="twitter:card" content={meta.twitterCard} />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={meta.image} />
+    <meta name="theme-color" content={SITE.themeColor} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <Font cssVariable="--font-body" preload />
+    <ClientRouter />
+    <slot name="head" />
+    {jsonLd.map((node) => <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />)}
   </head>
-  <body><slot /></body>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+    <slot />
+  </body>
 </html>

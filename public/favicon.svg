@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tu Bombero">
+  <rect width="64" height="64" rx="14" fill="#C41E3A"/>
+  <path d="M19 15h9v24c0 5 2 8 5 8s5-3 5-8V15h9v24c0 10-5 15-14 15S19 49 19 39V15Z" fill="#FFFFFF"/>
+</svg>

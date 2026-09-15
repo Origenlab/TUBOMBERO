@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://tubombero.com/sitemap.xml
+Sitemap: https://tubombero.com/sitemap-index.xml

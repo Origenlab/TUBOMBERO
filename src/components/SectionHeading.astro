@@ -1,20 +1,17 @@
 ---
-interface Props { eyebrow: string; title: string; description: string; }
-const { eyebrow, title, description } = Astro.props;
+interface Props { eyebrow?: string; title: string; titleAccent?: string; desc?: string; layout?: 'simple' | 'duo'; align?: 'left' | 'center'; body?: string[]; dark?: boolean; }
+const { eyebrow, title, titleAccent, desc, layout = 'simple', align = 'left', body = [], dark = false } = Astro.props;
 ---
-
-<div class="section-heading reveal">
-  <p class="eyebrow">{eyebrow}</p>
-  <div>
-    <h2 class="section-title">{title}</h2>
-    <p class="section-copy">{description}</p>
-  </div>
-</div>
-
+<header class:list={['section-heading', `section-heading--${layout}`, `section-heading--${align}`, dark && 'section-heading--dark']}><div><p class="eyebrow">{eyebrow}</p><h2>{title}{titleAccent && <><br /><span>{titleAccent}</span></>}</h2>{desc && <p class="section-heading__desc">{desc}</p>}</div>{layout === 'duo' && body.length > 0 && <div class="section-heading__body">{body.map((text) => <p>{text}</p>)}</div>}</header>
 <style>
-  .section-heading { align-items: end; display: grid; gap: 2rem; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); margin-bottom: 2.8rem; }
-  .section-heading .eyebrow { align-self: start; margin: .7rem 0 0; }
-  .section-heading .section-title { margin-top: 0; }
-  .section-heading .section-copy { margin-bottom: 0; }
-  @media (max-width: 720px) { .section-heading { display: block; } .section-heading .eyebrow { margin-bottom: .8rem; } }
+  .section-heading { margin-bottom: var(--sp-8); }
+  .section-heading--duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 7vw, 6rem); align-items: end; }
+  .section-heading h2 { margin: 0; font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3.25rem); line-height: var(--leading-tight); letter-spacing: -.03em; }
+  .section-heading h2 span { color: var(--c-primary); }
+  .section-heading__desc, .section-heading__body p { color: var(--c-ink-2); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .section-heading__body { display: grid; gap: var(--sp-3); }
+  .section-heading__body p { margin: 0; font-size: var(--text-base); }
+  .section-heading--dark h2 { color: var(--c-white); }
+  .section-heading--dark .section-heading__desc, .section-heading--dark .section-heading__body p { color: rgb(255 255 255 / .7); }
+  @media (max-width: 768px) { .section-heading--duo { grid-template-columns: 1fr; align-items: start; gap: var(--sp-4); } }
 </style>

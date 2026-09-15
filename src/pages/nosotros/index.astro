@@ -1,0 +1,16 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+---
+<PageLayout title="Nosotros | Tu Bombero" description="Conoce el enfoque de Tu Bombero para orientar compras y necesidades de protección contra incendio en México." breadcrumbs={[{ label: 'Nosotros' }]}>
+  <section class="about"><div class="container"><p class="eyebrow">Nosotros</p><h1>Una forma más clara de resolver necesidades contra incendio.</h1><p>Tu Bombero nace como un punto de partida para organizaciones, brigadas y proyectos que necesitan ubicar equipo y servicios con mejor orientación.</p><div class="about__grid"><article><h2>Qué hacemos</h2><p>Organizamos categorías y servicios para que encontrar una ruta de atención sea sencillo, incluso cuando todavía estás definiendo qué necesitas.</p></article><article><h2>Cómo trabajamos</h2><p>Presentamos la información con claridad y dejamos visibles los pendientes. Los datos comerciales se publicarán sólo cuando estén confirmados.</p></article></div></div></section>
+</PageLayout>
+<style>
+  .about { padding-block: clamp(5rem, 11vw, 9rem); }
+  .about h1 { max-width: 15ch; margin: 0; font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 5rem); line-height: var(--leading-tight); }
+  .about > .container > p:not(.eyebrow) { max-width: 56ch; color: var(--c-ink-2); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .about__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); margin-top: var(--sp-10); }
+  .about__grid article { padding: var(--sp-5); border: var(--border); border-radius: var(--radius-lg); background: var(--c-surface); }
+  .about__grid h2 { margin: 0 0 var(--sp-2); font-family: var(--font-heading); }
+  .about__grid p { margin: 0; color: var(--c-ink-2); line-height: var(--leading-relaxed); }
+  @media (max-width: 640px) { .about__grid { grid-template-columns: 1fr; } }
+</style>

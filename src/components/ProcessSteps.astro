@@ -1,0 +1,20 @@
+---
+interface Step { num: string; title: string; desc: string; }
+interface Props { eyebrow?: string; title: string; titleAccent?: string; desc?: string; steps: readonly Step[]; }
+const { eyebrow = 'Ruta de atención', title, titleAccent, desc, steps } = Astro.props;
+---
+<section class="process"><div class="container"><p class="eyebrow">{eyebrow}</p><h2>{title}{titleAccent && <span> {titleAccent}</span>}</h2>{desc && <p class="process__intro">{desc}</p>}<ol>{steps.map((step) => <li><span>{step.num}</span><h3>{step.title}</h3><p>{step.desc}</p></li>)}</ol></div></section>
+<style>
+  .process { padding-block: var(--section-py); background: var(--c-ink); color: var(--c-white); }
+  .process .eyebrow { color: var(--c-primary-light); }
+  .process h2 { max-width: 14ch; margin: 0; font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3.25rem); line-height: var(--leading-tight); }
+  .process h2 span { color: var(--c-primary-light); }
+  .process__intro { max-width: 45ch; color: rgb(255 255 255 / .7); }
+  .process ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: var(--sp-8) 0 0; padding: 0; list-style: none; border: 1px solid rgb(255 255 255 / .15); border-radius: var(--radius-lg); overflow: hidden; }
+  .process li { min-height: 13rem; padding: var(--sp-5); border-left: 1px solid rgb(255 255 255 / .15); }
+  .process li:first-child { border-left: 0; }
+  .process li > span { color: var(--c-primary-light); font-family: var(--font-heading); font-size: 2.5rem; font-weight: var(--weight-black); }
+  .process h3 { margin: var(--sp-5) 0 var(--sp-2); font-family: var(--font-heading); font-size: var(--text-lg); }
+  .process li p { margin: 0; color: rgb(255 255 255 / .64); line-height: var(--leading-relaxed); }
+  @media (max-width: 640px) { .process ol { grid-template-columns: 1fr; } .process li, .process li:first-child { min-height: 0; border-left: 0; border-top: 1px solid rgb(255 255 255 / .15); } .process li:first-child { border-top: 0; } }
+</style>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TopBar from '@components/TopBar.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import WhatsAppFloat from '@components/WhatsAppFloat.astro';
+import { type PageType, type SchemaData } from '@lib/seo';
+
+export interface Props {
+  title?: string;
+  keywords?: readonly string[];
+  description?: string;
+  canonical?: string;
+  image?: string;
+  pageType?: PageType;
+  schemaData?: SchemaData;
+  noindex?: boolean;
+  breadcrumbs?: { label: string; href?: string }[];
+}
+const { breadcrumbs = [], ...baseProps } = Astro.props;
+const schemaData = {
+  ...(baseProps.schemaData ?? {}),
+  ...(breadcrumbs.length > 0
+    ? { breadcrumbs: [{ name: 'Inicio', path: '/' }, ...breadcrumbs.map((item) => ({ name: item.label, path: item.href ?? '' }))] }
+    : {}),
+};
+---
+
+<BaseLayout {...baseProps} schemaData={schemaData}>
+  <TopBar />
+  <Header />
+  {breadcrumbs.length > 0 && <nav class="breadcrumbs" aria-label="Migas de pan"><div class="container"><a href="/">Inicio</a>{breadcrumbs.map((item) => <><span aria-hidden="true">/</span>{item.href ? <a href={item.href}>{item.label}</a> : <span aria-current="page">{item.label}</span>}</>)}</div></nav>}
+  <main id="main-content"><slot /></main>
+  <Footer />
+  <WhatsAppFloat />
+</BaseLayout>
+<style>
+  .breadcrumbs { border-bottom: var(--border); background: var(--c-surface); }
+  .breadcrumbs .container { display: flex; flex-wrap: wrap; gap: var(--sp-2); padding-block: var(--sp-3); color: var(--c-muted); font-size: var(--text-sm); }
+  .breadcrumbs a { color: var(--c-primary); text-decoration: none; }
+</style>
