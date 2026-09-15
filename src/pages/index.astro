@@ -9,7 +9,7 @@ import SectionHeading from '@components/SectionHeading.astro';
 import SectionMenu from '@components/SectionMenu.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import PageLayout from '@layouts/PageLayout.astro';
-import { CATEGORIES, PROCESS, SERVICES, SECTORS } from '@config/site';
+import { CATEGORIES, CATEGORY_FEATURES, PROCESS, SERVICES, SECTORS } from '@config/site';
 
 const menuItems = [
   { label: 'Catálogo', href: '#catalogo', sub: 'Catálogo por necesidad' },
@@ -52,23 +52,25 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     </div>
   </section>
 
-  <CategoryFeature
-    eyebrow="Respuesta inicial"
-    title="Extintores"
-    titleAccent="para cada tipo de riesgo."
-    description="Equipos portátiles, gabinetes, señalización y elementos de respuesta inicial. Un extintor adecuado, en el lugar correcto y con el agente indicado para cada riesgo es la primera línea de defensa de cualquier instalación: permite controlar un conato de incendio en sus primeros segundos, antes de que comprometa a las personas, los bienes o la operación. En Tu Bombero organizamos esta familia por tipo de agente para que identifiques con claridad qué extintor corresponde a oficinas, almacenes, cocinas, áreas eléctricas o zonas con líquidos inflamables."
-    features={[
-      { label: 'Extintores CO₂', desc: 'Para áreas eléctricas y equipos sensibles.' },
-      { label: 'Extintores de agua', desc: 'Para combustibles ordinarios como madera, papel y textiles.' },
-      { label: 'Extintores de espuma AFFF', desc: 'Para riesgos con líquidos inflamables.' },
-      { label: 'Extintores PQS', desc: 'Polvo químico seco para uso general en instalaciones.' },
-    ]}
-    imgMain={{ src: '/images/categorias/extintores-pqs-co2-y-agua.avif', alt: 'Extintores de polvo químico seco, CO₂ y agua en un almacén' }}
-    imgA={{ src: '/images/categorias/extintor-espuma-afff.avif', alt: 'Extintor de espuma AFFF en una nave industrial' }}
-    imgB={{ src: '/images/categorias/extintor-polvo-quimico-seco-pqs.avif', alt: 'Extintor de polvo químico seco PQS montado en una columna' }}
-    ctaLabel="Extintores contra incendio"
-    ctaHref="/productos/extintores-y-emergencia"
-  />
+  {CATEGORY_FEATURES.map((feature, index) => {
+    const category = CATEGORIES.find((item) => item.slug === feature.slug)!;
+    const [imgMain, imgA, imgB] = feature.images;
+    return (
+      <CategoryFeature
+        eyebrow={category.tag}
+        title={feature.title}
+        titleAccent={feature.titleAccent}
+        description={feature.description}
+        features={[...feature.points]}
+        imgMain={imgMain}
+        imgA={imgA}
+        imgB={imgB}
+        ctaLabel={category.cta}
+        ctaHref={`/productos/${category.slug}`}
+        surface={index % 2 === 1}
+      />
+    );
+  })}
 
   <section id="sectores" class="section sectors">
     <div class="container">
@@ -85,19 +87,6 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     </div>
   </section>
 
-  <CategoryFeature
-    eyebrow="Equipo para bomberos y brigadas"
-    title="Equipo de protección"
-    titleAccent="para brigadas y bomberos."
-    description="Protección personal, equipo de respiración, herramientas y accesorios de rescate agrupados en un mismo lugar para facilitar la consulta técnica y comercial de brigadas industriales y cuerpos de respuesta."
-    features={[{ label: 'Equipo de protección personal', desc: 'Cascos, trajes, guantes, botas y respiración.' }, { label: 'Herramientas para bomberos', desc: 'Entrada forzada, ventilación y corte.' }, { label: 'Rescate y accesorios', desc: 'Cuerdas, camillas, botiquines y bolsas.' }]}
-    imgMain={{ src: '/images/home/epp-y-rescate.avif', alt: 'Equipo de protección personal y rescate para bomberos' }}
-    imgA={{ src: '/images/home/extintores-y-emergencia.avif', alt: 'Extintores y elementos de emergencia' }}
-    imgB={{ src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Inspección de equipo contra incendio' }}
-    ctaLabel="Equipo de protección para brigadas"
-    ctaHref="/productos/equipo-para-bomberos-y-brigadas"
-    surface
-  />
 
   <section id="guias" class="section section--surface">
     <div class="container">

@@ -253,3 +253,156 @@ export function waUrl(message: string = WA_MESSAGES.default): string | undefined
 export function telUrl(): string | undefined {
   return CONTACT.phoneE164 ? `tel:${CONTACT.phoneE164}` : undefined;
 }
+
+/**
+ * Módulos destacados por categoría (portada). Un módulo por categoría, mismo
+ * componente (CategoryFeature) y mismo orden de columnas: texto a la izquierda,
+ * galería 1 + 2 a la derecha. Los puntos siguen el orden alfabético de la card.
+ */
+export interface CategoryFeatureData {
+  slug: string;
+  title: string;
+  titleAccent: string;
+  description: string;
+  points: readonly { label: string; desc: string }[];
+  images: readonly [{ src: string; alt: string }, { src: string; alt: string }, { src: string; alt: string }];
+}
+
+export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
+  {
+    slug: 'extintores-y-emergencia',
+    title: 'Extintores',
+    titleAccent: 'para cada tipo de riesgo.',
+    description: 'Equipos portátiles, gabinetes, señalización y elementos de respuesta inicial. Un extintor adecuado, en el lugar correcto y con el agente indicado para cada riesgo es la primera línea de defensa de cualquier instalación: permite controlar un conato de incendio en sus primeros segundos, antes de que comprometa a las personas, los bienes o la operación. En Tu Bombero organizamos esta familia por tipo de agente para que identifiques con claridad qué extintor corresponde a oficinas, almacenes, cocinas, áreas eléctricas o zonas con líquidos inflamables.',
+    points: [
+      { label: 'Extintores CO₂', desc: 'Para áreas eléctricas y equipos sensibles.' },
+      { label: 'Extintores de agua', desc: 'Para combustibles ordinarios como madera, papel y textiles.' },
+      { label: 'Extintores de espuma AFFF', desc: 'Para riesgos con líquidos inflamables.' },
+      { label: 'Extintores PQS', desc: 'Polvo químico seco para uso general en instalaciones.' },
+    ],
+    images: [
+      { src: '/images/categorias/extintores-pqs-co2-y-agua.avif', alt: 'Extintores de polvo químico seco, CO₂ y agua en un almacén' },
+      { src: '/images/categorias/extintor-espuma-afff.avif', alt: 'Extintor de espuma AFFF en una nave industrial' },
+      { src: '/images/categorias/extintor-polvo-quimico-seco-pqs.avif', alt: 'Extintor de polvo químico seco PQS montado en una columna' },
+    ],
+  },
+  {
+    slug: 'sistemas-contra-incendio',
+    title: 'Red contra incendios',
+    titleAccent: 'para un suministro de agua confiable.',
+    description: 'Componentes para redes hidráulicas, mangueras, hidrantes, válvulas y gabinetes. La red contra incendios lleva agua con la presión y el caudal necesarios a cada punto de la instalación, y su confiabilidad depende de que mangueras, válvulas, boquillas y conexiones sean compatibles entre sí y adecuadas para la presión de trabajo. En Tu Bombero agrupamos estos componentes para que armes o mantengas tu sistema hidráulico con piezas que respondan cuando se necesitan.',
+    points: [
+      { label: 'Boquillas y chiflones', desc: 'Control del chorro directo o de niebla.' },
+      { label: 'Conexiones y adaptadores', desc: 'Acoplamiento entre mangueras, tomas y equipos.' },
+      { label: 'Mangueras', desc: 'Tramos para gabinetes, hidrantes y ataque al fuego.' },
+      { label: 'Válvulas', desc: 'Apertura, seccionamiento y control del flujo de agua.' },
+    ],
+    images: [
+      { src: '/images/modulos/red-contra-incendios-manguera-hidrante.avif', alt: 'Bombero combatiendo un incendio con manguera conectada a un hidrante' },
+      { src: '/images/modulos/valvulas-y-conexiones-de-bronce.avif', alt: 'Válvulas y conexiones de bronce para red contra incendios en almacén' },
+      { src: '/images/modulos/boquillas-y-conexiones-contra-incendio.avif', alt: 'Boquillas y conexiones de bronce para sistemas contra incendio' },
+    ],
+  },
+  {
+    slug: 'gabinetes-e-hidrantes',
+    title: 'Gabinetes e hidrantes',
+    titleAccent: 'listos en cada nivel del inmueble.',
+    description: 'Gabinetes, hidrantes y estaciones de manguera para tener el equipo listo y a la vista en cada nivel de la instalación. Un gabinete bien ubicado protege la manguera y el extintor del polvo, los golpes y el uso indebido, y permite que la brigada los localice en segundos durante una emergencia. Los hidrantes conectan la red contra incendios con el equipo de ataque, tanto en el interior como en el exterior del inmueble.',
+    points: [
+      { label: 'Estaciones de manguera', desc: 'Manguera lista para usarse en pasillos y naves.' },
+      { label: 'Gabinetes para extintor', desc: 'Resguardo visible y protegido del equipo portátil.' },
+      { label: 'Gabinetes para manguera', desc: 'Manguera, válvula y boquilla en un solo punto.' },
+      { label: 'Hidrantes', desc: 'Toma de agua para el combate en interiores y exteriores.' },
+    ],
+    images: [
+      { src: '/images/modulos/hidrante-contra-incendio-exterior.avif', alt: 'Hidrante contra incendio rojo en la vía pública' },
+      { src: '/images/modulos/gabinete-contra-incendio-para-manguera.avif', alt: 'Gabinete contra incendio con carrete de manguera y puerta de vidrio' },
+      { src: '/images/modulos/estacion-de-manguera-contra-incendio.avif', alt: 'Estación de manguera contra incendio con gabinete y extintor' },
+    ],
+  },
+  {
+    slug: 'deteccion-y-alarma',
+    title: 'Detección y alarma',
+    titleAccent: 'para alertar a tiempo.',
+    description: 'Equipos para detección, notificación y respuesta coordinada ante una condición de riesgo. Detectar un incendio en su etapa inicial es lo que da tiempo para evacuar y combatirlo: los detectores identifican humo o calor, el panel de control procesa la señal y las sirenas y estrobos avisan a todos los ocupantes, incluso en áreas ruidosas. Un sistema de detección y alarma bien diseñado es la base de cualquier plan de emergencia.',
+    points: [
+      { label: 'Detectores de humo', desc: 'Detección temprana en oficinas, pasillos y bodegas.' },
+      { label: 'Detectores de temperatura', desc: 'Para cocinas, cuartos de máquinas y áreas con polvo.' },
+      { label: 'Paneles de control', desc: 'Supervisión y activación de todo el sistema.' },
+      { label: 'Sirenas y estrobos', desc: 'Aviso audible y visual para la evacuación.' },
+    ],
+    images: [
+      { src: '/images/modulos/detectores-de-humo-en-plafon.avif', alt: 'Detectores de humo instalados en el plafón de una oficina' },
+      { src: '/images/modulos/monitoreo-de-sistema-de-alarma.avif', alt: 'Operadores supervisando un sistema de monitoreo y alarma' },
+      { src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Técnico revisando un gabinete y red contra incendio' },
+    ],
+  },
+  {
+    slug: 'equipo-para-bomberos-y-brigadas',
+    title: 'Equipo de protección',
+    titleAccent: 'para brigadas y bomberos.',
+    description: 'Protección personal, respiración, herramientas y equipo de apoyo para respuesta especializada. Quien combate un incendio necesita protección frente al calor, las llamas, los impactos y el humo: el equipo de protección personal adecuado permite a brigadistas y bomberos trabajar con mayor seguridad y durante más tiempo. Reunimos cascos, trajes, guantes, botas y equipos de respiración para que cada integrante de la brigada cuente con un equipo completo y compatible.',
+    points: [
+      { label: 'Cascos', desc: 'Protección de la cabeza contra impactos y calor.' },
+      { label: 'Equipos de respiración', desc: 'Aire respirable en atmósferas con humo.' },
+      { label: 'Guantes y botas', desc: 'Protección de manos y pies en zonas de riesgo.' },
+      { label: 'Trajes estructurales', desc: 'Barrera térmica para el combate de incendios.' },
+    ],
+    images: [
+      { src: '/images/modulos/equipo-de-proteccion-personal-bomberos.avif', alt: 'Vestidor con trajes estructurales y cascos de bomberos' },
+      { src: '/images/modulos/cascos-para-bomberos-y-brigadas.avif', alt: 'Cascos para bomberos y brigadas en exhibición' },
+      { src: '/images/modulos/botas-para-bomberos-y-brigadas.avif', alt: 'Botas para bomberos de cuero, caucho y aproximación' },
+    ],
+  },
+  {
+    slug: 'herramientas-para-bomberos',
+    title: 'Herramientas',
+    titleAccent: 'para entrada forzada y rescate.',
+    description: 'Herramientas de mano para entrada forzada, ventilación y remoción de obstáculos durante la respuesta. Abrir una puerta bloqueada, ventilar un espacio lleno de humo o liberar a una persona atrapada exige herramientas resistentes, fáciles de manejar con guantes y pensadas para trabajar bajo presión. Este grupo reúne las herramientas básicas de las unidades de respuesta y de las brigadas industriales.',
+    points: [
+      { label: 'Barras Halligan', desc: 'Palanca y punta para forzar puertas y ventanas.' },
+      { label: 'Ganchos y pértigas', desc: 'Remoción de plafones y materiales al ventilar.' },
+      { label: 'Hachas', desc: 'Corte y apertura de accesos.' },
+      { label: 'Herramientas de corte', desc: 'Liberación en rescate vehicular y estructural.' },
+    ],
+    images: [
+      { src: '/images/modulos/herramientas-de-corte-rescate-vehicular.avif', alt: 'Bomberos usando herramientas de corte en un rescate vehicular' },
+      { src: '/images/modulos/barra-halligan-para-bomberos.avif', alt: 'Barra Halligan para entrada forzada' },
+      { src: '/images/categorias/herramientas-para-bomberos-hacha-halligan.avif', alt: 'Hacha y barra de bombero sobre concreto' },
+    ],
+  },
+  {
+    slug: 'rescate-y-accesorios',
+    title: 'Equipo de rescate',
+    titleAccent: 'y accesorios para brigadas.',
+    description: 'Accesorios y equipo complementario para apoyo operativo, rescate y preparación. En una emergencia, además de combatir el fuego, la brigada debe poder trasladar a personas lesionadas, trabajar en altura o en espacios reducidos y brindar primeros auxilios mientras llega la ayuda especializada. El equipo de rescate y los accesorios de apoyo completan la preparación de cualquier brigada de emergencia.',
+    points: [
+      { label: 'Bolsas de equipo', desc: 'Organización y traslado del equipo de respuesta.' },
+      { label: 'Botiquines', desc: 'Material de primeros auxilios al alcance de la brigada.' },
+      { label: 'Camillas', desc: 'Traslado seguro de personas lesionadas.' },
+      { label: 'Cuerdas y arneses', desc: 'Trabajo y rescate en altura.' },
+    ],
+    images: [
+      { src: '/images/modulos/rescate-en-altura-con-camilla.avif', alt: 'Rescatistas descendiendo con camilla por la fachada de un edificio' },
+      { src: '/images/modulos/rescate-en-estructura-colapsada.avif', alt: 'Brigada de rescate trabajando en una estructura colapsada' },
+      { src: '/images/modulos/rescate-en-espacio-confinado.avif', alt: 'Rescate en espacio confinado dentro de una planta industrial' },
+    ],
+  },
+  {
+    slug: 'senalizacion-y-evacuacion',
+    title: 'Señalización',
+    titleAccent: 'para una evacuación ordenada.',
+    description: 'Elementos para comunicar rutas, salidas y puntos de seguridad dentro de una instalación. Durante una emergencia las personas deben saber hacia dónde dirigirse aun con humo o poca luz: los señalamientos de protección civil indican rutas de evacuación, salidas de emergencia, puntos de reunión y la ubicación de extintores, hidrantes y alarmas. Una señalización clara también facilita los simulacros y las verificaciones de Protección Civil.',
+    points: [
+      { label: 'Puntos de reunión', desc: 'Zonas seguras para el conteo del personal.' },
+      { label: 'Rutas de evacuación', desc: 'Dirección hacia la salida más cercana.' },
+      { label: 'Señales fotoluminiscentes', desc: 'Visibles aun cuando falla la iluminación.' },
+      { label: 'Señalización de equipos', desc: 'Ubicación de extintores, hidrantes y alarmas.' },
+    ],
+    images: [
+      { src: '/images/modulos/simulacro-de-evacuacion-brigada.avif', alt: 'Brigada revisando extintores y rutas durante un simulacro' },
+      { src: '/images/modulos/instalacion-de-senalamientos-de-emergencia.avif', alt: 'Instalación de señal de salida de emergencia junto a una alarma' },
+      { src: '/images/home/extintores-y-emergencia.avif', alt: 'Señal de salida y gabinete con extintores' },
+    ],
+  },
+];
