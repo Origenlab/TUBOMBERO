@@ -65,6 +65,8 @@ const Tag = as
   .sech__body { display: flex; flex-direction: column; gap: var(--sp-4, 1rem); }
   .sech__body-p { font-size: var(--text-base, 1.0625rem); color: var(--text-muted, var(--c-muted, var(--c-muted))); line-height: var(--leading-relaxed, 1.7); margin: 0; }
 
+  @media (min-width: 641px) { .sech__body-p { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; } }
+
   /* dark */
   .sech--dark .sech__title { color: var(--c-white); }
   .sech--dark .sech__desc, .sech--dark .sech__body-p { color: rgba(255,255,255,.75); }

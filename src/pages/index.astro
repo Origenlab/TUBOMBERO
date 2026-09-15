@@ -43,6 +43,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
         title="Encuentra el equipo según el punto que necesitas atender."
         desc="La primera versión organiza el catálogo en ocho familias para que la navegación sea clara desde el inicio. Las fichas técnicas y referencias reales se incorporarán a partir del inventario confirmado."
         layout="duo"
+        body={["Elegir equipo contra incendio empieza por entender qué riesgo se quiere cubrir. Por eso el catálogo de Tu Bombero se ordena por necesidad y no por marca: extintores y equipo de respuesta inicial, sistemas contra incendio, gabinetes e hidrantes, detección y alarma, equipo de protección para bomberos, herramientas de entrada forzada, rescate y señalización de evacuación.", "Cada familia reúne sus subcategorías principales para que compradores, jefes de brigada y responsables de seguridad ubiquen en pocos clics el equipo que su instalación requiere y lleguen a la cotización con una idea clara de lo que necesitan, sin perder tiempo entre listados genéricos."]}
       />
       <div class="grid-4 category-grid">
         {CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} imagePosition={category.imagePosition} badge={category.tag} blurb={category.description} subcategories={category.subcategories} index={index} />)}
@@ -51,15 +52,15 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   </section>
 
   <section id="sectores" class="section sectors">
-    <div class="container sectors__grid">
-      <div><p class="eyebrow">Soluciones por sector</p><h2 class="section-title">Un punto de partida para cada operación.</h2></div>
-      <div><p class="section-copy">El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere.</p><div class="grid-4 sector-grid">{SECTORS.map((sector, index) => <article class="sector-card"><span class="sector-card__icon" aria-hidden="true">{sector.icon === 'cross' ? '✚' : sector.icon === 'flame' ? '♨' : sector.icon === 'shield' ? '⬟' : sector.icon === 'briefcase' ? '▣' : sector.icon === 'school' ? '⌂' : '▤'}</span><span class="sector-card__num">0{index + 1}</span><span class="sector-card__label">{sector.label}</span><b aria-hidden="true">↗</b></article>)}</div></div>
+    <div class="container">
+      <SectionHeading eyebrow="Soluciones por sector" title="Un punto de partida para cada operación." desc="El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere." layout="duo" body={["Una planta de manufactura, un hospital, un centro comercial y un almacén no enfrentan los mismos riesgos de incendio ni operan en las mismas condiciones. Las rutas por sector ayudan a identificar qué equipo contra incendio y qué servicios son más relevantes para cada tipo de instalación.", "Desde industria y construcción hasta hospitalidad, salud, logística, educación, energía y cuerpos de Protección Civil, cada sector funciona como punto de partida para orientar la compra con criterio técnico y con el lenguaje propio de cada operación."]} />
+      <div class="grid-4 sector-grid">{SECTORS.map((sector, index) => <article class="sector-card"><span class="sector-card__icon" aria-hidden="true">{sector.icon === 'cross' ? '✚' : sector.icon === 'flame' ? '♨' : sector.icon === 'shield' ? '⬟' : sector.icon === 'briefcase' ? '▣' : sector.icon === 'school' ? '⌂' : '▤'}</span><span class="sector-card__num">0{index + 1}</span><span class="sector-card__label">{sector.label}</span><b aria-hidden="true">↗</b></article>)}</div>
     </div>
   </section>
 
   <section id="servicios" class="section">
     <div class="container">
-      <SectionHeading eyebrow="Servicios" title="Acompañamiento antes, durante y después de la selección." desc="Las líneas de servicio se presentan como un mapa comercial. El alcance concreto de cada una se publicará al confirmar las capacidades operativas y comerciales de Tu Bombero." layout="duo" />
+      <SectionHeading eyebrow="Servicios" title="Acompañamiento antes, durante y después de la selección." desc="Las líneas de servicio se presentan como un mapa comercial. El alcance concreto de cada una se publicará al confirmar las capacidades operativas y comerciales de Tu Bombero." layout="duo" body={["Comprar equipo contra incendio es solo una parte de la protección de una instalación: el equipo debe elegirse bien, instalarse correctamente, mantenerse en condiciones y ser utilizado por personas preparadas. Las líneas de servicio de Tu Bombero se organizan alrededor de ese ciclo completo.", "Asesoría técnica para seleccionar el equipo, instalación de sistemas contra incendio, mantenimiento para la continuidad operativa y capacitación para brigadas: cuatro frentes pensados para que cada inversión en seguridad se traduzca en una respuesta más ordenada ante una emergencia."]} />
       <a class="service-link" href="#servicios">Ver servicios</a>
       <div class="grid-4 service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href="/servicios" />)}</div>
     </div>
@@ -81,14 +82,14 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
 
   <section id="guias" class="section section--surface">
     <div class="container">
-      <SectionHeading eyebrow="Guías técnicas" title="Contenido que ayuda a empezar la conversación correcta." desc="El centro de recursos se construirá con artículos revisados antes de su publicación. Desde ahora, el sitio reserva sus rutas principales para no depender únicamente de un catálogo." />
+      <SectionHeading eyebrow="Guías técnicas" title="Contenido que ayuda a empezar la conversación correcta." desc="El centro de recursos se construirá con artículos revisados antes de su publicación. Desde ahora, el sitio reserva sus rutas principales para no depender únicamente de un catálogo." layout="duo" body={["Una buena cotización empieza con buenas preguntas. Las guías técnicas de Tu Bombero explican de forma práctica cómo identificar una familia de equipo, qué información reunir antes de solicitar precios y cómo elegir el tipo de extintor según el riesgo de cada área.", "Son recursos pensados para responsables de compras, seguridad industrial y Protección Civil que necesitan tomar decisiones informadas sobre equipo contra incendio, con contenido revisado antes de su publicación y enfocado en resolver dudas reales de la operación diaria."]} />
       <div class="grid-4 guide-grid">
         {['Cómo identificar una familia de equipo contra incendio', 'Qué información preparar antes de solicitar una cotización', 'Cómo organizar la consulta de una necesidad de protección', 'Cómo elegir el tipo de extintor según el riesgo de tu instalación'].map((title, index) => <article><span>0{index + 1}</span><h3>{title}</h3><a href="/contacto">Solicitar información <b aria-hidden="true">→</b></a></article>)}
       </div>
     </div>
   </section>
 
-  <ProcessSteps eyebrow="Ruta de atención" title="De una necesidad a" titleAccent="una conversación clara." desc="Un camino sencillo para ubicar el equipo y servicio que se requiere." steps={steps} />
+  <ProcessSteps eyebrow="Ruta de atención" title="De una necesidad a" titleAccent="una conversación clara." desc="Un camino sencillo para ubicar el equipo y servicio que se requiere." steps={steps} body={["Solicitar información sobre equipo contra incendio no debería ser complicado. La ruta de atención de Tu Bombero divide el proceso en tres pasos claros para que sepas en todo momento qué sigue y qué datos conviene tener a la mano.", "Primero describes tu instalación o proyecto, después revisas las familias de equipo y los servicios que aplican a tu caso y, finalmente, defines el siguiente paso comercial con una necesidad bien planteada, lo que agiliza la respuesta y evita cotizaciones imprecisas."]} />
 
   <CTABanner id="cotizar" heading="Cuéntanos qué necesitas proteger." desc="Estamos preparando los canales de atención. Cuando compartas el teléfono, WhatsApp o correo comercial, esta sección quedará conectada para iniciar cada solicitud con contexto. Para publicar el acceso de cotización necesitamos confirmar un dato real de contacto." btns={[{ label: 'Solicitar información', href: '/contacto', primary: true }]} badge="Canal de contacto pendiente · Canales de atención en configuración" variant="dark" />
 </PageLayout>
@@ -97,7 +98,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   .section--surface, .sectors { background: var(--c-surface); }
   .sectors { border-block: var(--border); }
   .sectors__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); }
-  .sector-grid { margin-top: var(--sp-6); }
+  .sector-grid { margin-top: 0; }
   .sector-card { display: grid; grid-template-columns: auto 1fr auto; gap: var(--sp-3); align-items: center; min-height: 7rem; padding: var(--sp-4); border: var(--border); border-radius: var(--radius-lg); background: var(--c-white); color: var(--c-ink); text-decoration: none; box-shadow: var(--shadow-sm); }
   .sector-card:hover { color: var(--c-primary-dark); box-shadow: var(--shadow-md); transform: translateY(-2px); }
   .sector-card__icon { grid-row: span 2; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radius-md); background: var(--c-primary); color: var(--c-white); font-size: var(--text-xl); }
