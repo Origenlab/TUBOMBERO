@@ -73,7 +73,7 @@ const categories = [
     image: '/images/categorias/extintores-y-equipo-de-emergencia.avif',
     imageAlt: 'Extintores y gabinete contra incendio en interior claro',
     imagePosition: undefined,
-    subcategories: ['Extintores PQS', 'Extintores CO₂', 'Espuma AFFF', 'Agua a presión', 'Gabinetes para extintor'],
+    subcategories: ['Extintores PQS', 'Extintores CO₂', 'Extintores de espuma AFFF', 'Extintores de agua'],
   },
   {
     slug: 'sistemas-contra-incendio',
@@ -83,7 +83,7 @@ const categories = [
     image: '/images/categorias/sistemas-contra-incendio-mangueras-hidrantes.avif',
     imageAlt: 'Técnico revisando un gabinete y red contra incendio',
     imagePosition: undefined,
-    subcategories: ['Mangueras', 'Boquillas y chiflones', 'Válvulas', 'Conexiones y adaptadores', 'Tomas siamesas'],
+    subcategories: ['Mangueras', 'Boquillas y chiflones', 'Válvulas', 'Conexiones y adaptadores'],
   },
   {
     slug: 'gabinetes-e-hidrantes',
@@ -93,7 +93,7 @@ const categories = [
     image: '/images/categorias/gabinetes-e-hidrantes-contra-incendio.avif',
     imageAlt: 'Gabinetes e hidrantes contra incendio',
     imagePosition: undefined,
-    subcategories: ['Gabinetes para manguera', 'Hidrantes', 'Estaciones de manguera', 'Porta mangueras'],
+    subcategories: ['Gabinetes para manguera', 'Gabinetes para extintor', 'Hidrantes', 'Estaciones de manguera'],
   },
   {
     slug: 'deteccion-y-alarma',
@@ -103,17 +103,17 @@ const categories = [
     image: '/images/home/hero-inspeccion-equipo-contra-incendio.avif',
     imageAlt: 'Equipos de seguridad contra incendio en un entorno limpio',
     imagePosition: 'right center',
-    subcategories: ['Detectores de humo', 'Detectores de temperatura', 'Paneles de control', 'Estaciones manuales', 'Sirenas y estrobos'],
+    subcategories: ['Detectores de humo', 'Detectores de temperatura', 'Paneles de control', 'Sirenas y estrobos'],
   },
   {
     slug: 'equipo-para-bomberos-y-brigadas',
     label: 'Equipo para bomberos y brigadas',
     description: 'Protección personal, respiración, herramientas y equipo de apoyo para respuesta especializada.',
     tag: 'Protección personal',
-    image: '/images/home/epp-y-rescate.avif',
-    imageAlt: 'Equipo de protección personal y rescate para bomberos',
+    image: '/images/categorias/equipo-de-proteccion-para-bomberos.avif',
+    imageAlt: 'Traje estructural de protección para bombero',
     imagePosition: undefined,
-    subcategories: ['Trajes estructurales', 'Cascos', 'Botas', 'Guantes', 'Monjas', 'Equipos de respiración autónoma'],
+    subcategories: ['Trajes estructurales', 'Cascos', 'Guantes y botas', 'Equipos de respiración'],
   },
   {
     slug: 'herramientas-para-bomberos',
