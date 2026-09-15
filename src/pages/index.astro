@@ -52,20 +52,21 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   </section>
 
   <CategoryFeature
-    eyebrow="Venta y asesoría técnica"
-    title="Asesoría técnica"
-    titleAccent="para elegir el equipo correcto."
-    description="Antes de comprar extintores, gabinetes o componentes para una red hidráulica conviene tener claro qué riesgo se busca cubrir y en qué condiciones opera la instalación. El servicio de venta y asesoría técnica de Tu Bombero te acompaña para identificar la familia de equipo adecuada, comparar alternativas y preparar una solicitud de cotización con la información correcta, de modo que cada compra responda a una necesidad real de protección y no a una lista genérica."
+    eyebrow="Respuesta inicial"
+    title="Extintores"
+    titleAccent="y emergencia."
+    description="Equipos portátiles, gabinetes, señalización y elementos de respuesta inicial. Un extintor adecuado, en el lugar correcto y con el agente indicado para cada riesgo es la primera línea de defensa de cualquier instalación: permite controlar un conato de incendio en sus primeros segundos, antes de que comprometa a las personas, los bienes o la operación. En Tu Bombero organizamos esta familia por tipo de agente para que identifiques con claridad qué extintor corresponde a oficinas, almacenes, cocinas, áreas eléctricas o zonas con líquidos inflamables."
     features={[
-      { label: 'Evaluación de la necesidad', desc: 'Tipo de instalación, nivel de riesgo y equipo existente.' },
-      { label: 'Selección del equipo', desc: 'Familia, capacidad y accesorios que corresponden a cada área.' },
-      { label: 'Cotización ordenada', desc: 'Una solicitud clara, sin partidas innecesarias.' },
+      { label: 'Extintores CO₂', desc: 'Para áreas eléctricas y equipos sensibles.' },
+      { label: 'Extintores de agua', desc: 'Para combustibles ordinarios como madera, papel y textiles.' },
+      { label: 'Extintores de espuma AFFF', desc: 'Para riesgos con líquidos inflamables.' },
+      { label: 'Extintores PQS', desc: 'Polvo químico seco para uso general en instalaciones.' },
     ]}
-    imgMain={{ src: '/images/servicios/almacen-equipo-contra-incendio.avif', alt: 'Almacén con equipo contra incendio listo para suministro' }}
-    imgA={{ src: '/images/servicios/gabinete-contra-incendio-planta-industrial.avif', alt: 'Gabinete contra incendio con manguera en una planta industrial' }}
-    imgB={{ src: '/images/servicios/asesoria-tecnica-en-planta.avif', alt: 'Especialista en seguridad revisando una instalación industrial' }}
-    ctaLabel="Conocer el servicio"
-    ctaHref="/servicios"
+    imgMain={{ src: '/images/categorias/extintores-pqs-co2-y-agua.avif', alt: 'Extintores de polvo químico seco, CO₂ y agua en un almacén' }}
+    imgA={{ src: '/images/categorias/extintor-espuma-afff.avif', alt: 'Extintor de espuma AFFF en una nave industrial' }}
+    imgB={{ src: '/images/categorias/extintor-polvo-quimico-seco-pqs.avif', alt: 'Extintor de polvo químico seco PQS montado en una columna' }}
+    ctaLabel="Ver categoría"
+    ctaHref="/productos/extintores-y-emergencia"
   />
 
   <section id="sectores" class="section sectors">
