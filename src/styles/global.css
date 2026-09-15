@@ -7,3 +7,17 @@
 .prose { max-width: var(--container-prose); color: var(--c-ink-2); }
 .prose h2 { margin-top: var(--sp-8); color: var(--c-ink); font-family: var(--font-heading); }
 .prose a { color: var(--c-primary); }
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-5);
+}
+
+@media (min-width: 640px) {
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1100px) {
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

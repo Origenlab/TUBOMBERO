@@ -5,8 +5,10 @@ import sitemap from '@astrojs/sitemap';
 const categorySlugs = [
   'extintores-y-emergencia',
   'sistemas-contra-incendio',
+  'gabinetes-e-hidrantes',
   'deteccion-y-alarma',
   'equipo-para-bomberos-y-brigadas',
+  'herramientas-para-bomberos',
   'rescate-y-accesorios',
   'senalizacion-y-evacuacion',
 ];

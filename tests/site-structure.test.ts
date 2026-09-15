@@ -12,9 +12,20 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(SITE.business).toBeUndefined();
     expect(SITE.allowSelfReviews).toBe(false);
     expect(CONTACT.whatsapp).toBeUndefined();
-    expect(TAXONOMY.categories).toHaveLength(6);
+    expect(TAXONOMY.categories).toHaveLength(8);
     expect(TAXONOMY.services).toHaveLength(4);
-    expect(TAXONOMY.sectors).toHaveLength(6);
+    expect(TAXONOMY.sectors).toHaveLength(8);
+    expect(TAXONOMY.categories.map((category) => category.slug)).toEqual([
+      'extintores-y-emergencia',
+      'sistemas-contra-incendio',
+      'gabinetes-e-hidrantes',
+      'deteccion-y-alarma',
+      'equipo-para-bomberos-y-brigadas',
+      'herramientas-para-bomberos',
+      'rescate-y-accesorios',
+      'senalizacion-y-evacuacion',
+    ]);
+    expect(TAXONOMY.categories.every((category) => category.subcategories.length > 0)).toBe(true);
     expect(NAV.map((item) => item.label)).toEqual([
       'Productos',
       'Servicios',
@@ -38,5 +49,12 @@ describe('contrato de homologación TUBOMBERO', () => {
       expect(home).toContain(`id="${id}"`);
     }
     expect(read('src/components/Footer.astro')).toContain('id="contacto"');
+  });
+
+  it('mantiene la rejilla canónica de cuatro columnas en los catálogos', () => {
+    expect(read('src/styles/global.css')).toMatch(/\.grid-4[\s\S]*repeat\(4, minmax\(0, 1fr\)\)/);
+    expect(read('src/pages/index.astro')).toContain('class="grid-4 category-grid"');
+    expect(read('src/pages/productos/index.astro')).toContain('class="grid-4"');
+    expect(read('src/pages/servicios/index.astro')).toContain('class="grid-4"');
   });
 });

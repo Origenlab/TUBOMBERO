@@ -70,24 +70,40 @@ const categories = [
     label: 'Extintores y emergencia',
     description: 'Equipos portátiles, gabinetes, señalización y elementos de respuesta inicial.',
     tag: 'Respuesta inicial',
-    image: '/images/home/extintores-y-emergencia.avif',
+    image: '/images/categorias/extintores-y-equipo-de-emergencia.avif',
     imageAlt: 'Extintores y gabinete contra incendio en interior claro',
+    imagePosition: undefined,
+    subcategories: ['Extintores PQS', 'Extintores CO₂', 'Espuma AFFF', 'Agua a presión', 'Gabinetes para extintor'],
   },
   {
     slug: 'sistemas-contra-incendio',
     label: 'Sistemas contra incendio',
     description: 'Componentes para redes hidráulicas, mangueras, hidrantes, válvulas y gabinetes.',
     tag: 'Infraestructura',
-    image: '/images/home/hero-inspeccion-equipo-contra-incendio.avif',
+    image: '/images/categorias/sistemas-contra-incendio-mangueras-hidrantes.avif',
     imageAlt: 'Técnico revisando un gabinete y red contra incendio',
+    imagePosition: undefined,
+    subcategories: ['Mangueras', 'Boquillas y chiflones', 'Válvulas', 'Conexiones y adaptadores', 'Tomas siamesas'],
+  },
+  {
+    slug: 'gabinetes-e-hidrantes',
+    label: 'Gabinetes e hidrantes',
+    description: 'Gabinetes, hidrantes y estaciones de manguera para tener el equipo listo y a la vista en cada nivel de la instalación.',
+    tag: 'Almacenamiento',
+    image: '/images/categorias/gabinetes-e-hidrantes-contra-incendio.avif',
+    imageAlt: 'Gabinetes e hidrantes contra incendio',
+    imagePosition: undefined,
+    subcategories: ['Gabinetes para manguera', 'Hidrantes', 'Estaciones de manguera', 'Porta mangueras'],
   },
   {
     slug: 'deteccion-y-alarma',
     label: 'Detección y alarma',
     description: 'Equipos para detección, notificación y respuesta coordinada ante una condición de riesgo.',
     tag: 'Detección',
-    image: '/images/home/extintores-y-emergencia.avif',
+    image: '/images/home/hero-inspeccion-equipo-contra-incendio.avif',
     imageAlt: 'Equipos de seguridad contra incendio en un entorno limpio',
+    imagePosition: 'right center',
+    subcategories: ['Detectores de humo', 'Detectores de temperatura', 'Paneles de control', 'Estaciones manuales', 'Sirenas y estrobos'],
   },
   {
     slug: 'equipo-para-bomberos-y-brigadas',
@@ -96,6 +112,18 @@ const categories = [
     tag: 'Protección personal',
     image: '/images/home/epp-y-rescate.avif',
     imageAlt: 'Equipo de protección personal y rescate para bomberos',
+    imagePosition: undefined,
+    subcategories: ['Trajes estructurales', 'Cascos', 'Botas', 'Guantes', 'Monjas', 'Equipos de respiración autónoma'],
+  },
+  {
+    slug: 'herramientas-para-bomberos',
+    label: 'Herramientas para bomberos',
+    description: 'Herramientas de mano para entrada forzada, ventilación y remoción de obstáculos durante la respuesta.',
+    tag: 'Entrada forzada',
+    image: '/images/categorias/herramientas-para-bomberos-hacha-halligan.avif',
+    imageAlt: 'Hacha y herramienta Halligan para bomberos',
+    imagePosition: undefined,
+    subcategories: ['Barras Halligan', 'Hachas', 'Ganchos y pértigas', 'Herramientas de corte'],
   },
   {
     slug: 'rescate-y-accesorios',
@@ -104,6 +132,8 @@ const categories = [
     tag: 'Operación',
     image: '/images/home/epp-y-rescate.avif',
     imageAlt: 'Bolsa de rescate y equipo de protección personal',
+    imagePosition: undefined,
+    subcategories: ['Cuerdas y arneses', 'Camillas', 'Botiquines', 'Bolsas de equipo'],
   },
   {
     slug: 'senalizacion-y-evacuacion',
@@ -112,6 +142,8 @@ const categories = [
     tag: 'Prevención',
     image: '/images/home/extintores-y-emergencia.avif',
     imageAlt: 'Señalización de salida y equipo contra incendio',
+    imagePosition: undefined,
+    subcategories: ['Señales fotoluminiscentes', 'Rutas de evacuación', 'Puntos de reunión', 'Señalización de equipos'],
   },
 ] as const;
 
@@ -123,12 +155,14 @@ const services = [
 ] as const;
 
 const sectors = [
-  { slug: 'industria-manufactura', label: 'Industria y manufactura' },
-  { slug: 'construccion-infraestructura', label: 'Construcción e infraestructura' },
-  { slug: 'comercio-oficinas', label: 'Comercio y oficinas' },
-  { slug: 'hospitalidad-salud', label: 'Hospitalidad y salud' },
-  { slug: 'proteccion-civil-bomberos', label: 'Protección Civil y bomberos' },
-  { slug: 'almacenes-logistica', label: 'Almacenes y logística' },
+  { slug: 'industria-manufactura', label: 'Industria y manufactura', icon: 'building' },
+  { slug: 'construccion-infraestructura', label: 'Construcción e infraestructura', icon: 'construction' },
+  { slug: 'comercio-oficinas', label: 'Comercio y oficinas', icon: 'briefcase' },
+  { slug: 'hospitalidad-salud', label: 'Hospitalidad y salud', icon: 'cross' },
+  { slug: 'proteccion-civil-bomberos', label: 'Protección Civil y bomberos', icon: 'shield' },
+  { slug: 'almacenes-logistica', label: 'Almacenes y logística', icon: 'warehouse' },
+  { slug: 'educacion-gobierno', label: 'Educación y gobierno', icon: 'school' },
+  { slug: 'energia-petroquimica', label: 'Energía y petroquímica', icon: 'flame' },
 ] as const;
 
 export const TAXONOMY = {

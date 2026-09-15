@@ -19,6 +19,7 @@ interface Props {
 }
 const { guia = false } = Astro.props
 const schedule = CONTACT.schedule?.display as string | undefined
+const headerWaUrl = waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default)
 
 // Puntos del header — fuente única de la leyenda guía (mismo patrón que el TopBar).
 const PUNTOS = [
@@ -104,9 +105,9 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
       </ul>
     </nav>
 
-    <a href={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ?? '/contacto'} class="hdr-cta" target={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? '_blank' : undefined} rel={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? 'noopener noreferrer' : undefined} aria-label="Solicitar información">
+    <a href={headerWaUrl ?? '/contacto'} class="hdr-cta" target={headerWaUrl ? '_blank' : undefined} rel={headerWaUrl ? 'noopener noreferrer' : undefined} aria-label="Solicitar información">
       {guia && <span class="hdr-mark hdr-mark--cta" aria-hidden="true">4</span>}
-      <Fragment set:html={WA_SVG} /> Cotizar
+      {headerWaUrl ? <Fragment set:html={WA_SVG} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} Cotizar
     </a>
 
     <button class="hdr-burger" id="hdr-burger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="hdr-mobile-nav">
