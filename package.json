@@ -14,7 +14,8 @@
     "audit:meta": "node scripts/audit-meta.mjs",
     "astro": "astro",
     "check:demo": "node scripts/check-demo.mjs",
-    "check:url-shape": "node scripts/check-url-shape.mjs"
+    "check:url-shape": "node scripts/check-url-shape.mjs",
+    "check:budget": "node scripts/check-budget.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",

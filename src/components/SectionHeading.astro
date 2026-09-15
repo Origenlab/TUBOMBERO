@@ -30,7 +30,7 @@ const Tag = as
   <div class="sech__head">
     {eyebrow && <p class="sech__eyebrow"><span class="sech__eyebrow-bar" aria-hidden="true"></span>{eyebrow}</p>}
     <Tag class="sech__title" id={id}>
-      {title}{titleAccent && <><br /><span class="sech__accent">{titleAccent}</span></>}
+      {titleAccent ? `${title} ` : title}{titleAccent && <><br /><span class="sech__accent">{titleAccent}</span></>}
     </Tag>
     {desc && <p class="sech__desc">{desc}</p>}
   </div>

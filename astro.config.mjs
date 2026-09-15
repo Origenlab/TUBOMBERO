@@ -24,12 +24,13 @@ export default defineConfig({
     name: 'Inter',
     cssVariable: '--font-body',
     provider: fontProviders.fontsource(),
-    weights: ['400', '500', '600', '700', '800'],
-    subsets: ['latin', 'latin-ext'],
+    weights: ['400', '500', '600', '700'],
+    styles: ['normal'],
+    subsets: ['latin'],
     display: 'swap',
   }],
   integrations: [sitemap({
-    filter: (page) => !categorySlugs.some((slug) => page.endsWith(`/productos/${slug}`)),
+    filter: (page) => !categorySlugs.some((slug) => page.endsWith(`/productos/${slug}`)) && !/\/(cookies|privacidad|terminos)$/.test(page),
     serialize(item) {
       if (item.url === 'https://tubombero.com/') {
         item.priority = 1;

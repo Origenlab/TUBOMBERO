@@ -8,7 +8,7 @@ export const SITE = {
   locale: 'es-MX',
   description: 'Equipos y soluciones contra incendio para organizaciones que requieren orientar su compra en México.',
   contactStatus: 'Canales de atención en configuración',
-  defaultImage: '/images/og/proteccion-contra-incendios-tubombero.png',
+  defaultImage: '/images/og/proteccion-contra-incendios-tubombero.jpg',
   trailingSlash: 'never' as const,
   searchUrl: undefined as string | undefined,
   allowSelfReviews: false,
@@ -16,7 +16,7 @@ export const SITE = {
   seo: {
     title: 'Protección contra incendios: equipo y sistemas en México',
     description: 'Equipo y sistemas de protección contra incendios para empresas: extintores, alarmas, detectores de humo, hidrantes, señalización y equipo para brigadas.',
-    image: '/images/og/proteccion-contra-incendios-tubombero.png',
+    image: '/images/og/proteccion-contra-incendios-tubombero.jpg',
     titleMaxLength: 60,
     descriptionMaxLength: 160,
     appendBrand: false,
