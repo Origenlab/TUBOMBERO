@@ -51,6 +51,23 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     </div>
   </section>
 
+  <CategoryFeature
+    eyebrow="Venta y asesoría técnica"
+    title="Asesoría técnica"
+    titleAccent="para elegir el equipo correcto."
+    description="Antes de comprar extintores, gabinetes o componentes para una red hidráulica conviene tener claro qué riesgo se busca cubrir y en qué condiciones opera la instalación. El servicio de venta y asesoría técnica de Tu Bombero te acompaña para identificar la familia de equipo adecuada, comparar alternativas y preparar una solicitud de cotización con la información correcta, de modo que cada compra responda a una necesidad real de protección y no a una lista genérica."
+    features={[
+      { label: 'Evaluación de la necesidad', desc: 'Tipo de instalación, nivel de riesgo y equipo existente.' },
+      { label: 'Selección del equipo', desc: 'Familia, capacidad y accesorios que corresponden a cada área.' },
+      { label: 'Cotización ordenada', desc: 'Una solicitud clara, sin partidas innecesarias.' },
+    ]}
+    imgMain={{ src: '/images/servicios/almacen-equipo-contra-incendio.avif', alt: 'Almacén con equipo contra incendio listo para suministro' }}
+    imgA={{ src: '/images/servicios/gabinete-contra-incendio-planta-industrial.avif', alt: 'Gabinete contra incendio con manguera en una planta industrial' }}
+    imgB={{ src: '/images/servicios/asesoria-tecnica-en-planta.avif', alt: 'Especialista en seguridad revisando una instalación industrial' }}
+    ctaLabel="Conocer el servicio"
+    ctaHref="/servicios"
+  />
+
   <section id="sectores" class="section sectors">
     <div class="container">
       <SectionHeading eyebrow="Soluciones por sector" title="Un punto de partida para cada operación." desc="El catálogo crecerá con rutas específicas para cada tipo de instalación, haciendo más fácil ubicar el equipo y servicio que se requiere." layout="duo" body={["Una planta de manufactura, un hospital, un centro comercial y un almacén no enfrentan los mismos riesgos de incendio ni operan en las mismas condiciones. Las rutas por sector ayudan a identificar qué equipo contra incendio y qué servicios son más relevantes para cada tipo de instalación.", "Desde industria y construcción hasta hospitalidad, salud, logística, educación, energía y cuerpos de Protección Civil, cada sector funciona como punto de partida para orientar la compra con criterio técnico y con el lenguaje propio de cada operación."]} />
