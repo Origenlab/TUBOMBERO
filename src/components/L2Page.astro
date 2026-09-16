@@ -8,10 +8,12 @@ import PageLayout from '@layouts/PageLayout.astro';
 interface Props {
   slug: string;
   /** Solo en hubs (ItemList). Sin `list` la página se marca como WebPage. */
+  /** Migas intermedias (p. ej. Productos en las páginas de familia). */
+  parent?: { label: string; href: string };
   list?: { path: string; items: { name: string; path: string }[] };
 }
 
-const { slug, list } = Astro.props;
+const { slug, list, parent } = Astro.props;
 const page = await getEntry('paginas', slug);
 if (!page) throw new Error(`No se encontró src/content/paginas/${slug}.md`);
 const { Content } = await render(page);
@@ -22,7 +24,7 @@ const { title, seoTitle, description, noindex, breadcrumb, hero, menu, sections 
   description={description}
   pageType={list ? 'category' : 'page'}
   noindex={noindex}
-  breadcrumbs={[{ label: breadcrumb }]}
+  breadcrumbs={parent ? [parent, { label: breadcrumb }] : [{ label: breadcrumb }]}
   schemaData={list ? { list: { name: title, description, path: list.path, items: list.items } } : undefined}
 >
   <Hero badge={hero.badge} title={hero.title} accent={hero.accent} after={hero.after} descRight={hero.paragraphs} ctas={hero.ctas} />

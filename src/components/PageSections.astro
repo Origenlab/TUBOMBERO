@@ -1,5 +1,6 @@
 ---
 import CategoryCard from '@components/CategoryCard.astro'
+import CategoryFeature from '@components/CategoryFeature.astro'
 import ArticleCard from '@components/ArticleCard.astro'
 import FAQWithContact from '@components/FAQWithContact.astro'
 import ProseTable from '@components/ProseTable.astro'
@@ -8,7 +9,7 @@ import StageGrid from '@components/StageGrid.astro'
 import ServiceCard from '@components/ServiceCard.astro'
 import SectorCard from '@components/SectorCard.astro'
 import SectorDetails from '@components/SectorDetails.astro'
-import { CATEGORIES, SERVICES, SECTORS } from '@config/site'
+import { CATEGORIES, CATEGORY_FEATURES, SERVICES, SECTORS } from '@config/site'
 import { getGuides } from '@lib/guides'
 import { img } from '@lib/images'
 
@@ -22,14 +23,41 @@ interface ProseSection extends SectionBase { type: 'prose' }
 interface GuidesSection extends SectionBase { type: 'guides' }
 interface Help { eyebrow: string; title: string; text: string; links: { label: string; href: string; variant?: 'primary' | 'outline' }[] }
 interface FaqSection extends SectionBase { type: 'faq'; items: { question: string; answer: string }[]; help?: Help }
-type PageSection = CategorySection | ServicesSection | SectorsSection | SectorDetailsSection | StageSection | ProseSection | GuidesSection | FaqSection
+interface FeatureSection { type: 'feature'; id: string; category: string }
+type PageSection = FeatureSection | CategorySection | ServicesSection | SectorsSection | SectorDetailsSection | StageSection | ProseSection | GuidesSection | FaqSection
 interface Props { sections: PageSection[]; Content: any }
 
 const { sections, Content } = Astro.props
 const guides = await getGuides()
+const featureOf = (slug: string) => {
+  const feature = CATEGORY_FEATURES.find((item) => item.slug === slug)
+  const category = CATEGORIES.find((item) => item.slug === slug)
+  if (!feature || !category) throw new Error(`Sin CATEGORY_FEATURES para ${slug}`)
+  return { feature, category }
+}
 ---
 
-{sections.map((section, index) => section.type === 'faq' ? (
+{sections.map((section, index) => section.type === 'feature' ? (() => {
+  const { feature, category } = featureOf(section.category)
+  const [imgMain, imgA, imgB] = feature.images
+  return (
+    <CategoryFeature
+      id={section.id}
+      headingLevel={2}
+      eyebrow={category.tag}
+      title={feature.title}
+      titleAccent={feature.titleAccent}
+      description={feature.description}
+      features={[...feature.points]}
+      ctaLabel={`Cotizar ${category.cta.toLocaleLowerCase('es-MX')}`}
+      ctaHref="#cotizar"
+      imgMain={imgMain}
+      imgA={imgA}
+      imgB={imgB}
+      surface={index % 2 === 1}
+    />
+  )
+})() : section.type === 'faq' ? (
   <FAQWithContact
     id={section.id}
     eyebrow={section.eyebrow}

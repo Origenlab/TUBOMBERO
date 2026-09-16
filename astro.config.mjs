@@ -19,7 +19,7 @@ export default defineConfig({
   trailingSlash: 'never',
   scopedStyleStrategy: 'class',
   compressHTML: true,
-  build: { format: 'file' },
+  build: { format: 'file', inlineStylesheets: 'never' },
   prefetch: { defaultStrategy: 'hover' },
   redirects: Object.fromEntries(categorySlugs.map((slug) => [`/productos/categoria/${slug}`, `/productos/${slug}`])),
   fonts: [{

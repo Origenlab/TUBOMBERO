@@ -37,6 +37,10 @@ interface Props {
   /** 2 imágenes pequeñas debajo */
   imgA: GalleryImage
   imgB: GalleryImage
+  /** Ancla opcional (páginas de familia) */
+  id?: string
+  /** Nivel del título: 3 en la portada (bajo el H2 del catálogo), 2 en las páginas de familia */
+  headingLevel?: 2 | 3
   /** Fondo alternado: true = fondo surface, false = blanco */
   surface?: boolean
   /** Imagen a la derecha (default) o a la izquierda */
@@ -57,10 +61,13 @@ const {
   imgB,
   surface = false,
   flip = false,
+  id,
+  headingLevel = 3,
 } = Astro.props
+const Heading = headingLevel === 2 ? 'h2' : 'h3'
 ---
 
-<section class:list={['cf', surface && 'cf--surface', flip && 'cf--flip']}>
+<section id={id} class:list={['cf', surface && 'cf--surface', flip && 'cf--flip']}>
   <div class="cf__inner">
 
     <!-- Columna izquierda: contenido -->
@@ -70,10 +77,10 @@ const {
         {eyebrow}
       </p>
 
-      <h3 class="cf__title">
+      <Heading class="cf__title">
         {title}
         {titleAccent && <span class="cf__accent"><br />{titleAccent}</span>}
-      </h3>
+      </Heading>
 
       <p class="cf__desc">{description}</p>
 

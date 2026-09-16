@@ -3,8 +3,9 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 const DIST = 'dist';
+// CSS por página: 70 KB crudo (PageSections une el CSS de todos los tipos de sección en hojas compartidas y cacheables); lo que viaja es gzip ≤ 13 KB.
 // HTML: el marcado de <Picture> (srcset AVIF+WebP aprobado) infla el tamaño en crudo; lo que viaja es gzip.
-const LIMITS = { html: 130_000, htmlGzip: 25_000, cssPage: 65_000, cssPageGzip: 13_000, jsTotal: 3_000, image: 120_000, preloads: 4 };
+const LIMITS = { html: 130_000, htmlGzip: 25_000, cssPage: 70_000, cssPageGzip: 13_000, jsTotal: 3_000, image: 120_000, preloads: 4 };
 const walk = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
 const files = walk(DIST);
 const fails = [];

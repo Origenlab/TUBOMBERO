@@ -180,6 +180,7 @@ const paginas = defineCollection({
           links: z.array(z.object({ label: z.string(), href: z.string() }).strict()),
         }).strict()),
       }).strict(),
+      z.object({ type: z.literal('feature'), id: z.string(), category: z.enum(guideCategorySlugs) }).strict(),
       z.object({ type: z.literal('prose'), ...l2SectionBase }).strict(),
       z.object({ type: z.literal('guides'), ...l2SectionBase }).strict(),
       z.object({
