@@ -1,0 +1,5 @@
+---
+import L2Page from '@components/L2Page.astro';
+import { SECTORS } from '@config/site';
+---
+<L2Page slug="sectores" list={{ path: '/sectores', items: SECTORS.map((s) => ({ name: s.label, path: `/sectores#sector-${s.slug}` })) }} />

@@ -88,6 +88,18 @@ const l2MenuItem = z.preprocess((value) => {
   sub: z.string().optional(),
 }).strict());
 
+const sectorSlugs = [
+  'industria-manufactura', 'construccion-infraestructura', 'comercio-oficinas', 'hospitalidad-salud',
+  'proteccion-civil-bomberos', 'almacenes-logistica', 'educacion-gobierno', 'energia-petroquimica',
+] as const;
+
+const sectorDetailItem = z.object({
+  slug: z.enum(sectorSlugs),
+  summary: z.string(),
+  points: z.array(z.string()).length(3),
+  links: z.array(z.object({ label: z.string(), href: z.string() }).strict()).min(1).max(3),
+}).strict();
+
 const paginas = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/paginas' }),
   schema: z.object({
@@ -124,6 +136,15 @@ const paginas = defineCollection({
     sections: z.array(z.discriminatedUnion('type', [
       z.object({ type: z.literal('categories'), ...l2SectionBase }).strict(),
       z.object({ type: z.literal('services'), ...l2SectionBase }).strict(),
+      z.object({ type: z.literal('sectors'), ...l2SectionBase }).strict(),
+      z.object({
+        type: z.literal('sectorDetails'),
+        ...l2SectionBase,
+        items: z.array(sectorDetailItem).length(8).refine(
+          (items) => new Set(items.map((item) => item.slug)).size === items.length,
+          'Los sectores no pueden repetir slug',
+        ),
+      }).strict(),
       z.object({
         type: z.literal('stages'),
         ...l2SectionBase,

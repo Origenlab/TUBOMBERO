@@ -226,7 +226,7 @@ export type NavItem = {
 export const NAV: readonly NavItem[] = [
   { label: 'Productos', href: '/productos', allLabel: 'Catálogo de equipo contra incendios' },
   { label: 'Servicios', href: '/servicios', allLabel: 'Servicios de protección contra incendios' },
-  { label: 'Sectores', href: '/#sectores' },
+  { label: 'Sectores', href: '/sectores' },
   { label: 'Guías', href: '/#guias' },
   { label: 'Nosotros', href: '/nosotros' },
   { label: 'Contacto', href: '/contacto' },

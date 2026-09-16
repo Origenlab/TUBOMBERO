@@ -81,7 +81,7 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(faq).toContain('disabled={!waReady}');
     expect(faq).toContain('Canal de WhatsApp en configuración.');
     expect(footer).toContain('href="/servicios"');
-    expect(footer).toContain('href="/#sectores"');
+    expect(footer).toContain('/sectores#sector-${sec.slug}');
     expect(footer).not.toContain('href="/blog"');
     expect(footer).toContain('Toda la República Mexicana');
   });
@@ -116,5 +116,16 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(servicesPage).toMatch(/\n\s+help:\s*\n/);
     expect(servicesPage).toContain('eyebrow: ¿Buscas equipo?');
     expect(servicesPage).toContain('links:');
+  });
+
+  it('valida los ocho detalles de sector contra la taxonomía', () => {
+    const contentConfig = read('src/content.config.ts');
+    const sectorsPage = read('src/content/paginas/sectores.md');
+    const details = sectorsPage.match(/(?<=\n)      - slug: ([^\n]+)/g)?.map((line) => line.replace('      - slug: ', '')) ?? [];
+
+    expect(contentConfig).toContain("type: z.literal('sectorDetails')");
+    expect(details).toHaveLength(8);
+    expect(new Set(details).size).toBe(8);
+    expect(details).toEqual(TAXONOMY.sectors.map((sector) => sector.slug));
   });
 });

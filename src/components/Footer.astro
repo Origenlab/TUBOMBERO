@@ -163,7 +163,7 @@ const SOCIAL_ICONS: Record<string, string> = {
           <>
             <h3 class="footer__col-heading footer__col-heading--mt"><span class="footer__col-heading-accent" aria-hidden="true"></span>Sectores</h3>
             <ul class="footer__nav-list" role="list">
-              {SECTORS.map((sec) => (<li><a href="/#sectores" class="footer__nav-link">{sec.label}</a></li>))}
+              {SECTORS.map((sec) => (<li><a href={`/sectores#sector-${sec.slug}`} class="footer__nav-link">{sec.label}</a></li>))}
             </ul>
           </>
         )}
