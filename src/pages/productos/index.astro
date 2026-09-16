@@ -1,16 +1,32 @@
 ---
-import CategoryCard from '@components/CategoryCard.astro';
-import SectionHeading from '@components/SectionHeading.astro';
+import { getEntry, render } from 'astro:content';
+import Hero from '@components/Hero.astro';
+import PageSections from '@components/PageSections.astro';
+import SectionMenu from '@components/SectionMenu.astro';
 import PageLayout from '@layouts/PageLayout.astro';
 import { CATEGORIES } from '@config/site';
+
+const page = await getEntry('paginas', 'productos');
+if (!page) throw new Error('No se encontró src/content/paginas/productos.md');
+const { Content } = await render(page);
+const { title, seoTitle, description, noindex, breadcrumb, hero, menu, sections } = page.data;
 ---
-<PageLayout title="Catálogo de equipo contra incendios en 8 categorías" description="Extintores, red contra incendios, gabinetes e hidrantes, detección y alarma, equipo y herramientas para bomberos, rescate y señalización en un catálogo." pageType="category">
-  <section class="page-intro"><div class="container"><p class="eyebrow">Catálogo</p><h1>Catálogo de equipo contra incendios</h1><p>Ocho familias de equipo y sistemas de protección contra incendios para ubicar lo que tu instalación necesita. Las fichas técnicas se publican conforme se confirma el inventario.</p></div></section>
-  <section class="section"><div class="container"><SectionHeading eyebrow="Categorías" title="Elige el punto de partida." desc="Cada categoría organiza una necesidad distinta de protección, preparación o respuesta." layout="duo" body={["Las ocho categorías del catálogo cubren las etapas de la protección contra incendio: prevenir con señalización, detectar a tiempo, responder con extintores y sistemas hidráulicos, y equipar a bomberos y brigadas con protección personal, herramientas y equipo de rescate.", "Entra a la categoría que corresponde a tu necesidad para conocer sus subcategorías principales. Las fichas técnicas de cada producto se integrarán conforme se confirme el inventario, para que la información publicada sea siempre verificable."]} /><div class="grid-4">{CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} imagePosition={category.imagePosition} badge={category.tag} blurb={category.description} subcategories={category.subcategories} ctaLabel={category.cta} index={index} />)}</div></div></section>
+<PageLayout
+  title={seoTitle}
+  description={description}
+  pageType="category"
+  noindex={noindex}
+  breadcrumbs={[{ label: breadcrumb }]}
+  schemaData={{
+    list: {
+      name: title,
+      description,
+      path: '/productos',
+      items: CATEGORIES.map((category) => ({ name: category.label, path: `/productos/${category.slug}` })),
+    },
+  }}
+>
+  <Hero badge={hero.badge} title={hero.title} accent={hero.accent} after={hero.after} descRight={hero.paragraphs} ctas={hero.ctas} />
+  <SectionMenu items={menu.items} cta={menu.cta} />
+  <PageSections sections={sections} Content={Content} />
 </PageLayout>
-<style>
-  .page-intro { padding-block: clamp(4rem, 9vw, 7rem); background: var(--c-ink); color: var(--c-white); }
-  .page-intro h1 { max-width: 12ch; margin: 0; font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 5rem); line-height: var(--leading-tight); }
-  .page-intro p:last-child { max-width: 58ch; color: rgb(255 255 255 / .74); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
-  .page-intro .eyebrow { color: var(--c-primary-light); }
-</style>

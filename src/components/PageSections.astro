@@ -1,0 +1,66 @@
+---
+import CategoryCard from '@components/CategoryCard.astro'
+import FAQWithContact from '@components/FAQWithContact.astro'
+import ProseTable from '@components/ProseTable.astro'
+import SectionHeading from '@components/SectionHeading.astro'
+import StageGrid from '@components/StageGrid.astro'
+import { CATEGORIES } from '@config/site'
+
+interface SectionBase { type: string; id: string; eyebrow: string; title: string; accent?: string; desc: string; body: string[] }
+interface CategorySection extends SectionBase { type: 'categories' }
+interface StageSection extends SectionBase { type: 'stages'; items: { num: string; title: string; desc: string; links: { label: string; href: string }[] }[] }
+interface ProseSection extends SectionBase { type: 'prose' }
+interface FaqSection extends SectionBase { type: 'faq'; items: { question: string; answer: string }[] }
+type PageSection = CategorySection | StageSection | ProseSection | FaqSection
+interface Props { sections: PageSection[]; Content: any }
+
+const { sections, Content } = Astro.props
+---
+
+{sections.map((section, index) => section.type === 'faq' ? (
+  <FAQWithContact
+    id={section.id}
+    eyebrow={section.eyebrow}
+    title={section.title}
+    titleAccent={section.accent}
+    desc={section.desc}
+    body={section.body}
+    items={section.items}
+  />
+) : (
+  <section id={section.id} class:list={['section', index % 2 === 1 && 'section--surface']}>
+    <div class="container">
+      <SectionHeading
+        id={section.type === 'prose' ? `${section.id}-heading` : undefined}
+        eyebrow={section.eyebrow}
+        title={section.title}
+        titleAccent={section.accent}
+        desc={section.desc}
+        layout="duo"
+        body={section.body}
+      />
+      {section.type === 'categories' && (
+        <div class="grid-4 category-grid">
+          {CATEGORIES.map((category, categoryIndex) => (
+            <CategoryCard
+              label={category.label}
+              href={`/productos/${category.slug}`}
+              image={category.image}
+              imageAlt={category.imageAlt}
+              imagePosition={category.imagePosition}
+              badge={category.tag}
+              blurb={category.description}
+              subcategories={category.subcategories}
+              ctaLabel={category.cta}
+              index={categoryIndex}
+            />
+          ))}
+        </div>
+      )}
+      {section.type === 'stages' && <StageGrid items={section.items} />}
+      {section.type === 'prose' && (
+        <ProseTable labelId={`${section.id}-heading`}><Content /></ProseTable>
+      )}
+    </div>
+  </section>
+))}

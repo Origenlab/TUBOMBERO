@@ -1,4 +1,6 @@
 ---
+import Icon from '@components/Icon.astro'
+
 // Breadcrumbs.astro — Migas de pan: la ruta que dice DÓNDE está el visitante en la
 // jerarquía del sitio, justo debajo del Header. ORIGEN: PROYECTORED/src/components/ui/Breadcrumb.astro.
 //
@@ -86,7 +88,7 @@ const PUNTOS = [
             {index < DEMO.length - 1 && (
               <span class="breadcrumb__sepwrap">
                 {index === DEMO.length - 2 && <span class="bc-mark" aria-hidden="true">3</span>}
-                <svg class="breadcrumb__sep" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                <Icon name="chevron-right" size={14} class="breadcrumb__sep" />
               </span>
             )}
           </li>
@@ -104,7 +106,7 @@ const PUNTOS = [
             )}
             <meta itemprop="position" content={String(index + 1)} />
             {index < trail.length - 1 && (
-              <svg class="breadcrumb__sep" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              <Icon name="chevron-right" size={14} class="breadcrumb__sep" />
             )}
           </li>
         ))}
@@ -155,50 +157,4 @@ const PUNTOS = [
   .breadcrumb__sepwrap { display: inline-flex; align-items: center; gap: var(--sp-1, .25rem); }
   .breadcrumb__sep { color: var(--text-muted, var(--c-muted, var(--c-muted))); flex-shrink: 0; }
 
-  /* ── Marcadores (modo guía) — círculos numerados sobre la ruta de ejemplo ── */
-  .bc-mark {
-    flex-shrink: 0; display: inline-grid; place-items: center;
-    width: 18px; height: 18px; margin-right: 6px;
-    border-radius: var(--radius-full); background: var(--c-primary); color: var(--c-white);
-    font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: .6875rem;
-  }
-  /* Sobre el separador el marcador va sin sangría a la derecha. */
-  .breadcrumb__sepwrap .bc-mark { margin-right: 0; }
-
-  /* ── Leyenda guía (igual que la del TopBar / Header) — franja bajo las migas ── */
-  .bcg { background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
-  .bcg-inner { max-width: var(--container-max); margin-inline: auto; padding: var(--sp-4) var(--container-px) var(--sp-5); }
-  .bcg__tag {
-    display: inline-flex; align-items: center; gap: var(--sp-1); margin: 0 0 var(--sp-2);
-    font-family: var(--font-heading); font-size: var(--text-xs); font-weight: var(--weight-bold);
-    letter-spacing: .08em; text-transform: uppercase; color: var(--c-primary);
-  }
-  .bcg__intro { margin: 0 0 var(--sp-4); font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--c-ink-2); max-width: 70ch; }
-  .bcg__intro code, .bcg__dato code, .bcg__edit code {
-    font-family: ui-monospace, 'SFMono-Regular', 'Menlo', monospace; font-size: .85em;
-    background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-sm);
-    padding: .05em .4em; color: var(--c-primary-dark);
-  }
-  .bcg__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); grid-template-columns: 1fr; }
-  .bcg__pt {
-    display: flex; gap: var(--sp-3); align-items: start;
-    background: var(--c-white); border: 1px solid var(--c-border);
-    border-radius: var(--radius-md); padding: var(--sp-3) var(--sp-4);
-  }
-  .bcg__num {
-    flex-shrink: 0; display: inline-grid; place-items: center;
-    width: 24px; height: 24px; border-radius: var(--radius-full);
-    background: var(--c-primary); color: var(--c-white);
-    font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: var(--text-sm);
-  }
-  .bcg__pt-body { display: grid; gap: 2px; min-width: 0; }
-  .bcg__nombre { margin: 0; font-family: var(--font-heading); font-weight: var(--weight-semibold); color: var(--c-ink); font-size: var(--text-base); }
-  .bcg__que { margin: 0; font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--c-ink-2); }
-  .bcg__dato { margin: 4px 0 0; font-size: var(--text-xs); color: var(--c-muted); display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
-  .bcg__dato span, .bcg__edit span { text-transform: uppercase; letter-spacing: .06em; font-weight: var(--weight-semibold); color: var(--c-muted); }
-  .bcg__edit { margin: var(--sp-4) 0 0; display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; font-size: var(--text-xs); color: var(--c-muted); }
-
-  /* Leyenda guía: 1 col (móvil) → 2 col (tablet) → fila de 4 cards (desktop). */
-  @media (min-width: 600px)  { .bcg__list { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1000px) { .bcg__list { grid-template-columns: repeat(4, 1fr); } }
 </style>

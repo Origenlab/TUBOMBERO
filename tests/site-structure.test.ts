@@ -55,7 +55,7 @@ describe('contrato de homologación TUBOMBERO', () => {
   it('mantiene la rejilla canónica de cuatro columnas en los catálogos', () => {
     expect(read('src/styles/global.css')).toMatch(/\.grid-4[\s\S]*repeat\(4, minmax\(0, 1fr\)\)/);
     expect(read('src/pages/index.astro')).toContain('class="grid-4 category-grid"');
-    expect(read('src/pages/productos/index.astro')).toContain('class="grid-4"');
+    expect(read('src/components/PageSections.astro')).toContain('class="grid-4 category-grid"');
     expect(read('src/pages/servicios/index.astro')).toContain('class="grid-4"');
   });
 
@@ -84,5 +84,25 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(footer).toContain('href="/#sectores"');
     expect(footer).not.toContain('href="/blog"');
     expect(footer).toContain('Toda la República Mexicana');
+  });
+
+  it('mantiene el contrato SEO CollectionPage + ItemList para la plantilla L2', () => {
+    const seo = read('src/lib/seo.ts');
+    expect(seo).toContain("case 'category':");
+    expect(seo).toContain('if (data.list) out.push({ \'@context\': CTX, ...directorySchema(data.list) });');
+    expect(seo).toContain("'@type': 'ItemList'");
+    expect(seo).toContain('itemListElement: data.items.map');
+  });
+
+  it('expone la infraestructura reutilizable de páginas L2 desde Markdown', () => {
+    const contentConfig = read('src/content.config.ts');
+    const page = read('src/pages/productos/index.astro');
+    expect(contentConfig).toMatch(/const paginas = defineCollection\([\s\S]*?base: ['"]\.\/src\/content\/paginas['"][\s\S]*?\.strict\(\)/);
+    expect(page).toContain("getEntry('paginas', 'productos')");
+    expect(page).toContain("render(page)");
+    expect(page).toContain('<PageSections sections={sections} Content={Content} />');
+    expect(read('src/components/StageGrid.astro')).toContain('class="grid-4 stage-grid"');
+    expect(read('src/components/ProseTable.astro')).toContain('role="region"');
+    expect(read('src/components/PageSections.astro')).toContain('FAQWithContact');
   });
 });

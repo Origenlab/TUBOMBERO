@@ -17,6 +17,8 @@ export default defineConfig({
   site: 'https://tubombero.com',
   output: 'static',
   trailingSlash: 'never',
+  scopedStyleStrategy: 'class',
+  compressHTML: true,
   build: { format: 'file' },
   prefetch: { defaultStrategy: 'hover' },
   redirects: Object.fromEntries(categorySlugs.map((slug) => [`/productos/categoria/${slug}`, `/productos/${slug}`])),

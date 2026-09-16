@@ -34,6 +34,7 @@
 // CTA al fondo). Mobile-first; hover con elevación. A11y: foco visible, aria.
 // ============================================================================
 import { Picture } from 'astro:assets';
+import Icon from '@components/Icon.astro';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -79,7 +80,7 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
           src={image}
           formats={['avif', 'webp']}
           fallbackFormat="avif"
-          widths={[400, 600, 800]}
+          widths={[400, 800]}
           sizes="(min-width:1100px) 25vw, (min-width:640px) 50vw, 100vw"
           alt={imageAlt ?? label}
           width={800}
@@ -122,7 +123,7 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
     ) : (
       <a class="ccard__cta" href={href}>
         {resolvedCtaLabel}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <Icon name="arrow-right" size={14} />
       </a>
     )}
   </div>
@@ -155,8 +156,6 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
     background: var(--c-primary); padding: .25em .6em; border-radius: var(--radius-sm);
   }
   /* Badge en el cuerpo (cuando la tarjeta no lleva imagen, p. ej. módulos). */
-  .ccard__badge--inline { position: static; align-self: flex-start; }
-  .ccard__badge--soon { color: var(--c-muted); background: var(--c-surface); border: 1px solid var(--c-border); }
 
   /* Cuerpo */
   .ccard__body { display: flex; flex-direction: column; flex-grow: 1; gap: var(--sp-3); padding: var(--sp-5); }
@@ -226,10 +225,9 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
   .ccard__cta:hover { background: var(--c-primary-dark); gap: var(--sp-3); }
   .ccard__cta:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
   /* CTA inactivo para tarjetas 'próximo' (no enlaza). */
-  .ccard__cta--soon { background: var(--c-surface); color: var(--c-muted); border: 1px solid var(--c-border); cursor: default; }
-  .ccard__cta--soon:hover { background: var(--c-surface); gap: var(--sp-2); }
 
   @media (prefers-reduced-motion: reduce) {
     .ccard, .ccard__cta { transition: none; }
   }
+  @media (max-width: 768px) { .ccard__sub { min-height: 40px; display: inline-flex; align-items: center; } }
 </style>

@@ -1,0 +1,18 @@
+---
+interface Props { labelId: string }
+const { labelId } = Astro.props
+---
+
+<div class="prose-table" role="region" aria-labelledby={labelId} tabindex="0">
+  <slot />
+</div>
+
+<style>
+  .prose-table { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .prose-table :global(table) { width: 100%; min-width: 680px; border-collapse: collapse; border: 1px solid var(--c-border); color: var(--c-ink-2); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+  .prose-table :global(th) { background: var(--c-ink); color: var(--c-white); font-weight: var(--weight-semibold); text-align: left; }
+  .prose-table :global(th), .prose-table :global(td) { border: 1px solid var(--c-border); padding: var(--sp-4) var(--sp-5); vertical-align: top; }
+  .prose-table :global(tbody tr:nth-child(even)) { background: var(--c-surface); }
+  .prose-table :global(td:first-child) { font-weight: var(--weight-semibold); color: var(--c-ink); }
+  .prose-table :global(a) { color: var(--c-primary-dark); text-decoration: underline; text-underline-offset: .12em; }
+</style>

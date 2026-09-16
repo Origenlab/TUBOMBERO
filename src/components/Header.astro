@@ -12,6 +12,7 @@
 // ítem: itera NAV para generar (1) el menú de escritorio, (2) los paneles desplegables
 // y (3) el menú móvil. Para editar el menú, edita NAV en site.ts. Guía: docs/MENU.md.
 import { NAV, SITE, CONTACT, waUrl, telUrl, WA_MESSAGES } from '@config/site'
+import Icon from '@components/Icon.astro'
 
 interface Props {
   /** Modo guía: marcadores numerados sobre la barra + leyenda explicativa debajo. */
@@ -60,14 +61,12 @@ const navId = (s: string) =>
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(href)
 
-const WA_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`
-const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>`
 ---
 
 <header class:list={['site-header', { 'is-guia': guia }]} role="banner">
   <div class="hdr-inner">
 
-    <a href="/" class="hdr-logo" aria-label={`${SITE.name} — Inicio`}>
+    <a href="/" class="hdr-logo">
       {guia && <span class="hdr-mark" aria-hidden="true">1</span>}
       <span class="hdr-logo__mark" aria-hidden="true">{SITE.brand.charAt(0)}</span>
       <span class="hdr-logo__word">{SITE.brand}<span class="hdr-logo__tld">{`.${SITE.domain.split(".").slice(1).join(".")}`}</span></span>
@@ -84,7 +83,7 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
             <a href={item.href} class:list={['hdr-nav__link', { 'hdr-nav__link--active': isActive(item.href) }]} aria-haspopup="true" aria-expanded="false">
               {guia && i === 0 && <span class="hdr-mark" aria-hidden="true">2</span>}
               {item.label}
-              <svg class="hdr-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              <Icon name="chevron-down" size={12} class="hdr-chevron" />
               {guia && i === 1 && <span class="hdr-mark" aria-hidden="true">3</span>}
             </a>
             {item.panel === 'dropdown' && (
@@ -107,7 +106,7 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
 
     <a href={headerWaUrl ?? '/contacto'} class="hdr-cta" target={headerWaUrl ? '_blank' : undefined} rel={headerWaUrl ? 'noopener noreferrer' : undefined} aria-label="Cotizar equipo contra incendios">
       {guia && <span class="hdr-mark hdr-mark--cta" aria-hidden="true">4</span>}
-      {headerWaUrl ? <Fragment set:html={WA_SVG} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} Cotizar equipo
+      {headerWaUrl ? <Icon name="whatsapp" size={16} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} Cotizar equipo
     </a>
 
     <button class="hdr-burger" id="hdr-burger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="hdr-mobile-nav">
@@ -167,12 +166,12 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
 {/* MOBILE NAV — generado desde el MISMO NAV. Ítems con panel → acordeón; resto → enlace directo.
     El `top` real lo fija el script al abrir (= borde inferior del header sticky), así funciona
     en ambos modos y a cualquier altura de scroll. */}
-<div class="hdr-mobile-nav" id="hdr-mobile-nav" aria-hidden="true">
+<div class="hdr-mobile-nav" id="hdr-mobile-nav" aria-hidden="true" inert>
   <div class="mob-scroll">
     <nav aria-label="Navegación móvil">
       {NAV.map((item) => item.panel ? (
         <div class="mob-item">
-          <button class="mob-item__trigger" aria-expanded="false"><span>{item.label}</span><svg class="mob-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <button class="mob-item__trigger" aria-expanded="false"><span>{item.label}</span><Icon name="chevron-down" size={18} class="mob-chevron" /></button>
           <div class="mob-item__panel">
             <div class="mob-item__panel-inner">
               <a href={item.href} class="mob-item__all">{item.allLabel ?? item.label}</a>
@@ -189,13 +188,13 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
   <div class="mob-foot">
     <div class="mob-foot__cta">
       <a href={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ?? '/contacto'} class="mob-cta" target={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? '_blank' : undefined} rel={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? 'noopener noreferrer' : undefined}>
-        {waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) && <Fragment set:html={WA_SVG} />} Cotizar equipo contra incendios
+        {waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) && <Icon name="whatsapp" size={16} />} Cotizar equipo contra incendios
       </a>
       {telUrl() && <a href={telUrl()} class="mob-call" aria-label={`Llamar al ${CONTACT.phone}`}>
-        <Fragment set:html={PHONE_SVG} /> Llamar
+        <Icon name="phone" size={16} /> Llamar
       </a>}
     </div>
-    {schedule && <p class="mob-foot__meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg> {schedule}</p>}
+    {schedule && <p class="mob-foot__meta"><Icon name="clock" size={14} /> {schedule}</p>}
   </div>
 </div>
 
@@ -322,54 +321,25 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
     .hdr-logo__word { font-size: 1.18rem; }
   }
 
-  /* ── Marcadores (modo guía) — círculos numerados sobre la barra ── */
-  .hdr-mark {
-    flex-shrink: 0; display: inline-grid; place-items: center;
-    width: 18px; height: 18px; border-radius: var(--radius-full);
-    background: var(--c-primary); color: var(--c-white);
-    font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: .6875rem;
-  }
-  .hdr-mark--cta { background: var(--c-white); color: var(--c-primary); }
-
-  /* ── Leyenda guía (igual que la del TopBar) — franja bajo el header ── */
-  .hbg { background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
-  .hbg-inner { max-width: var(--container-max); margin-inline: auto; padding: var(--sp-4) var(--container-px) var(--sp-5); }
-  .hbg__tag {
-    display: inline-flex; align-items: center; gap: var(--sp-1); margin: 0 0 var(--sp-2);
-    font-family: var(--font-heading); font-size: var(--text-xs); font-weight: var(--weight-bold);
-    letter-spacing: .08em; text-transform: uppercase; color: var(--c-primary);
-  }
-  .hbg__intro { margin: 0 0 var(--sp-4); font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--c-ink-2); max-width: 70ch; }
-  .hbg__intro code, .hbg__dato code, .hbg__edit code {
-    font-family: ui-monospace, 'SFMono-Regular', 'Menlo', monospace; font-size: .85em;
-    background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-sm);
-    padding: .05em .4em; color: var(--c-primary-dark);
-  }
-  .hbg__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); grid-template-columns: 1fr; }
-  .hbg__pt {
-    display: flex; gap: var(--sp-3); align-items: start;
-    background: var(--c-white); border: 1px solid var(--c-border);
-    border-radius: var(--radius-md); padding: var(--sp-3) var(--sp-4);
-  }
-  .hbg__num {
-    flex-shrink: 0; display: inline-grid; place-items: center;
-    width: 24px; height: 24px; border-radius: var(--radius-full);
-    background: var(--c-primary); color: var(--c-white);
-    font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: var(--text-sm);
-  }
-  .hbg__pt-body { display: grid; gap: 2px; min-width: 0; }
-  .hbg__nombre { margin: 0; font-family: var(--font-heading); font-weight: var(--weight-semibold); color: var(--c-ink); font-size: var(--text-base); }
-  .hbg__que { margin: 0; font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--c-ink-2); }
-  .hbg__dato { margin: 4px 0 0; font-size: var(--text-xs); color: var(--c-muted); display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
-  .hbg__dato span, .hbg__edit span { text-transform: uppercase; letter-spacing: .06em; font-weight: var(--weight-semibold); color: var(--c-muted); }
-  .hbg__edit { margin: var(--sp-4) 0 0; display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; font-size: var(--text-xs); color: var(--c-muted); }
-
-  @media (min-width: 600px)  { .hbg__list { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1000px) { .hbg__list { grid-template-columns: repeat(4, 1fr); } }
-
   /* Respeta usuarios con motion reducido. */
   @media (prefers-reduced-motion: reduce) {
     .hdr-mobile-nav, .mob-item__panel, .mega-panel, .drop-panel, .hdr-chevron, .mob-chevron, .site-header { transition: none; }
+  }
+  @media (max-width: 1024px) {
+    .mob-direct, .mob-item__trigger { min-height: 48px; }
+    .mob-item__link, .mob-item__all { min-height: 44px; display: flex; align-items: center; }
+    .hdr-burger { width: 44px; height: 44px; }
+    .hdr-cta { -webkit-tap-highlight-color: rgba(var(--c-primary-rgb), .15); }
+  }
+  @media (max-width: 768px) {
+    .hdr-inner, .mega-panel__inner {
+      padding-left: max(var(--container-px), env(safe-area-inset-left));
+      padding-right: max(var(--container-px), env(safe-area-inset-right));
+    }
+  }
+  @media (max-width: 380px) {
+    .hdr-inner { gap: .75rem; }
+    .hdr-logo__word { font-size: 1.05rem; }
   }
 </style>
 
@@ -447,6 +417,7 @@ const PHONE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
         mobileNav.style.top = bottom + 'px'
       }
       mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true')
+      mobileNav.toggleAttribute('inert', !open)
       burgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false')
       burgerBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú')
       document.body.classList.toggle('menu-open', open)

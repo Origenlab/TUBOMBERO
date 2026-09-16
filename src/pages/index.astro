@@ -7,6 +7,7 @@ import ProcessSteps from '@components/ProcessSteps.astro';
 import SectionHeading from '@components/SectionHeading.astro';
 import SectionMenu from '@components/SectionMenu.astro';
 import ServiceCard from '@components/ServiceCard.astro';
+import Icon from '@components/Icon.astro';
 import PageLayout from '@layouts/PageLayout.astro';
 import { CATEGORIES, CATEGORY_FEATURES, PROCESS, SERVICES, SECTORS } from '@config/site';
 
@@ -74,7 +75,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   <section id="sectores" class="section sectors">
     <div class="container">
         <SectionHeading eyebrow="Soluciones por sector" title="Protección contra incendios para cada tipo de instalación" desc="Cada sector tiene riesgos de incendio, normativas y condiciones de operación distintas; estas rutas ayudan a ubicar el equipo y los servicios que corresponden a tu inmueble." layout="duo" body={["Una planta de manufactura, un hospital, un centro comercial y un almacén no enfrentan los mismos riesgos de incendio ni operan en las mismas condiciones. Las rutas por sector ayudan a identificar qué equipo contra incendio y qué servicios son más relevantes para cada tipo de instalación.", "Desde industria y construcción hasta hospitalidad, salud, logística, educación, energía y cuerpos de Protección Civil, cada sector funciona como punto de partida para orientar la compra con criterio técnico y con el lenguaje propio de cada operación."]} />
-      <div class="grid-4 sector-grid">{SECTORS.map((sector, index) => <article class="sector-card"><span class="sector-card__icon" aria-hidden="true">{sector.icon === 'cross' ? '✚' : sector.icon === 'flame' ? '♨' : sector.icon === 'shield' ? '⬟' : sector.icon === 'briefcase' ? '▣' : sector.icon === 'school' ? '⌂' : '▤'}</span><span class="sector-card__num">0{index + 1}</span><span class="sector-card__label">{sector.label}</span><b aria-hidden="true">↗</b></article>)}</div>
+      <div class="grid-4 sector-grid">{SECTORS.map((sector, index) => <article class="sector-card"><span class="sector-card__icon" aria-hidden="true"><Icon name={sector.icon} size={24} /></span><span class="sector-card__num">0{index + 1}</span><span class="sector-card__label">{sector.label}</span><b aria-hidden="true">↗</b></article>)}</div>
     </div>
   </section>
 
@@ -119,7 +120,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
 </PageLayout>
 
 <style>
-  .section--surface, .sectors { background: var(--c-surface); }
+  .sectors { background: var(--c-surface); }
   .sectors { border-block: var(--border); }
   .sectors__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); }
   .sector-grid { margin-top: 0; }

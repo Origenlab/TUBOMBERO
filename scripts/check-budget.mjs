@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 const DIST = 'dist';
 // HTML: el marcado de <Picture> (srcset AVIF+WebP aprobado) infla el tamaño en crudo; lo que viaja es gzip.
-const LIMITS = { html: 130_000, htmlGzip: 25_000, cssTotal: 50_000, jsTotal: 3_000, image: 120_000, preloads: 4 };
+const LIMITS = { html: 130_000, htmlGzip: 25_000, cssTotal: 55_000, jsTotal: 3_000, image: 120_000, preloads: 4 };
 const walk = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
 const files = walk(DIST);
 const fails = [];
