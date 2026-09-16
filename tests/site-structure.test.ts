@@ -56,7 +56,7 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read('src/styles/global.css')).toMatch(/\.grid-4[\s\S]*repeat\(4, minmax\(0, 1fr\)\)/);
     expect(read('src/pages/index.astro')).toContain('class="grid-4 category-grid"');
     expect(read('src/components/PageSections.astro')).toContain('class="grid-4 category-grid"');
-    expect(read('src/pages/servicios/index.astro')).toContain('class="grid-4"');
+    expect(read('src/components/PageSections.astro')).toContain('class="grid-4"');
   });
 
   it('expone las metas SEO aprobadas y conserva enlazado interno en noindex', () => {
@@ -97,12 +97,24 @@ describe('contrato de homologación TUBOMBERO', () => {
   it('expone la infraestructura reutilizable de páginas L2 desde Markdown', () => {
     const contentConfig = read('src/content.config.ts');
     const page = read('src/pages/productos/index.astro');
+    const l2 = read('src/components/L2Page.astro');
     expect(contentConfig).toMatch(/const paginas = defineCollection\([\s\S]*?base: ['"]\.\/src\/content\/paginas['"][\s\S]*?\.strict\(\)/);
-    expect(page).toContain("getEntry('paginas', 'productos')");
-    expect(page).toContain("render(page)");
-    expect(page).toContain('<PageSections sections={sections} Content={Content} />');
+    expect(page).toContain('<L2Page slug="productos"');
+    expect(l2).toContain('getEntry(\'paginas\', slug)');
+    expect(l2).toContain('render(page)');
+    expect(l2).toContain('<PageSections sections={sections} Content={Content} />');
     expect(read('src/components/StageGrid.astro')).toContain('class="grid-4 stage-grid"');
     expect(read('src/components/ProseTable.astro')).toContain('role="region"');
     expect(read('src/components/PageSections.astro')).toContain('FAQWithContact');
+  });
+
+  it('valida el contrato L2 de servicios con sección services y ayuda FAQ', () => {
+    const contentConfig = read('src/content.config.ts');
+    const servicesPage = read('src/content/paginas/servicios.md');
+    expect(contentConfig).toContain("type: z.literal('services')");
+    expect(servicesPage).toMatch(/type:\s*services/);
+    expect(servicesPage).toMatch(/\n\s+help:\s*\n/);
+    expect(servicesPage).toContain('eyebrow: ¿Buscas equipo?');
+    expect(servicesPage).toContain('links:');
   });
 });

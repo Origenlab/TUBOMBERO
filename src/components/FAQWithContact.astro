@@ -6,6 +6,7 @@ import SectionHeading from '@components/SectionHeading.astro'
 import { CATEGORIES, CONTACT, SECTORS, SERVICES } from '@config/site'
 
 interface FAQItem { question: string; answer: string }
+interface Help { eyebrow: string; title: string; text: string; links: { label: string; href: string; variant?: 'primary' | 'outline' }[] }
 interface Props {
   id?: string
   items: FAQItem[]
@@ -16,6 +17,7 @@ interface Props {
   desc?: string
   body?: string[]
   textareaPlaceholder?: string
+  help?: Help
 }
 
 const {
@@ -31,6 +33,15 @@ const {
     '¿Tu duda no está aquí? Usa el formulario y te respondemos directamente por WhatsApp.',
   ],
   textareaPlaceholder = 'Superficie aproximada, equipo con el que ya cuentas y fecha en que lo necesitas',
+  help = {
+    eyebrow: '¿No encuentras tu respuesta?',
+    title: 'Te orientamos para elegir el equipo contra incendios adecuado.',
+    text: 'Revisa las familias de equipo organizadas por necesidad o conoce los servicios de instalación, mantenimiento y capacitación. Si tu caso es particular, completa el formulario de cotización con el detalle de tu instalación.',
+    links: [
+      { label: 'Catálogo de equipo contra incendios', href: '/#catalogo', variant: 'primary' },
+      { label: 'Mantenimiento contra incendios', href: '/servicios' },
+    ],
+  },
 } = Astro.props
 
 const STATES = [
@@ -53,12 +64,11 @@ const waReady = Boolean(waNumber)
       <div class="fwc__col-faq">
         <FAQAccordion items={items} title="" bare openFirst />
         <div class="fwc__help">
-          <p class="fwc__help-eyebrow">¿No encuentras tu respuesta?</p>
-          <p class="fwc__help-title">Te orientamos para elegir el equipo contra incendios adecuado.</p>
-          <p class="fwc__help-text">Revisa las familias de equipo organizadas por necesidad o conoce los servicios de instalación, mantenimiento y capacitación. Si tu caso es particular, completa el formulario de cotización con el detalle de tu instalación.</p>
+          <p class="fwc__help-eyebrow">{help.eyebrow}</p>
+          <p class="fwc__help-title">{help.title}</p>
+          <p class="fwc__help-text">{help.text}</p>
           <div class="fwc__help-actions">
-            <a class="fwc__help-btn fwc__help-btn--primary" href="/#catalogo">Catálogo de equipo contra incendios</a>
-            <a class="fwc__help-btn" href="/servicios">Mantenimiento contra incendios</a>
+            {help.links.map((link, index) => <a class:list={['fwc__help-btn', (link.variant ?? (index === 0 ? 'primary' : 'outline')) === 'primary' && 'fwc__help-btn--primary']} href={link.href}>{link.label}</a>)}
           </div>
         </div>
       </div>

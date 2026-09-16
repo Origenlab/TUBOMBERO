@@ -157,7 +157,7 @@ const SOCIAL_ICONS: Record<string, string> = {
       <nav class="footer__col" aria-label="Servicios">
         <h3 class="footer__col-heading"><span class="footer__col-heading-accent" aria-hidden="true"></span>Servicios</h3>
         <ul class="footer__nav-list" role="list">
-          {SERVICES.map((svc) => (<li><a href="/servicios" class="footer__nav-link">{svc.label}</a></li>))}
+          {SERVICES.map((svc) => (<li><a href={`/servicios#${svc.id}`} class="footer__nav-link">{svc.label}</a></li>))}
         </ul>
         {SECTORS.length > 0 && (
           <>

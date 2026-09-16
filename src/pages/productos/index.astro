@@ -1,32 +1,5 @@
 ---
-import { getEntry, render } from 'astro:content';
-import Hero from '@components/Hero.astro';
-import PageSections from '@components/PageSections.astro';
-import SectionMenu from '@components/SectionMenu.astro';
-import PageLayout from '@layouts/PageLayout.astro';
+import L2Page from '@components/L2Page.astro';
 import { CATEGORIES } from '@config/site';
-
-const page = await getEntry('paginas', 'productos');
-if (!page) throw new Error('No se encontró src/content/paginas/productos.md');
-const { Content } = await render(page);
-const { title, seoTitle, description, noindex, breadcrumb, hero, menu, sections } = page.data;
 ---
-<PageLayout
-  title={seoTitle}
-  description={description}
-  pageType="category"
-  noindex={noindex}
-  breadcrumbs={[{ label: breadcrumb }]}
-  schemaData={{
-    list: {
-      name: title,
-      description,
-      path: '/productos',
-      items: CATEGORIES.map((category) => ({ name: category.label, path: `/productos/${category.slug}` })),
-    },
-  }}
->
-  <Hero badge={hero.badge} title={hero.title} accent={hero.accent} after={hero.after} descRight={hero.paragraphs} ctas={hero.ctas} />
-  <SectionMenu items={menu.items} cta={menu.cta} />
-  <PageSections sections={sections} Content={Content} />
-</PageLayout>
+<L2Page slug="productos" list={{ path: '/productos', items: CATEGORIES.map((c) => ({ name: c.label, path: `/productos/${c.slug}` })) }} />

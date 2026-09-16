@@ -123,6 +123,7 @@ const paginas = defineCollection({
     }).strict(),
     sections: z.array(z.discriminatedUnion('type', [
       z.object({ type: z.literal('categories'), ...l2SectionBase }).strict(),
+      z.object({ type: z.literal('services'), ...l2SectionBase }).strict(),
       z.object({
         type: z.literal('stages'),
         ...l2SectionBase,
@@ -137,6 +138,16 @@ const paginas = defineCollection({
       z.object({
         type: z.literal('faq'),
         ...l2SectionBase,
+        help: z.object({
+          eyebrow: z.string(),
+          title: z.string(),
+          text: z.string(),
+          links: z.array(z.object({
+            label: z.string(),
+            href: z.string(),
+            variant: z.enum(['primary', 'outline']).optional(),
+          }).strict()).min(1).max(2),
+        }).strict().optional(),
         items: z.array(z.object({ question: z.string(), answer: z.string() }).strict()),
       }).strict(),
     ])),

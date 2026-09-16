@@ -6,6 +6,7 @@ import Icon from '@components/Icon.astro';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
+  id?: string
   title: string
   description: string
   href: string
@@ -19,10 +20,10 @@ interface Props {
   /** true → CTA estilo WhatsApp (verde) + target _blank. */
   whatsapp?: boolean
 }
-const { title, description, href, icon, image, imageAlt, badge, ctaLabel = title, whatsapp = false } = Astro.props
+const { id, title, description, href, icon, image, imageAlt, badge, ctaLabel = title, whatsapp = false } = Astro.props
 ---
 
-<article class="scard" aria-label={title}>
+<article id={id} class="scard" aria-label={title}>
   {image ? (
     <div class="scard__media">
       <Picture src={image} alt={imageAlt ?? title} width={640} height={360} widths={[400, 640]} sizes="(min-width:1100px) 25vw, (min-width:640px) 50vw, 100vw" formats={['avif', 'webp']} fallbackFormat="avif" loading="lazy" decoding="async" class="scard__img" quality={60} />

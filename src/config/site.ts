@@ -175,10 +175,10 @@ const categories = [
 ] as const;
 
 const services = [
-  { id: 'venta-y-asesoria-tecnica', cta: 'Asesoría en equipo contra incendios', label: 'Venta y asesoría técnica', desc: 'Acompañamiento para identificar la familia de equipo adecuada para cada necesidad.' },
-  { id: 'instalacion-de-sistemas', cta: 'Instalación de sistemas contra incendios', label: 'Instalación de sistemas', desc: 'Soluciones para proyectos que requieren integrar equipos de protección contra incendio.' },
-  { id: 'mantenimiento', cta: 'Mantenimiento de equipo contra incendios', label: 'Mantenimiento', desc: 'Atención a necesidades de revisión, reposición y continuidad operativa.' },
-  { id: 'capacitacion', cta: 'Capacitación de brigadas contra incendios', label: 'Capacitación', desc: 'Orientación para fortalecer la preparación de brigadas y equipos de trabajo.' },
+  { id: 'venta-y-asesoria-tecnica', cta: 'Asesoría en equipo contra incendios', label: 'Venta y asesoría técnica', desc: 'Acompañamiento para identificar la familia de equipo adecuada para cada necesidad.', image: img('home/hero-inspeccion-equipo-contra-incendio.avif'), imageAlt: 'Técnico revisando equipo contra incendio en una instalación' },
+  { id: 'instalacion-de-sistemas', cta: 'Instalación de sistemas contra incendios', label: 'Instalación de sistemas', desc: 'Soluciones para proyectos que requieren integrar equipos de protección contra incendio.', image: img('modulos/detectores-de-humo-en-plafon.avif'), imageAlt: 'Detectores de humo instalados en el plafón de un inmueble' },
+  { id: 'mantenimiento', cta: 'Mantenimiento de equipo contra incendios', label: 'Mantenimiento', desc: 'Atención a necesidades de revisión, reposición y continuidad operativa.', image: img('modulos/monitoreo-de-sistema-de-alarma.avif'), imageAlt: 'Monitoreo de un sistema de alarma contra incendio' },
+  { id: 'capacitacion', cta: 'Capacitación de brigadas contra incendios', label: 'Capacitación', desc: 'Orientación para fortalecer la preparación de brigadas y equipos de trabajo.', image: img('modulos/simulacro-de-evacuacion-brigada.avif'), imageAlt: 'Brigada durante un simulacro de evacuación' },
 ] as const;
 
 const sectors = [

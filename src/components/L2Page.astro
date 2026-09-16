@@ -1,0 +1,30 @@
+---
+import { getEntry, render } from 'astro:content';
+import Hero from '@components/Hero.astro';
+import PageSections from '@components/PageSections.astro';
+import SectionMenu from '@components/SectionMenu.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+
+interface Props {
+  slug: string;
+  list: { path: string; items: { name: string; path: string }[] };
+}
+
+const { slug, list } = Astro.props;
+const page = await getEntry('paginas', slug);
+if (!page) throw new Error(`No se encontró src/content/paginas/${slug}.md`);
+const { Content } = await render(page);
+const { title, seoTitle, description, noindex, breadcrumb, hero, menu, sections } = page.data;
+---
+<PageLayout
+  title={seoTitle}
+  description={description}
+  pageType="category"
+  noindex={noindex}
+  breadcrumbs={[{ label: breadcrumb }]}
+  schemaData={{ list: { name: title, description, path: list.path, items: list.items } }}
+>
+  <Hero badge={hero.badge} title={hero.title} accent={hero.accent} after={hero.after} descRight={hero.paragraphs} ctas={hero.ctas} />
+  <SectionMenu items={menu.items} cta={menu.cta} />
+  <PageSections sections={sections} Content={Content} />
+</PageLayout>

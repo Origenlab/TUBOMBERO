@@ -83,7 +83,7 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
     <div class="container">
       <SectionHeading eyebrow="Servicios" title="Asesoría, instalación y mantenimiento de sistemas contra incendios" desc="Cuatro líneas de servicio que acompañan cada etapa: elegir el equipo, instalarlo, mantenerlo en condiciones y preparar a las personas que lo utilizarán." layout="duo" body={["Comprar equipo contra incendio es solo una parte de la protección de una instalación: el equipo debe elegirse bien, instalarse correctamente, mantenerse en condiciones y ser utilizado por personas preparadas. Las líneas de servicio de Tu Bombero se organizan alrededor de ese ciclo completo.", "Asesoría técnica para seleccionar el equipo, instalación de sistemas contra incendio, mantenimiento para la continuidad operativa y capacitación para brigadas: cuatro frentes pensados para que cada inversión en seguridad se traduzca en una respuesta más ordenada ante una emergencia."]} />
       <a class="service-link" href="/servicios">Servicios de protección contra incendios</a>
-      <div class="grid-4 service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href="/servicios" ctaLabel={service.cta} />)}</div>
+      <div class="grid-4 service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href={`/servicios#${service.id}`} ctaLabel={service.cta} />)}</div>
     </div>
   </section>
 
