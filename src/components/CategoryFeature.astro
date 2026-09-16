@@ -4,13 +4,16 @@
 // Derecha: galería 3 imágenes (1 grande arriba + 2 pequeñas abajo).
 // Reutilizable para cada una de las 8 categorías del showcase.
 
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Brand {
   name: string
   note?: string
 }
 
 interface GalleryImage {
-  src: string
+  src: ImageMetadata
   alt: string
 }
 
@@ -116,37 +119,52 @@ const {
     <!-- Columna derecha: galería -->
     <div class="cf__gallery">
       <figure class="cf__img-wrap cf__img-wrap--main">
-        <img
+        <Picture
           src={imgMain.src}
+          formats={['avif', 'webp']}
+          fallbackFormat="avif"
+          widths={[480, 768, 1000]}
+          sizes="(min-width:1024px) 45vw, 100vw"
           alt={imgMain.alt}
-          width="800"
-          height="500"
-          loading="eager"
+          width={1000}
+          height={625}
+          loading="lazy"
           decoding="async"
           class="cf__img"
+          quality={50}
         />
       </figure>
       <div class="cf__img-row">
         <figure class="cf__img-wrap cf__img-wrap--sm">
-          <img
+          <Picture
             src={imgA.src}
+            formats={['avif', 'webp']}
+            fallbackFormat="avif"
+            widths={[320, 480, 640]}
+            sizes="(min-width:1024px) 22vw, 50vw"
             alt={imgA.alt}
-            width="400"
-            height="300"
+            width={640}
+            height={480}
             loading="lazy"
             decoding="async"
             class="cf__img"
+            quality={60}
           />
         </figure>
         <figure class="cf__img-wrap cf__img-wrap--sm">
-          <img
+          <Picture
             src={imgB.src}
+            formats={['avif', 'webp']}
+            fallbackFormat="avif"
+            widths={[320, 480, 640]}
+            sizes="(min-width:1024px) 22vw, 50vw"
             alt={imgB.alt}
-            width="400"
-            height="300"
+            width={640}
+            height={480}
             loading="lazy"
             decoding="async"
             class="cf__img"
+            quality={60}
           />
         </figure>
       </div>

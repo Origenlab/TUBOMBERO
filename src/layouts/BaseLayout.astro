@@ -26,7 +26,6 @@
 import { SITE } from "@config/site";
 import { buildMeta, buildSchema, buildKeywordTitle, buildKeywordDescription, type PageType, type SchemaData } from "@lib/seo";
 import { Font } from 'astro:assets';
-import { ClientRouter } from 'astro:transitions';
 
 // Tokens de diseño (FUENTE ÚNICA, C2). Se importa UNA sola vez aquí — todo el
 // sitio cuelga de BaseLayout, así que basta este import para exponer las
@@ -179,17 +178,6 @@ const jsonLd = buildSchema(pageType, schemaData);
       (preload de imagen LCP, RSS alternate, JSON-LD puntual). Patrón PROYECTORED.
     */}
     <slot name="head" />
-
-    {/*
-      ── View Transitions (ClientRouter) ──
-      Habilita navegación SPA con CSS View Transitions: el browser intercambia
-      el contenido de la página sin recarga completa (fade de 200ms por defecto).
-      El bundle del ClientRouter es ~4 KB. Combina bien con el prefetch hover
-      (ya habilitado en astro.config) — el prefetch pre-carga la página,
-      ClientRouter hace la transición sin parpadeo.
-      Ref: https://docs.astro.build/en/guides/view-transitions/
-    */}
-    <ClientRouter />
 
     {/* ── JSON-LD: un <script> por nodo del grafo, generado por buildSchema ──
        is:inline obligatorio: JSON-LD es DATA, no JS — saltar el bundler

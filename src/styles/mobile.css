@@ -44,8 +44,8 @@
   @media (max-width: 768px) {
     .container, .hdr-inner, .tb-inner, .hero__inner, .mega-panel__inner,
     .footer__grid, .footer__cert-inner, .footer__bottom-inner, .footer__cta-inner {
-      padding-left:  max(var(--container-px), env(safe-area-inset-left))  !important;
-      padding-right: max(var(--container-px), env(safe-area-inset-right)) !important;
+      padding-left:  max(var(--container-px), env(safe-area-inset-left));
+      padding-right: max(var(--container-px), env(safe-area-inset-right));
     }
   }
 }
@@ -54,25 +54,25 @@
    .section/.band usan --sp-8 directo; se compactan en pantallas chicas para un
    ritmo más mobile sin tocar el desktop. */
 @media (max-width: 480px) {
-  .section { padding-block: 2.5rem !important; }
-  .band    { padding-top: 1.5rem !important; }
+  .section { padding-block: 2.5rem; }
+  .band    { padding-top: 1.5rem; }
 }
 @media (max-width: 380px) {
-  .section { padding-block: 2.1rem !important; }
+  .section { padding-block: 2.1rem; }
 }
 
 /* ── 4) HERO · TIPOGRAFÍA FLUIDA + APILADO ──────────────────────────────────
    El título usaba --text-4xl FIJO (36px). Se vuelve fluido en % de viewport y
    se unifica el apilado/CTAs en los breakpoints canónicos. */
 @media (max-width: 768px) {
-  .hero__inner   { grid-template-columns: 1fr !important; gap: clamp(1.5rem, 5vw, 2.25rem) !important; }
-  .hero__title   { font-size: clamp(1.9rem, 7vw, 2.6rem) !important; }
-  .hero__subtitle, .hero__desc { font-size: clamp(1rem, 4vw, 1.0625rem) !important; }
-  .hero__right   { gap: var(--sp-4, 1rem) !important; }
+  .hero__inner   { grid-template-columns: 1fr; gap: clamp(1.5rem, 5vw, 2.25rem); }
+  .hero__title   { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+  .hero__subtitle, .hero__desc { font-size: clamp(1rem, 4vw, 1.0625rem); }
+  .hero__right   { gap: var(--sp-4, 1rem); }
 }
 @media (max-width: 480px) {
-  .hero__ctas { flex-direction: column !important; width: 100%; }
-  .hero__btn  { width: 100% !important; justify-content: center !important; min-height: 48px; }
+  .hero__ctas { flex-direction: column; width: 100%; }
+  .hero__btn  { width: 100%; justify-content: center; min-height: 48px; }
 }
 
 /* ── 5) ÁREAS TÁCTILES ≥44px (Apple HIG / WCAG) ─────────────────────────────
@@ -80,7 +80,7 @@
 @media (max-width: 1024px) {
   .mob-direct, .mob-item__trigger { min-height: 48px; }
   .mob-item__link, .mob-item__all {
-    min-height: 44px; display: flex !important; align-items: center;
+    min-height: 44px; display: flex; align-items: center;
   }
   .hdr-burger { width: 44px; height: 44px; }
   a, button, [role="button"], summary, label, .hdr-cta, .hero__btn, .cform__submit {
@@ -99,12 +99,12 @@
    16px en controles evita el zoom automático de Safari iOS. Se reduce el padding
    del bloque en pantallas chicas (2rem era apretado en 320px). */
 @media (max-width: 640px) {
-  .cform { padding: clamp(1.1rem, 5vw, 1.75rem) !important; }
+  .cform { padding: clamp(1.1rem, 5vw, 1.75rem); }
   .cform input, .cform textarea, .cform select {
-    font-size: 16px !important; min-height: 48px;
+    font-size: 16px; min-height: 48px;
   }
   .cform textarea { min-height: 120px; }
-  .cform__submit  { width: 100% !important; min-height: 50px; }
+  .cform__submit  { width: 100%; min-height: 50px; }
 }
 
 /* ── 7) FAB WHATSAPP · CÍRCULO LIMPIO + SAFE-AREA ───────────────────────────
@@ -112,11 +112,11 @@
    respetando el área segura inferior/derecha (notch / barra de gestos iOS). */
 @media (max-width: 640px) {
   .wa-float {
-    width: 52px; height: 52px; padding: 0 !important; justify-content: center;
-    bottom: max(1rem, env(safe-area-inset-bottom)) !important;
-    right:  max(1rem, env(safe-area-inset-right))  !important;
+    width: 52px; height: 52px; padding: 0; justify-content: center;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    right:  max(1rem, env(safe-area-inset-right));
   }
-  .wa-float__label { display: none !important; }
+  .wa-float__label { display: none; }
 }
 
 /* ── 8) FOOTER · CIERRE EN 1 COLUMNA ────────────────────────────────────────
@@ -131,8 +131,8 @@
    El alto del header lo baja tokens.css por breakpoint; aquí solo se asegura
    que el inner no apriete el logo contra el burger en pantallas muy chicas. */
 @media (max-width: 380px) {
-  .hdr-inner { gap: .75rem !important; }
-  .hdr-logo__word { font-size: 1.05rem !important; }
+  .hdr-inner { gap: .75rem; }
+  .hdr-logo__word { font-size: 1.05rem; }
 }
 
 /* ── 10) DRAWER MÓVIL ABIERTO · BLOQUEO DE FONDO ────────────────────────────
@@ -141,7 +141,7 @@
    el panel. El drawer trae su propio scroll interno (.mob-scroll) con
    overscroll-behavior:contain → no hay «doble scroll» ni saltos del fondo. */
 body.menu-open { overflow: hidden; }
-body.menu-open .wa-float { display: none !important; }
+body.menu-open .wa-float { display: none; }
 
 /* ── 11) GUARDA ANTI-DESBORDE · BLOQUES DE PATRÓN Y RECETAS DE CÓDIGO ────────
    Los bloques .pat (demos de patrón) y .receta (code blocks) viven en grids 1fr.

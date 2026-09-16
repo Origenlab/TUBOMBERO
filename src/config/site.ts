@@ -1,3 +1,6 @@
+import type { ImageMetadata } from 'astro';
+import { img } from '../lib/images';
+
 export const SITE = {
   name: 'Tu Bombero',
   brand: 'Tu Bombero',
@@ -73,7 +76,7 @@ const categories = [
     seoTitle: 'Extintores contra incendio: PQS, CO₂, espuma AFFF y agua',
     seoDescription: 'Extintores contra incendio de polvo químico seco (PQS), CO₂, espuma AFFF y agua, además de gabinetes y señalización para la respuesta inicial en tu empresa.',
     tag: 'Respuesta inicial',
-    image: '/images/categorias/extintores-y-equipo-de-emergencia.avif',
+    image: img('categorias/extintores-y-equipo-de-emergencia.avif'),
     imageAlt: 'Extintores y gabinete contra incendio en interior claro',
     imagePosition: undefined,
     subcategories: ['Extintores PQS', 'Extintores CO₂', 'Extintores de espuma AFFF', 'Extintores de agua'],
@@ -86,7 +89,7 @@ const categories = [
     seoTitle: 'Red contra incendios: mangueras, válvulas y conexiones',
     seoDescription: 'Componentes para la red contra incendios: mangueras, boquillas y chiflones, válvulas, conexiones y adaptadores para sistemas hidráulicos de protección.',
     tag: 'Infraestructura',
-    image: '/images/categorias/sistemas-contra-incendio-mangueras-hidrantes.avif',
+    image: img('categorias/sistemas-contra-incendio-mangueras-hidrantes.avif'),
     imageAlt: 'Técnico revisando un gabinete y red contra incendio',
     imagePosition: undefined,
     subcategories: ['Mangueras', 'Boquillas y chiflones', 'Válvulas', 'Conexiones y adaptadores'],
@@ -99,7 +102,7 @@ const categories = [
     seoTitle: 'Gabinetes contra incendio y estaciones de manguera',
     seoDescription: 'Gabinetes contra incendio para manguera y extintor, hidrantes y estaciones de manguera para tener el equipo listo y visible en cada nivel del inmueble.',
     tag: 'Almacenamiento',
-    image: '/images/categorias/gabinetes-e-hidrantes-contra-incendio.avif',
+    image: img('categorias/gabinetes-e-hidrantes-contra-incendio.avif'),
     imageAlt: 'Gabinetes e hidrantes contra incendio',
     imagePosition: undefined,
     subcategories: ['Gabinetes para manguera', 'Gabinetes para extintor', 'Hidrantes', 'Estaciones de manguera'],
@@ -112,7 +115,7 @@ const categories = [
     seoTitle: 'Sistemas de detección y alarma de incendios',
     seoDescription: 'Sistemas de detección y alarma de incendios: detectores de humo y de temperatura, paneles de control, sirenas y estrobos para alertar a tiempo al personal.',
     tag: 'Detección',
-    image: '/images/home/hero-inspeccion-equipo-contra-incendio.avif',
+    image: img('home/hero-inspeccion-equipo-contra-incendio.avif'),
     imageAlt: 'Equipos de seguridad contra incendio en un entorno limpio',
     imagePosition: 'right center',
     subcategories: ['Detectores de humo', 'Detectores de temperatura', 'Paneles de control', 'Sirenas y estrobos'],
@@ -125,7 +128,7 @@ const categories = [
     seoTitle: 'Equipo de protección personal para brigadas',
     seoDescription: 'Equipo de protección personal para brigadas y bomberos: cascos, trajes estructurales, guantes, botas y equipos de respiración para respuesta especializada.',
     tag: 'Protección personal',
-    image: '/images/categorias/equipo-de-proteccion-para-bomberos.avif',
+    image: img('categorias/equipo-de-proteccion-para-bomberos.avif'),
     imageAlt: 'Traje estructural de protección para bombero',
     imagePosition: undefined,
     subcategories: ['Trajes estructurales', 'Cascos', 'Guantes y botas', 'Equipos de respiración'],
@@ -138,7 +141,7 @@ const categories = [
     seoTitle: 'Herramientas para bomberos: hachas y barras Halligan',
     seoDescription: 'Herramientas para bomberos y brigadas: barras Halligan, hachas, ganchos, pértigas y herramientas de corte para entrada forzada y ventilación en emergencias.',
     tag: 'Entrada forzada',
-    image: '/images/categorias/herramientas-para-bomberos-hacha-halligan.avif',
+    image: img('categorias/herramientas-para-bomberos-hacha-halligan.avif'),
     imageAlt: 'Hacha y herramienta Halligan para bomberos',
     imagePosition: undefined,
     subcategories: ['Barras Halligan', 'Hachas', 'Ganchos y pértigas', 'Herramientas de corte'],
@@ -151,7 +154,7 @@ const categories = [
     seoTitle: 'Equipo de rescate y accesorios para brigadas',
     seoDescription: 'Equipo de rescate y accesorios para brigadas: cuerdas y arneses, camillas, botiquines y bolsas de equipo para apoyo operativo durante una emergencia.',
     tag: 'Operación',
-    image: '/images/home/epp-y-rescate.avif',
+    image: img('home/epp-y-rescate.avif'),
     imageAlt: 'Bolsa de rescate y equipo de protección personal',
     imagePosition: undefined,
     subcategories: ['Cuerdas y arneses', 'Camillas', 'Botiquines', 'Bolsas de equipo'],
@@ -164,7 +167,7 @@ const categories = [
     seoTitle: 'Señalamientos de protección civil y evacuación',
     seoDescription: 'Señalamientos de protección civil para rutas de evacuación, salidas de emergencia, puntos de reunión y ubicación de equipos, con señales fotoluminiscentes.',
     tag: 'Prevención',
-    image: '/images/home/extintores-y-emergencia.avif',
+    image: img('home/extintores-y-emergencia.avif'),
     imageAlt: 'Señalización de salida y equipo contra incendio',
     imagePosition: undefined,
     subcategories: ['Señales fotoluminiscentes', 'Rutas de evacuación', 'Puntos de reunión', 'Señalización de equipos'],
@@ -265,7 +268,7 @@ export interface CategoryFeatureData {
   titleAccent: string;
   description: string;
   points: readonly { label: string; desc: string }[];
-  images: readonly [{ src: string; alt: string }, { src: string; alt: string }, { src: string; alt: string }];
+  images: readonly [{ src: ImageMetadata; alt: string }, { src: ImageMetadata; alt: string }, { src: ImageMetadata; alt: string }];
 }
 
 export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
@@ -281,9 +284,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Extintores PQS', desc: 'Polvo químico seco para uso general en instalaciones.' },
     ],
     images: [
-      { src: '/images/categorias/extintores-pqs-co2-y-agua.avif', alt: 'Extintores de polvo químico seco, CO₂ y agua en un almacén' },
-      { src: '/images/categorias/extintor-espuma-afff.avif', alt: 'Extintor de espuma AFFF en una nave industrial' },
-      { src: '/images/categorias/extintor-polvo-quimico-seco-pqs.avif', alt: 'Extintor de polvo químico seco PQS montado en una columna' },
+      { src: img('categorias/extintores-pqs-co2-y-agua.avif'), alt: 'Extintores de polvo químico seco, CO₂ y agua en un almacén' },
+      { src: img('categorias/extintor-espuma-afff.avif'), alt: 'Extintor de espuma AFFF en una nave industrial' },
+      { src: img('categorias/extintor-polvo-quimico-seco-pqs.avif'), alt: 'Extintor de polvo químico seco PQS montado en una columna' },
     ],
   },
   {
@@ -298,9 +301,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Válvulas', desc: 'Apertura, seccionamiento y control del flujo de agua.' },
     ],
     images: [
-      { src: '/images/modulos/red-contra-incendios-manguera-hidrante.avif', alt: 'Bombero combatiendo un incendio con manguera conectada a un hidrante' },
-      { src: '/images/modulos/valvulas-y-conexiones-de-bronce.avif', alt: 'Válvulas y conexiones de bronce para red contra incendios en almacén' },
-      { src: '/images/modulos/boquillas-y-conexiones-contra-incendio.avif', alt: 'Boquillas y conexiones de bronce para sistemas contra incendio' },
+      { src: img('modulos/red-contra-incendios-manguera-hidrante.avif'), alt: 'Bombero combatiendo un incendio con manguera conectada a un hidrante' },
+      { src: img('modulos/valvulas-y-conexiones-de-bronce.avif'), alt: 'Válvulas y conexiones de bronce para red contra incendios en almacén' },
+      { src: img('modulos/boquillas-y-conexiones-contra-incendio.avif'), alt: 'Boquillas y conexiones de bronce para sistemas contra incendio' },
     ],
   },
   {
@@ -315,9 +318,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Hidrantes', desc: 'Toma de agua para el combate en interiores y exteriores.' },
     ],
     images: [
-      { src: '/images/modulos/hidrante-contra-incendio-exterior.avif', alt: 'Hidrante contra incendio rojo en la vía pública' },
-      { src: '/images/modulos/gabinete-contra-incendio-para-manguera.avif', alt: 'Gabinete contra incendio con carrete de manguera y puerta de vidrio' },
-      { src: '/images/modulos/estacion-de-manguera-contra-incendio.avif', alt: 'Estación de manguera contra incendio con gabinete y extintor' },
+      { src: img('modulos/hidrante-contra-incendio-exterior.avif'), alt: 'Hidrante contra incendio rojo en la vía pública' },
+      { src: img('modulos/gabinete-contra-incendio-para-manguera.avif'), alt: 'Gabinete contra incendio con carrete de manguera y puerta de vidrio' },
+      { src: img('modulos/estacion-de-manguera-contra-incendio.avif'), alt: 'Estación de manguera contra incendio con gabinete y extintor' },
     ],
   },
   {
@@ -332,9 +335,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Sirenas y estrobos', desc: 'Aviso audible y visual para la evacuación.' },
     ],
     images: [
-      { src: '/images/modulos/detectores-de-humo-en-plafon.avif', alt: 'Detectores de humo instalados en el plafón de una oficina' },
-      { src: '/images/modulos/monitoreo-de-sistema-de-alarma.avif', alt: 'Operadores supervisando un sistema de monitoreo y alarma' },
-      { src: '/images/home/hero-inspeccion-equipo-contra-incendio.avif', alt: 'Técnico revisando un gabinete y red contra incendio' },
+      { src: img('modulos/detectores-de-humo-en-plafon.avif'), alt: 'Detectores de humo instalados en el plafón de una oficina' },
+      { src: img('modulos/monitoreo-de-sistema-de-alarma.avif'), alt: 'Operadores supervisando un sistema de monitoreo y alarma' },
+      { src: img('home/hero-inspeccion-equipo-contra-incendio.avif'), alt: 'Técnico revisando un gabinete y red contra incendio' },
     ],
   },
   {
@@ -349,9 +352,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Trajes estructurales', desc: 'Barrera térmica para el combate de incendios.' },
     ],
     images: [
-      { src: '/images/modulos/equipo-de-proteccion-personal-bomberos.avif', alt: 'Vestidor con trajes estructurales y cascos de bomberos' },
-      { src: '/images/modulos/cascos-para-bomberos-y-brigadas.avif', alt: 'Cascos para bomberos y brigadas en exhibición' },
-      { src: '/images/modulos/botas-para-bomberos-y-brigadas.avif', alt: 'Botas para bomberos de cuero, caucho y aproximación' },
+      { src: img('modulos/equipo-de-proteccion-personal-bomberos.avif'), alt: 'Vestidor con trajes estructurales y cascos de bomberos' },
+      { src: img('modulos/cascos-para-bomberos-y-brigadas.avif'), alt: 'Cascos para bomberos y brigadas en exhibición' },
+      { src: img('modulos/botas-para-bomberos-y-brigadas.avif'), alt: 'Botas para bomberos de cuero, caucho y aproximación' },
     ],
   },
   {
@@ -366,9 +369,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Herramientas de corte', desc: 'Liberación en rescate vehicular y estructural.' },
     ],
     images: [
-      { src: '/images/modulos/herramientas-de-corte-rescate-vehicular.avif', alt: 'Bomberos usando herramientas de corte en un rescate vehicular' },
-      { src: '/images/modulos/barra-halligan-para-bomberos.avif', alt: 'Barra Halligan para entrada forzada' },
-      { src: '/images/categorias/herramientas-para-bomberos-hacha-halligan.avif', alt: 'Hacha y barra de bombero sobre concreto' },
+      { src: img('modulos/herramientas-de-corte-rescate-vehicular.avif'), alt: 'Bomberos usando herramientas de corte en un rescate vehicular' },
+      { src: img('modulos/barra-halligan-para-bomberos.avif'), alt: 'Barra Halligan para entrada forzada' },
+      { src: img('categorias/herramientas-para-bomberos-hacha-halligan.avif'), alt: 'Hacha y barra de bombero sobre concreto' },
     ],
   },
   {
@@ -383,9 +386,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Cuerdas y arneses', desc: 'Trabajo y rescate en altura.' },
     ],
     images: [
-      { src: '/images/modulos/rescate-en-altura-con-camilla.avif', alt: 'Rescatistas descendiendo con camilla por la fachada de un edificio' },
-      { src: '/images/modulos/rescate-en-estructura-colapsada.avif', alt: 'Brigada de rescate trabajando en una estructura colapsada' },
-      { src: '/images/modulos/rescate-en-espacio-confinado.avif', alt: 'Rescate en espacio confinado dentro de una planta industrial' },
+      { src: img('modulos/rescate-en-altura-con-camilla.avif'), alt: 'Rescatistas descendiendo con camilla por la fachada de un edificio' },
+      { src: img('modulos/rescate-en-estructura-colapsada.avif'), alt: 'Brigada de rescate trabajando en una estructura colapsada' },
+      { src: img('modulos/rescate-en-espacio-confinado.avif'), alt: 'Rescate en espacio confinado dentro de una planta industrial' },
     ],
   },
   {
@@ -400,9 +403,9 @@ export const CATEGORY_FEATURES: readonly CategoryFeatureData[] = [
       { label: 'Señalización de equipos', desc: 'Ubicación de extintores, hidrantes y alarmas.' },
     ],
     images: [
-      { src: '/images/modulos/simulacro-de-evacuacion-brigada.avif', alt: 'Brigada revisando extintores y rutas durante un simulacro' },
-      { src: '/images/modulos/instalacion-de-senalamientos-de-emergencia.avif', alt: 'Instalación de señal de salida de emergencia junto a una alarma' },
-      { src: '/images/home/extintores-y-emergencia.avif', alt: 'Señal de salida y gabinete con extintores' },
+      { src: img('modulos/simulacro-de-evacuacion-brigada.avif'), alt: 'Brigada revisando extintores y rutas durante un simulacro' },
+      { src: img('modulos/instalacion-de-senalamientos-de-emergencia.avif'), alt: 'Instalación de señal de salida de emergencia junto a una alarma' },
+      { src: img('home/extintores-y-emergencia.avif'), alt: 'Señal de salida y gabinete con extintores' },
     ],
   },
 ];

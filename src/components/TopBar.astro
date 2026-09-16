@@ -170,39 +170,6 @@ const PUNTOS = [
     font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: .6875rem;
   }
 
-  /* ── Leyenda guía ─────────────────────────────────────────────────────────── */
-  .tbg { background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
-  .tbg-inner { max-width: var(--container-max); margin-inline: auto; padding: var(--sp-4) var(--container-px) var(--sp-5); }
-  .tbg__tag {
-    display: inline-flex; align-items: center; gap: var(--sp-1); margin: 0 0 var(--sp-2);
-    font-family: var(--font-heading); font-size: var(--text-xs); font-weight: var(--weight-bold);
-    letter-spacing: .08em; text-transform: uppercase; color: var(--c-primary);
-  }
-  .tbg__intro { margin: 0 0 var(--sp-4); font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--c-ink-2); max-width: 70ch; }
-  .tbg__intro code, .tbg__dato code, .tbg__edit code {
-    font-family: ui-monospace, 'SFMono-Regular', 'Menlo', monospace; font-size: .85em;
-    background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-sm);
-    padding: .05em .4em; color: var(--c-primary-dark);
-  }
-  .tbg__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); grid-template-columns: 1fr; }
-  .tbg__pt {
-    display: flex; gap: var(--sp-3); align-items: start;
-    background: var(--c-white); border: 1px solid var(--c-border);
-    border-radius: var(--radius-md); padding: var(--sp-3) var(--sp-4);
-  }
-  .tbg__num {
-    flex-shrink: 0; display: inline-grid; place-items: center;
-    width: 24px; height: 24px; border-radius: var(--radius-full);
-    background: var(--c-primary); color: var(--c-white);
-    font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: var(--text-sm);
-  }
-  .tbg__pt-body { display: grid; gap: 2px; min-width: 0; }
-  .tbg__nombre { margin: 0; font-family: var(--font-heading); font-weight: var(--weight-semibold); color: var(--c-ink); font-size: var(--text-base); }
-  .tbg__que { margin: 0; font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--c-ink-2); }
-  .tbg__dato { margin: 4px 0 0; font-size: var(--text-xs); color: var(--c-muted); display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
-  .tbg__dato span, .tbg__edit span { text-transform: uppercase; letter-spacing: .06em; font-weight: var(--weight-semibold); color: var(--c-muted); }
-  .tbg__edit { margin: var(--sp-4) 0 0; display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; font-size: var(--text-xs); color: var(--c-muted); }
-
   /* ── Responsive de la barra ───────────────────────────────────────────────────
      Tablet: se esconde la propuesta para dar aire al contacto.
      Móvil (≤640): el contacto se reparte en DOS acciones de igual peso —llamar y
@@ -223,7 +190,4 @@ const PUNTOS = [
     .tb-wa:hover, .tb-phone:hover { background: rgba(255, 255, 255, .12); }
   }
 
-  /* Leyenda guía: 1 col (móvil) → 2 col (tablet) → fila de 4 cards (desktop). */
-  @media (min-width: 600px)  { .tbg__list { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1000px) { .tbg__list { grid-template-columns: repeat(4, 1fr); } }
 </style>
