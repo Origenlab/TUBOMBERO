@@ -1,9 +1,9 @@
 ---
-interface Props { labelId: string }
-const { labelId } = Astro.props
+interface Props { labelId?: string; ariaLabel?: string }
+const { labelId, ariaLabel } = Astro.props
 ---
 
-<div class="prose-table" role="region" aria-labelledby={labelId} tabindex="0">
+<div class="prose-table" role="region" aria-label={ariaLabel} aria-labelledby={ariaLabel ? undefined : labelId} tabindex="0">
   <slot />
 </div>
 

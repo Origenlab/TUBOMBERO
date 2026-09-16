@@ -1,5 +1,6 @@
 ---
 import CategoryCard from '@components/CategoryCard.astro'
+import ArticleCard from '@components/ArticleCard.astro'
 import FAQWithContact from '@components/FAQWithContact.astro'
 import ProseTable from '@components/ProseTable.astro'
 import SectionHeading from '@components/SectionHeading.astro'
@@ -8,6 +9,8 @@ import ServiceCard from '@components/ServiceCard.astro'
 import SectorCard from '@components/SectorCard.astro'
 import SectorDetails from '@components/SectorDetails.astro'
 import { CATEGORIES, SERVICES, SECTORS } from '@config/site'
+import { getGuides } from '@lib/guides'
+import { img } from '@lib/images'
 
 interface SectionBase { type: string; id: string; eyebrow: string; title: string; accent?: string; desc: string; body: string[] }
 interface CategorySection extends SectionBase { type: 'categories' }
@@ -16,12 +19,14 @@ interface SectorsSection extends SectionBase { type: 'sectors' }
 interface SectorDetailsSection extends SectionBase { type: 'sectorDetails'; items: { slug: string; summary: string; points: string[]; links: { label: string; href: string }[] }[] }
 interface StageSection extends SectionBase { type: 'stages'; items: { num: string; title: string; desc: string; links: { label: string; href: string }[] }[] }
 interface ProseSection extends SectionBase { type: 'prose' }
+interface GuidesSection extends SectionBase { type: 'guides' }
 interface Help { eyebrow: string; title: string; text: string; links: { label: string; href: string; variant?: 'primary' | 'outline' }[] }
 interface FaqSection extends SectionBase { type: 'faq'; items: { question: string; answer: string }[]; help?: Help }
-type PageSection = CategorySection | ServicesSection | SectorsSection | SectorDetailsSection | StageSection | ProseSection | FaqSection
+type PageSection = CategorySection | ServicesSection | SectorsSection | SectorDetailsSection | StageSection | ProseSection | GuidesSection | FaqSection
 interface Props { sections: PageSection[]; Content: any }
 
 const { sections, Content } = Astro.props
+const guides = await getGuides()
 ---
 
 {sections.map((section, index) => section.type === 'faq' ? (
@@ -85,6 +90,11 @@ const { sections, Content } = Astro.props
       {section.type === 'stages' && <StageGrid items={section.items} />}
       {section.type === 'prose' && (
         <ProseTable labelId={`${section.id}-heading`}><Content /></ProseTable>
+      )}
+      {section.type === 'guides' && (
+        <div class="grid-4">
+          {guides.map((guide, guideIndex) => guide && <ArticleCard title={guide.data.title} excerpt={guide.data.excerpt} href={`/guias/${guide.id}`} cta={`Guía de ${guide.data.keyword}`} num={`0${guideIndex + 1}`} image={guide.data.image ? img(guide.data.image) : undefined} imageAlt={guide.data.imageAlt} />)}
+        </div>
       )}
     </div>
   </section>

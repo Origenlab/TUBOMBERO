@@ -1,5 +1,6 @@
 ---
 import CategoryCard from '@components/CategoryCard.astro';
+import ArticleCard from '@components/ArticleCard.astro';
 import CategoryFeature from '@components/CategoryFeature.astro';
 import FAQWithContact from '@components/FAQWithContact.astro';
 import Hero from '@components/Hero.astro';
@@ -10,6 +11,8 @@ import ServiceCard from '@components/ServiceCard.astro';
 import SectorCard from '@components/SectorCard.astro';
 import PageLayout from '@layouts/PageLayout.astro';
 import { CATEGORIES, CATEGORY_FEATURES, PROCESS, SERVICES, SECTORS } from '@config/site';
+import { getGuides } from '@lib/guides';
+import { img } from '@lib/images';
 
 const menuItems = [
   { label: 'Catálogo', href: '#catalogo', sub: 'Catálogo por necesidad' },
@@ -18,6 +21,7 @@ const menuItems = [
   { label: 'Guías', href: '#guias', sub: 'Guías técnicas' },
 ];
 const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, title, desc }));
+const guides = await getGuides();
 ---
 
 <PageLayout title="Protección contra incendios: equipo y sistemas en México" description="Equipo y sistemas de protección contra incendios para empresas: extintores, alarmas, detectores de humo, hidrantes, señalización y equipo para brigadas." pageType="home">
@@ -91,9 +95,10 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   <section id="guias" class="section section--surface">
     <div class="container">
       <SectionHeading eyebrow="Guías técnicas" title="Guías sobre protección contra incendios" desc="Artículos prácticos, revisados antes de publicarse, para resolver dudas frecuentes sobre equipo, normativa y cotización." layout="duo" body={["Una buena cotización empieza con buenas preguntas. Las guías técnicas de Tu Bombero explican de forma práctica cómo identificar una familia de equipo, qué información reunir antes de solicitar precios y cómo elegir el tipo de extintor según el riesgo de cada área.", "Son recursos pensados para responsables de compras, seguridad industrial y Protección Civil que necesitan tomar decisiones informadas sobre equipo contra incendio, con contenido revisado antes de su publicación y enfocado en resolver dudas reales de la operación diaria."]} />
-      <div class="grid-4 guide-grid">
-        {[['Cómo identificar una familia de equipo contra incendio', 'Guía de equipo contra incendio'], ['Qué información preparar antes de solicitar una cotización', 'Cotización de equipo contra incendios'], ['Cómo organizar la consulta de una necesidad de protección', 'Consulta de protección contra incendios'], ['Cómo elegir el tipo de extintor según el riesgo de tu instalación', 'Guía para elegir extintor']].map(([title, cta], index) => <article><span>0{index + 1}</span><h3>{title}</h3><a href="/contacto">{cta} <b aria-hidden="true">→</b></a></article>)}
+      <div class="grid-4">
+        {guides.map((guide, index) => guide && <ArticleCard title={guide.data.title} excerpt={guide.data.excerpt} href={`/guias/${guide.id}`} cta={`Guía de ${guide.data.keyword}`} num={`0${index + 1}`} image={guide.data.image ? img(guide.data.image) : undefined} imageAlt={guide.data.imageAlt} />)}
       </div>
+      <a class="service-link" href="/guias">Guías de protección contra incendios</a>
     </div>
   </section>
 
@@ -124,11 +129,6 @@ const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, tit
   .sectors { border-block: var(--border); }
   .sectors__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); }
   .sector-grid { margin-top: 0; }
-  .guide-grid { gap: var(--sp-5); }
-  .guide-grid article { display: flex; flex-direction: column; min-height: 14rem; padding: var(--sp-5); border: var(--border); border-radius: var(--radius-lg); background: var(--c-white); box-shadow: var(--shadow-sm); }
-  .guide-grid span { color: var(--c-primary); font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: var(--weight-bold); }
-  .guide-grid h3 { margin: var(--sp-5) 0 auto; font-family: var(--font-heading); font-size: var(--text-lg); line-height: var(--leading-snug); }
-   .guide-grid a { color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
    .service-link { display: inline-flex; margin: 0 0 var(--sp-5); color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
   @media (max-width: 900px) { .sectors__grid { grid-template-columns: 1fr; } }
 </style>

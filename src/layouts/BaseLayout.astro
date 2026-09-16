@@ -78,7 +78,7 @@ const {
 const path = canonical ?? Astro.url.pathname;
 
 // og:type: 'article' solo en artículos; el resto 'website'.
-const ogType = pageType === "article" ? "article" : "website";
+const ogType = pageType === "article" || pageType === "techArticle" ? "article" : "website";
 
 // Regla de metas keyword-first: si la página declara `keywords`, el title se
 // genera con la tripleta (kw1 | kw2 | kw3, sin marca) y la description se obliga
@@ -97,8 +97,8 @@ const meta = buildMeta({
   image,
   type: ogType,
   noindex,
-  publishedTime: (schemaData as any)?.article?.datePublished,
-  modifiedTime: (schemaData as any)?.article?.dateModified,
+  publishedTime: (schemaData as any)?.article?.datePublished ?? (schemaData as any)?.techArticle?.datePublished,
+  modifiedTime: (schemaData as any)?.article?.dateModified ?? (schemaData as any)?.techArticle?.dateModified,
 });
 
 // JSON-LD por tipo de página (firma posicional: pageType, schemaData).

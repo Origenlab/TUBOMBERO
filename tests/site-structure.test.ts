@@ -1,12 +1,35 @@
 import { readFileSync } from 'node:fs';
+import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { CONTACT, KEYWORDS, NAV, SITE, TAXONOMY } from '../src/config/site';
+import { GUIDE_ORDER } from '../src/lib/guides';
 
 const root = resolve(import.meta.dirname, '..');
 const read = (file: string) => readFileSync(resolve(root, file), 'utf8');
+const guideSlugs = readdirSync(resolve(root, 'src/content/guias'))
+  .filter((file) => file.endsWith('.md'))
+  .map((file) => file.replace(/\.md$/, ''))
+  .sort();
 
 describe('contrato de homologación TUBOMBERO', () => {
+  it('mantiene GUIDE_ORDER igual a los slugs de la colección', () => {
+    expect([...GUIDE_ORDER].sort()).toEqual(guideSlugs);
+  });
+
+  it('mantiene relaciones válidas entre guías', () => {
+    for (const slug of guideSlugs) {
+      const source = read(`src/content/guias/${slug}.md`);
+      const related = source.match(/(?<=\n)related: \[([^\]]+)\]/)?.[1]
+        ?.split(',')
+        .map((item) => item.trim().replace(/^['"]|['"]$/g, '')) ?? [];
+      expect(related.length).toBeGreaterThanOrEqual(1);
+      expect(new Set(related).size).toBe(related.length);
+      expect(related).not.toContain(slug);
+      expect(related.every((item) => guideSlugs.includes(item))).toBe(true);
+    }
+  });
+
   it('expone el SSoT de identidad, contacto, taxonomía y navegación', () => {
     expect(SITE.name).toBe('Tu Bombero');
     expect(SITE.business).toBeUndefined();

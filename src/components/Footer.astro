@@ -14,6 +14,7 @@ import {
   SITE, CONTACT, BRANCHES, PRODUCT_CATEGORIES, SERVICES, SECTORS,
   COVERAGE_STATES, SOCIAL, LEGAL, waUrl, telUrl, WA_MESSAGES,
 } from '@config/site'
+import { getGuides } from '@lib/guides'
 
 interface Cert { label: string; title?: string }
 interface Branch { label: string; address: string; mapsUrl?: string }
@@ -34,6 +35,7 @@ const {
 } = Astro.props
 
 const currentYear = new Date().getFullYear()
+const guides = await getGuides()
 const waDefault = waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default)
 const telLink = telUrl()
 const schedule = CONTACT.schedule as { weekdays?: string; saturday?: string; sunday?: string } | undefined
@@ -167,6 +169,15 @@ const SOCIAL_ICONS: Record<string, string> = {
             </ul>
           </>
         )}
+      </nav>
+
+      <!-- Guías -->
+      <nav class="footer__col" aria-label="Guías">
+        <h3 class="footer__col-heading"><span class="footer__col-heading-accent" aria-hidden="true"></span>Guías</h3>
+        <ul class="footer__nav-list" role="list">
+          {guides.map((guide) => guide && <li><a href={`/guias/${guide.id}`} class="footer__nav-link">{guide.data.keyword.charAt(0).toLocaleUpperCase('es-MX') + guide.data.keyword.slice(1)}</a></li>)}
+          <li><a href="/guias" class="footer__nav-link footer__nav-link--all">Todas las guías de protección</a></li>
+        </ul>
       </nav>
 
       <!-- Cobertura -->

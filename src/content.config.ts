@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { CATEGORIES } from '@config/site';
 
 const productos = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/productos' }),
@@ -63,13 +64,37 @@ const casos = defineCollection({
   }).strict(),
 });
 
+const guideCategorySlugs = CATEGORIES.map((category) => category.slug) as [string, ...string[]];
+
+const guias = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/guias' }),
+  schema: z.object({
+    title: z.string(),
+    seoTitle: z.string().max(60),
+    description: z.string().min(140).max(160),
+    keyword: z.string(),
+    secondary: z.array(z.string()),
+    updated: z.coerce.date(),
+    excerpt: z.string(),
+    related: z.array(z.string()).min(1).max(3),
+    faq: z.array(z.object({ question: z.string(), answer: z.string() }).strict()).min(3),
+    noindex: z.boolean().default(false),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    category: z.enum(guideCategorySlugs).optional(),
+  }).strict().refine((data) => !data.image || Boolean(data.imageAlt), {
+    message: 'imageAlt es obligatorio cuando una guía tiene image',
+    path: ['imageAlt'],
+  }),
+});
+
 const l2SectionBase = {
   id: z.string(),
   eyebrow: z.string(),
   title: z.string(),
   accent: z.string().optional(),
   desc: z.string(),
-  body: z.array(z.string()).length(2),
+  body: z.array(z.string()).min(2).max(3),
 };
 
 const l2MenuItem = z.preprocess((value) => {
@@ -156,6 +181,7 @@ const paginas = defineCollection({
         }).strict()),
       }).strict(),
       z.object({ type: z.literal('prose'), ...l2SectionBase }).strict(),
+      z.object({ type: z.literal('guides'), ...l2SectionBase }).strict(),
       z.object({
         type: z.literal('faq'),
         ...l2SectionBase,
@@ -175,4 +201,4 @@ const paginas = defineCollection({
   }).strict(),
 });
 
-export const collections = { productos, servicios, articulos, zonas, casos, paginas };
+export const collections = { productos, servicios, articulos, zonas, casos, guias, paginas };

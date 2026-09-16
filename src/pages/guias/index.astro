@@ -1,0 +1,7 @@
+---
+import L2Page from '@components/L2Page.astro';
+import { getGuides } from '@lib/guides';
+
+const guides = await getGuides();
+---
+<L2Page slug="guias" list={{ path: '/guias', items: guides.flatMap((guide) => guide ? [{ name: guide.data.title, path: `/guias/${guide.id}` }] : []) }} />

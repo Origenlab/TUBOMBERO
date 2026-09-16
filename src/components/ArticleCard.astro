@@ -1,0 +1,44 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from '@components/Icon.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  excerpt: string;
+  href: string;
+  cta: string;
+  num?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+
+const { title, excerpt, href, cta, num, image, imageAlt } = Astro.props;
+---
+
+<article class="acard">
+  {image && <a class="acard__media-link" href={href} tabindex="-1" aria-hidden="true"><Picture src={image} alt={imageAlt ?? title} width={800} height={450} widths={[400, 800]} sizes="(min-width:1100px) 25vw, (min-width:640px) 50vw, 100vw" formats={['avif', 'webp']} fallbackFormat="avif" loading="lazy" decoding="async" class="acard__img" /></a>}
+  <div class="acard__body">
+    {!image && num && <span class="acard__num" aria-hidden="true">{num}</span>}
+    <h3 class="acard__title"><a href={href}>{title}</a></h3>
+    <p class="acard__excerpt">{excerpt}</p>
+    <a class="acard__cta" href={href}>{cta}<Icon name="arrow-right" size={14} /></a>
+  </div>
+</article>
+
+<style>
+  .acard { position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform var(--transition), box-shadow var(--transition); }
+  .acard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .acard__media-link { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--c-surface); }
+  .acard__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .acard__body { display: flex; flex-direction: column; flex: 1; gap: var(--sp-3); padding: var(--sp-5); }
+  .acard__num { color: var(--c-primary); font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: var(--weight-bold); line-height: 1; }
+  .acard__title { margin: 0; font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); line-height: var(--leading-snug); }
+  .acard__title a { color: var(--c-ink); text-decoration: none; }
+  .acard__title a::after { position: absolute; inset: 0; content: ''; }
+  .acard__excerpt { margin: 0; color: var(--c-ink-2); font-size: var(--text-sm); line-height: var(--leading-normal); }
+  .acard__cta { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: var(--sp-2); margin-top: auto; color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
+  .acard__cta:hover { gap: var(--sp-3); }
+  .acard__cta svg { flex: 0 0 auto; }
+  @media (prefers-reduced-motion: reduce) { .acard { transition: none; } }
+</style>
