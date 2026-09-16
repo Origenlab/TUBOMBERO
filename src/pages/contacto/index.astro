@@ -1,14 +1,4 @@
 ---
-import PageLayout from '@layouts/PageLayout.astro';
-import { SITE } from '@config/site';
+import L2Page from '@components/L2Page.astro';
 ---
-<PageLayout title="Contacto y cotización de equipo contra incendios" description="Solicita información sobre equipo y sistemas de protección contra incendios. Los canales de atención de Tu Bombero se publicarán en cuanto estén confirmados." breadcrumbs={[{ label: 'Contacto' }]}>
-  <section class="contact-page"><div class="container"><p class="eyebrow">Contacto</p><h1>Canales de atención en configuración</h1><p>Tu Bombero aún no publica teléfono, WhatsApp, correo, dirección ni horario. Esta página se mantendrá honesta hasta contar con datos comerciales confirmados.</p><div class="notice"><strong>{SITE.contactStatus}</strong><span>Cuando los canales estén listos, aquí podrás solicitar información y cotizar sin enlaces provisionales.</span></div></div></section>
-</PageLayout>
-<style>
-  .contact-page { padding-block: clamp(5rem, 11vw, 9rem); background: var(--c-surface); }
-  .contact-page h1 { max-width: 14ch; margin: 0; font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 5rem); line-height: var(--leading-tight); }
-  .contact-page > .container > p:not(.eyebrow) { max-width: 58ch; color: var(--c-ink-2); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
-  .notice { display: grid; gap: var(--sp-2); max-width: 38rem; margin-top: var(--sp-8); padding: var(--sp-5); border-left: .25rem solid var(--c-primary); border-radius: var(--radius-md); background: var(--c-white); box-shadow: var(--shadow-sm); }
-  .notice span { color: var(--c-ink-2); }
-</style>
+<L2Page slug="contacto" />
