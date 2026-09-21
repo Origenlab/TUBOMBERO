@@ -1,50 +1,54 @@
 ---
-import { Picture } from 'astro:assets';
 import type { DirectoryState } from '@config/site';
-import { img } from '@lib/images';
 
 interface Props {
   states: readonly DirectoryState[];
 }
 
 const { states } = Astro.props;
-const visuals = [
-  { image: img('directorio/atlas-papel-rojo.avif'), alt: 'Composición editorial abstracta de papel rojo con líneas de relieve', position: '50% 54%' },
-  { image: img('directorio/atlas-grafito-rojo.avif'), alt: 'Composición editorial abstracta de papel grafito y retícula roja', position: '42% 50%' },
-  { image: img('directorio/atlas-textil-rojo.avif'), alt: 'Composición editorial abstracta de textil técnico y una cinta roja', position: '58% 48%' },
-  { image: img('directorio/atlas-papel-rojo.avif'), alt: 'Composición editorial abstracta de papel rojo con líneas de relieve', position: '72% 52%' },
-  { image: img('directorio/atlas-grafito-rojo.avif'), alt: 'Composición editorial abstracta de papel grafito y retícula roja', position: '63% 42%' },
-  { image: img('directorio/atlas-textil-rojo.avif'), alt: 'Composición editorial abstracta de textil técnico y una cinta roja', position: '34% 50%' },
+
+const directoryPhotos = [
+  { id: '1600624697183-00566baf12e6', sourceUrl: 'https://unsplash.com/es/fotos/camion-de-bomberos-rojo-y-blanco-estacionado-cerca-del-edificio-durante-el-dia-LM3ISKU4Dk8', alt: 'Camión de bomberos rojo y blanco estacionado junto a un edificio', position: 'center' },
+  { id: '1576707995936-a6cffe26ef7b', sourceUrl: 'https://unsplash.com/es/fotos/bomberos-rociando-agua-sobre-el-fuego-newCTAG6kPE', alt: 'Bomberos con equipo de protección usando una manguera durante una intervención', position: 'center' },
+  { id: '1660323671848-928629deddca', sourceUrl: 'https://unsplash.com/es/fotos/un-camion-de-bomberos-en-la-calle-egergv8fSG8', alt: 'Camión de bomberos rojo en una calle', position: 'center' },
+  { id: '1575867094974-9e16b6f55360', sourceUrl: 'https://unsplash.com/es/fotos/bomberos-cerca-del-incendio-j6oWhh7l4Ig', alt: 'Bomberos con equipo de protección cerca de una zona de incendio', position: 'center' },
+  { id: '1610586618549-a05378824c91', sourceUrl: 'https://unsplash.com/es/fotos/camion-de-bomberos-rojo-y-blanco-en-la-carretera-durante-la-noche-FmycYDIbzFs', alt: 'Camión de bomberos rojo y blanco durante una operación nocturna', position: 'center' },
+  { id: '1636248552051-d13fe1330f51', sourceUrl: 'https://unsplash.com/es/fotos/un-camion-de-bomberos-conduciendo-por-una-calle-junto-a-edificios-altos-O9A_0qmav50', alt: 'Camión de bomberos circulando entre edificios', position: 'center' },
+  { id: '1552244935-439697eea0bd', sourceUrl: 'https://unsplash.com/es/fotos/camion-de-bomberos-rojo-5yGxeS9IWJ8', alt: 'Detalle de un camión de bomberos rojo', position: 'center' },
+  { id: '1622783089891-ddf18baab338', sourceUrl: 'https://unsplash.com/es/fotos/un-camion-de-bomberos-rojo-estacionado-al-costado-de-la-carretera-Y2ZJ5XqRB1s', alt: 'Camión de bomberos rojo estacionado al costado de una carretera', position: 'center' },
 ] as const;
+
+const unsplashUrl = (id: string, width: number) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${width}&q=82`;
+const unsplashSrcset = (id: string) => [480, 720, 960, 1400].map((width) => `${unsplashUrl(id, width)} ${width}w`).join(', ');
 ---
 
-<div class="state-directory-grid" aria-label="Entidades federativas de México">
+<div class="state-directory-grid" aria-label="Directorio de estaciones de bomberos por entidad federativa">
   {states.map((state, index) => {
-    const visual = visuals[index % visuals.length];
+    const photo = directoryPhotos[index % directoryPhotos.length];
     return (
       <article id={`estado-${state.slug}`} class="state-directory-card">
         <div class="state-directory-card__media">
-          <Picture
-            src={visual.image}
-            formats={['avif', 'webp']}
-            fallbackFormat="avif"
-            widths={[400, 800]}
-            sizes="(min-width: 1100px) 32vw, (min-width: 720px) 50vw, 100vw"
-            alt={visual.alt}
-            width={800}
-            height={500}
-            loading={index < 3 ? 'eager' : 'lazy'}
+          <img
+            src={unsplashUrl(photo.id, 1400)}
+            srcset={unsplashSrcset(photo.id)}
+            sizes="(min-width: 1180px) 27vw, (min-width: 720px) 50vw, 100vw"
+            alt={photo.alt}
+            width="1400"
+            height="960"
+            loading={index < 2 ? 'eager' : 'lazy'}
             fetchpriority={index === 0 ? 'high' : undefined}
             decoding="async"
             class="state-directory-card__image"
-            style={`object-position: ${visual.position}`}
-            quality={65}
+            style={`object-position: ${photo.position}`}
           />
         </div>
         <div class="state-directory-card__body">
-          <h3 class="state-directory-card__title">{state.label}</h3>
-          <p class="state-directory-card__status">Esta ficha integrará fuentes institucionales verificables.</p>
-          <button class="state-directory-card__cta" type="button" disabled>Directorio estatal en preparación</button>
+          <p class="state-directory-card__eyebrow">Directorio de bomberos</p>
+          <h3 class="state-directory-card__title">Estaciones de bomberos en {state.label}</h3>
+          <p class="state-directory-card__description">
+            El directorio de estaciones de bomberos en {state.label} se publicará con registros institucionales verificables. Será un punto de consulta para localizar cuerpos de bomberos y canales de atención de emergencia cuando cada ficha esté confirmada.
+          </p>
+          <a class="state-directory-card__cta" href="/contacto" aria-label={`Solicitar información de bomberos en ${state.label}`}>Solicitar información de bomberos</a>
         </div>
       </article>
     );
@@ -52,32 +56,33 @@ const visuals = [
 </div>
 
 <style>
-  .state-directory-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
-  .state-directory-card { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid var(--c-border); border-radius: var(--radius-lg); background: var(--c-white); }
-  .state-directory-card__media { aspect-ratio: 8 / 5; overflow: hidden; background: var(--c-surface); }
-  .state-directory-card__image { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s cubic-bezier(.16, 1, .3, 1); }
-  .state-directory-card__body { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: var(--sp-3); padding: var(--sp-5); }
-  .state-directory-card__title { margin: 0; color: var(--c-ink); font-family: var(--font-heading); font-size: clamp(1.25rem, 1.8vw, 1.7rem); font-weight: var(--weight-bold); letter-spacing: -.025em; line-height: var(--leading-snug); }
-  .state-directory-card__status { margin: 0; color: var(--c-muted); font-size: var(--text-sm); line-height: var(--leading-normal); }
-  .state-directory-card__cta { width: 100%; margin-top: auto; padding: .72rem 1rem; border: 1px solid var(--c-border); border-radius: var(--radius-sm); background: var(--c-surface); color: var(--c-muted); font-family: var(--font-heading); font-size: var(--text-sm); font-weight: var(--weight-semibold); line-height: 1.2; text-align: left; }
-  .state-directory-card__cta:disabled { cursor: not-allowed; opacity: 1; }
+  .state-directory-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+  .state-directory-card { display: grid; min-width: 0; overflow: hidden; border: 1px solid var(--c-border); border-radius: var(--radius-lg); background: var(--c-white); }
+  .state-directory-card__media { min-height: 14.5rem; overflow: hidden; background: var(--c-ink); }
+  .state-directory-card__image { display: block; width: 100%; height: 100%; min-height: inherit; object-fit: cover; filter: saturate(.82) contrast(1.05); transition: transform .65s cubic-bezier(.16, 1, .3, 1), filter .35s ease; }
+  .state-directory-card__body { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; padding: clamp(1.5rem, 3vw, 2.5rem); }
+  .state-directory-card__eyebrow { margin: 0 0 var(--sp-3); color: var(--c-primary); font-family: var(--font-heading); font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: .12em; text-transform: uppercase; }
+  .state-directory-card__title { max-width: 18ch; margin: 0; color: var(--c-ink); font-family: var(--font-heading); font-size: clamp(1.45rem, 1.15rem + 1vw, 2rem); font-weight: var(--weight-bold); letter-spacing: -.035em; line-height: 1.06; }
+  .state-directory-card__description { max-width: 49ch; margin: var(--sp-4) 0 0; color: var(--c-ink-2); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+  .state-directory-card__cta { display: inline-flex; min-height: 2.9rem; align-items: center; margin-top: var(--sp-6); padding: .75rem 1rem; border: 1px solid var(--c-primary); border-radius: var(--radius-sm); background: var(--c-primary); color: var(--c-white); font-family: var(--font-heading); font-size: var(--text-sm); font-weight: var(--weight-bold); line-height: 1.2; text-decoration: none; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+  .state-directory-card__cta:focus-visible { outline: 3px solid color-mix(in srgb, var(--c-primary) 34%, var(--c-white)); outline-offset: 3px; }
 
   @media (hover: hover) {
     .state-directory-card { transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
-    .state-directory-card:hover { border-color: color-mix(in srgb, var(--c-primary) 38%, var(--c-border)); box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .state-directory-card:hover .state-directory-card__image { transform: scale(1.035); }
-    .state-directory-card:active { transform: translateY(-1px); }
+    .state-directory-card:hover { border-color: color-mix(in srgb, var(--c-primary) 45%, var(--c-border)); box-shadow: 0 18px 32px rgb(20 20 20 / .09); transform: translateY(-4px); }
+    .state-directory-card:hover .state-directory-card__image { filter: saturate(1) contrast(1.03); transform: scale(1.045); }
+    .state-directory-card__cta:hover { border-color: var(--c-primary-dark); background: var(--c-primary-dark); transform: translateY(-1px); }
   }
 
   @media (min-width: 720px) {
     .state-directory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .state-directory-card__media { min-height: 16rem; }
   }
 
-  @media (min-width: 1100px) {
-    .state-directory-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-    .state-directory-card:nth-child(6n + 1), .state-directory-card:nth-child(6n + 5) { grid-column: span 5; }
-    .state-directory-card:nth-child(6n + 2), .state-directory-card:nth-child(6n + 6) { grid-column: span 3; }
-    .state-directory-card:nth-child(6n + 3), .state-directory-card:nth-child(6n + 4) { grid-column: span 4; }
-    .state-directory-card:nth-child(6n + 2) .state-directory-card__media, .state-directory-card:nth-child(6n + 6) .state-directory-card__media { aspect-ratio: 4 / 3; }
+  @media (min-width: 1180px) {
+    .state-directory-card { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); min-height: 25rem; }
+    .state-directory-card:nth-child(even) .state-directory-card__media { order: 2; }
+    .state-directory-card__media { min-height: 100%; }
+    .state-directory-card__body { justify-content: center; }
   }
 </style>
