@@ -173,6 +173,13 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read(directoryGrid)).toContain('Consultar directorio de bomberos en {state.label}');
     expect(read(directoryGrid)).toContain('srcset={unsplashSrcset(photo.id)}');
     expect(read(directoryGrid)).toContain('sizes="(min-width: 1180px) 27vw, (min-width: 720px) 50vw, 100vw"');
+    expect(read(directoryGrid)).toContain('class="state-directory-layout"');
+    expect(read(directoryGrid)).toContain('class="state-directory-sidebar"');
+    expect(read(directoryGrid)).toContain('href={`/directorio#estado-${state.slug}`}');
+    expect(read(directoryGrid)).toContain("href: '/productos/equipo-para-bomberos-y-brigadas'");
+    expect(read(directoryGrid)).toContain('@media (min-width: 840px)');
+    expect(read(directoryGrid)).toContain('state-directory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }');
+    expect(read(directoryGrid)).not.toContain('state-directory-card__eyebrow');
     expect(read(directoryGrid)).toContain('sourceUrl:');
     expect(read(directoryGrid)).not.toContain('atlas-papel-rojo');
     expect(read(directoryGrid)).not.toContain('Composición editorial abstracta');
