@@ -162,6 +162,7 @@ const paginas = defineCollection({
       z.object({ type: z.literal('categories'), ...l2SectionBase }).strict(),
       z.object({ type: z.literal('services'), ...l2SectionBase }).strict(),
       z.object({ type: z.literal('sectors'), ...l2SectionBase }).strict(),
+      z.object({ type: z.literal('states'), ...l2SectionBase }).strict(),
       z.object({
         type: z.literal('sectorDetails'),
         ...l2SectionBase,

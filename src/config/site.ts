@@ -192,6 +192,41 @@ const sectors = [
   { slug: 'energia-petroquimica', label: 'Energía y petroquímica', icon: 'flame' },
 ] as const;
 
+const directoryStates = [
+  { slug: 'aguascalientes', label: 'Aguascalientes' },
+  { slug: 'baja-california', label: 'Baja California' },
+  { slug: 'baja-california-sur', label: 'Baja California Sur' },
+  { slug: 'campeche', label: 'Campeche' },
+  { slug: 'chiapas', label: 'Chiapas' },
+  { slug: 'chihuahua', label: 'Chihuahua' },
+  { slug: 'ciudad-de-mexico', label: 'Ciudad de México' },
+  { slug: 'coahuila', label: 'Coahuila' },
+  { slug: 'colima', label: 'Colima' },
+  { slug: 'durango', label: 'Durango' },
+  { slug: 'estado-de-mexico', label: 'Estado de México' },
+  { slug: 'guanajuato', label: 'Guanajuato' },
+  { slug: 'guerrero', label: 'Guerrero' },
+  { slug: 'hidalgo', label: 'Hidalgo' },
+  { slug: 'jalisco', label: 'Jalisco' },
+  { slug: 'michoacan', label: 'Michoacán' },
+  { slug: 'morelos', label: 'Morelos' },
+  { slug: 'nayarit', label: 'Nayarit' },
+  { slug: 'nuevo-leon', label: 'Nuevo León' },
+  { slug: 'oaxaca', label: 'Oaxaca' },
+  { slug: 'puebla', label: 'Puebla' },
+  { slug: 'queretaro', label: 'Querétaro' },
+  { slug: 'quintana-roo', label: 'Quintana Roo' },
+  { slug: 'san-luis-potosi', label: 'San Luis Potosí' },
+  { slug: 'sinaloa', label: 'Sinaloa' },
+  { slug: 'sonora', label: 'Sonora' },
+  { slug: 'tabasco', label: 'Tabasco' },
+  { slug: 'tamaulipas', label: 'Tamaulipas' },
+  { slug: 'tlaxcala', label: 'Tlaxcala' },
+  { slug: 'veracruz', label: 'Veracruz' },
+  { slug: 'yucatan', label: 'Yucatán' },
+  { slug: 'zacatecas', label: 'Zacatecas' },
+] as const;
+
 export const TAXONOMY = {
   categories,
   services,
@@ -204,6 +239,7 @@ export const PRODUCT_CATEGORIES = TAXONOMY.categories;
 export const SERVICES = TAXONOMY.services;
 export const SECTORS = TAXONOMY.sectors;
 export const COVERAGE_STATES = TAXONOMY.coverageStates;
+export const DIRECTORY_STATES = directoryStates;
 
 export const PROCESS = [
   ['Comparte tu necesidad', 'Describe el tipo de instalación, equipo o proyecto que necesitas atender.'],
@@ -215,6 +251,7 @@ export type ProductCategory = (typeof TAXONOMY.categories)[number];
 export type Service = (typeof TAXONOMY.services)[number];
 export type Sector = (typeof TAXONOMY.sectors)[number];
 export type CoverageState = (typeof TAXONOMY.coverageStates)[number];
+export type DirectoryState = (typeof DIRECTORY_STATES)[number];
 export type NavItem = {
   label: string;
   href: string;
@@ -227,6 +264,7 @@ export const NAV: readonly NavItem[] = [
   { label: 'Productos', href: '/productos', allLabel: 'Catálogo de equipo contra incendios' },
   { label: 'Servicios', href: '/servicios', allLabel: 'Servicios de protección contra incendios' },
   { label: 'Sectores', href: '/sectores' },
+  { label: 'Directorio', href: '/directorio' },
   { label: 'Guías', href: '/guias' },
   { label: 'Nosotros', href: '/nosotros' },
   { label: 'Contacto', href: '/contacto' },

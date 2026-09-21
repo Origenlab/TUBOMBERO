@@ -1,0 +1,6 @@
+---
+import L2Page from '@components/L2Page.astro';
+import { DIRECTORY_STATES } from '@config/site';
+---
+
+<L2Page slug="directorio" list={{ path: '/directorio', items: DIRECTORY_STATES.map((state) => ({ name: state.label, path: `/directorio#estado-${state.slug}` })) }} />

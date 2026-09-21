@@ -1,0 +1,36 @@
+---
+import Icon from '@components/Icon.astro';
+import type { DirectoryState } from '@config/site';
+
+interface Props {
+  states: readonly DirectoryState[];
+}
+
+const { states } = Astro.props;
+---
+
+<div class="grid-4 state-directory-grid" aria-label="Entidades federativas de México">
+  {states.map((state, index) => (
+    <article id={`estado-${state.slug}`} class="state-directory-card">
+      <div class="state-directory-card__top">
+        <span class="state-directory-card__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <Icon name="pin" size={18} />
+      </div>
+      <h3 class="state-directory-card__title">{state.label}</h3>
+      <p class="state-directory-card__status">Directorio estatal en preparación</p>
+    </article>
+  ))}
+</div>
+
+<style>
+  .state-directory-card { display: flex; min-height: 10.5rem; flex-direction: column; justify-content: space-between; gap: var(--sp-6); padding: var(--sp-5); border: var(--border); border-radius: var(--radius-lg); background: var(--c-white); box-shadow: var(--shadow-sm); }
+  .state-directory-card__top { display: flex; align-items: center; justify-content: space-between; color: var(--c-primary); }
+  .state-directory-card__number { font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: .08em; }
+  .state-directory-card__title { margin: 0; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); line-height: var(--leading-snug); color: var(--c-ink); }
+  .state-directory-card__status { margin: 0; color: var(--c-muted); font-size: var(--text-sm); line-height: var(--leading-normal); }
+
+  @media (hover: hover) {
+    .state-directory-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .state-directory-card:hover { border-color: color-mix(in srgb, var(--c-primary) 35%, var(--c-border)); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  }
+</style>

@@ -1,8 +1,7 @@
-import { readFileSync } from 'node:fs';
-import { readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { CONTACT, KEYWORDS, NAV, SITE, TAXONOMY } from '../src/config/site';
+import { CONTACT, DIRECTORY_STATES, KEYWORDS, NAV, SITE, TAXONOMY } from '../src/config/site';
 import { GUIDE_ORDER } from '../src/lib/guides';
 
 const root = resolve(import.meta.dirname, '..');
@@ -53,6 +52,7 @@ describe('contrato de homologación TUBOMBERO', () => {
       'Productos',
       'Servicios',
       'Sectores',
+      'Directorio',
       'Guías',
       'Nosotros',
       'Contacto',
@@ -150,5 +150,24 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(details).toHaveLength(8);
     expect(new Set(details).size).toBe(8);
     expect(details).toEqual(TAXONOMY.sectors.map((sector) => sector.slug));
+  });
+
+  it('expone un índice nacional de 32 entidades sin inventar estaciones', () => {
+    const directoryRoute = 'src/pages/directorio/index.astro';
+    const directoryPage = 'src/content/paginas/directorio.md';
+    const directoryGrid = 'src/components/StateDirectoryGrid.astro';
+
+    expect(existsSync(resolve(root, directoryRoute))).toBe(true);
+    expect(existsSync(resolve(root, directoryPage))).toBe(true);
+    expect(existsSync(resolve(root, directoryGrid))).toBe(true);
+    expect(read('src/config/site.ts')).toContain('export const DIRECTORY_STATES');
+    expect(read('src/config/site.ts')).toContain("label: 'Ciudad de México'");
+    expect(DIRECTORY_STATES).toHaveLength(32);
+    expect(new Set(DIRECTORY_STATES.map((state) => state.slug)).size).toBe(32);
+    expect(read(directoryRoute)).toContain('<L2Page slug="directorio"');
+    expect(read(directoryGrid)).toContain('states.map');
+    expect(read('src/components/PageSections.astro')).toContain('<StateDirectoryGrid states={DIRECTORY_STATES} />');
+    expect(read(directoryGrid)).toContain('Directorio estatal en preparación');
+    expect(NAV.map((item) => item.label)).toContain('Directorio');
   });
 });

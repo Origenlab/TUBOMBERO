@@ -9,7 +9,8 @@ import StageGrid from '@components/StageGrid.astro'
 import ServiceCard from '@components/ServiceCard.astro'
 import SectorCard from '@components/SectorCard.astro'
 import SectorDetails from '@components/SectorDetails.astro'
-import { CATEGORIES, CATEGORY_FEATURES, SERVICES, SECTORS } from '@config/site'
+import StateDirectoryGrid from '@components/StateDirectoryGrid.astro'
+import { CATEGORIES, CATEGORY_FEATURES, DIRECTORY_STATES, SERVICES, SECTORS } from '@config/site'
 import { getGuides } from '@lib/guides'
 import { img } from '@lib/images'
 
@@ -17,6 +18,7 @@ interface SectionBase { type: string; id: string; eyebrow: string; title: string
 interface CategorySection extends SectionBase { type: 'categories' }
 interface ServicesSection extends SectionBase { type: 'services' }
 interface SectorsSection extends SectionBase { type: 'sectors' }
+interface StatesSection extends SectionBase { type: 'states' }
 interface SectorDetailsSection extends SectionBase { type: 'sectorDetails'; items: { slug: string; summary: string; points: string[]; links: { label: string; href: string }[] }[] }
 interface StageSection extends SectionBase { type: 'stages'; items: { num: string; title: string; desc: string; links: { label: string; href: string }[] }[] }
 interface ProseSection extends SectionBase { type: 'prose' }
@@ -24,7 +26,7 @@ interface GuidesSection extends SectionBase { type: 'guides' }
 interface Help { eyebrow: string; title: string; text: string; links: { label: string; href: string; variant?: 'primary' | 'outline' }[] }
 interface FaqSection extends SectionBase { type: 'faq'; items: { question: string; answer: string }[]; help?: Help }
 interface FeatureSection { type: 'feature'; id: string; category: string }
-type PageSection = FeatureSection | CategorySection | ServicesSection | SectorsSection | SectorDetailsSection | StageSection | ProseSection | GuidesSection | FaqSection
+type PageSection = FeatureSection | CategorySection | ServicesSection | SectorsSection | StatesSection | SectorDetailsSection | StageSection | ProseSection | GuidesSection | FaqSection
 interface Props { sections: PageSection[]; Content: any }
 
 const { sections, Content } = Astro.props
@@ -114,6 +116,7 @@ const featureOf = (slug: string) => {
         </div>
       )}
       {section.type === 'sectors' && <div class="grid-4 sector-grid">{SECTORS.map((sector, sectorIndex) => <SectorCard label={sector.label} icon={sector.icon} num={`0${sectorIndex + 1}`} href={`#sector-${sector.slug}`} />)}</div>}
+      {section.type === 'states' && <StateDirectoryGrid states={DIRECTORY_STATES} />}
       {section.type === 'sectorDetails' && <SectorDetails items={section.items} />}
       {section.type === 'stages' && <StageGrid items={section.items} />}
       {section.type === 'prose' && (
