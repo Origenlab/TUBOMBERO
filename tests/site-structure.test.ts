@@ -168,6 +168,11 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read(directoryGrid)).toContain('states.map');
     expect(read('src/components/PageSections.astro')).toContain('<StateDirectoryGrid states={DIRECTORY_STATES} />');
     expect(read(directoryGrid)).toContain('Directorio estatal en preparación');
+    expect(read(directoryGrid)).toContain("import { Picture } from 'astro:assets'");
+    expect(read(directoryGrid)).toContain('<Picture');
+    expect(read(directoryGrid)).toContain('<button class="state-directory-card__cta" type="button" disabled>');
+    expect(read(directoryGrid)).not.toContain('state-directory-card__number');
+    expect(read(directoryGrid)).not.toContain('<Icon');
     expect(NAV.map((item) => item.label)).toContain('Directorio');
   });
 });
