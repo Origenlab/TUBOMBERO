@@ -173,10 +173,10 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read(directoryGrid)).toContain('Consultar directorio de bomberos en {state.label}');
     expect(read(directoryGrid)).toContain('srcset={unsplashSrcset(photo.id)}');
     expect(read(directoryGrid)).toContain('sizes="(min-width: 1180px) 27vw, (min-width: 720px) 50vw, 100vw"');
-    expect(read(directoryGrid)).toContain('class="state-directory-layout"');
+    expect(read(directoryGrid)).toContain('class="state-directory-layout state-directory-layout--right"');
     expect(read(directoryGrid)).toContain('class="state-directory-sidebar"');
     expect(read(directoryGrid)).toContain('href={`/directorio#estado-${state.slug}`}');
-    expect(read(directoryGrid)).toContain("href: '/productos/equipo-para-bomberos-y-brigadas'");
+    expect(read(directoryGrid)).toContain('CATEGORIES.map((category) => <li><a href={`/productos/${category.slug}`}>');
     expect(read(directoryGrid)).toContain('@media (min-width: 840px)');
     expect(read(directoryGrid)).toContain('state-directory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }');
     expect(read(directoryGrid)).not.toContain('state-directory-card__eyebrow');
@@ -196,5 +196,21 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read('src/components/Footer.astro')).toContain('const footerCtaLabel = contextualCta(Astro.url.pathname)');
     expect(read('src/pages/index.astro')).toContain("label: 'Cotizar protección contra incendios'");
     expect(read('src/content/paginas/directorio.md')).toContain('Explorar estaciones de bomberos por estado');
+  });
+
+  it('organiza widgets de interlinking en el sidebar derecho del directorio', () => {
+    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
+
+    expect(directoryGrid).toContain("import { CATEGORIES, SERVICES } from '@config/site';");
+    expect(directoryGrid).toContain("import { getGuides } from '@lib/guides';");
+    expect(directoryGrid).toContain('const guides = await getGuides();');
+    expect(directoryGrid).toContain('state-directory-sidebar__widget--states');
+    expect(directoryGrid).toContain('state-directory-sidebar__widget--categories');
+    expect(directoryGrid).toContain('state-directory-sidebar__widget--services');
+    expect(directoryGrid).toContain('state-directory-sidebar__widget--guides');
+    expect(directoryGrid).toContain('state-directory-sidebar__widget--contact');
+    expect(directoryGrid).toContain('class="state-directory-layout state-directory-layout--right"');
+    expect(directoryGrid.indexOf('class="state-directory-sidebar"')).toBeGreaterThan(directoryGrid.indexOf('class="state-directory-grid"'));
+    expect(directoryGrid).toContain('.state-directory-layout.state-directory-layout--right { grid-template-columns: minmax(0, 1fr) minmax(17rem, 20rem); align-items: start; }');
   });
 });
