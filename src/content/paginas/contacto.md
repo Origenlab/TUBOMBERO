@@ -24,7 +24,7 @@ menu:
     - { label: Proceso, href: "#proceso", sub: Cómo solicitar }
     - { label: Qué preparar, href: "#que-preparar", sub: Datos para cotizar }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Solicitar cotización de equipo, href: "#cotizar", sub: Formulario de cotización }
+  cta: { label: Cotizar equipo contra incendios, href: "#cotizar", sub: Formulario de cotización }
 sections:
   - type: stages
     id: proceso
@@ -33,7 +33,7 @@ sections:
     accent: de equipo contra incendios.
     desc: Cuatro pasos para pasar de una necesidad a una propuesta con alcance claro.
     body:
-      - "Solicitar información sobre equipo contra incendio no debería ser complicado. Dividimos el proceso en pasos claros para que sepas qué sigue y qué datos conviene tener a la mano en cada momento."
+      - "Conocer las opciones de equipo contra incendio no debería ser complicado. Dividimos el proceso en pasos claros para que sepas qué sigue y qué datos conviene tener a la mano en cada momento."
       - "Si todavía no sabes qué equipo necesitas, empieza por tu sector o por las guías técnicas; si ya lo sabes, revisa la familia en el catálogo y describe la cantidad y el uso en el formulario."
     items:
       - num: "01"

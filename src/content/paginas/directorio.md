@@ -22,7 +22,7 @@ hero:
 menu:
   items:
     - { label: Entidades, href: "#estados", sub: Directorio nacional en preparación }
-  cta: { label: Solicitar directorio de bomberos, href: /contacto, sub: Atención de Tu Bombero }
+  cta: { label: Consultar directorio de bomberos, href: /contacto, sub: Atención de Tu Bombero }
 sections:
   - type: states
     id: estados

@@ -170,7 +170,7 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read(directoryGrid)).toContain('images.unsplash.com/photo-');
     expect(read(directoryGrid)).toContain('Estaciones de bomberos en {state.label}');
     expect(read(directoryGrid)).toContain('El directorio de estaciones de bomberos en {state.label} se publicará');
-    expect(read(directoryGrid)).toContain('Solicitar directorio de bomberos en {state.label}');
+    expect(read(directoryGrid)).toContain('Consultar directorio de bomberos en {state.label}');
     expect(read(directoryGrid)).toContain('srcset={unsplashSrcset(photo.id)}');
     expect(read(directoryGrid)).toContain('sizes="(min-width: 1180px) 27vw, (min-width: 720px) 50vw, 100vw"');
     expect(read(directoryGrid)).toContain('sourceUrl:');
@@ -182,7 +182,7 @@ describe('contrato de homologación TUBOMBERO', () => {
   });
 
   it('usa CTA contextuales para enlazado interno sin repetir botones genéricos', () => {
-    expect(contextualCta('/directorio')).toBe('Solicitar directorio de bomberos');
+  expect(contextualCta('/directorio')).toBe('Consultar directorio de bomberos');
     expect(contextualCta('/productos/extintores-y-emergencia')).toBe('Cotizar extintores contra incendio');
     expect(contextualCta('/servicios')).toBe('Cotizar servicios contra incendios');
     expect(read('src/components/Header.astro')).toContain('const headerCtaLabel = contextualCta(currentPath)');

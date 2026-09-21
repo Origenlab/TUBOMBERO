@@ -242,11 +242,11 @@ export const COVERAGE_STATES = TAXONOMY.coverageStates;
 export const DIRECTORY_STATES = directoryStates;
 
 const contextualPageCtas = [
-  { path: '/directorio', label: 'Solicitar directorio de bomberos' },
+  { path: '/directorio', label: 'Consultar directorio de bomberos' },
   { path: '/servicios', label: 'Cotizar servicios contra incendios' },
   { path: '/sectores', label: 'Cotizar equipo contra incendios por sector' },
   { path: '/guias', label: 'Cotizar sistemas de protección contra incendios' },
-  { path: '/contacto', label: 'Solicitar cotización de equipo contra incendios' },
+  { path: '/contacto', label: 'Cotizar equipo contra incendios' },
   { path: '/nosotros', label: 'Cotizar protección contra incendios' },
   { path: '/productos', label: 'Cotizar material contra incendios' },
 ] as const;
