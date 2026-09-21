@@ -25,7 +25,7 @@ menu:
     - { label: Sistemas, href: "#sistemas", sub: Activa, pasiva y prevención }
     - { label: Comparativa, href: "#comparativa", sub: Cómo actúa cada sistema }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar protección, href: "#cotizar", sub: Sistemas contra incendios }
+  cta: { label: Cotizar sistemas de protección, href: "#cotizar", sub: Sistemas contra incendios }
 sections:
   - type: guides
     id: guias

@@ -24,7 +24,7 @@ menu:
     - { label: Proceso, href: "#proceso", sub: Cómo solicitar }
     - { label: Qué preparar, href: "#que-preparar", sub: Datos para cotizar }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo, href: "#cotizar", sub: Formulario de cotización }
+  cta: { label: Solicitar cotización de equipo, href: "#cotizar", sub: Formulario de cotización }
 sections:
   - type: stages
     id: proceso

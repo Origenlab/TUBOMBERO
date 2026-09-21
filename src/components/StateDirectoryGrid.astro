@@ -48,7 +48,7 @@ const unsplashSrcset = (id: string) => [480, 720, 960, 1400].map((width) => `${u
           <p class="state-directory-card__description">
             El directorio de estaciones de bomberos en {state.label} se publicará con registros institucionales verificables. Será un punto de consulta para localizar cuerpos de bomberos y canales de atención de emergencia cuando cada ficha esté confirmada.
           </p>
-          <a class="state-directory-card__cta" href="/contacto" aria-label={`Solicitar información de bomberos en ${state.label}`}>Solicitar información de bomberos</a>
+          <a class="state-directory-card__cta" href="/contacto">Solicitar directorio de bomberos en {state.label}</a>
         </div>
       </article>
     );

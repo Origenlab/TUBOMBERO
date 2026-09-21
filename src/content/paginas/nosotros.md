@@ -25,7 +25,7 @@ menu:
     - { label: Cómo trabajamos, href: "#como-trabajamos", sub: Criterios de información }
     - { label: Servicios, href: "#servicios", sub: Líneas de servicio }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo, href: "#cotizar", sub: Protección contra incendios }
+  cta: { label: Cotizar protección contra incendios, href: "#cotizar", sub: Protección contra incendios }
 sections:
   - type: stages
     id: que-hacemos

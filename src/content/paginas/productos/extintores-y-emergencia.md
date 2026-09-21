@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo, href: "#cotizar", sub: "Extintores y emergencia" }
+  cta: { label: Cotizar extintores contra incendio, href: "#cotizar", sub: "Extintores y emergencia" }
 sections:
   - type: feature
     id: subcategorias

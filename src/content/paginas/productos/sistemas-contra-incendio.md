@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo, href: "#cotizar", sub: "Sistemas contra incendio" }
+  cta: { label: Cotizar red contra incendios, href: "#cotizar", sub: "Sistemas contra incendio" }
 sections:
   - type: feature
     id: subcategorias

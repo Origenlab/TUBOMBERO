@@ -12,7 +12,7 @@
 import Icon from '@components/Icon.astro'
 import {
   SITE, CONTACT, BRANCHES, PRODUCT_CATEGORIES, SERVICES, SECTORS,
-  COVERAGE_STATES, SOCIAL, LEGAL, waUrl, telUrl, WA_MESSAGES,
+  COVERAGE_STATES, SOCIAL, LEGAL, contextualCta, waUrl, telUrl, WA_MESSAGES,
 } from '@config/site'
 import { getGuides } from '@lib/guides'
 
@@ -37,6 +37,7 @@ const {
 const currentYear = new Date().getFullYear()
 const guides = await getGuides()
 const waDefault = waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default)
+const footerCtaLabel = contextualCta(Astro.url.pathname)
 const telLink = telUrl()
 const schedule = CONTACT.schedule as { weekdays?: string; saturday?: string; sunday?: string } | undefined
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${(CONTACT as any).geo?.lat},${(CONTACT as any).geo?.lng}`
@@ -67,10 +68,10 @@ const SOCIAL_ICONS: Record<string, string> = {
       </div>
       <div class="footer__cta-actions">
         {waDefault && (<a href={waDefault} class="footer__btn footer__btn--wa" target="_blank" rel="noopener noreferrer">
-          <Icon name="whatsapp" size={18} />Cotizar por WhatsApp
+          <Icon name="whatsapp" size={18} />{footerCtaLabel} por WhatsApp
         </a>)}
         <a href="/contacto" class="footer__btn footer__btn--ghost">
-          Contacto para cotizar equipo<Icon name="arrow-right" size={14} />
+          {footerCtaLabel}<Icon name="arrow-right" size={14} />
         </a>
       </div>
     </div>

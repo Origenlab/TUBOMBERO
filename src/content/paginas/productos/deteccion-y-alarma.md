@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo, href: "#cotizar", sub: "Detección y alarma" }
+  cta: { label: Cotizar detección y alarma, href: "#cotizar", sub: "Detección y alarma" }
 sections:
   - type: feature
     id: subcategorias

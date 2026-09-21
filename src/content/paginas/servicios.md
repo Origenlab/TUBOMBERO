@@ -25,7 +25,7 @@ menu:
     - { label: Ciclo, href: "#ciclo", sub: Evaluar, instalar y mantener }
     - { label: Alcance, href: "#alcance", sub: Qué preparar y qué norma aplica }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas antes de contratar }
-  cta: { label: Cotizar servicio, href: "#cotizar", sub: Protección contra incendios }
+  cta: { label: Cotizar servicios contra incendios, href: "#cotizar", sub: Protección contra incendios }
 sections:
   - type: services
     id: servicios

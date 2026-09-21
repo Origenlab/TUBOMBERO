@@ -241,6 +241,24 @@ export const SECTORS = TAXONOMY.sectors;
 export const COVERAGE_STATES = TAXONOMY.coverageStates;
 export const DIRECTORY_STATES = directoryStates;
 
+const contextualPageCtas = [
+  { path: '/directorio', label: 'Solicitar directorio de bomberos' },
+  { path: '/servicios', label: 'Cotizar servicios contra incendios' },
+  { path: '/sectores', label: 'Cotizar equipo contra incendios por sector' },
+  { path: '/guias', label: 'Cotizar sistemas de protección contra incendios' },
+  { path: '/contacto', label: 'Solicitar cotización de equipo contra incendios' },
+  { path: '/nosotros', label: 'Cotizar protección contra incendios' },
+  { path: '/productos', label: 'Cotizar material contra incendios' },
+] as const;
+
+export function contextualCta(pathname: string): string {
+  const path = pathname.replace(/\/+$/, '') || '/';
+  const category = CATEGORIES.find(({ slug }) => path === `/productos/${slug}` || path === `/productos/categoria/${slug}`);
+
+  if (category) return `Cotizar ${category.cta.toLocaleLowerCase('es-MX')}`;
+  return contextualPageCtas.find((item) => path === item.path)?.label ?? 'Cotizar equipo contra incendios';
+}
+
 export const PROCESS = [
   ['Comparte tu necesidad', 'Describe el tipo de instalación, equipo o proyecto que necesitas atender.'],
   ['Revisa las opciones', 'Ubica la categoría, solución o servicio que corresponde a tu caso.'],

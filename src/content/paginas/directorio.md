@@ -17,12 +17,12 @@ hero:
     - Este índice organiza las 32 entidades federativas de México para que el directorio pueda crecer de forma clara, consistente y útil para personas, empresas e instituciones.
     - Cada ficha estatal se habilitará únicamente cuando exista información institucional verificable; esta primera versión no publica estaciones, horarios, teléfonos ni direcciones.
   ctas:
-    - { text: Ver entidades federativas, href: "#estados", variant: primary }
-    - { text: Contactar a Tu Bombero, href: /contacto, variant: outline }
+    - { text: Explorar estaciones de bomberos por estado, href: "#estados", variant: primary }
+    - { text: Contactar sobre el directorio de bomberos, href: /contacto, variant: outline }
 menu:
   items:
     - { label: Entidades, href: "#estados", sub: Directorio nacional en preparación }
-  cta: { label: Contacto, href: /contacto, sub: Atención de Tu Bombero }
+  cta: { label: Solicitar directorio de bomberos, href: /contacto, sub: Atención de Tu Bombero }
 sections:
   - type: states
     id: estados

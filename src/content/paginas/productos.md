@@ -25,7 +25,7 @@ menu:
     - { label: Etapas, href: "#etapas", sub: Prevenir, detectar y responder }
     - { label: Selección, href: "#seleccion", sub: Equipo según el riesgo }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas antes de cotizar }
-  cta: { label: Cotizar material, href: "#cotizar", sub: Equipo contra incendios }
+  cta: { label: Cotizar material contra incendios, href: "#cotizar", sub: Equipo contra incendios }
 sections:
   - type: categories
     id: categorias

@@ -25,7 +25,7 @@ menu:
     - { label: Medidas, href: "#medidas", sub: Cómo prevenir un incendio }
     - { label: Por sector, href: "#por-sector", sub: Riesgos y equipo a revisar }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo, href: "#cotizar", sub: Seguridad contra incendios }
+  cta: { label: Cotizar equipo contra incendios por sector, href: "#cotizar", sub: Seguridad contra incendios }
 sections:
   - type: sectors
     id: sectores

@@ -11,7 +11,7 @@
 // FUENTE ÚNICA del menú = NAV en @config/site. Este componente NO hardcodea NINGÚN
 // ítem: itera NAV para generar (1) el menú de escritorio, (2) los paneles desplegables
 // y (3) el menú móvil. Para editar el menú, edita NAV en site.ts. Guía: docs/MENU.md.
-import { NAV, SITE, CONTACT, waUrl, telUrl, WA_MESSAGES } from '@config/site'
+import { NAV, SITE, CONTACT, contextualCta, waUrl, telUrl, WA_MESSAGES } from '@config/site'
 import Icon from '@components/Icon.astro'
 
 interface Props {
@@ -51,6 +51,7 @@ const PUNTOS = [
 ]
 
 const currentPath = Astro.url.pathname
+const headerCtaLabel = contextualCta(currentPath)
 
 // id estable del panel a partir del label (sin acentos). Enlaza el <li data-dropdown>
 // con su panel #id — contrato que consume el <script> de interacción más abajo.
@@ -104,9 +105,9 @@ const isActive = (href: string) =>
       </ul>
     </nav>
 
-    <a href={headerWaUrl ?? '/contacto'} class="hdr-cta" target={headerWaUrl ? '_blank' : undefined} rel={headerWaUrl ? 'noopener noreferrer' : undefined} aria-label="Cotizar equipo contra incendios">
+    <a href={headerWaUrl ?? '/contacto'} class="hdr-cta" target={headerWaUrl ? '_blank' : undefined} rel={headerWaUrl ? 'noopener noreferrer' : undefined} aria-label={headerCtaLabel}>
       {guia && <span class="hdr-mark hdr-mark--cta" aria-hidden="true">4</span>}
-      {headerWaUrl ? <Icon name="whatsapp" size={16} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} Cotizar equipo
+      {headerWaUrl ? <Icon name="whatsapp" size={16} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} {headerCtaLabel}
     </a>
 
     <button class="hdr-burger" id="hdr-burger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="hdr-mobile-nav">
@@ -188,7 +189,7 @@ const isActive = (href: string) =>
   <div class="mob-foot">
     <div class="mob-foot__cta">
       <a href={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ?? '/contacto'} class="mob-cta" target={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? '_blank' : undefined} rel={waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) ? 'noopener noreferrer' : undefined}>
-        {waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) && <Icon name="whatsapp" size={16} />} Cotizar equipo contra incendios
+        {waUrl(WA_MESSAGES.cotizacion ?? WA_MESSAGES.default) && <Icon name="whatsapp" size={16} />} {headerCtaLabel}
       </a>
       {telUrl() && <a href={telUrl()} class="mob-call" aria-label={`Llamar al ${CONTACT.phone}`}>
         <Icon name="phone" size={16} /> Llamar

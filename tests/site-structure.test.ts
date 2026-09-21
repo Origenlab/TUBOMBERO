@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { CONTACT, DIRECTORY_STATES, KEYWORDS, NAV, SITE, TAXONOMY } from '../src/config/site';
+import { CONTACT, contextualCta, DIRECTORY_STATES, KEYWORDS, NAV, SITE, TAXONOMY } from '../src/config/site';
 import { GUIDE_ORDER } from '../src/lib/guides';
 
 const root = resolve(import.meta.dirname, '..');
@@ -170,8 +170,7 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read(directoryGrid)).toContain('images.unsplash.com/photo-');
     expect(read(directoryGrid)).toContain('Estaciones de bomberos en {state.label}');
     expect(read(directoryGrid)).toContain('El directorio de estaciones de bomberos en {state.label} se publicará');
-    expect(read(directoryGrid)).toContain('Solicitar información de bomberos');
-    expect(read(directoryGrid)).toContain('aria-label={`Solicitar información de bomberos en ${state.label}`}');
+    expect(read(directoryGrid)).toContain('Solicitar directorio de bomberos en {state.label}');
     expect(read(directoryGrid)).toContain('srcset={unsplashSrcset(photo.id)}');
     expect(read(directoryGrid)).toContain('sizes="(min-width: 1180px) 27vw, (min-width: 720px) 50vw, 100vw"');
     expect(read(directoryGrid)).toContain('sourceUrl:');
@@ -180,5 +179,15 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read(directoryGrid)).not.toContain('state-directory-card__number');
     expect(read(directoryGrid)).not.toContain('<Icon');
     expect(NAV.map((item) => item.label)).toContain('Directorio');
+  });
+
+  it('usa CTA contextuales para enlazado interno sin repetir botones genéricos', () => {
+    expect(contextualCta('/directorio')).toBe('Solicitar directorio de bomberos');
+    expect(contextualCta('/productos/extintores-y-emergencia')).toBe('Cotizar extintores contra incendio');
+    expect(contextualCta('/servicios')).toBe('Cotizar servicios contra incendios');
+    expect(read('src/components/Header.astro')).toContain('const headerCtaLabel = contextualCta(currentPath)');
+    expect(read('src/components/Footer.astro')).toContain('const footerCtaLabel = contextualCta(Astro.url.pathname)');
+    expect(read('src/pages/index.astro')).toContain("label: 'Cotizar protección contra incendios'");
+    expect(read('src/content/paginas/directorio.md')).toContain('Explorar estaciones de bomberos por estado');
   });
 });
