@@ -1,0 +1,220 @@
+---
+import { CATEGORIES, DIRECTORY_STATES, directoryStatePath, SERVICES, stationsForDirectoryState, stateDirectoryMetaDescription } from '@config/site';
+import type { DirectoryState } from '@config/site';
+import Hero from '@components/Hero.astro';
+import { getGuides } from '@lib/guides';
+import PageLayout from '@layouts/PageLayout.astro';
+
+interface Props {
+  state: DirectoryState;
+}
+
+const { state } = Astro.props;
+const guides = await getGuides();
+const relatedStates = DIRECTORY_STATES.filter((item) => item.slug !== state.slug);
+const stations = stationsForDirectoryState(state.slug);
+const title = `Estaciones de bomberos en ${state.label} | Directorio`;
+const description = stateDirectoryMetaDescription(state.label);
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  pageType="page"
+  breadcrumbs={[{ label: 'Directorio', href: '/directorio' }, { label: state.label }]}
+>
+  <Hero
+    badge="Directorio estatal"
+    title="Estaciones de bomberos"
+    accent={`en ${state.label}`}
+    subtitle={`El directorio de estaciones de bomberos en ${state.label} reúne registros institucionales documentados. Será un punto de consulta para localizar cuerpos de bomberos y canales de atención de emergencia con fuentes públicas consultables.`}
+    descRight={[
+      `Para empresas, brigadas y responsables de seguridad en ${state.label}, esta página se está estructurando como una referencia para localizar estaciones de bomberos y consultar soluciones de protección contra incendios con información verificable.`,
+      'Mientras las fichas institucionales se integran, explora equipo contra incendios, sistemas de detección y alarma, mantenimiento de equipos y capacitación de brigadas para planear compras y proyectos de seguridad contra incendios.',
+    ]}
+  />
+
+  <section id="directorio-estatal" class="section state-detail-content">
+    <div class="container state-detail-layout">
+      <div class="state-detail-main">
+        <section class="state-detail-status" aria-labelledby="estado-directorio">
+          <div class="state-detail-status__heading">
+            <p class="state-detail-kicker">Estado del directorio</p>
+            <h2 id="estado-directorio">Registros institucionales documentados.</h2>
+          </div>
+          <div class="state-detail-status__copy">
+            <p>
+              Esta primera publicación integra {stations.length} registros con nombre y ubicación identificados en fuentes institucionales. Cada ficha enlaza a su referencia para que la información pueda revisarse desde su origen.
+            </p>
+            <p>
+              El directorio no sustituye a los servicios de emergencia. Ante una situación de riesgo, llama al 911. Las fichas se ampliarán solo cuando exista una fuente pública verificable para cada dato adicional.
+            </p>
+            <a class="state-detail-cta state-detail-cta--inline" href="#estaciones-documentadas">Ver registros documentados de bomberos</a>
+          </div>
+        </section>
+
+        <section id="estaciones-documentadas" class="state-detail-stations" aria-labelledby="estaciones-documentadas-title">
+          <p class="state-detail-kicker">Registros publicados</p>
+          <h2 id="estaciones-documentadas-title">Registros institucionales de bomberos en {state.label}.</h2>
+          <p>Las imágenes son únicamente referenciales. Consulta la fuente institucional de cada ficha para corroborar el registro antes de acudir a la ubicación.</p>
+          <div class="state-detail-stations__grid">
+            {stations.map((station) => (
+              <article class="state-detail-station-card">
+                <figure class="state-detail-station-card__media">
+                  <img src={station.image.src} alt={station.image.alt} width="1200" height="800" loading="lazy" decoding="async" />
+                  <figcaption>Imagen de referencia; no corresponde necesariamente con la estación descrita.</figcaption>
+                </figure>
+                <div class="state-detail-station-card__body">
+                  <p class="state-detail-station-card__municipality">{station.municipality}, {state.label}</p>
+                  <h3>{station.name}</h3>
+                  <p>{station.summary}</p>
+                  <address>{station.address}</address>
+                  {station.phone && <p class="state-detail-station-card__phone"><span>{station.phoneLabel}: </span><a href={`tel:${station.phone.replace(/\D/g, '')}`}>{station.phone}</a></p>}
+                  <p class="state-detail-station-card__source">Fuente institucional · {station.source.published}</p>
+                  <a class="state-detail-station-card__cta" href={station.source.url} target="_blank" rel="noopener noreferrer">{station.cta}</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="state-detail-process" aria-labelledby="criterios-publicacion">
+          <p class="state-detail-kicker">Criterios de publicación</p>
+          <h2 id="criterios-publicacion">Qué integrará cada ficha cuando sea verificable.</h2>
+          <ol class="state-detail-process__list">
+            <li>
+              <h3>Identificación institucional</h3>
+              <p>Nombre oficial del cuerpo, estación o área de atención, publicado únicamente con la fuente que lo respalde.</p>
+            </li>
+            <li>
+              <h3>Ubicación y contacto confirmados</h3>
+              <p>Municipio, canales de comunicación y datos operativos solo cuando coincidan con información institucional vigente.</p>
+            </li>
+            <li>
+              <h3>Actualización responsable</h3>
+              <p>Fecha y referencia de la consulta para que cada ficha pueda revisarse y mantenerse clara para quien la necesita.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="state-detail-next" aria-labelledby="recursos-relacionados">
+          <p class="state-detail-kicker">Mientras el directorio se integra</p>
+          <h2 id="recursos-relacionados">Recursos de protección contra incendios.</h2>
+          <p>Explora equipo, soluciones y contenidos técnicos relacionados con la preparación de instalaciones, brigadas y proyectos contra incendio.</p>
+          <div class="state-detail-next__links">
+            <a href="/productos/equipo-para-bomberos-y-brigadas">Equipo para bomberos y brigadas</a>
+            <a href="/productos/sistemas-contra-incendio">Sistemas contra incendio</a>
+            <a href="/servicios#capacitacion">Capacitación de brigadas contra incendios</a>
+          </div>
+        </section>
+      </div>
+
+      <aside class="state-detail-sidebar" aria-label={`Recursos del directorio para ${state.label}`}>
+        <section class="state-detail-sidebar__widget state-detail-sidebar__widget--directory">
+          <p class="state-detail-sidebar__eyebrow">Directorio nacional</p>
+          <h2>Explora otras entidades.</h2>
+          <p>Consulta la estructura nacional del directorio y continúa por otra entidad federativa.</p>
+          <a class="state-detail-sidebar__action" href="/directorio">Estaciones de bomberos en México</a>
+          <nav aria-label="Otros estados del directorio">
+            <ul class="state-detail-sidebar__list">
+              {relatedStates.map((item) => <li><a href={directoryStatePath(item.slug)}>Bomberos en {item.label}</a></li>)}
+            </ul>
+          </nav>
+        </section>
+
+        <section class="state-detail-sidebar__widget">
+          <p class="state-detail-sidebar__eyebrow">Equipo contra incendio</p>
+          <ul class="state-detail-sidebar__list state-detail-sidebar__list--links">
+            {CATEGORIES.map((category) => <li><a href={`/productos/${category.slug}`}>{category.cta}</a></li>)}
+          </ul>
+        </section>
+
+        <section class="state-detail-sidebar__widget">
+          <p class="state-detail-sidebar__eyebrow">Servicios especializados</p>
+          <ul class="state-detail-sidebar__list state-detail-sidebar__list--links">
+            {SERVICES.map((service) => <li><a href={`/servicios#${service.id}`}>{service.cta}</a></li>)}
+          </ul>
+        </section>
+
+        <section class="state-detail-sidebar__widget">
+          <p class="state-detail-sidebar__eyebrow">Guías técnicas</p>
+          <ul class="state-detail-sidebar__list state-detail-sidebar__list--links">
+            {guides.map((guide) => guide && <li><a href={`/guias/${guide.id}`}>{guide.data.keyword}</a></li>)}
+          </ul>
+          <a class="state-detail-sidebar__action" href="/guias">Ver guías de protección contra incendios</a>
+        </section>
+      </aside>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .state-detail-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .75rem 1rem; border-radius: var(--radius-sm); font-family: var(--font-heading); font-size: var(--text-sm); font-weight: var(--weight-bold); line-height: 1.2; text-align: center; text-decoration: none; }
+  .state-detail-cta--inline { margin-top: var(--sp-5); border-bottom: 2px solid var(--c-primary); border-radius: 0; color: var(--c-primary-dark); padding-inline: 0; }
+  .state-detail-cta:focus-visible, .state-detail-sidebar a:focus-visible { outline: 3px solid color-mix(in srgb, var(--c-primary) 32%, var(--c-white)); outline-offset: 3px; }
+
+  .state-detail-layout { display: grid; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+  .state-detail-main { min-width: 0; }
+  .state-detail-main > section + section { margin-top: clamp(3rem, 6vw, 5.5rem); padding-top: clamp(3rem, 6vw, 5.5rem); border-top: 1px solid var(--c-border); }
+  .state-detail-kicker, .state-detail-sidebar__eyebrow { margin: 0; color: var(--c-primary); font-size: .6875rem; font-weight: var(--weight-bold); letter-spacing: .11em; text-transform: uppercase; }
+  .state-detail-main h2 { max-width: 22ch; margin: var(--sp-3) 0 0; color: var(--c-ink); font-family: var(--font-heading); font-size: clamp(1.7rem, 1.3rem + 1vw, 2.5rem); letter-spacing: -.04em; line-height: 1.04; }
+  .state-detail-main > section > p { max-width: 69ch; margin: var(--sp-5) 0 0; color: var(--c-ink-2); font-size: var(--text-base); line-height: var(--leading-relaxed); }
+  .state-detail-status { display: grid; gap: var(--sp-5); border-top: 3px solid var(--c-primary); padding-top: var(--sp-5); }
+  .state-detail-status__heading h2 { margin-top: var(--sp-3); }
+  .state-detail-status__copy { min-width: 0; }
+  .state-detail-status__copy p { max-width: 69ch; margin: 0; color: var(--c-ink-2); font-size: var(--text-base); line-height: var(--leading-relaxed); }
+  .state-detail-status__copy p + p { margin-top: var(--sp-4); }
+  .state-detail-stations > p:not(.state-detail-kicker) { max-width: 69ch; }
+  .state-detail-stations__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1rem, 2vw, 1.5rem); margin-top: var(--sp-6); }
+  .state-detail-station-card { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid var(--c-border); background: var(--c-white); }
+  .state-detail-station-card__media { position: relative; aspect-ratio: 4 / 3; margin: 0; overflow: hidden; background: var(--c-surface); }
+  .state-detail-station-card__media img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.76) contrast(1.03); }
+  .state-detail-station-card__media figcaption { position: absolute; right: 0; bottom: 0; left: 0; padding: .55rem .75rem; background: rgb(20 20 20 / .78); color: var(--c-white); font-size: .625rem; line-height: 1.35; }
+  .state-detail-station-card__body { display: flex; min-width: 0; flex: 1; flex-direction: column; align-items: flex-start; padding: clamp(1.25rem, 2vw, 1.75rem); }
+  .state-detail-station-card__municipality, .state-detail-station-card__source { margin: 0; color: var(--c-primary); font-size: .6875rem; font-weight: var(--weight-bold); letter-spacing: .08em; line-height: 1.4; text-transform: uppercase; }
+  .state-detail-station-card h3 { margin: var(--sp-3) 0 0; color: var(--c-ink); font-family: var(--font-heading); font-size: var(--text-lg); letter-spacing: -.03em; line-height: 1.12; }
+  .state-detail-station-card__body > p:not(.state-detail-station-card__municipality, .state-detail-station-card__source, .state-detail-station-card__phone) { margin: var(--sp-4) 0 0; color: var(--c-ink-2); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+  .state-detail-station-card address { margin-top: var(--sp-4); color: var(--c-ink); font-size: var(--text-sm); font-style: normal; font-weight: var(--weight-semibold); line-height: var(--leading-relaxed); }
+  .state-detail-station-card__phone { margin: var(--sp-4) 0 0; color: var(--c-ink-2); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+  .state-detail-station-card__phone span { font-weight: var(--weight-semibold); }
+  .state-detail-station-card__phone a { color: var(--c-primary-dark); font-weight: var(--weight-bold); text-decoration: none; }
+  .state-detail-station-card__source { margin-top: var(--sp-4); }
+  .state-detail-station-card__cta { display: inline-flex; min-height: 2.9rem; align-items: center; margin-top: auto; padding: var(--sp-4) 0 .1rem; border-bottom: 2px solid var(--c-primary); color: var(--c-primary-dark); font-family: var(--font-heading); font-size: var(--text-sm); font-weight: var(--weight-bold); line-height: 1.3; text-decoration: none; transition: border-color .2s ease, color .2s ease, transform .2s ease; }
+  .state-detail-station-card__cta:hover { border-color: var(--c-primary-dark); color: var(--c-ink); transform: translateX(3px); }
+  .state-detail-process__list { display: grid; gap: 0; margin: var(--sp-6) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--c-border); }
+  .state-detail-process__list li { padding: var(--sp-5) 0; border-bottom: 1px solid var(--c-border); }
+  .state-detail-process h3 { margin: 0; color: var(--c-ink); font-family: var(--font-heading); font-size: var(--text-lg); letter-spacing: -.02em; line-height: var(--leading-snug); }
+  .state-detail-process li p { max-width: 62ch; margin: var(--sp-2) 0 0; color: var(--c-ink-2); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+  .state-detail-next { background: var(--c-surface); padding: clamp(1.5rem, 4vw, 3rem); }
+  .state-detail-next__links { display: grid; gap: .75rem; margin-top: var(--sp-5); }
+  .state-detail-next__links a { color: var(--c-primary-dark); font-size: var(--text-sm); font-weight: var(--weight-bold); line-height: var(--leading-normal); text-decoration: none; }
+  .state-detail-next__links a:hover { color: var(--c-ink); }
+
+  .state-detail-sidebar { display: grid; gap: var(--sp-4); min-width: 0; }
+  .state-detail-sidebar__widget { padding: clamp(1.25rem, 2vw, 1.75rem); border: 1px solid var(--c-border); background: var(--c-white); }
+  .state-detail-sidebar__widget--directory { border-top: 3px solid var(--c-primary); }
+  .state-detail-sidebar h2 { margin: var(--sp-3) 0 0; color: var(--c-ink); font-family: var(--font-heading); font-size: var(--text-xl); letter-spacing: -.03em; line-height: 1.05; }
+  .state-detail-sidebar__widget > p:not(.state-detail-sidebar__eyebrow) { margin: var(--sp-3) 0 0; color: var(--c-muted); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+  .state-detail-sidebar__list { display: grid; gap: 0; max-height: 19rem; margin: var(--sp-4) 0 0; padding: 0; overflow-y: auto; list-style: none; border-top: 1px solid var(--c-border); }
+  .state-detail-sidebar__list li { border-bottom: 1px solid var(--c-border); }
+  .state-detail-sidebar__list a { display: block; padding: .7rem 0; color: var(--c-ink-2); font-size: var(--text-xs); font-weight: var(--weight-semibold); line-height: 1.35; text-decoration: none; }
+  .state-detail-sidebar__list a:hover { color: var(--c-primary-dark); }
+  .state-detail-sidebar__list--links { max-height: none; }
+  .state-detail-sidebar__list--links a { color: var(--c-primary-dark); }
+  .state-detail-sidebar__action { display: inline-flex; margin-top: var(--sp-4); padding-bottom: .2rem; border-bottom: 2px solid var(--c-primary); color: var(--c-ink); font-size: var(--text-xs); font-weight: var(--weight-bold); line-height: 1.35; text-decoration: none; }
+  .state-detail-sidebar__action:hover { color: var(--c-primary-dark); }
+
+  @media (min-width: 1180px) {
+    .state-detail-layout { grid-template-columns: minmax(0, 1fr) minmax(17rem, 20rem); }
+    .state-detail-sidebar { position: sticky; top: calc(var(--stack-height) + var(--sp-4)); }
+  }
+
+  @media (min-width: 760px) {
+    .state-detail-status { grid-template-columns: minmax(12rem, .8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 4rem); }
+    .state-detail-stations__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (min-width: 840px) {
+    .state-detail-stations__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+</style>

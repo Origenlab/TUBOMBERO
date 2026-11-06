@@ -1,0 +1,9 @@
+---
+import StateDirectoryDetail from '@components/StateDirectoryDetail.astro';
+import { DIRECTORY_STATES } from '@config/site';
+
+const state = DIRECTORY_STATES.find((item) => item.slug === 'coahuila');
+if (!state) throw new Error('No se encontró la ficha de directorio para Coahuila.');
+---
+
+<StateDirectoryDetail state={state} />
