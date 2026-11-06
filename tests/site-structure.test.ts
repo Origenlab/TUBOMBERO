@@ -33,7 +33,8 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(SITE.name).toBe('Tu Bombero');
     expect(SITE.business).toBeUndefined();
     expect(SITE.allowSelfReviews).toBe(false);
-    expect(CONTACT.whatsapp).toBeUndefined();
+    expect(CONTACT.whatsapp).toBe('529381049576');
+    expect(CONTACT.phoneE164).toBe('+529381049576');
     expect(TAXONOMY.categories).toHaveLength(8);
     expect(TAXONOMY.services).toHaveLength(4);
     expect(TAXONOMY.sectors).toHaveLength(8);
@@ -97,12 +98,14 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(home).toContain('¿Qué es la protección contra incendios?');
   });
 
-  it('mantiene el formulario de cotización deshabilitado sin WhatsApp y limpia el footer', () => {
+  it('envía el formulario de cotización a WhatsApp (deshabilitado solo sin número) y limpia el footer', () => {
     const faq = read('src/components/FAQWithContact.astro');
     const footer = read('src/components/Footer.astro');
     expect(faq).toContain('waNumber?: string');
     expect(faq).toContain('disabled={!waReady}');
     expect(faq).toContain('Canal de WhatsApp en configuración.');
+    expect(faq).toContain('waUrl(WA_MESSAGES.cotizar)');
+    expect(faq).toContain('encodeURIComponent');
     expect(footer).toContain('href="/servicios"');
     expect(footer).toContain('/sectores#sector-${sec.slug}');
     expect(footer).not.toContain('href="/blog"');

@@ -1,7 +1,7 @@
 ---
 title: Contacto
 seoTitle: "Contacto y cotización de equipo contra incendios"
-description: "Prepara tu cotización de equipo y sistemas contra incendios: qué datos reunir, cómo es el proceso y el estado de los canales de atención de Tu Bombero."
+description: "Cotiza equipo y sistemas contra incendios por WhatsApp con Tu Bombero: qué datos reunir, cómo es el proceso y el formulario que arma tu solicitud."
 keyword: cotización de equipo contra incendios
 secondary: [contacto Tu Bombero, cotizar equipo contra incendios]
 intent: navegacional
@@ -15,7 +15,7 @@ hero:
   after: con información clara.
   paragraphs:
     - "Una buena cotización empieza con una necesidad bien descrita. En esta página encontrarás cómo es el proceso para solicitar equipo o servicios contra incendio, qué información conviene reunir antes de escribirnos y el formulario de cotización con los campos que permiten preparar una propuesta precisa."
-    - "Los canales de atención de Tu Bombero están en configuración: todavía no publicamos teléfono, WhatsApp, correo, dirección ni horario. Se darán a conocer aquí en cuanto estén confirmados, y mientras tanto puedes preparar tu solicitud con el formulario."
+    - "El canal de atención de Tu Bombero es WhatsApp al 938 104 9576. Al enviar el formulario se abre WhatsApp con tu solicitud ya redactada; también puedes escribir o llamar directamente a ese número."
   ctas:
     - { text: Formulario de cotización de equipo, href: "#cotizar", variant: primary }
     - { text: Datos para cotizar equipo contra incendios, href: "#que-preparar", variant: outline }
@@ -73,7 +73,7 @@ sections:
     accent: la cotización.
     desc: Respuestas sobre el formulario, los canales de atención y la información que se solicita.
     body:
-      - "Estas respuestas explican cómo funciona el formulario de cotización mientras los canales de atención se terminan de configurar y qué ocurre con la información que compartes."
+      - "Estas respuestas explican cómo funciona el formulario de cotización, por qué canal llega tu solicitud y qué ocurre con la información que compartes."
       - "Si tu instalación tiene condiciones especiales, como líquidos inflamables, cocinas industriales o cuartos eléctricos, descríbelas en el campo de detalle para recibir una propuesta acorde con tu riesgo."
     help:
       eyebrow: ¿Aún no sabes qué pedir?
@@ -84,15 +84,15 @@ sections:
         - { label: Guías de protección contra incendios, href: /guias }
     items:
       - question: ¿Cómo solicito una cotización de equipo contra incendios?
-        answer: Completa el formulario de cotización con tu nombre, empresa o institución, estado, tipo de instalación, el equipo o servicio que te interesa y el detalle de tu necesidad. Al enviarlo se genera un mensaje con esa información para el canal de atención.
-      - question: ¿Por qué no aparece un teléfono o WhatsApp?
-        answer: Los canales de atención de Tu Bombero están en configuración. Preferimos no publicar números, correos ni direcciones provisionales; se darán a conocer en esta página en cuanto estén confirmados.
+        answer: Completa el formulario de cotización con tu nombre, empresa o institución, estado, tipo de instalación, el equipo o servicio que te interesa y el detalle de tu necesidad. Al enviarlo se abre WhatsApp con un mensaje que reúne esa información, listo para enviar.
+      - question: ¿Por qué canal se atiende la cotización?
+        answer: Por WhatsApp, al 938 104 9576. El formulario arma el mensaje con tus datos y lo abre en WhatsApp para que lo envíes; si prefieres, escribe o llama directamente a ese número.
       - question: ¿Qué datos necesito para cotizar?
         answer: Ayuda indicar el tipo de instalación y su superficie aproximada, el equipo o servicio que buscas, el equipo que ya tienes y su antigüedad, los materiales inflamables que se manejan y la fecha en que lo necesitas.
       - question: ¿Puedo cotizar equipo y servicios en la misma solicitud?
         answer: Sí. En el campo de detalle puedes describir tanto el equipo como el servicio de instalación, mantenimiento o capacitación que necesitas, para recibir una propuesta integral.
       - question: ¿Se guarda la información que envío?
-        answer: El formulario no almacena datos en el sitio. Al pulsar el botón se abre un mensaje con la información que escribiste para enviarla por el canal de atención; el tratamiento de los datos se describe en el aviso de privacidad.
+        answer: El formulario no almacena datos en el sitio. Al pulsar el botón se abre WhatsApp con la información que escribiste para que la envíes; el tratamiento de los datos se describe en el aviso de privacidad.
 ---
 
 | Tipo de solicitud | Datos que conviene reunir | Dónde revisar antes |

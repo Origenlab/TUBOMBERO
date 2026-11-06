@@ -3,7 +3,7 @@
 import FAQAccordion from '@components/FAQAccordion.astro'
 import Icon from '@components/Icon.astro'
 import SectionHeading from '@components/SectionHeading.astro'
-import { CATEGORIES, CONTACT, SECTORS, SERVICES } from '@config/site'
+import { CATEGORIES, CONTACT, SECTORS, SERVICES, WA_MESSAGES, waUrl } from '@config/site'
 
 interface FAQItem { question: string; answer: string }
 interface Help { eyebrow: string; title: string; text: string; links: { label: string; href: string; variant?: 'primary' | 'outline' }[] }
@@ -54,6 +54,8 @@ const STATES = [
   'Zacatecas',
 ] as const
 const waReady = Boolean(waNumber)
+// Enlace directo sin JS: mismo número del SSoT con el mensaje de cotización precargado.
+const waFallback = waUrl(WA_MESSAGES.cotizar)
 ---
 
 <section id={id} class="fwc">
@@ -96,6 +98,7 @@ const waReady = Boolean(waNumber)
 
             <button type="submit" class="fwc__btn" disabled={!waReady} aria-disabled={!waReady}><Icon name="whatsapp" size={20} />Cotizar equipo contra incendios por WhatsApp</button>
             {!waReady && <p class="fwc__notice" role="status">Canal de WhatsApp en configuración. Pronto podrás enviar tu solicitud desde aquí.</p>}
+            {waFallback && <p class="fwc__fallback">¿No se abre WhatsApp? Escríbenos directo: <a href={waFallback} target="_blank" rel="noopener noreferrer">wa.me/{CONTACT.whatsapp}</a>{CONTACT.phone && <> · {CONTACT.phone}</>}</p>}
             <p class="fwc__privacy">Al pulsar el botón se abre WhatsApp con tu mensaje. No guardamos ningún dato.</p>
           </form>
         </div>
@@ -116,8 +119,21 @@ const waReady = Boolean(waNumber)
     const sector = String(data.get('sector') || '').trim()
     const interest = String(data.get('interest') || '').trim()
     const detail = String(data.get('detail') || '').trim()
-    const text = [`Hola, soy ${name} de ${company} (${state}).`, interest && `Me interesa: ${interest}.`, sector && `Tipo de instalación: ${sector}.`, detail && `Detalle: ${detail}`].filter(Boolean).join(' ')
-    window.open(`https://${'wa' + '.me'}/${waNumber}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer')
+    const lines = [
+      'Hola, quiero cotizar equipo contra incendios.',
+      '',
+      `Nombre: ${name}`,
+      `Empresa o institución: ${company}`,
+      `Estado: ${state}`,
+    ]
+    if (sector) lines.push(`Tipo de instalación: ${sector}`)
+    lines.push(`Equipo o servicio de interés: ${interest}`)
+    if (detail) lines.push(`Detalle: ${detail}`)
+    const url = `https://${'wa' + '.me'}/${waNumber}?text=${encodeURIComponent(lines.join('\n'))}`
+    // Sin 'noopener' en features: con él window.open devuelve null siempre y no se detecta el bloqueo.
+    const win = window.open(url, '_blank')
+    if (win) win.opener = null
+    else window.location.href = url
   })
 </script>
 
@@ -161,6 +177,8 @@ const waReady = Boolean(waNumber)
   .fwc__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); width: 100%; padding: .85em 1.2em; font-family: var(--font-heading); font-size: var(--text-base); font-weight: var(--weight-bold); color: var(--c-white); background: var(--c-primary); border: 0; border-radius: var(--radius-md); cursor: pointer; transition: background var(--transition), transform var(--transition); }
   .fwc__btn:hover:not(:disabled) { background: var(--c-primary-dark); transform: translateY(-1px); }
   .fwc__btn:disabled { cursor: not-allowed; opacity: .55; }
+  .fwc__fallback { margin: 0; font-size: var(--text-xs); line-height: var(--leading-normal); text-align: center; color: var(--c-ink-2); }
+  .fwc__fallback a { color: var(--c-primary); font-weight: var(--weight-semibold); }
   .fwc__notice, .fwc__privacy { margin: 0; font-size: var(--text-xs); line-height: var(--leading-normal); text-align: center; color: var(--c-muted); }
   .fwc__notice { padding: var(--sp-3); background: var(--c-primary-tint); border-radius: var(--radius-md); }
   .fwc__privacy { margin-top: calc(var(--sp-1) * -1); }

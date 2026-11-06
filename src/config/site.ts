@@ -10,7 +10,7 @@ export const SITE = {
   lang: 'es-MX',
   locale: 'es-MX',
   description: 'Equipos y soluciones contra incendio para organizaciones que requieren orientar su compra en México.',
-  contactStatus: 'Canales de atención en configuración',
+  contactStatus: 'Atención por WhatsApp al 938 104 9576',
   defaultImage: '/images/og/proteccion-contra-incendios-tubombero.jpg',
   trailingSlash: 'never' as const,
   searchUrl: undefined as string | undefined,
@@ -48,10 +48,10 @@ export const KEYWORDS = [
 ] as const;
 
 export const CONTACT = {
-  phone: undefined as string | undefined,
-  phoneE164: undefined as string | undefined,
-  phoneRaw: undefined as string | undefined,
-  whatsapp: undefined as string | undefined,
+  phone: '938 104 9576' as string | undefined,
+  phoneE164: '+529381049576' as string | undefined,
+  phoneRaw: '+529381049576' as string | undefined,
+  whatsapp: '529381049576' as string | undefined,
   email: undefined as string | undefined,
   street: undefined as string | undefined,
   city: undefined as string | undefined,
