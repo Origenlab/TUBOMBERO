@@ -27,8 +27,7 @@ const { title, excerpt, href, cta, num, image, imageAlt } = Astro.props;
 </article>
 
 <style>
-  .acard { position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform var(--transition), box-shadow var(--transition); }
-  .acard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .acard { position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
   .acard__media-link { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--c-surface); }
   .acard__img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .acard__body { display: flex; flex-direction: column; flex: 1; gap: var(--sp-3); padding: var(--sp-5); }
@@ -40,5 +39,4 @@ const { title, excerpt, href, cta, num, image, imageAlt } = Astro.props;
   .acard__cta { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: var(--sp-2); margin-top: auto; color: var(--c-primary); font-size: var(--text-sm); font-weight: var(--weight-bold); text-decoration: none; }
   .acard__cta:hover { gap: var(--sp-3); }
   .acard__cta svg { flex: 0 0 auto; }
-  @media (prefers-reduced-motion: reduce) { .acard { transition: none; } }
 </style>

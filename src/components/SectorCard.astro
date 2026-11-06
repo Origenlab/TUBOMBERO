@@ -14,7 +14,7 @@ const { label, icon, num, href } = Astro.props;
 
 <style>
   .sector-card { display: grid; grid-template-columns: auto 1fr auto; gap: var(--sp-3); align-items: center; min-height: 7rem; padding: var(--sp-4); border: var(--border); border-radius: var(--radius-lg); background: var(--c-white); color: var(--c-ink); text-decoration: none; box-shadow: var(--shadow-sm); }
-  .sector-card:hover { color: var(--c-primary-dark); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .sector-card:hover { color: var(--c-primary-dark); box-shadow: var(--shadow-md); }
   .sector-card__icon { grid-row: span 2; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radius-md); background: var(--c-primary); color: var(--c-white); font-size: var(--text-xl); }
   .sector-card__num { color: var(--c-primary); font-size: var(--text-xs); font-weight: var(--weight-bold); }
   .sector-card__label { grid-column: 2 / -1; font-family: var(--font-heading); font-size: var(--text-base); font-weight: var(--weight-semibold); line-height: var(--leading-snug); }

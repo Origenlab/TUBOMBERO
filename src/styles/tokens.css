@@ -172,14 +172,10 @@ img, picture, video, canvas { max-width: 100%; }
   font-weight: var(--weight-semibold, 600);
   text-decoration: none;
   z-index: 9999;
-  transition: top .15s ease-out;
 }
 .skip-link:focus,
 .skip-link:focus-visible {
   top: var(--sp-2, .5rem);
   outline: 2px solid var(--c-primary);
   outline-offset: 2px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .skip-link { transition: none; }
 }

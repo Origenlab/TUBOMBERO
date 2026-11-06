@@ -137,9 +137,7 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: transform var(--transition), box-shadow var(--transition);
   }
-  .ccard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
   /* Imagen de cabecera */
   .ccard__media-link { display: block; }
@@ -226,8 +224,5 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
   .ccard__cta:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
   /* CTA inactivo para tarjetas 'próximo' (no enlaza). */
 
-  @media (prefers-reduced-motion: reduce) {
-    .ccard, .ccard__cta { transition: none; }
-  }
   @media (max-width: 768px) { .ccard__sub { min-height: 40px; display: inline-flex; align-items: center; } }
 </style>

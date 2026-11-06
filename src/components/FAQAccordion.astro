@@ -55,10 +55,9 @@ const faqSchema = emitSchema ? {
   .faq__item[open] .faq__q { background: var(--c-surface); }
   .faq--bare { padding: 0; }
   .faq--bare .faq__inner { max-width: none; padding-inline: 0; }
-  .faq__chevron { flex-shrink: 0; transition: transform .2s ease; color: var(--c-primary); }
+  .faq__chevron { flex-shrink: 0; color: var(--c-primary); }
   .faq__item[open] .faq__chevron { transform: rotate(180deg); }
   .faq__a { padding: var(--sp-4) var(--sp-5); color: var(--c-ink-2); line-height: var(--leading-relaxed); border-top: var(--border); }
   .faq__a :global(p) { margin: 0; }
   .faq__a :global(a) { color: var(--c-primary); }
-  @media (prefers-reduced-motion: reduce) { .faq__chevron { transition: none; } }
 </style>
