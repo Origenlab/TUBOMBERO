@@ -22,8 +22,16 @@ describe('contrato de migración a Astro 7', () => {
     expect(headers).toContain("Content-Security-Policy: default-src 'self'");
     expect(headers).toContain("frame-ancestors 'none'");
     expect(headers).toContain('Permissions-Policy: camera=(), microphone=(), geolocation=()');
-    expect(workflow).toContain('cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd');
-    expect(workflow).not.toContain('cloudflare/wrangler-action@v3');
+    expect(workflow).toContain('cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0');
+    expect(workflow).not.toContain('cloudflare/wrangler-action@v4.1.3');
+  });
+
+  it('fija las Actions actuales por SHA y evita runtimes obsoletos', () => {
+    const workflow = read('.github/workflows/deploy.yml');
+
+    expect(workflow).toContain('actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1');
+    expect(workflow).toContain('actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0');
+    expect(workflow).toContain('cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4.1.3');
   });
 
   it('endurece el layout raíz sin precargas tipográficas excesivas', () => {
