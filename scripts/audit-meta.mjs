@@ -1,146 +1,150 @@
 #!/usr/bin/env node
-/* ============================================================================
- * scripts/audit-meta.mjs — gate de SEO técnico (longitudes title/description)
- * ----------------------------------------------------------------------------
- * REGLA: cada página en src/pages/ debe tener <title> ≤60 chars y meta
- * description ≤160 chars. Espejo de los límites publicados en
- * `src/lib/seo.ts` (META_TITLE_MAX=60, META_DESC_MAX=160 vía buildMeta).
- *
- * USO:  npm run audit:meta
- *
- * QUÉ HACE:
- *  1. Walk recursivo de src/pages/ buscando archivos .astro.
- *  2. Para cada uno, encuentra la PRIMERA aparición de <PageLayout> y extrae
- *     los atributos title="..." y description="..." (strings literales).
- *  3. Si el valor es una expresión {…} (no literal), lo marca como "dinámico"
- *     y lo cuenta como SKIP (no falla, no aprueba ciegamente).
- *  4. Aplica los límites y emite tabla + exit 1 si hay fallas.
- *
- * NO ES un build hook: se corre manualmente o se invoca desde CI. Está
- * documentado en docs/MODULOS.md §6 (Auditoría de metadatos).
- * ========================================================================== */
 
-import fs from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..');
-const PAGES_DIR = path.join(ROOT, 'src', 'pages');
-
-// Límites — espejo de src/lib/seo.ts (META_TITLE_MAX, META_DESC_MAX).
+const DIST = path.resolve('dist');
+const ORIGIN = 'https://tubombero.com';
 const TITLE_MAX = 60;
-const DESC_MAX = 160;
+const DESCRIPTION_MAX = 155;
+const DESCRIPTION_MIN = 100;
 
-// ── walk recursivo de .astro ────────────────────────────────────────────────
-function walk(dir) {
-  const out = [];
-  for (const name of fs.readdirSync(dir)) {
-    if (name.startsWith('.')) continue; // ignora .fuse_hidden* y dotfiles
-    const full = path.join(dir, name);
-    const stat = fs.statSync(full);
-    if (stat.isDirectory()) out.push(...walk(full));
-    else if (name.endsWith('.astro')) out.push(full);
-  }
-  return out;
-}
-
-// ── extractor: del primer <PageLayout ...> saca title y description ─────────
-// Devuelve { title: string | null, description: string | null, dynamic: { title, description } }
-// - string → valor literal entre comillas
-// - null   → no encontrado o expresión {…} (dinámico)
-function extractMeta(src) {
-  const open = src.indexOf('<PageLayout');
-  if (open === -1) return { title: null, description: null, dynamicTitle: false, dynamicDesc: false, hasLayout: false };
-  // Acota al bloque del tag de apertura (hasta el primer '>').
-  const end = src.indexOf('>', open);
-  const block = end === -1 ? src.slice(open) : src.slice(open, end);
-
-  const grab = (attr) => {
-    // Literal "…" o '…'
-    const lit = block.match(new RegExp(`${attr}=("([^"]*)"|'([^']*)')`));
-    if (lit) return { val: lit[2] ?? lit[3] ?? '', dynamic: false };
-    // Dinámico {…}
-    const dyn = block.match(new RegExp(`${attr}=\\{`));
-    if (dyn) return { val: null, dynamic: true };
-    return { val: null, dynamic: false };
-  };
-
-  const t = grab('title');
-  const d = grab('description');
-  return {
-    title: t.val,
-    description: d.val,
-    dynamicTitle: t.dynamic,
-    dynamicDesc: d.dynamic,
-    hasLayout: true,
-  };
-}
-
-// ── audit ───────────────────────────────────────────────────────────────────
-const files = walk(PAGES_DIR).sort();
-const rows = [];
-let failed = 0;
-let skipped = 0;
-let passed = 0;
-
-for (const file of files) {
-  const src = fs.readFileSync(file, 'utf8');
-  const m = extractMeta(src);
-  const rel = path.relative(ROOT, file);
-
-  if (!m.hasLayout) {
-    rows.push({ file: rel, status: '—', tLen: '—', dLen: '—', note: 'sin <PageLayout> (probable utility/redirect)' });
-    skipped++;
-    continue;
-  }
-
-  // Si NO declara title NI description literal, probablemente delega en SITE.seo
-  // (caso típico: home keyword-driven). Lo marcamos SKIP, no FAIL.
-  const noTitleAny = m.title == null && !m.dynamicTitle;
-  const noDescAny = m.description == null && !m.dynamicDesc;
-  if (noTitleAny && noDescAny) {
-    rows.push({ file: rel, status: 'SKIP', tLen: '—', dLen: '—', note: 'sin title/description literales (delega en SITE.seo o keywords-first)' });
-    skipped++;
-    continue;
-  }
-
-  const errs = [];
-  if (m.dynamicTitle) errs.push('title={…} dinámico');
-  if (m.dynamicDesc) errs.push('description={…} dinámico');
-  if (noTitleAny && !m.dynamicTitle) errs.push('title ausente');
-  if (noDescAny && !m.dynamicDesc) errs.push('description ausente');
-  if (m.title && m.title.length > TITLE_MAX) errs.push(`title ${m.title.length} > ${TITLE_MAX}`);
-  if (m.description && m.description.length > DESC_MAX) errs.push(`description ${m.description.length} > ${DESC_MAX}`);
-
-  const hardErr = errs.some((e) => /> \d+$/.test(e) || e.endsWith('ausente'));
-  if (errs.length === 0) {
-    rows.push({ file: rel, status: 'OK', tLen: m.title.length, dLen: m.description.length, note: '' });
-    passed++;
-  } else if (!hardErr) {
-    rows.push({ file: rel, status: 'SKIP', tLen: m.title?.length ?? '—', dLen: m.description?.length ?? '—', note: errs.join(' · ') });
-    skipped++;
-  } else {
-    rows.push({ file: rel, status: 'FAIL', tLen: m.title?.length ?? '—', dLen: m.description?.length ?? '—', note: errs.join(' · ') });
-    failed++;
-  }
-}
-
-// ── reporte ─────────────────────────────────────────────────────────────────
-const pad = (s, n) => String(s).padEnd(n);
-console.log(`audit-meta · src/pages/*.astro · límites: title ≤${TITLE_MAX} · description ≤${DESC_MAX}`);
-console.log('─'.repeat(120));
-console.log(`${pad('STATUS', 6)} ${pad('T', 4)} ${pad('D', 4)} FILE / NOTE`);
-console.log('─'.repeat(120));
-for (const r of rows) {
-  console.log(`${pad(r.status, 6)} ${pad(r.tLen, 4)} ${pad(r.dLen, 4)} ${r.file}${r.note ? '  · ' + r.note : ''}`);
-}
-console.log('─'.repeat(120));
-console.log(`Resumen: ${passed} OK · ${skipped} SKIP · ${failed} FAIL  (total ${files.length})`);
-
-if (failed > 0) {
-  console.error(`\n✗ audit-meta falló: ${failed} página(s) fuera de los límites.`);
+if (!existsSync(DIST)) {
+  console.error('audit-meta: falta dist/. Ejecuta el build antes de la auditoría.');
   process.exit(1);
 }
-console.log('\n✓ audit-meta OK.');
-process.exit(0);
+
+function walkHtml(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) return walkHtml(file);
+    return entry.isFile() && entry.name.endsWith('.html') ? [file] : [];
+  });
+}
+
+function decode(value = '') {
+  return value
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([\da-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
+    .replaceAll('&amp;', '&')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#39;', "'")
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>');
+}
+
+function attribute(tag, name) {
+  const match = tag.match(new RegExp(`\\b${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)')`, 'i'));
+  return decode(match?.[1] ?? match?.[2] ?? '');
+}
+
+function metaContent(html, key, value) {
+  const matches = (html.match(/<meta\b[^>]*>/gi) ?? [])
+    .filter((tag) => attribute(tag, key).toLowerCase() === value.toLowerCase());
+  return { count: matches.length, value: matches[0] ? attribute(matches[0], 'content') : '' };
+}
+
+function linksByRel(html, rel) {
+  return (html.match(/<link\b[^>]*>/gi) ?? [])
+    .filter((tag) => attribute(tag, 'rel').toLowerCase().split(/\s+/).includes(rel));
+}
+
+function isRedirect(html) {
+  return /<meta\b[^>]*http-equiv\s*=\s*(["'])refresh\1[^>]*>/i.test(html)
+    || /location\.replace\s*\(/i.test(html);
+}
+
+function sitemapUrls() {
+  const files = readdirSync(DIST).filter((name) => /^sitemap-\d+\.xml$/.test(name));
+  return new Set(files.flatMap((name) => {
+    const xml = readFileSync(path.join(DIST, name), 'utf8');
+    return [...xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi)].map((match) => decode(match[1].trim()));
+  }));
+}
+
+const inSitemap = sitemapUrls();
+const indexableCanonicals = new Set();
+const canonicalOwners = new Map();
+const failures = [];
+let checked = 0;
+let redirects = 0;
+let noindexPages = 0;
+
+for (const file of walkHtml(DIST).sort()) {
+  const relative = path.relative(DIST, file).replaceAll(path.sep, '/');
+  const html = readFileSync(file, 'utf8');
+  if (isRedirect(html)) {
+    redirects++;
+    continue;
+  }
+
+  checked++;
+  const reasons = [];
+  const is404 = /(^|\/)404(\/index)?\.html$/.test(relative);
+  const titles = [...html.matchAll(/<title\b[^>]*>([\s\S]*?)<\/title>/gi)].map((match) => decode(match[1]).trim());
+  const description = metaContent(html, 'name', 'description');
+  const robots = metaContent(html, 'name', 'robots');
+  const canonicals = linksByRel(html, 'canonical');
+  const canonical = canonicals[0] ? attribute(canonicals[0], 'href') : '';
+  const noindex = robots.value.toLowerCase().split(',').map((item) => item.trim()).includes('noindex');
+
+  if (titles.length !== 1) reasons.push(`requiere un title; encontró ${titles.length}`);
+  else if (!titles[0] || titles[0].length > TITLE_MAX) reasons.push(`title de ${titles[0]?.length ?? 0}/${TITLE_MAX} caracteres`);
+
+  if (description.count !== 1) reasons.push(`requiere una meta description; encontró ${description.count}`);
+  else {
+    if (!description.value || description.value.length > DESCRIPTION_MAX) {
+      reasons.push(`description de ${description.value.length}/${DESCRIPTION_MAX} caracteres`);
+    }
+    if (!noindex && !is404 && description.value.length < DESCRIPTION_MIN) {
+      reasons.push(`description indexable demasiado corta (${description.value.length}/${DESCRIPTION_MIN})`);
+    }
+  }
+
+  if (robots.count !== 1) reasons.push(`requiere una directiva robots; encontró ${robots.count}`);
+  if (canonicals.length !== 1) reasons.push(`requiere un canonical; encontró ${canonicals.length}`);
+  if (canonical) {
+    if (canonical !== ORIGIN && !canonical.startsWith(`${ORIGIN}/`)) reasons.push(`canonical fuera del origen: ${canonical}`);
+    if (/\.html(?:$|[?#])/.test(canonical)) reasons.push(`canonical contiene .html: ${canonical}`);
+    if (canonical !== `${ORIGIN}/` && canonical.endsWith('/')) reasons.push(`canonical termina en slash: ${canonical}`);
+    const owner = canonicalOwners.get(canonical);
+    if (owner) reasons.push(`canonical duplicado con ${owner}`);
+    else canonicalOwners.set(canonical, relative);
+  }
+
+  const alternates = linksByRel(html, 'alternate');
+  for (const lang of ['es-MX', 'x-default']) {
+    const match = alternates.find((tag) => attribute(tag, 'hreflang') === lang);
+    if (!match || attribute(match, 'href') !== canonical) reasons.push(`hreflang ${lang} ausente o distinto del canonical`);
+  }
+
+  const ogUrl = metaContent(html, 'property', 'og:url');
+  if (ogUrl.count !== 1 || ogUrl.value !== canonical) reasons.push('og:url ausente o distinto del canonical');
+
+  const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type\s*=\s*(["'])application\/ld\+json\1[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const [, , payload] of jsonLdBlocks) {
+    try {
+      JSON.parse(payload);
+    } catch {
+      reasons.push('JSON-LD inválido');
+    }
+  }
+
+  if (noindex || is404) {
+    noindexPages++;
+    if (canonical && inSitemap.has(canonical)) reasons.push('URL noindex incluida en sitemap');
+  } else if (canonical) {
+    indexableCanonicals.add(canonical);
+    if (!inSitemap.has(canonical)) reasons.push('URL indexable ausente del sitemap');
+  }
+
+  if (reasons.length) failures.push(`${relative}: ${reasons.join('; ')}`);
+}
+
+for (const url of inSitemap) {
+  if (!indexableCanonicals.has(url)) failures.push(`sitemap: URL sin página indexable correspondiente: ${url}`);
+}
+
+for (const failure of failures) console.error(`audit-meta: ${failure}`);
+console.log(`audit-meta: ${checked} páginas renderizadas · ${noindexPages} noindex · ${redirects} redirecciones · ${inSitemap.size} URLs en sitemap · ${failures.length} fallos`);
+if (failures.length) process.exit(1);

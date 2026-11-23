@@ -21,7 +21,7 @@ export const SITE = {
     description: 'Equipo y sistemas de protección contra incendios para empresas: extintores, alarmas, detectores de humo, hidrantes, señalización y equipo para brigadas.',
     image: '/images/og/proteccion-contra-incendios-tubombero.jpg',
     titleMaxLength: 60,
-    descriptionMaxLength: 160,
+    descriptionMaxLength: 155,
     appendBrand: false,
   },
   social: {

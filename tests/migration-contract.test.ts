@@ -46,7 +46,7 @@ describe('contrato de migración a Astro 7', () => {
   it('hace obligatorio el presupuesto de rendimiento después del build', () => {
     const packageJson = JSON.parse(read('package.json'));
 
-    expect(packageJson.scripts.postbuild).toBe('node scripts/check-dist-content.mjs && node scripts/check-budget.mjs');
+    expect(packageJson.scripts.postbuild).toBe('node scripts/audit-meta.mjs && node scripts/check-dist-content.mjs && node scripts/check-budget.mjs');
   });
 
   it('describe con precisión la analítica y la transferencia a WhatsApp', () => {
@@ -88,5 +88,24 @@ describe('contrato de migración a Astro 7', () => {
     expect(contentConfig).toContain('export const collections = { guias, paginas };');
     expect(contentConfig).not.toContain('const productos = defineCollection');
     expect(contentConfig).not.toContain('const casos = defineCollection');
+  });
+
+  it('audita el SEO renderizado y lo aplica como gate de postbuild', () => {
+    const packageJson = JSON.parse(read('package.json'));
+    const audit = read('scripts/audit-meta.mjs');
+
+    expect(packageJson.scripts.postbuild).toContain('node scripts/audit-meta.mjs');
+    expect(audit).toContain("path.resolve('dist')");
+    expect(audit).toContain('sitemap-');
+    expect(audit).toContain('noindex');
+    expect(audit).not.toContain("path.join(ROOT, 'src', 'pages')");
+  });
+
+  it('unifica el límite de descripciones y el canonical de portada', () => {
+    const site = read('src/config/site.ts');
+    const seo = read('src/lib/seo.ts');
+
+    expect(site).toContain('descriptionMaxLength: 155');
+    expect(seo).toContain("if (clean === base || clean === `${base}/`) return wantsSlash ? `${base}/` : base;");
   });
 });

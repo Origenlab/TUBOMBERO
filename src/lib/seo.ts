@@ -91,13 +91,13 @@ export function absUrl(path: string): string {
   // (F0-9b 2026-08 — lo detectó el gate scripts/check-url-shape.mjs.)
   clean = clean.replace(/\/index\.html$/i, '/').replace(/\.html$/i, '');
 
-  if (clean === base || clean === `${base}/`) return `${base}/`; // home
+  const wantsSlash = String(SITE.trailingSlash ?? 'never') === 'always';
+  if (clean === base || clean === `${base}/`) return wantsSlash ? `${base}/` : base; // home
   if (/\.\w{2,5}$/.test(clean)) return clean;                     // archivo con extensión
 
   // Widen a string: SITE.trailingSlash puede ser literal ('never'/'always') por
   // `as const` en site.ts; el cast mantiene la política data-driven sin que TS
   // marque la comparación como imposible (ts2367).
-  const wantsSlash = String(SITE.trailingSlash ?? 'never') === 'always';
   const hasSlash = clean.endsWith('/');
   if (wantsSlash && !hasSlash) clean = `${clean}/`;
   if (!wantsSlash && hasSlash) clean = clean.slice(0, -1);
@@ -152,7 +152,7 @@ export function formatTitle(title?: string): string {
   return `${capTitleCore(core, TITLE_MAX - TITLE_SUFFIX.length)}${TITLE_SUFFIX}`;
 }
 
-const META_MAX = SITE.seo?.descriptionMaxLength ?? 160;
+const META_MAX = SITE.seo?.descriptionMaxLength ?? 155;
 const WEAK_ENDINGS = new Set([
   'a', 'al', 'con', 'como', 'de', 'del', 'el', 'en', 'la', 'las', 'los',
   'para', 'por', 'sin', 'un', 'una', 'y', 'o', 'que',
