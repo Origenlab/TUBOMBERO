@@ -27,11 +27,9 @@
   --c-bg: #ffffff;
 
   /* ---------- TIPOGRAFÍA ---------- */
-  /* FONTS API (Astro 7): BaseLayout inyecta <Font cssVariable="--font-body">
-     que sobreescribe este valor con Inter + @font-face + size-adjust.
-     Los valores system-ui aquí son fallback para builds sin Fonts API activa. */
+  /* Inter se sirve desde @fontsource-variable/inter; system-ui queda como fallback. */
   --font-heading: var(--font-body); /* Frank: Inter como única familia */
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   --text-xs: .75rem;   --text-sm: .875rem;  --text-base: 1rem;
   --text-lg: 1.125rem; --text-xl: 1.25rem;  --text-2xl: 1.5rem;

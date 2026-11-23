@@ -30,8 +30,8 @@ describe('contrato de migración a Astro 7', () => {
     const layout = read('src/layouts/BaseLayout.astro');
 
     expect(layout).toContain('<meta name="theme-color" content={SITE.themeColor} />');
-    expect(layout).toContain('<Font cssVariable="--font-body" />');
-    expect(layout).not.toContain('<Font cssVariable="--font-body" preload />');
+    expect(layout).toContain("import '@fontsource-variable/inter';");
+    expect(layout).not.toContain('<Font');
   });
 
   it('escapa respuestas FAQ y expone el estado actual de navegación', () => {
@@ -107,5 +107,19 @@ describe('contrato de migración a Astro 7', () => {
 
     expect(site).toContain('descriptionMaxLength: 155');
     expect(seo).toContain("if (clean === base || clean === `${base}/`) return wantsSlash ? `${base}/` : base;");
+  });
+
+  it('sirve Inter localmente sin depender de Fontsource durante el build', () => {
+    const packageJson = JSON.parse(read('package.json'));
+    const config = read('astro.config.mjs');
+    const layout = read('src/layouts/BaseLayout.astro');
+    const tokens = read('src/styles/tokens.css');
+
+    expect(packageJson.dependencies['@fontsource-variable/inter']).toBe('^5.3.0');
+    expect(layout).toContain("import '@fontsource-variable/inter';");
+    expect(layout).not.toContain("import { Font } from 'astro:assets'");
+    expect(layout).not.toContain('<Font cssVariable="--font-body" />');
+    expect(config).not.toContain('fontProviders.fontsource()');
+    expect(tokens).toContain("--font-body: 'Inter Variable', system-ui");
   });
 });

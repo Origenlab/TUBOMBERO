@@ -25,7 +25,7 @@
 
 import { SITE } from "@config/site";
 import { buildMeta, buildSchema, buildKeywordTitle, buildKeywordDescription, type PageType, type SchemaData } from "@lib/seo";
-import { Font } from 'astro:assets';
+import '@fontsource-variable/inter';
 
 // Tokens de diseño (FUENTE ÚNICA, C2). Se importa UNA sola vez aquí — todo el
 // sitio cuelga de BaseLayout, así que basta este import para exponer las
@@ -152,19 +152,6 @@ const jsonLd = buildSchema(pageType, schemaData);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content={SITE.themeColor} />
-
-    {/*
-      ── Fonts API (Astro 7) — Inter (body) ──
-      El proveedor Fontsource descargó los woff2 durante el build y los sirve
-      desde este dominio (no Google CDN). <Font> emite:
-        - @font-face con la fuente real
-        - @font-face del fallback con size-adjust/ascent-override calculados
-          para CLS ≈ 0 (texto del sistema mismo tamaño que Inter/Outfit).
-      --font-body / --font-heading en tokens.css son placeholders system-ui;
-      esta <Font> los sobreescribe con el valor correcto vía cssVariable.
-      Configurado en astro.config.mjs → bloque `fonts: [...]`.
-    */}
-    <Font cssVariable="--font-body" />
 
     {/*
       ── Preconnect CDN de imágenes (E3) — opcional ──

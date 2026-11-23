@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 const categorySlugs = [
@@ -22,15 +22,6 @@ export default defineConfig({
   build: { format: 'file', inlineStylesheets: 'never' },
   prefetch: { defaultStrategy: 'hover' },
   redirects: Object.fromEntries(categorySlugs.map((slug) => [`/productos/categoria/${slug}`, `/productos/${slug}`])),
-  fonts: [{
-    name: 'Inter',
-    cssVariable: '--font-body',
-    provider: fontProviders.fontsource(),
-    weights: ['400', '500', '600', '700'],
-    styles: ['normal'],
-    subsets: ['latin'],
-    display: 'swap',
-  }],
   integrations: [sitemap({
     filter: (page) => !categorySlugs.some((slug) => page.endsWith(`/productos/${slug}`)) && !/\/(cookies|privacidad|terminos)$/.test(page),
     serialize(item) {
