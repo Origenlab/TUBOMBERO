@@ -18,14 +18,14 @@ hero:
     - "Empezamos por la protección pasiva, la menos conocida y una de las más importantes para que el fuego no se propague: la pintura intumescente para estructuras de acero, las puertas cortafuego, los materiales resistentes al fuego y el cálculo de la carga de fuego de cada área."
   ctas:
     - { text: Guías de protección pasiva contra incendios, href: "#guias", variant: primary }
-    - { text: Cotizar protección contra incendios, href: "#cotizar", variant: outline }
+    - { text: Solicitar cotización de protección contra incendios, href: "#cotizar", variant: outline }
 menu:
   items:
     - { label: Guías, href: "#guias", sub: Artículos técnicos }
     - { label: Sistemas, href: "#sistemas", sub: Activa, pasiva y prevención }
     - { label: Comparativa, href: "#comparativa", sub: Cómo actúa cada sistema }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar sistemas de protección, href: "#cotizar", sub: Sistemas contra incendios }
+  cta: { label: Solicitar cotización de sistemas de protección, href: "#cotizar", sub: Sistemas contra incendios }
 sections:
   - type: guides
     id: guias
@@ -47,24 +47,20 @@ sections:
       - "Pensar en capas ayuda a detectar huecos: un inmueble con extintores pero sin puertas cortafuego, o con detectores pero sin rutas de evacuación señalizadas, deja expuestas a las personas en la etapa que no se cubrió."
       - "El objetivo común es actuar desde el conato de incendio: prevenir, avisar a los ocupantes, controlar el fuego con los sistemas de extinción —extintores, bocas de incendio equipadas, rociadores, espuma o polvo químico— y contener el humo y los gases tóxicos para minimizar daños y pérdidas."
     items:
-      - num: "01"
-        title: Prevención
+      - title: Prevención
         desc: Orden y limpieza, control de fuentes de calor, almacenamiento seguro de inflamables, señalización y capacitación del personal.
         links:
           - { label: Señalamientos de protección civil, href: /productos/senalizacion-y-evacuacion }
-      - num: "02"
-        title: Detección y alarma
+      - title: Detección y alarma
         desc: Detectores de humo y temperatura, paneles de control y alarmas que avisan a tiempo para iniciar la evacuación.
         links:
           - { label: Detección y alarma de incendios, href: /productos/deteccion-y-alarma }
-      - num: "03"
-        title: Protección activa
+      - title: Protección activa
         desc: Extintores, red contra incendios, hidrantes, rociadores y sistemas de supresión que controlan o extinguen el fuego.
         links:
           - { label: Extintores contra incendio, href: /productos/extintores-y-emergencia }
           - { label: Red contra incendios, href: /productos/sistemas-contra-incendio }
-      - num: "04"
-        title: Protección pasiva
+      - title: Protección pasiva
         desc: Muros, puertas y sellos cortafuego, pintura intumescente y materiales resistentes al fuego que contienen el incendio.
         links:
           - { label: Guía de puertas cortafuego, href: /guias/puertas-cortafuego }

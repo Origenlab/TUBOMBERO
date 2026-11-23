@@ -25,7 +25,7 @@ menu:
     - { label: Cómo trabajamos, href: "#como-trabajamos", sub: Criterios de información }
     - { label: Servicios, href: "#servicios", sub: Líneas de servicio }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar protección contra incendios, href: "#cotizar", sub: Protección contra incendios }
+  cta: { label: Solicitar cotización de protección contra incendios, href: "#cotizar", sub: Protección contra incendios }
 sections:
   - type: stages
     id: que-hacemos
@@ -37,23 +37,19 @@ sections:
       - "Hay quien llega sabiendo qué equipo necesita y quien apenas está definiendo el problema. Por eso organizamos Tu Bombero en cuatro rutas: el catálogo por familias de equipo, los servicios por etapa del proyecto, las recomendaciones por sector y las guías técnicas."
       - "Las cuatro se enlazan entre sí. Una guía lleva a la familia de equipo que menciona, un sector lleva a los productos y servicios que suele necesitar, y todas terminan en el mismo formulario de cotización."
     items:
-      - num: "01"
-        title: Catálogo por necesidad
+      - title: Catálogo por necesidad
         desc: Equipo y material contra incendios agrupado en familias, desde extintores y red contra incendios hasta equipo para brigadas y señalización.
         links:
           - { label: Catálogo de material contra incendios, href: /productos }
-      - num: "02"
-        title: Servicios por etapa
+      - title: Servicios por etapa
         desc: Asesoría técnica, instalación de sistemas, mantenimiento y capacitación ordenados según el ciclo de vida de cada sistema.
         links:
           - { label: Servicios de protección contra incendios, href: /servicios }
-      - num: "03"
-        title: Rutas por sector
+      - title: Rutas por sector
         desc: Riesgos, puntos de atención y equipo recomendado para ocho tipos de centro de trabajo.
         links:
           - { label: Prevención de incendios por sector, href: /sectores }
-      - num: "04"
-        title: Guías técnicas
+      - title: Guías técnicas
         desc: Artículos prácticos sobre sistemas de protección, protección pasiva y cálculo del riesgo de incendio.
         links:
           - { label: Guías de protección contra incendios, href: /guias }

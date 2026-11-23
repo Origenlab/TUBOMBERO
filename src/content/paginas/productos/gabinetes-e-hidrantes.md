@@ -18,7 +18,7 @@ hero:
     - "Un gabinete contra incendio resguarda la manguera, la válvula y el extintor del polvo, los golpes y el mal uso, y los mantiene visibles para que el personal los encuentre de inmediato. Los hidrantes y las estaciones de manguera completan el acceso al agua dentro y fuera del inmueble."
     - "Esta familia reúne gabinetes para manguera y para extintor, hidrantes y estaciones de manguera. Su número y ubicación se definen en el proyecto de la red contra incendios y en el análisis de riesgo, y deben señalizarse conforme a la NOM-003-SEGOB-2011."
   ctas:
-    - { text: "Cotizar gabinetes contra incendio", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de gabinetes contra incendio", href: "#cotizar", variant: primary }
     - { text: "Tipos de gabinetes contra incendio", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar gabinetes contra incendio, href: "#cotizar", sub: "Gabinetes e hidrantes" }
+  cta: { label: Solicitar cotización de gabinetes contra incendio, href: "#cotizar", sub: "Gabinetes e hidrantes" }
 sections:
   - type: feature
     id: subcategorias

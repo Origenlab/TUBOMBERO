@@ -17,7 +17,7 @@ hero:
     - "Un sistema contra incendio solo cumple su función si se elige de acuerdo con el riesgo, se instala conforme a su especificación y recibe mantenimiento preventivo a lo largo del tiempo. Nuestros servicios contra incendios acompañan ese ciclo completo: asesoría para seleccionar el equipo, instalación de sistemas, mantenimiento y capacitación de las personas que responderán en caso de emergencia."
     - "Cada servicio se define a partir del inmueble, del tipo de fuego que puede presentarse y de lo que establecen las normas oficiales mexicanas, en particular la NOM-002-STPS-2010 para los centros de trabajo. El alcance, los tiempos y los entregables se acuerdan en la cotización de cada proyecto."
   ctas:
-    - { text: Cotizar servicios contra incendios, href: "#cotizar", variant: primary }
+    - { text: Solicitar cotización de servicios contra incendios, href: "#cotizar", variant: primary }
     - { text: Líneas de servicio contra incendios, href: "#servicios", variant: outline }
 menu:
   items:
@@ -25,7 +25,7 @@ menu:
     - { label: Ciclo, href: "#ciclo", sub: Evaluar, instalar y mantener }
     - { label: Alcance, href: "#alcance", sub: Qué preparar y qué norma aplica }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas antes de contratar }
-  cta: { label: Cotizar servicios contra incendios, href: "#cotizar", sub: Protección contra incendios }
+  cta: { label: Solicitar cotización de servicios contra incendios, href: "#cotizar", sub: Protección contra incendios }
 sections:
   - type: services
     id: servicios
@@ -46,25 +46,21 @@ sections:
       - "Un sistema de detección activa la alarma de incendio ante la presencia de humo o calor; un sistema de extinción suministra el agente extintor que controla el fuego. Ambos dependen de una buena especificación inicial y de revisiones periódicas que confirmen que siguen funcionando como se diseñaron."
       - "Ordenar los servicios por etapa facilita planear el presupuesto, programar el mantenimiento con anticipación y mantener la continuidad de las operaciones del centro de trabajo mientras se atiende cada sistema."
     items:
-      - num: "01"
-        title: Evaluar el riesgo
+      - title: Evaluar el riesgo
         desc: Revisión del inmueble, de los materiales que se manejan y del tipo de fuego posible para especificar el equipo y el sistema adecuados.
         links:
           - { label: Catálogo de material contra incendios, href: /productos }
-      - num: "02"
-        title: Instalar los sistemas
+      - title: Instalar los sistemas
         desc: Integración de detectores y sensores, sistemas de alarma, red contra incendios, gabinetes e hidrantes de acuerdo con la especificación de cada tipo de sistema.
         links:
           - { label: Detección y alarma de incendios, href: /productos/deteccion-y-alarma }
           - { label: Red contra incendios, href: /productos/sistemas-contra-incendio }
-      - num: "03"
-        title: Mantener en condiciones
+      - title: Mantener en condiciones
         desc: Servicio de mantenimiento preventivo y correctivo de extintores, hidrantes, mangueras, válvulas y gabinetes para conservar la eficacia de los sistemas.
         links:
           - { label: Extintores contra incendio, href: /productos/extintores-y-emergencia }
           - { label: Gabinetes contra incendio, href: /productos/gabinetes-e-hidrantes }
-      - num: "04"
-        title: Preparar a las personas
+      - title: Preparar a las personas
         desc: Capacitación de brigadas, prácticas de evacuación y equipo de protección personal para responder en caso de emergencia.
         links:
           - { label: Equipo de protección para brigadas, href: /productos/equipo-para-bomberos-y-brigadas }

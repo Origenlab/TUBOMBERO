@@ -18,7 +18,7 @@ hero:
     - "La red contra incendios lleva agua con la presión y el caudal necesarios a cada punto del inmueble para combatir el fuego con mangueras o hidrantes. Es un sistema fijo de protección activa: su confiabilidad depende de que cada componente sea compatible con el resto y de que se revise con regularidad."
     - "Esta familia reúne los componentes que conforman la red: mangueras, boquillas y chiflones, válvulas, conexiones y adaptadores. El diseño hidráulico, los diámetros y la fuente de abastecimiento se definen en el proyecto de ingeniería de cada inmueble, con referencias como la NFPA 14 para sistemas de mangueras."
   ctas:
-    - { text: "Cotizar red contra incendios", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de red contra incendios", href: "#cotizar", variant: primary }
     - { text: "Componentes de la red contra incendios", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar red contra incendios, href: "#cotizar", sub: "Sistemas contra incendio" }
+  cta: { label: Solicitar cotización de red contra incendios, href: "#cotizar", sub: "Sistemas contra incendio" }
 sections:
   - type: feature
     id: subcategorias

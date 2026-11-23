@@ -60,8 +60,8 @@ const imageData = image ? img(image) : undefined;
     <div class="container">
       <SectionHeading eyebrow="También te puede servir" title="Guías relacionadas" layout="simple" align="left" />
       <div class="grid-4">
-        {categoryData && <CategoryCard label={categoryData.label} href={`/productos/${categoryData.slug}`} image={categoryData.image} imageAlt={categoryData.imageAlt} imagePosition={categoryData.imagePosition} badge={categoryData.tag} blurb={categoryData.description} subcategories={categoryData.subcategories} ctaLabel={categoryData.cta} />}
-        {relatedGuides.map((relatedGuide) => <ArticleCard title={relatedGuide.data.title} excerpt={relatedGuide.data.excerpt} href={`/guias/${relatedGuide.id}`} cta={`Guía de ${relatedGuide.data.keyword}`} />)}
+        {categoryData && <CategoryCard label={categoryData.label} href={`/productos/${categoryData.slug}`} image={categoryData.image} imageAlt={categoryData.imageAlt} imagePosition={categoryData.imagePosition} badge={categoryData.tag} blurb={categoryData.description} subcategories={categoryData.subcategories} ctaLabel={`Ver ${categoryData.cta.toLocaleLowerCase('es-MX')}`} />}
+        {relatedGuides.map((relatedGuide) => <ArticleCard title={relatedGuide.data.title} excerpt={relatedGuide.data.excerpt} href={`/guias/${relatedGuide.id}`} cta={`Leer guía de ${relatedGuide.data.keyword}`} />)}
       </div>
     </div>
   </section>

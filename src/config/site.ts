@@ -182,14 +182,14 @@ const services = [
 ] as const;
 
 const sectors = [
-  { slug: 'industria-manufactura', label: 'Industria y manufactura', icon: 'building' },
-  { slug: 'construccion-infraestructura', label: 'Construcción e infraestructura', icon: 'construction' },
-  { slug: 'comercio-oficinas', label: 'Comercio y oficinas', icon: 'briefcase' },
-  { slug: 'hospitalidad-salud', label: 'Hospitalidad y salud', icon: 'cross' },
-  { slug: 'proteccion-civil-bomberos', label: 'Protección Civil y bomberos', icon: 'shield' },
-  { slug: 'almacenes-logistica', label: 'Almacenes y logística', icon: 'warehouse' },
-  { slug: 'educacion-gobierno', label: 'Educación y gobierno', icon: 'school' },
-  { slug: 'energia-petroquimica', label: 'Energía y petroquímica', icon: 'flame' },
+  { slug: 'industria-manufactura', label: 'Industria y manufactura', image: img('modulos/red-contra-incendios-manguera-hidrante.avif'), imageAlt: 'Red contra incendios con manguera e hidrante' },
+  { slug: 'construccion-infraestructura', label: 'Construcción e infraestructura', image: img('modulos/instalacion-de-senalamientos-de-emergencia.avif'), imageAlt: 'Instalación de señalamientos de emergencia' },
+  { slug: 'comercio-oficinas', label: 'Comercio y oficinas', image: img('modulos/detectores-de-humo-en-plafon.avif'), imageAlt: 'Detectores de humo en plafón' },
+  { slug: 'hospitalidad-salud', label: 'Hospitalidad y salud', image: img('categorias/extintores-pqs-co2-y-agua.avif'), imageAlt: 'Extintores para distintos tipos de fuego' },
+  { slug: 'proteccion-civil-bomberos', label: 'Protección Civil y bomberos', image: img('modulos/equipo-de-proteccion-personal-bomberos.avif'), imageAlt: 'Equipo de protección personal para bomberos' },
+  { slug: 'almacenes-logistica', label: 'Almacenes y logística', image: img('modulos/gabinete-contra-incendio-para-manguera.avif'), imageAlt: 'Gabinete contra incendio para manguera' },
+  { slug: 'educacion-gobierno', label: 'Educación y gobierno', image: img('modulos/simulacro-de-evacuacion-brigada.avif'), imageAlt: 'Brigada durante un simulacro de evacuación' },
+  { slug: 'energia-petroquimica', label: 'Energía y petroquímica', image: img('categorias/extintor-espuma-afff.avif'), imageAlt: 'Extintor de espuma AFFF' },
 ] as const;
 
 const directoryStates = [

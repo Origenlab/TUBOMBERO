@@ -18,7 +18,7 @@ hero:
     - "Quien combate un incendio necesita protección contra el calor, las llamas, los golpes y el humo. El equipo de protección personal para bomberos y brigadas protege cabeza, cuerpo, manos y pies, y los equipos de respiración permiten trabajar en ambientes con humo."
     - "Esta familia reúne trajes estructurales, cascos, guantes y botas, y equipos de respiración. Su selección considera el tipo de respuesta que realiza cada brigada, las tallas de sus integrantes y estándares de fabricación como la NFPA 1970, que integra a la antigua NFPA 1971 para ropa de protección estructural."
   ctas:
-    - { text: "Cotizar equipo de protección para brigadas", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de equipo de protección para brigadas", href: "#cotizar", variant: primary }
     - { text: "Equipo de protección personal para brigadas", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo para brigadas, href: "#cotizar", sub: "Equipo para bomberos y brigadas" }
+  cta: { label: Solicitar cotización de equipo para brigadas, href: "#cotizar", sub: "Equipo para bomberos y brigadas" }
 sections:
   - type: feature
     id: subcategorias

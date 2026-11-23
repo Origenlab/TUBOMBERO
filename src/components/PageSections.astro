@@ -20,7 +20,7 @@ interface ServicesSection extends SectionBase { type: 'services' }
 interface SectorsSection extends SectionBase { type: 'sectors' }
 interface StatesSection extends SectionBase { type: 'states' }
 interface SectorDetailsSection extends SectionBase { type: 'sectorDetails'; items: { slug: string; summary: string; points: string[]; links: { label: string; href: string }[] }[] }
-interface StageSection extends SectionBase { type: 'stages'; items: { num: string; title: string; desc: string; links: { label: string; href: string }[] }[] }
+interface StageSection extends SectionBase { type: 'stages'; items: { title: string; desc: string; links: { label: string; href: string }[] }[] }
 interface ProseSection extends SectionBase { type: 'prose' }
 interface GuidesSection extends SectionBase { type: 'guides' }
 interface Help { eyebrow: string; title: string; text: string; links: { label: string; href: string; variant?: 'primary' | 'outline' }[] }
@@ -51,7 +51,7 @@ const featureOf = (slug: string) => {
       titleAccent={feature.titleAccent}
       description={feature.description}
       features={[...feature.points]}
-      ctaLabel={`Cotizar ${category.cta.toLocaleLowerCase('es-MX')}`}
+      ctaLabel={`Solicitar cotización de ${category.cta.toLocaleLowerCase('es-MX')}`}
       ctaHref="#cotizar"
       imgMain={imgMain}
       imgA={imgA}
@@ -84,7 +84,7 @@ const featureOf = (slug: string) => {
       />
       {section.type === 'categories' && (
         <div class="grid-4 category-grid">
-          {CATEGORIES.map((category, categoryIndex) => (
+          {CATEGORIES.map((category) => (
             <CategoryCard
               label={category.label}
               href={`/productos/${category.slug}`}
@@ -94,8 +94,7 @@ const featureOf = (slug: string) => {
               badge={category.tag}
               blurb={category.description}
               subcategories={category.subcategories}
-              ctaLabel={category.cta}
-              index={categoryIndex}
+              ctaLabel={`Ver ${category.cta.toLocaleLowerCase('es-MX')}`}
             />
           ))}
         </div>
@@ -109,13 +108,13 @@ const featureOf = (slug: string) => {
               description={service.desc}
               image={service.image}
               imageAlt={service.imageAlt}
-              ctaLabel={service.cta}
+              ctaLabel={`Solicitar ${service.cta.toLocaleLowerCase('es-MX')}`}
               href="#cotizar"
             />
           ))}
         </div>
       )}
-      {section.type === 'sectors' && <div class="grid-4 sector-grid">{SECTORS.map((sector, sectorIndex) => <SectorCard label={sector.label} icon={sector.icon} num={`0${sectorIndex + 1}`} href={`#sector-${sector.slug}`} />)}</div>}
+      {section.type === 'sectors' && <div class="grid-4 sector-grid">{SECTORS.map((sector) => <SectorCard sector={sector} href={`#sector-${sector.slug}`} />)}</div>}
       {section.type === 'states' && <StateDirectoryGrid states={DIRECTORY_STATES} />}
       {section.type === 'sectorDetails' && <SectorDetails items={section.items} />}
       {section.type === 'stages' && <StageGrid items={section.items} />}
@@ -124,7 +123,7 @@ const featureOf = (slug: string) => {
       )}
       {section.type === 'guides' && (
         <div class="grid-4">
-          {guides.map((guide, guideIndex) => guide && <ArticleCard title={guide.data.title} excerpt={guide.data.excerpt} href={`/guias/${guide.id}`} cta={`Guía de ${guide.data.keyword}`} num={`0${guideIndex + 1}`} image={guide.data.image ? img(guide.data.image) : undefined} imageAlt={guide.data.imageAlt} />)}
+          {guides.map((guide) => guide && <ArticleCard title={guide.data.title} excerpt={guide.data.excerpt} href={`/guias/${guide.id}`} cta={`Leer guía de ${guide.data.keyword}`} image={guide.data.image ? img(guide.data.image) : undefined} imageAlt={guide.data.imageAlt} />)}
         </div>
       )}
     </div>

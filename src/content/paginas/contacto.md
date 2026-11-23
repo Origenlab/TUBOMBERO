@@ -24,7 +24,7 @@ menu:
     - { label: Proceso, href: "#proceso", sub: Cómo solicitar }
     - { label: Qué preparar, href: "#que-preparar", sub: Datos para cotizar }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo contra incendios, href: "#cotizar", sub: Formulario de cotización }
+  cta: { label: Solicitar cotización de equipo contra incendios, href: "#cotizar", sub: Formulario de cotización }
 sections:
   - type: stages
     id: proceso
@@ -36,24 +36,20 @@ sections:
       - "Conocer las opciones de equipo contra incendio no debería ser complicado. Dividimos el proceso en pasos claros para que sepas qué sigue y qué datos conviene tener a la mano en cada momento."
       - "Si todavía no sabes qué equipo necesitas, empieza por tu sector o por las guías técnicas; si ya lo sabes, revisa la familia en el catálogo y describe la cantidad y el uso en el formulario."
     items:
-      - num: "01"
-        title: Identificar la necesidad
+      - title: Identificar la necesidad
         desc: Revisa el tipo de instalación, las actividades que se realizan y los materiales que se manejan para ubicar el riesgo de incendio.
         links:
           - { label: Prevención de incendios por sector, href: /sectores }
-      - num: "02"
-        title: Ubicar el equipo o servicio
+      - title: Ubicar el equipo o servicio
         desc: Localiza la familia de equipo o la línea de servicio que corresponde a lo que necesitas resolver.
         links:
           - { label: Catálogo de material contra incendios, href: /productos }
           - { label: Servicios de protección contra incendios, href: /servicios }
-      - num: "03"
-        title: Reunir los datos
+      - title: Reunir los datos
         desc: Superficie aproximada, equipo existente, cantidades estimadas y fecha en que lo necesitas.
         links:
           - { label: Datos para cotizar equipo contra incendios, href: "#que-preparar" }
-      - num: "04"
-        title: Enviar la solicitud
+      - title: Solicitud de cotización
         desc: Completa el formulario de cotización con el detalle de tu necesidad para recibir una propuesta acorde con tu riesgo.
         links:
           - { label: Formulario de cotización de equipo, href: "#cotizar" }

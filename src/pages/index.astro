@@ -20,7 +20,7 @@ const menuItems = [
   { label: 'Servicios', href: '#servicios', sub: 'Lo que ofrecemos' },
   { label: 'Guías', href: '#guias', sub: 'Guías técnicas' },
 ];
-const steps = PROCESS.map(([title, desc], index) => ({ num: `0${index + 1}`, title, desc }));
+const steps = PROCESS.map(([title, desc]) => ({ title, desc }));
 const guides = await getGuides();
 ---
 
@@ -36,10 +36,10 @@ const guides = await getGuides();
       'La protección contra incendios de un centro de trabajo combina medidas activas —extintores, sistemas de detección y alarma, hidrantes y rociadores— con medidas de protección pasiva y preventiva, como la señalización, las rutas de evacuación y la preparación de las brigadas. En Tu Bombero reunimos ese equipo contra incendios en un solo catálogo, organizado por necesidad, para que cada riesgo de incendio tenga una respuesta clara.',
       'La NOM-002-STPS-2010 establece que los centros de trabajo en México cuenten con equipos y sistemas de protección contra incendios acordes con su nivel de riesgo. Por eso el catálogo está pensado para industria, construcción, comercio, hospitalidad, salud, logística y Protección Civil, con líneas de servicio —asesoría técnica, instalación, mantenimiento y capacitación— que acompañan cada decisión con criterio técnico.',
     ]}
-    ctas={[{ text: 'Cotizar equipo contra incendios', href: '/contacto' }, { text: 'Catálogo de protección contra incendios', href: '#catalogo', variant: 'outline' }]}
+    ctas={[{ text: 'Solicitar cotización de equipo contra incendios', href: '/contacto' }, { text: 'Ver catálogo de protección contra incendios', href: '#catalogo', variant: 'outline' }]}
   />
 
-  <SectionMenu items={menuItems} cta={{ label: 'Cotizar protección contra incendios', href: '/contacto', sub: 'Protección contra incendios' }} />
+  <SectionMenu items={menuItems} cta={{ label: 'Solicitar cotización de protección contra incendios', href: '/contacto', sub: 'Protección contra incendios' }} />
 
   <section id="catalogo" class="section section--surface">
     <div class="container">
@@ -51,7 +51,7 @@ const guides = await getGuides();
         body={["Elegir equipo contra incendio empieza por entender qué riesgo se quiere cubrir. Por eso el catálogo de Tu Bombero se ordena por necesidad y no por marca: extintores y equipo de respuesta inicial, sistemas contra incendio, gabinetes e hidrantes, detección y alarma, equipo de protección para bomberos, herramientas de entrada forzada, rescate y señalización de evacuación."]}
       />
       <div class="grid-4 category-grid">
-        {CATEGORIES.map((category, index) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} imagePosition={category.imagePosition} badge={category.tag} blurb={category.description} subcategories={category.subcategories} ctaLabel={category.cta} index={index} />)}
+        {CATEGORIES.map((category) => <CategoryCard label={category.label} href={`/productos/${category.slug}`} image={category.image} imageAlt={category.imageAlt} imagePosition={category.imagePosition} badge={category.tag} blurb={category.description} subcategories={category.subcategories} ctaLabel={`Ver ${category.cta.toLocaleLowerCase('es-MX')}`} />)}
       </div>
     </div>
   </section>
@@ -69,7 +69,7 @@ const guides = await getGuides();
         imgMain={imgMain}
         imgA={imgA}
         imgB={imgB}
-        ctaLabel={category.cta}
+        ctaLabel={`Ver ${category.cta.toLocaleLowerCase('es-MX')}`}
         ctaHref={`/productos/${category.slug}`}
         surface={index % 2 === 1}
       />
@@ -79,15 +79,15 @@ const guides = await getGuides();
   <section id="sectores" class="section sectors">
     <div class="container">
         <SectionHeading eyebrow="Soluciones por sector" title="Protección contra incendios para cada tipo de instalación" desc="Cada sector tiene riesgos de incendio, normativas y condiciones de operación distintas; estas rutas ayudan a ubicar el equipo y los servicios que corresponden a tu inmueble." layout="duo" body={["Una planta de manufactura, un hospital, un centro comercial y un almacén no enfrentan los mismos riesgos de incendio ni operan en las mismas condiciones. Las rutas por sector ayudan a identificar qué equipo contra incendio y qué servicios son más relevantes para cada tipo de instalación."]} />
-      <div class="grid-4 sector-grid">{SECTORS.map((sector, index) => <SectorCard label={sector.label} icon={sector.icon} num={`0${index + 1}`} href={`/sectores#sector-${sector.slug}`} />)}</div>
+      <div class="grid-4 sector-grid">{SECTORS.map((sector) => <SectorCard sector={sector} href={`/sectores#sector-${sector.slug}`} />)}</div>
     </div>
   </section>
 
   <section id="servicios" class="section">
     <div class="container">
       <SectionHeading eyebrow="Servicios" title="Asesoría, instalación y mantenimiento de sistemas contra incendios" desc="Cuatro líneas de servicio que acompañan cada etapa: elegir el equipo, instalarlo, mantenerlo en condiciones y preparar a las personas que lo utilizarán." layout="duo" body={["Comprar equipo contra incendio es solo una parte de la protección de una instalación: el equipo debe elegirse bien, instalarse correctamente, mantenerse en condiciones y ser utilizado por personas preparadas. Las líneas de servicio de Tu Bombero se organizan alrededor de ese ciclo completo."]} />
-      <a class="service-link" href="/servicios">Servicios de protección contra incendios</a>
-      <div class="grid-4 service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} href={`/servicios#${service.id}`} ctaLabel={service.cta} />)}</div>
+      <a class="service-link" href="/servicios">Ver servicios de protección contra incendios</a>
+      <div class="grid-4 service-grid">{SERVICES.map((service) => <ServiceCard title={service.label} description={service.desc} image={service.image} imageAlt={service.imageAlt} href={`/servicios#${service.id}`} ctaLabel={`Ver ${service.cta.toLocaleLowerCase('es-MX')}`} />)}</div>
     </div>
   </section>
 
@@ -96,9 +96,9 @@ const guides = await getGuides();
     <div class="container">
       <SectionHeading eyebrow="Guías técnicas" title="Guías sobre protección contra incendios" desc="Artículos prácticos para resolver dudas frecuentes sobre equipo, normativa y cotización." layout="duo" body={["Una buena cotización empieza con buenas preguntas. Las guías técnicas de Tu Bombero explican cómo identificar una familia de equipo y qué información reunir antes de solicitar precios."]} />
       <div class="grid-4">
-        {guides.map((guide, index) => guide && <ArticleCard title={guide.data.title} excerpt={guide.data.excerpt} href={`/guias/${guide.id}`} cta={`Guía de ${guide.data.keyword}`} num={`0${index + 1}`} image={guide.data.image ? img(guide.data.image) : undefined} imageAlt={guide.data.imageAlt} />)}
+        {guides.map((guide) => guide && <ArticleCard title={guide.data.title} excerpt={guide.data.excerpt} href={`/guias/${guide.id}`} cta={`Leer guía de ${guide.data.keyword}`} image={guide.data.image ? img(guide.data.image) : undefined} imageAlt={guide.data.imageAlt} />)}
       </div>
-      <a class="service-link" href="/guias">Guías de protección contra incendios</a>
+      <a class="service-link" href="/guias">Ver guías de protección contra incendios</a>
     </div>
   </section>
 

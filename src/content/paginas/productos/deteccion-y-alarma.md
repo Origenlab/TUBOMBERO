@@ -18,7 +18,7 @@ hero:
     - "Detectar un incendio en su etapa inicial es lo que da tiempo para evacuar y controlar el fuego. Los detectores identifican humo o calor, el panel de control procesa la señal y las sirenas y estrobos avisan a los ocupantes para iniciar la evacuación."
     - "Esta familia agrupa detectores de humo y de temperatura, paneles de control y dispositivos de notificación. El diseño del sistema considera la altura de los plafones, el uso de cada área y estándares de referencia como la NFPA 72; la NOM-002-STPS-2010 incluye la detección entre los medios de protección de los centros de trabajo."
   ctas:
-    - { text: "Cotizar detección y alarma de incendios", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de detección y alarma de incendios", href: "#cotizar", variant: primary }
     - { text: "Componentes de detección y alarma", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar detección y alarma, href: "#cotizar", sub: "Detección y alarma" }
+  cta: { label: Solicitar cotización de detección y alarma, href: "#cotizar", sub: "Detección y alarma" }
 sections:
   - type: feature
     id: subcategorias

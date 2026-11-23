@@ -17,7 +17,7 @@ hero:
     - "El material contra incendios cumple funciones distintas: unos equipos previenen, otros detectan el fuego en su etapa inicial y otros permiten combatirlo o proteger a quienes responden. Por eso este catálogo agrupa los productos contra incendios en ocho familias, desde extintores portátiles y red contra incendios hasta equipo de protección personal para brigadas y señalización de evacuación."
     - "Cada familia reúne sus subcategorías principales para que identifiques con rapidez qué necesita tu instalación. La selección final depende del riesgo de incendio del inmueble, de los materiales que se manejan y de lo que establece la NOM-002-STPS-2010 para los centros de trabajo; las fichas técnicas se publican conforme se confirma el inventario."
   ctas:
-    - { text: Cotizar material contra incendios, href: "#cotizar", variant: primary }
+    - { text: Solicitar cotización de material contra incendios, href: "#cotizar", variant: primary }
     - { text: Categorías de equipo contra incendios, href: "#categorias", variant: outline }
 menu:
   items:
@@ -25,7 +25,7 @@ menu:
     - { label: Etapas, href: "#etapas", sub: Prevenir, detectar y responder }
     - { label: Selección, href: "#seleccion", sub: Equipo según el riesgo }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas antes de cotizar }
-  cta: { label: Cotizar material contra incendios, href: "#cotizar", sub: Equipo contra incendios }
+  cta: { label: Solicitar cotización de material contra incendios, href: "#cotizar", sub: Equipo contra incendios }
 sections:
   - type: categories
     id: categorias
@@ -46,25 +46,21 @@ sections:
       - "Pensar en etapas ayuda a no dejar huecos en la protección. Primero se previene y se orienta a las personas; después se detecta el humo o el calor lo antes posible; luego se controla el fuego con el agente adecuado, y por último se protege y equipa a quienes responden a la emergencia."
       - "Cada etapa se apoya en familias concretas del catálogo. Revisarlas en este orden facilita integrar la protección activa, que actúa sobre el fuego, con la prevención y la preparación de brigadas que exige la normativa para los centros de trabajo."
     items:
-      - num: "01"
-        title: Prevenir y orientar
+      - title: Prevenir y orientar
         desc: Señales de ruta de evacuación, salidas de emergencia, ubicación de equipo y punto de reunión, conforme a la NOM-003-SEGOB-2011.
         links:
           - { label: Señalamientos de protección civil, href: /productos/senalizacion-y-evacuacion }
-      - num: "02"
-        title: Detectar a tiempo
+      - title: Detectar a tiempo
         desc: Detectores de humo y calor, estaciones manuales y alarmas que avisan del incendio en su etapa inicial para iniciar la evacuación.
         links:
           - { label: Detección y alarma de incendios, href: /productos/deteccion-y-alarma }
-      - num: "03"
-        title: Controlar el fuego
+      - title: Controlar el fuego
         desc: Extintores portátiles con el agente adecuado, red contra incendios y gabinetes con manguera para atacar el fuego con suministro de agua.
         links:
           - { label: Extintores contra incendio, href: /productos/extintores-y-emergencia }
           - { label: Red contra incendios, href: /productos/sistemas-contra-incendio }
           - { label: Gabinetes contra incendio, href: /productos/gabinetes-e-hidrantes }
-      - num: "04"
-        title: Responder y rescatar
+      - title: Responder y rescatar
         desc: Trajes, cascos y guantes para brigadas, herramientas de entrada forzada y accesorios de rescate para intervenir con seguridad.
         links:
           - { label: Equipo de protección para brigadas, href: /productos/equipo-para-bomberos-y-brigadas }

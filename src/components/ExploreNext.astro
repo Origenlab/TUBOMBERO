@@ -1,0 +1,65 @@
+---
+import Icon from '@components/Icon.astro';
+import { PRODUCT_CATEGORIES, SERVICES } from '@config/site';
+
+const path = Astro.url.pathname.replace(/\/index\.html$/i, '/').replace(/\.html$/i, '').replace(/\/$/, '') || '/';
+const categorySlug = path.startsWith('/productos/') ? path.split('/')[2] : undefined;
+const complements: Record<string, string> = {
+  'extintores-y-emergencia': 'senalizacion-y-evacuacion',
+  'sistemas-contra-incendio': 'gabinetes-e-hidrantes',
+  'gabinetes-e-hidrantes': 'sistemas-contra-incendio',
+  'deteccion-y-alarma': 'senalizacion-y-evacuacion',
+  'equipo-para-bomberos-y-brigadas': 'herramientas-para-bomberos',
+  'herramientas-para-bomberos': 'rescate-y-accesorios',
+  'rescate-y-accesorios': 'equipo-para-bomberos-y-brigadas',
+  'senalizacion-y-evacuacion': 'extintores-y-emergencia',
+};
+const complement = categorySlug ? PRODUCT_CATEGORIES.find((category) => category.slug === complements[categorySlug]) : undefined;
+const installation = categorySlug && ['sistemas-contra-incendio', 'gabinetes-e-hidrantes', 'deteccion-y-alarma'].includes(categorySlug);
+const service = SERVICES.find((item) => item.id === (installation ? 'instalacion-de-sistemas' : 'venta-y-asesoria-tecnica')) ?? SERVICES[0];
+const catalog = { label: 'Catálogo de equipo contra incendios', href: '/productos', detail: 'Compara las familias de productos y sus aplicaciones.', kind: 'Equipo' };
+const services = { label: service.cta, href: `/servicios#${service.id}`, detail: service.desc, kind: 'Servicio' };
+const sectors = { label: 'Protección contra incendios por sector', href: '/sectores', detail: 'Consulta las necesidades de protección de cada sector.', kind: 'Aplicación' };
+const guide = { label: 'Carga de fuego', href: '/guias/carga-de-fuego', detail: 'Conoce este concepto antes de definir los equipos de tu proyecto.', kind: 'Guía técnica' };
+const directory = { label: 'Estaciones de bomberos por estado', href: '/directorio', detail: 'Encuentra ubicaciones y fuentes institucionales en el directorio.', kind: 'Directorio' };
+const links = (path.startsWith('/directorio') ? [directory, { ...catalog, label: 'Equipo para bomberos y brigadas', href: '/productos/equipo-para-bomberos-y-brigadas' }, guide]
+  : path.startsWith('/guias') ? [catalog, services, sectors]
+  : path === '/servicios' ? [catalog, sectors, guide]
+  : path === '/sectores' ? [catalog, services, guide]
+  : path.startsWith('/productos') ? [complement ? { label: complement.label, href: `/productos/${complement.slug}`, detail: complement.description, kind: 'Equipo complementario' } : sectors, services, guide]
+  : [catalog, services, sectors]).filter((link) => link.href.split('#')[0] !== path);
+const show = /^\/(productos|servicios|sectores|guias|directorio|nosotros)(\/|$)/.test(path);
+---
+
+{show && <section class="explore-next" aria-labelledby="explore-next-title">
+  <div class="container">
+    <div class="explore-next__heading">
+      <p class="eyebrow">Continúa tu consulta</p>
+      <h2 id="explore-next-title">Conecta la información con tu proyecto.</h2>
+    </div>
+    <nav aria-label="Recursos para continuar tu consulta">
+      <ul class="explore-next__links">
+        {links.map((link) => <li>
+          <span class="explore-next__kind">{link.kind}</span>
+          <a class="explore-next__title" href={link.href}>{link.label}<Icon name="arrow-up-right" size={20} /></a>
+          <span class="explore-next__detail">{link.detail}</span>
+        </li>)}
+      </ul>
+    </nav>
+  </div>
+</section>}
+
+<style>
+  .explore-next { padding-block: clamp(2.5rem, 5vw, 4.5rem); background: var(--c-surface); border-top: 1px solid var(--c-border); }
+  .explore-next__heading { margin-bottom: 2rem; }
+  .explore-next h2 { margin: 0; max-width: 30ch; font-size: clamp(1.5rem, 2.5vw, 2.25rem); line-height: 1.2; font-weight: 600; letter-spacing: -.035em; }
+  .explore-next__links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
+  .explore-next__links li { min-width: 0; }
+  .explore-next__links li { display: flex; flex-direction: column; gap: .75rem; height: 100%; border-top: 2px solid var(--c-border); padding: 1.5rem 0 .5rem; color: var(--c-ink); text-decoration: none; }
+  .explore-next__links a:hover { color: var(--c-primary-dark); text-decoration: underline; text-underline-offset: .3em; }
+  .explore-next__links a:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 6px; }
+  .explore-next__kind { color: var(--c-muted); font-size: .6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; }
+  .explore-next__title { color: var(--c-ink); text-decoration: none; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; font-size: 1.0625rem; font-weight: 600; line-height: 1.4; }
+  .explore-next__title :global(svg) { color: var(--c-primary); flex-shrink: 0; margin-top: .15rem; }
+  .explore-next__detail { max-width: 45ch; color: var(--c-muted); font-size: .875rem; line-height: 1.65; }
+</style>

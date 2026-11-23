@@ -18,7 +18,7 @@ hero:
     - "En una emergencia, las personas necesitan saber hacia dónde ir y dónde está el equipo contra incendio, aunque haya humo o poca luz. La señalización de rutas, salidas, equipo y puntos de reunión orienta la evacuación y la respuesta."
     - "Esta familia reúne señales fotoluminiscentes, rutas de evacuación, puntos de reunión y señalización de equipos. Sus colores, formas y símbolos se rigen por la NOM-003-SEGOB-2011, y la NOM-026-STPS-2008 define los colores y señales de seguridad en los centros de trabajo."
   ctas:
-    - { text: "Cotizar señalamientos de protección civil", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de señalamientos de protección civil", href: "#cotizar", variant: primary }
     - { text: "Tipos de señales de evacuación", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar señalización de evacuación, href: "#cotizar", sub: "Señalización y evacuación" }
+  cta: { label: Solicitar cotización de señalización de evacuación, href: "#cotizar", sub: "Señalización y evacuación" }
 sections:
   - type: feature
     id: subcategorias

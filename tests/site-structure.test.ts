@@ -89,10 +89,13 @@ describe('contrato de homologación TUBOMBERO', () => {
   });
 
   it('mantiene la rejilla canónica de cuatro columnas en los catálogos', () => {
+    const categoryCard = read('src/components/CategoryCard.astro');
     expect(read('src/styles/global.css')).toMatch(/\.grid-4[\s\S]*repeat\(4, minmax\(0, 1fr\)\)/);
     expect(read('src/pages/index.astro')).toContain('class="grid-4 category-grid"');
     expect(read('src/components/PageSections.astro')).toContain('class="grid-4 category-grid"');
     expect(read('src/components/PageSections.astro')).toContain('class="grid-4"');
+    expect(categoryCard).toContain('loading="lazy"');
+    expect(categoryCard).not.toContain('fetchpriority');
   });
 
   it('expone las metas SEO aprobadas y conserva enlazado interno en noindex', () => {
@@ -144,6 +147,10 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read('src/components/StageGrid.astro')).toContain('class="grid-4 stage-grid"');
     expect(read('src/components/ProseTable.astro')).toContain('role="region"');
     expect(read('src/components/PageSections.astro')).toContain('FAQWithContact');
+    expect(read('src/components/StageGrid.astro')).toContain('<ol class="grid-4 stage-grid"');
+    expect(read('src/components/ProcessSteps.astro')).toContain('<ol class="process-grid"');
+    expect(read('src/components/StageGrid.astro')).not.toContain('Paso ${index + 1}');
+    expect(read('src/components/StageGrid.astro')).not.toContain('mediaFor');
   });
 
   it('valida el contrato L2 de servicios con sección services y ayuda FAQ', () => {
@@ -159,12 +166,16 @@ describe('contrato de homologación TUBOMBERO', () => {
   it('valida los ocho detalles de sector contra la taxonomía', () => {
     const contentConfig = read('src/content.config.ts');
     const sectorsPage = read('src/content/paginas/sectores.md');
+    const sectorDetails = read('src/components/SectorDetails.astro');
     const details = sectorsPage.match(/(?<=\n)      - slug: ([^\n]+)/g)?.map((line) => line.replace('      - slug: ', '')) ?? [];
 
     expect(contentConfig).toContain("type: z.literal('sectorDetails')");
     expect(details).toHaveLength(8);
     expect(new Set(details).size).toBe(8);
     expect(details).toEqual(TAXONOMY.sectors.map((sector) => sector.slug));
+    expect(sectorDetails).not.toContain('grid-4 sector-details');
+    expect(sectorDetails).toContain('grid-template-columns: repeat(2, minmax(0, 1fr))');
+    expect(sectorDetails).toContain('linkContent={false}');
   });
 
   it('expone un índice nacional de 32 entidades sin inventar estaciones', () => {
@@ -205,12 +216,13 @@ describe('contrato de homologación TUBOMBERO', () => {
   });
 
   it('usa CTA contextuales para enlazado interno sin repetir botones genéricos', () => {
-  expect(contextualCta('/directorio')).toBe('Consultar directorio de bomberos');
+    expect(contextualCta('/directorio')).toBe('Consultar directorio de bomberos');
     expect(contextualCta('/productos/extintores-y-emergencia')).toBe('Cotizar extintores contra incendio');
     expect(contextualCta('/servicios')).toBe('Cotizar servicios contra incendios');
     expect(read('src/components/Header.astro')).toContain('const headerCtaLabel = contextualCta(currentPath)');
     expect(read('src/components/Footer.astro')).toContain('const footerCtaLabel = contextualCta(Astro.url.pathname)');
-    expect(read('src/pages/index.astro')).toContain("label: 'Cotizar protección contra incendios'");
+    expect(read('src/pages/index.astro')).toContain("label: 'Solicitar cotización de protección contra incendios'");
+    expect(read('src/components/FAQWithContact.astro')).toContain('Solicitar cotización de equipo contra incendios por WhatsApp');
     expect(read('src/content/paginas/directorio.md')).toContain('Explorar estaciones de bomberos por estado');
   });
 

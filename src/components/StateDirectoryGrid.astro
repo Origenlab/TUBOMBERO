@@ -61,7 +61,7 @@ const guides = await getGuides();
     })}
   </div>
 
-  <aside class="state-directory-sidebar" aria-label="Explorar el directorio y recursos relacionados">
+  <aside class="state-directory-sidebar" aria-label="Directorio de bomberos en México y recursos relacionados">
     <section class="state-directory-sidebar__widget state-directory-sidebar__widget--intro">
       <p class="state-directory-sidebar__eyebrow">Directorio nacional</p>
       <h3>Consulta estaciones de bomberos por entidad</h3>
@@ -99,12 +99,12 @@ const guides = await getGuides();
       <ul class="state-directory-sidebar__link-list">
         {guides.map((guide) => guide && <li><a href={`/guias/${guide.id}`}>{guide.data.keyword}</a></li>)}
       </ul>
-      <a class="state-directory-sidebar__all-link" href="/guias">Ver todas las guías de protección</a>
+      <a class="state-directory-sidebar__all-link" href="/guias">Ver guías de protección contra incendios</a>
     </section>
 
     <section class="state-directory-sidebar__widget state-directory-sidebar__widget--contact">
       <p>¿Buscas equipo para tu instalación?</p>
-      <a href="/contacto">Cotizar equipo contra incendios</a>
+      <a href="/contacto">Solicitar cotización de equipo contra incendios</a>
     </section>
   </aside>
 </div>

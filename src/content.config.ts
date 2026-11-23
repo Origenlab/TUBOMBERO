@@ -114,7 +114,6 @@ const paginas = defineCollection({
         type: z.literal('stages'),
         ...l2SectionBase,
         items: z.array(z.object({
-          num: z.string(),
           title: z.string(),
           desc: z.string(),
           links: z.array(z.object({ label: z.string(), href: z.string() }).strict()),

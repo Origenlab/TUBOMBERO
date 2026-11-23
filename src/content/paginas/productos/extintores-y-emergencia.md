@@ -18,7 +18,7 @@ hero:
     - "El extintor portátil es la primera herramienta para controlar un conato de incendio antes de que se propague. Su eficacia depende de tres decisiones: elegir el agente extintor adecuado para el material que puede arder, colocarlo donde el personal lo alcance en segundos y mantenerlo cargado y revisado."
     - "Esta familia agrupa los extintores de polvo químico seco (PQS), de dióxido de carbono (CO₂), de espuma AFFF y de agua, junto con los elementos de respuesta inicial que los acompañan. La NOM-002-STPS-2010 pide que los centros de trabajo cuenten con extintores acordes con su riesgo de incendio y los mantengan en condiciones de funcionamiento."
   ctas:
-    - { text: "Cotizar extintores contra incendio", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de extintores contra incendio", href: "#cotizar", variant: primary }
     - { text: "Tipos de extintores contra incendio", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar extintores contra incendio, href: "#cotizar", sub: "Extintores y emergencia" }
+  cta: { label: Solicitar cotización de extintores contra incendio, href: "#cotizar", sub: "Extintores y emergencia" }
 sections:
   - type: feature
     id: subcategorias

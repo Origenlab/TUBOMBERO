@@ -18,7 +18,7 @@ hero:
     - "Una emergencia no siempre termina al controlar el fuego: puede haber personas lesionadas, atrapadas o que deben trasladarse. El equipo de rescate y los accesorios de apoyo permiten atenderlas y moverlas con seguridad."
     - "Esta familia reúne cuerdas y arneses, camillas, botiquines y bolsas de equipo. Su selección depende de los escenarios de rescate que pueden presentarse, como alturas, espacios confinados o estructuras dañadas, y de la capacitación de la brigada."
   ctas:
-    - { text: "Cotizar equipo de rescate para brigadas", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de equipo de rescate para brigadas", href: "#cotizar", variant: primary }
     - { text: "Tipos de equipo de rescate", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo de rescate, href: "#cotizar", sub: "Rescate y accesorios" }
+  cta: { label: Solicitar cotización de equipo de rescate, href: "#cotizar", sub: "Rescate y accesorios" }
 sections:
   - type: feature
     id: subcategorias

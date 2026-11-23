@@ -18,7 +18,7 @@ hero:
     - "Durante un incendio o un rescate, los bomberos necesitan abrir puertas, ventilar espacios y retirar obstáculos con rapidez y seguridad. Las herramientas de mano para entrada forzada y ventilación son parte del equipo básico de cualquier cuerpo de respuesta."
     - "Esta familia reúne barras Halligan, hachas, ganchos y pértigas y herramientas de corte. Su elección depende del tipo de estructuras en las que trabaja la brigada, del resto de su equipo y de la capacitación de quienes las usarán."
   ctas:
-    - { text: "Cotizar herramientas para bomberos", href: "#cotizar", variant: primary }
+    - { text: "Solicitar cotización de herramientas para bomberos", href: "#cotizar", variant: primary }
     - { text: "Tipos de herramientas para bomberos", href: "#subcategorias", variant: outline }
 menu:
   items:
@@ -26,7 +26,7 @@ menu:
     - { label: Cómo elegir, href: "#como-elegir", sub: Criterios de selección }
     - { label: Servicios, href: "#servicios", sub: Instalación y mantenimiento }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar herramientas para bomberos, href: "#cotizar", sub: "Herramientas para bomberos" }
+  cta: { label: Solicitar cotización de herramientas para bomberos, href: "#cotizar", sub: "Herramientas para bomberos" }
 sections:
   - type: feature
     id: subcategorias

@@ -20,6 +20,7 @@
 //   confirmado en BOMBERO y RENTADEILUMINACION).
 // ============================================================================
 
+import ExploreNext from "@components/ExploreNext.astro";
 import BaseLayout from "./BaseLayout.astro";
 import TopBar from "@components/TopBar.astro";
 import Header from "@components/Header.astro";
@@ -118,6 +119,7 @@ const GUIDE_CSS = `.hbg,.bcg{background:var(--c-surface);border-bottom:1px solid
 
   <main id="main-content">
     <slot />
+    <ExploreNext />
   </main>
 
   <Footer />

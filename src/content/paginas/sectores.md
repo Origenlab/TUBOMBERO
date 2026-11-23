@@ -17,7 +17,7 @@ hero:
     - "Cada centro de trabajo tiene sus propias fuentes de calor, materiales inflamables y formas de ocupación. Una planta industrial con soldadura y productos químicos no enfrenta el mismo riesgo de incendio que una oficina, un hospital o un almacén con estibas altas. Por eso la prevención de incendios en el trabajo empieza por reconocer el sector y las actividades que se realizan en cada área."
     - "En esta sección encontrarás, para ocho sectores, los riesgos más comunes, los puntos de atención y el equipo contra incendios que conviene revisar. Todo parte de lo que pide la NOM-002-STPS-2010: clasificar el riesgo de incendio, contar con equipos acordes, mantenerlos en condiciones y preparar a las personas para actuar en caso de emergencia."
   ctas:
-    - { text: Cotizar equipo contra incendios para tu sector, href: "#cotizar", variant: primary }
+    - { text: Solicitar cotización de equipo para tu sector, href: "#cotizar", variant: primary }
     - { text: Sectores de protección contra incendios, href: "#sectores", variant: outline }
 menu:
   items:
@@ -25,7 +25,7 @@ menu:
     - { label: Medidas, href: "#medidas", sub: Cómo prevenir un incendio }
     - { label: Por sector, href: "#por-sector", sub: Riesgos y equipo a revisar }
     - { label: Preguntas, href: "#preguntas-frecuentes", sub: Dudas frecuentes }
-  cta: { label: Cotizar equipo contra incendios por sector, href: "#cotizar", sub: Seguridad contra incendios }
+  cta: { label: Solicitar cotización de equipo por sector, href: "#cotizar", sub: Seguridad contra incendios }
 sections:
   - type: sectors
     id: sectores
@@ -46,24 +46,20 @@ sections:
       - "La mayoría de los incendios en el trabajo se originan en fuentes de calor mal controladas: chispas de soldadura o corte, equipos eléctricos sobrecargados, calentadores cerca de materiales combustibles o productos químicos inflamables mal almacenados. Reducir esas causas es la primera medida preventiva."
       - "Además de prevenir, el empleador debe estar preparado para detectar el fuego a tiempo, combatirlo con el equipo adecuado y evacuar a los ocupantes con orden. Estas cuatro acciones resumen las medidas de seguridad que la normativa espera en un centro de trabajo."
     items:
-      - num: "01"
-        title: Evaluar el riesgo
+      - title: Evaluar el riesgo
         desc: Clasificar el riesgo de incendio del centro de trabajo, como pide la NOM-002-STPS-2010, e identificar fuentes de calor, chispas y materiales inflamables en cada área.
         links:
           - { label: Catálogo de material contra incendios, href: /productos }
-      - num: "02"
-        title: Reducir las causas
+      - title: Reducir las causas
         desc: Orden y limpieza, mantenimiento de equipos eléctricos, control de trabajos de soldadura y almacenamiento seguro de productos químicos inflamables.
         links:
           - { label: Servicios contra incendios, href: /servicios }
-      - num: "03"
-        title: Detectar y combatir
+      - title: Detectar y combatir
         desc: Detectores de humo, alarmas de incendio y extintores adecuados al tipo de fuego, con red contra incendios donde el riesgo lo requiera.
         links:
           - { label: Detección y alarma de incendios, href: /productos/deteccion-y-alarma }
           - { label: Extintores contra incendio, href: /productos/extintores-y-emergencia }
-      - num: "04"
-        title: Preparar la respuesta
+      - title: Preparar la respuesta
         desc: Brigadas capacitadas, simulacros de incendio, rutas de evacuación señalizadas y salidas de emergencia libres para que los ocupantes salgan con orden.
         links:
           - { label: Señalamientos de protección civil, href: /productos/senalizacion-y-evacuacion }

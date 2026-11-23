@@ -27,8 +27,7 @@
 //   badge          → etiqueta corta sobre la imagen (entrega, certificación…).
 //   blurb          → texto de venta (1–2 frases).
 //   subcategories  → [{ label, href }] enlaces hijos (chips).
-//   ctaLabel       → texto del botón principal (default "Ver más").
-//   index          → posición en el grid; los primeros cargan la imagen `eager`.
+//   ctaLabel       → texto del botón principal (default: título de la tarjeta).
 //
 // ESTILO: tokens de src/styles/tokens.css. Alturas iguales en el grid (flex col +
 // CTA al fondo). Mobile-first; hover con elevación. A11y: foco visible, aria.
@@ -38,6 +37,7 @@ import Icon from '@components/Icon.astro';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
+  id?: string;
   label: string;
   href: string;
   image?: ImageMetadata;
@@ -47,10 +47,11 @@ interface Props {
   blurb?: string;
   subcategories?: readonly string[];
   ctaLabel?: string;
-  index?: number;
   disabled?: boolean; // tarjeta sin enlace (p. ej. módulo 'próximo'); muestra badge en el cuerpo si no hay imagen.
+  linkContent?: boolean; // false → imagen y título informativos; el CTA conserva su enlace.
 }
 const {
+  id,
   label,
   href,
   image,
@@ -60,20 +61,20 @@ const {
   blurb,
   subcategories = [],
   ctaLabel,
-  index = 99,
   disabled = false,
+  linkContent = true,
 } = Astro.props;
-const eager = index < 4; // las 4 primeras tarjetas (1.ª fila) cargan imagen sin lazy.
 const resolvedCtaLabel = ctaLabel ?? label;
 // 'disabled' (p. ej. módulo 'próximo'): ni la imagen ni los chips enlazan (evita 404s).
-const MediaTag = disabled ? "div" : "a";
+const contentLinked = !disabled && linkContent;
+const MediaTag = contentLinked ? "a" : "div";
 // Orden alfabético (es-MX) para que todas las cards lean igual.
 const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX', { sensitivity: 'base' }));
 ---
 
-<article class="ccard">
+<article id={id} class="ccard">
   {image && (
-    <MediaTag class="ccard__media-link" href={disabled ? undefined : href} tabindex={disabled ? undefined : "-1"} aria-hidden="true">
+    <MediaTag class="ccard__media-link" href={contentLinked ? href : undefined} tabindex={contentLinked ? "-1" : undefined} aria-hidden={contentLinked ? "true" : undefined}>
       <div class="ccard__media">
         <Picture
           src={image}
@@ -84,8 +85,7 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
           alt={imageAlt ?? label}
           width={800}
           height={600}
-          loading={eager ? "eager" : "lazy"}
-          fetchpriority={index === 0 ? "high" : undefined}
+          loading="lazy"
           decoding="async"
           style={imagePosition ? `object-position: ${imagePosition}` : undefined}
           class="ccard__img"
@@ -102,7 +102,7 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
       <span class:list={["ccard__badge", "ccard__badge--inline", { "ccard__badge--soon": disabled }]}>{badge}</span>
     )}
     <h3 class="ccard__title">
-      {disabled ? <span>{label}</span> : <a href={href}>{label}</a>}
+      {disabled || !linkContent ? <span>{label}</span> : <a href={href}>{label}</a>}
     </h3>
     {blurb && <p class="ccard__desc">{blurb}</p>}
 
@@ -116,6 +116,8 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
         </ul>
       </div>
     )}
+
+    <slot />
 
     {disabled ? (
       <span class="ccard__cta ccard__cta--soon">Próximamente</span>
@@ -135,8 +137,10 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
     border: 1px solid var(--c-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    box-shadow: none;
   }
+
+  .ccard:hover, .ccard:focus-within { border-color: var(--c-primary); }
 
   /* Imagen de cabecera */
   .ccard__media-link { display: block; }
@@ -217,9 +221,9 @@ const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX',
     font-size: var(--text-sm); color: var(--c-white); text-decoration: none;
     background: var(--c-primary); border-radius: var(--radius-md);
     min-height: 2.75rem; text-align: center; line-height: 1.25; text-wrap: balance;
-    transition: background var(--transition), gap var(--transition);
+    transition: background var(--transition);
   }
-  .ccard__cta:hover { background: var(--c-primary-dark); gap: var(--sp-3); }
+  .ccard__cta:hover { background: var(--c-primary-dark); }
   .ccard__cta:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
   /* CTA inactivo para tarjetas 'próximo' (no enlaza). */
 
