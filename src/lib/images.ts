@@ -1,6 +1,9 @@
 import type { ImageMetadata } from 'astro';
 
-const images = import.meta.glob('/src/assets/images' + '/**/*.avif', {
+const images = import.meta.glob([
+  '/src/assets/images/**/*.avif',
+  '!/src/assets/images/directorio/*.avif',
+], {
   eager: true,
   import: 'default',
 }) as Record<string, ImageMetadata>;

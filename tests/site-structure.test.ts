@@ -12,6 +12,17 @@ const guideSlugs = readdirSync(resolve(root, 'src/content/guias'))
   .sort();
 
 describe('contrato de homologación TUBOMBERO', () => {
+  it('fija una base de dependencias compatible con Astro 7 y Node seguro', () => {
+    const packageJson = JSON.parse(read('package.json'));
+
+    expect(read('.node-version').trim()).toBe('22.23.4');
+    expect(packageJson.engines.node).toBe('>=22.23.4');
+    expect(packageJson.dependencies.astro).toBe('^7.4.13');
+    expect(packageJson.devDependencies.vitest).toBe('^4.1.12');
+    expect(read('src/content.config.ts')).toContain("import { z } from 'astro/zod';");
+    expect(read('src/content.config.ts')).not.toContain("defineCollection, z } from 'astro:content'");
+  });
+
   it('mantiene GUIDE_ORDER igual a los slugs de la colección', () => {
     expect([...GUIDE_ORDER].sort()).toEqual(guideSlugs);
   });
