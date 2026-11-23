@@ -60,7 +60,9 @@ const navId = (s: string) =>
 
 // ¿Sección activa? Resalta el ítem de la ruta actual.
 const isActive = (href: string) =>
-  href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(href)
+  href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`)
+const currentState = (href: string) =>
+  currentPath === href ? 'page' : (href !== '/' && currentPath.startsWith(`${href}/`) ? 'true' : undefined)
 
 ---
 
@@ -77,11 +79,11 @@ const isActive = (href: string) =>
       <ul class="hdr-nav__list" role="list">
         {NAV.map((item, i) => !item.panel ? (
           <li class="hdr-nav__item">
-            <a href={item.href} class:list={['hdr-nav__link', { 'hdr-nav__link--active': isActive(item.href) }]}>{item.label}</a>
+            <a href={item.href} class:list={['hdr-nav__link', { 'hdr-nav__link--active': isActive(item.href) }]} aria-current={currentState(item.href)}>{item.label}</a>
           </li>
         ) : (
           <li class="hdr-nav__item" data-dropdown={navId(item.label)}>
-            <a href={item.href} class:list={['hdr-nav__link', { 'hdr-nav__link--active': isActive(item.href) }]} aria-haspopup="true" aria-expanded="false">
+            <a href={item.href} class:list={['hdr-nav__link', { 'hdr-nav__link--active': isActive(item.href) }]} aria-current={currentState(item.href)} aria-haspopup="true" aria-expanded="false">
               {guia && i === 0 && <span class="hdr-mark" aria-hidden="true">2</span>}
               {item.label}
               <Icon name="chevron-down" size={12} class="hdr-chevron" />
@@ -175,13 +177,13 @@ const isActive = (href: string) =>
           <button class="mob-item__trigger" aria-expanded="false"><span>{item.label}</span><Icon name="chevron-down" size={18} class="mob-chevron" /></button>
           <div class="mob-item__panel">
             <div class="mob-item__panel-inner">
-              <a href={item.href} class="mob-item__all">{item.allLabel ?? item.label}</a>
+              <a href={item.href} class="mob-item__all" aria-current={currentState(item.href)}>{item.allLabel ?? item.label}</a>
               {(item.items ?? []).map((sub) => (<a href={sub.href} class="mob-item__link">{sub.label}</a>))}
             </div>
           </div>
         </div>
       ) : (
-        <a href={item.href} class="mob-direct">{item.label}</a>
+        <a href={item.href} class="mob-direct" aria-current={currentState(item.href)}>{item.label}</a>
       ))}
     </nav>
   </div>

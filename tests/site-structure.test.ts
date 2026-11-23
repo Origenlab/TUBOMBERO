@@ -184,7 +184,8 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(read(directoryGrid)).toContain('images.unsplash.com/photo-');
     expect(read(directoryGrid)).toContain('Estaciones de bomberos en {state.label}');
     expect(read(directoryGrid)).toContain('El directorio de estaciones de bomberos en {state.label} se publicará');
-    expect(read(directoryGrid)).toContain('Consultar directorio de bomberos en {state.label}');
+    expect(read(directoryGrid)).toContain('Directorio en preparación');
+    expect(read(directoryGrid)).not.toContain("publishedDirectoryStatePath(state.slug) ?? '/contacto'");
     expect(read(directoryGrid)).toContain('srcset={unsplashSrcset(photo.id)}');
     expect(read(directoryGrid)).toContain('sizes="(min-width: 1180px) 27vw, (min-width: 720px) 50vw, 100vw"');
     expect(read(directoryGrid)).toContain('class="state-directory-layout state-directory-layout--right"');
@@ -653,7 +654,8 @@ describe('contrato de homologación TUBOMBERO', () => {
     expect(publishedDirectoryStatePath('oaxaca')).toBe('/directorio/oaxaca');
     expect(publishedDirectoryStatePath('puebla')).toBe('/directorio/puebla');
     expect(grid).toContain("import { CATEGORIES, publishedDirectoryStatePath, SERVICES } from '@config/site';");
-    expect(grid).toContain("publishedDirectoryStatePath(state.slug) ?? '/contacto'");
+    expect(grid).toContain('const statePath = publishedDirectoryStatePath(state.slug)');
+    expect(grid).toContain('href={statePath}');
     expect(detail).toContain("import { CATEGORIES, DIRECTORY_STATES, directoryStatePath, SERVICES, stationsForDirectoryState, stateDirectoryMetaDescription } from '@config/site';");
     expect(detail).toContain('href={directoryStatePath(item.slug)}');
   });

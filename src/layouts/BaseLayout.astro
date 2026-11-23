@@ -151,13 +151,12 @@ const jsonLd = buildSchema(pageType, schemaData);
     {/* ── Iconos y manifest ── */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="var(--c-ink)" />
+    <meta name="theme-color" content={SITE.themeColor} />
 
     {/*
-      ── Fonts API (Astro 6) — Inter (body) + Outfit (headings) ──
+      ── Fonts API (Astro 7) — Inter (body) ──
       El proveedor Fontsource descargó los woff2 durante el build y los sirve
-      desde este dominio (no Google CDN). <Font preload> emite:
-        - <link rel="preload"> para el subconjunto crítico (latin)
+      desde este dominio (no Google CDN). <Font> emite:
         - @font-face con la fuente real
         - @font-face del fallback con size-adjust/ascent-override calculados
           para CLS ≈ 0 (texto del sistema mismo tamaño que Inter/Outfit).
@@ -165,7 +164,7 @@ const jsonLd = buildSchema(pageType, schemaData);
       esta <Font> los sobreescribe con el valor correcto vía cssVariable.
       Configurado en astro.config.mjs → bloque `fonts: [...]`.
     */}
-    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-body" />
 
     {/*
       ── Preconnect CDN de imágenes (E3) — opcional ──

@@ -36,12 +36,12 @@ const faqSchema = emitSchema ? {
             <span>{item.question}</span>
             <Icon name="chevron-down" size={20} class="faq__chevron" />
           </summary>
-          <div class="faq__a"><p set:html={item.answer} /></div>
+          <div class="faq__a"><p>{item.answer}</p></div>
         </details>
       ))}
     </div>
   </div>
-  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+  {faqSchema && <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />}
 </section>
 
 <style>

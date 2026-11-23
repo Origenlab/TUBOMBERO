@@ -99,7 +99,7 @@ const waFallback = waUrl(WA_MESSAGES.cotizar)
             <button type="submit" class="fwc__btn" disabled={!waReady} aria-disabled={!waReady}><Icon name="whatsapp" size={20} />Cotizar equipo contra incendios por WhatsApp</button>
             {!waReady && <p class="fwc__notice" role="status">Canal de WhatsApp en configuración. Pronto podrás enviar tu solicitud desde aquí.</p>}
             {waFallback && <p class="fwc__fallback">¿No se abre WhatsApp? Escríbenos directo: <a href={waFallback} target="_blank" rel="noopener noreferrer">wa.me/{CONTACT.whatsapp}</a>{CONTACT.phone && <> · {CONTACT.phone}</>}</p>}
-            <p class="fwc__privacy">Al pulsar el botón se abre WhatsApp con tu mensaje. No guardamos ningún dato.</p>
+            <p class="fwc__privacy">Al pulsar el botón, los datos del formulario se transfieren a WhatsApp. Tu Bombero no los almacena en este sitio; WhatsApp aplica sus propios términos y política de privacidad.</p>
           </form>
         </div>
       </aside>
