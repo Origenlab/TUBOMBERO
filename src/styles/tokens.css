@@ -27,8 +27,8 @@
   --c-bg: #ffffff;
 
   /* ---------- TIPOGRAFÍA ---------- */
-  /* FONTS API (Astro 6): BaseLayout inyecta <Font cssVariable="--font-body/heading">
-     que sobreescribe estos valores con Inter/Outfit + @font-face + size-adjust.
+  /* FONTS API (Astro 7): BaseLayout inyecta <Font cssVariable="--font-body">
+     que sobreescribe este valor con Inter + @font-face + size-adjust.
      Los valores system-ui aquí son fallback para builds sin Fonts API activa. */
   --font-heading: var(--font-body); /* Frank: Inter como única familia */
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -51,7 +51,7 @@
   --border: 1px solid var(--c-border);
 
   /* ---------- LAYOUT ---------- */
-  --container-max: 100%;
+  --container-max: 1440px;
   --container-prose: 720px;      /* Ancho de lectura (prose en artículos). Se mantiene en px por legibilidad (line-length); NO es el ancho del sitio. */
   --container-px: clamp(1rem, 3vw, 3rem);
   --topbar-height: 36px;

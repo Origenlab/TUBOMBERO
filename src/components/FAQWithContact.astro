@@ -107,7 +107,7 @@ const waFallback = waUrl(WA_MESSAGES.cotizar)
   </div>
 </section>
 
-<script define:vars={{ waNumber }}>
+<script is:inline define:vars={{ waNumber }}>
   const form = document.getElementById('fwc-form')
   form?.addEventListener('submit', (event) => {
     event.preventDefault()

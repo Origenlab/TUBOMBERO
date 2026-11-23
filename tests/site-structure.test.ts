@@ -232,8 +232,6 @@ describe('contrato de homologación TUBOMBERO', () => {
   it('publica la primera ficha estatal de Aguascalientes con una estructura verificable', () => {
     const route = 'src/pages/directorio/aguascalientes.astro';
     const detail = 'src/components/StateDirectoryDetail.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
-
     expect(existsSync(resolve(root, route))).toBe(true);
     expect(existsSync(resolve(root, detail))).toBe(true);
     expect(read(route)).toContain('<StateDirectoryDetail state={state} />');
@@ -292,7 +290,6 @@ describe('contrato de homologación TUBOMBERO', () => {
   it('enlaza Baja California como la siguiente ficha L3 con estaciones verificables', () => {
     const route = 'src/pages/directorio/baja-california.astro';
     const detail = read('src/components/StateDirectoryDetail.astro');
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -308,7 +305,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Baja California Sur con estaciones activas verificadas por el Ayuntamiento de Los Cabos', () => {
     const route = 'src/pages/directorio/baja-california-sur.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -325,7 +321,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Campeche con las sedes institucionales confirmadas sin anticipar subestaciones en construcción', () => {
     const route = 'src/pages/directorio/campeche.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -342,7 +337,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Chiapas con seis estaciones y teléfonos del directorio institucional del Instituto de Bomberos', () => {
     const route = 'src/pages/directorio/chiapas.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -361,7 +355,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Chihuahua con estaciones cuya ubicación se documenta en fuentes oficiales recientes', () => {
     const route = 'src/pages/directorio/chihuahua.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -376,7 +369,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Ciudad de México con el directorio oficial de estaciones del Heroico Cuerpo de Bomberos', () => {
     const route = 'src/pages/directorio/ciudad-de-mexico.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -393,7 +385,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Coahuila con las estaciones y subestaciones publicadas por Protección Civil y Bomberos de Torreón', () => {
     const route = 'src/pages/directorio/coahuila.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -409,7 +400,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Colima con el registro institucional de Bomberos Tecomán', () => {
     const route = 'src/pages/directorio/colima.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);
@@ -423,7 +413,6 @@ describe('contrato de homologación TUBOMBERO', () => {
 
   it('enlaza Durango con los registros municipales de Protección Civil y Bomberos publicados por el estado', () => {
     const route = 'src/pages/directorio/durango.astro';
-    const directoryGrid = read('src/components/StateDirectoryGrid.astro');
     const site = read('src/config/site.ts');
 
     expect(existsSync(resolve(root, route))).toBe(true);

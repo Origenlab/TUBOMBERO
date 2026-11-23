@@ -58,4 +58,35 @@ describe('contrato de migración a Astro 7', () => {
     expect(contact).toContain('se transfieren a WhatsApp');
     expect(contact).not.toContain('No guardamos ningún dato.');
   });
+
+  it('limita el lienzo y simplifica el footer para pantallas amplias', () => {
+    const tokens = read('src/styles/tokens.css');
+    const globalStyles = read('src/styles/global.css');
+    const footer = read('src/components/Footer.astro');
+
+    expect(tokens).toContain('--container-max: 1440px;');
+    expect(globalStyles).toContain('text-wrap: balance');
+    expect(globalStyles).toContain('text-wrap: pretty');
+    expect(footer).not.toContain('aria-label="Cobertura"');
+    expect(footer).toContain('href="/directorio"');
+    expect(footer).toContain('Toda la República Mexicana');
+  });
+
+  it('usa las formas vigentes de Astro 7 sin variables muertas', () => {
+    const categoryCard = read('src/components/CategoryCard.astro');
+    const pageLayout = read('src/layouts/PageLayout.astro');
+    const contact = read('src/components/FAQWithContact.astro');
+
+    expect(categoryCard).not.toContain('const ChipTag');
+    expect(pageLayout).toContain('<style is:inline set:html={GUIDE_CSS} />');
+    expect(contact).toContain('<script is:inline define:vars={{ waNumber }}>');
+  });
+
+  it('declara sólo las colecciones que tienen contenido publicado', () => {
+    const contentConfig = read('src/content.config.ts');
+
+    expect(contentConfig).toContain('export const collections = { guias, paginas };');
+    expect(contentConfig).not.toContain('const productos = defineCollection');
+    expect(contentConfig).not.toContain('const casos = defineCollection');
+  });
 });

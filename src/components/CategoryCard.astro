@@ -67,7 +67,6 @@ const eager = index < 4; // las 4 primeras tarjetas (1.ª fila) cargan imagen si
 const resolvedCtaLabel = ctaLabel ?? label;
 // 'disabled' (p. ej. módulo 'próximo'): ni la imagen ni los chips enlazan (evita 404s).
 const MediaTag = disabled ? "div" : "a";
-const ChipTag = disabled ? "span" : "a";
 // Orden alfabético (es-MX) para que todas las cards lean igual.
 const sortedSubs = [...subcategories].sort((a, b) => a.localeCompare(b, 'es-MX', { sensitivity: 'base' }));
 ---

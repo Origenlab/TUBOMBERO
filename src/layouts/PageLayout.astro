@@ -104,7 +104,7 @@ const GUIDE_CSS = `.hbg,.bcg{background:var(--c-surface);border-bottom:1px solid
 ---
 
 <BaseLayout {...baseProps} schemaData={schemaData}>
-  {guia && <style is:inline>{GUIDE_CSS}</style>}
+  {guia && <style is:inline set:html={GUIDE_CSS} />}
   {/* TopBar: barra utilitaria. `guia` = modo plantilla-guía (anota cada punto). */}
   {/* En un sitio de cliente (o página de detalle), se pasa guia={false}. */}
   <TopBar guia={guia} />

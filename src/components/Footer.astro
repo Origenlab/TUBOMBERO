@@ -1,18 +1,18 @@
 ---
-// Footer.astro — Footer profesional AMPLIO de 5 zonas, 100% data-driven desde
+// Footer.astro — Footer profesional, 100% data-driven desde
 // config/site (SSoT). Estructura:
 //   1) Banda CTA pre-footer (titular + WhatsApp + Contacto).
 //   2) Cuerpo: marca (logo wordmark + descripción + contacto NAP + redes) + 4
-//      columnas de navegación (Productos · Servicios/Sectores · Cobertura · Empresa).
+//      columnas de navegación (Productos · Servicios/Sectores · Guías · Empresa).
 //   3) Banda de cumplimiento normativo (opcional, vía prop `certifications`).
 //   4) Barra inferior: copyright + enlaces legales + botón "volver arriba".
-// Barra full-width de fondo; contenido al 90% (--container-max). WhatsApp SIEMPRE
+// Barra full-width de fondo; contenido limitado por --container-max. WhatsApp SIEMPRE
 // vía waUrl(); teléfono vía telUrl(). Reglas de motion: solo botones/CTA con
 // transición (las listas de enlaces cambian de color al instante).
 import Icon from '@components/Icon.astro'
 import {
   SITE, CONTACT, BRANCHES, PRODUCT_CATEGORIES, SERVICES, SECTORS,
-  COVERAGE_STATES, SOCIAL, LEGAL, contextualCta, waUrl, telUrl, WA_MESSAGES,
+  SOCIAL, LEGAL, contextualCta, waUrl, telUrl, WA_MESSAGES,
 } from '@config/site'
 import { getGuides } from '@lib/guides'
 
@@ -88,6 +88,7 @@ const SOCIAL_ICONS: Record<string, string> = {
           <span class="footer__logo-word">{SITE.brand}<span class="footer__logo-tld">{`.${SITE.domain.split(".").slice(1).join(".")}`}</span></span>
         </a>
         <p class="footer__brand-desc">{SITE.description}</p>
+        <p class="footer__coverage-text">Cobertura comercial prevista: Toda la República Mexicana.</p>
 
         <address class="footer__contact" aria-label="Datos de contacto">
           {waDefault && <a href={waDefault} class="footer__contact-row footer__contact-row--cta" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
@@ -181,25 +182,13 @@ const SOCIAL_ICONS: Record<string, string> = {
         </ul>
       </nav>
 
-      <!-- Cobertura -->
-      <nav class="footer__col" aria-label="Cobertura">
-        <h3 class="footer__col-heading"><span class="footer__col-heading-accent" aria-hidden="true"></span>Cobertura</h3>
-        <ul class="footer__nav-list footer__coverage-list" role="list">
-          {COVERAGE_STATES.length > 0 ? COVERAGE_STATES.map((state) => (
-            <li><a href={`/cobertura/${state.slug}`} class="footer__nav-link">{state.label}
-              {(state as any).type && <span class={`footer__coverage-badge footer__coverage-badge--${(state as any).type}`}>{(state as any).type === 'operativo' ? 'Operativo' : 'Comercial'}</span>}
-            </a></li>
-          )) : <li><span class="footer__coverage-text">Toda la República Mexicana</span></li>}
-        </ul>
-      </nav>
-
-
       <!-- Empresa -->
       <nav class="footer__col" aria-label="Empresa">
         <h3 class="footer__col-heading"><span class="footer__col-heading-accent" aria-hidden="true"></span>Empresa</h3>
         <ul class="footer__nav-list" role="list">
           <li><a href="/nosotros" class="footer__nav-link">Nosotros</a></li>
           <li><a href="/servicios" class="footer__nav-link">Servicios de protección contra incendios</a></li>
+          <li><a href="/directorio" class="footer__nav-link">Directorio de bomberos</a></li>
           <li><a href="/contacto" class="footer__nav-link">Contacto</a></li>
           <li><a href={waDefault ?? '/contacto'} class="footer__nav-link" target={waDefault ? '_blank' : undefined} rel={waDefault ? 'noopener noreferrer' : undefined}>Cotizar equipo contra incendios</a></li>
         </ul>
@@ -297,7 +286,7 @@ const SOCIAL_ICONS: Record<string, string> = {
   .footer__logo-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: var(--ft-accent); color: var(--c-white); font-family: var(--font-heading); font-weight: var(--weight-black, 800); font-size: 1.25rem; line-height: 1; box-shadow: 0 2px 10px rgba(var(--c-primary-rgb, 91,61,245), .4); }
   .footer__logo-word { font-family: var(--font-heading); font-weight: var(--weight-black, 800); font-size: 1.35rem; letter-spacing: -.01em; color: var(--ft-white); line-height: 1; }
   .footer__logo-tld { color: var(--ft-accent-2); }
-  .footer__brand-desc { font-size: var(--text-sm, .875rem); line-height: 1.7; color: rgba(255,255,255,.5); margin: 0 0 1.5rem; max-width: 40ch; }
+  .footer__brand-desc { font-size: var(--text-sm, .875rem); line-height: 1.7; color: rgba(255,255,255,.5); margin: 0 0 .75rem; max-width: 40ch; }
 
   /* Columnas de navegación */
   .footer__col-heading { display: flex; align-items: center; gap: .5rem; font-size: var(--text-xs, .75rem); font-weight: var(--weight-bold, 700); color: var(--ft-white); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 1.25rem; }
@@ -308,7 +297,7 @@ const SOCIAL_ICONS: Record<string, string> = {
   .footer__nav-link:hover { color: var(--ft-text-hover); }
   .footer__nav-link--all { font-weight: var(--weight-semibold, 600); color: var(--ft-accent-2); font-size: .8125rem; }
   .footer__nav-link--all:hover { color: var(--ft-white); }
-  .footer__coverage-text { font-size: var(--text-sm, .875rem); line-height: 1.5; color: rgba(255,255,255,.72); }
+  .footer__coverage-text { margin: 0 0 1.5rem; font-size: var(--text-sm, .875rem); line-height: 1.5; color: rgba(255,255,255,.72); }
   /* ---------- 4) BARRA INFERIOR ---------- */
   .footer__bottom { background: var(--ft-bg-bottom); padding: 1.25rem 0; }
   .footer__bottom-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem 1.5rem; flex-wrap: wrap; max-width: var(--container-max, 1400px); margin-inline: auto; padding-inline: var(--container-px, 1.5rem); }
