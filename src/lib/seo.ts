@@ -46,6 +46,9 @@ import { SITE, CONTACT, SOCIAL } from '@config/site';
 const ORG_ID = `${SITE.url}/#organization`;
 const WEBSITE_ID = `${SITE.url}/#website`;
 const BUSINESS_ID = `${SITE.url}/#localbusiness`;
+// Vendedor/proveedor de Product y Service: el LocalBusiness si existe; si no,
+// la Organization. Así nunca queda un @id colgante (#localbusiness sin nodo).
+const SELLER_ID = (SITE as { business?: unknown }).business ? BUSINESS_ID : ORG_ID;
 const LOGO_ID = `${SITE.url}/#logo`;
 
 /* sameAs canónico de la entidad: combina organization.sameAs con los perfiles
@@ -640,7 +643,8 @@ export function breadcrumbSchema(items: Crumb[]) {
       '@type': 'ListItem',
       position: i + 1,
       name: c.name,
-      item: absUrl(c.path),
+      // Sin path no se inventa URL: Google admite el último ListItem sin `item`.
+      ...(c.path ? { item: absUrl(c.path) } : {}),
     })),
   };
 }
@@ -654,40 +658,34 @@ export type ProductData = {
   brand?: string;
   category?: string;
   material?: string;
-  price?: string;        // 'desde' en MXN, solo dígitos. Omítelo si es "bajo cotización".
+  price?: number;        // precio numérico en MXN. Omítelo si es "bajo cotización".
   availability?: 'InStock' | 'OutOfStock' | 'PreOrder';
   reviews?: Review[];    // ← solo reseñas REALES verificables (ver emitReviews)
 };
 
 /**
  * Product + Offer honesto.
- * - Si NO hay `price`, se emite Offer "bajo cotización" (UnitPriceSpecification),
- *   patrón de negocio WhatsApp-first sin precio público (origen BOMBERO).
+ * - Con `price` (número) → Offer con price numérico (válido para Google).
+ * - Sin `price` → Product SIN `offers`. Antes se emitía price "0", que Google
+ *   lee como «gratis» (engañoso) y el texto "Desde $X" era inválido.
  * - aggregateRating/Review SOLO si emitReviews() valida reseñas reales.
  */
 export function productSchema(p: ProductData) {
   const url = absUrl(p.path);
-  const offer: Record<string, unknown> = {
-    '@type': 'Offer',
-    url,
-    priceCurrency: 'MXN',
-    availability: `https://schema.org/${p.availability ?? 'InStock'}`,
-    itemCondition: 'https://schema.org/NewCondition',
-    seller: { '@id': BUSINESS_ID },
-    areaServed: 'MX',
-  };
-  if (p.price) {
-    offer.price = p.price;
-    offer.priceValidUntil = `${new Date().getFullYear() + 1}-12-31`;
-  } else {
-    offer.price = '0';
-    offer.priceSpecification = {
-      '@type': 'UnitPriceSpecification',
-      price: '0',
-      priceCurrency: 'MXN',
-      description: 'Precio bajo cotización — contáctanos para tarifa personalizada.',
-    };
-  }
+  const offer =
+    typeof p.price === 'number' && p.price > 0
+      ? {
+          '@type': 'Offer',
+          url,
+          price: p.price,
+          priceCurrency: 'MXN',
+          priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
+          availability: `https://schema.org/${p.availability ?? 'InStock'}`,
+          itemCondition: 'https://schema.org/NewCondition',
+          seller: { '@id': SELLER_ID },
+          areaServed: 'MX',
+        }
+      : undefined;
   return {
     '@type': 'Product',
     '@id': `${url}#product`,
@@ -700,7 +698,7 @@ export function productSchema(p: ProductData) {
     brand: { '@type': 'Brand', name: p.brand ?? SITE.name },
     manufacturer: { '@id': ORG_ID },
     url,
-    offers: offer,
+    ...(offer ? { offers: offer } : {}),
     ...emitReviews(p.reviews),
   };
 }
@@ -726,7 +724,7 @@ export function serviceSchema(s: ServiceData) {
     serviceType: s.serviceType ?? s.name,
     url,
     ...(s.image ? { image: absImage(s.image) } : {}),
-    provider: { '@id': BUSINESS_ID },
+    provider: { '@id': SELLER_ID },
     areaServed: (s.areaServed ?? (SITE.business as any)?.areaServed ?? ['Ciudad de México']).map((name: string) => ({ '@type': 'City', name })),
     availableChannel: {
       '@type': 'ServiceChannel',

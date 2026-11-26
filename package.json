@@ -16,7 +16,8 @@
     "check:demo": "node scripts/check-demo.mjs",
     "check:url-shape": "node scripts/check-url-shape.mjs",
     "check:budget": "node scripts/check-budget.mjs",
-    "postbuild": "node scripts/audit-meta.mjs && node scripts/check-dist-content.mjs && node scripts/check-budget.mjs"
+    "postbuild": "node scripts/audit-meta.mjs && node scripts/check-dist-content.mjs && node scripts/check-budget.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
