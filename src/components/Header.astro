@@ -70,7 +70,7 @@ const currentState = (href: string) =>
   <div class="hdr-inner">
 
     <a href="/" class="hdr-logo">
-      {guia && <span class="hdr-mark" aria-hidden="true">1</span>}
+      {guia && <span class="hdr-mark" aria-hidden="true"></span>}
       <span class="hdr-logo__mark" aria-hidden="true">{SITE.brand.charAt(0)}</span>
       <span class="hdr-logo__word">{SITE.brand}<span class="hdr-logo__tld">{`.${SITE.domain.split(".").slice(1).join(".")}`}</span></span>
     </a>
@@ -84,10 +84,10 @@ const currentState = (href: string) =>
         ) : (
           <li class="hdr-nav__item" data-dropdown={navId(item.label)}>
             <a href={item.href} class:list={['hdr-nav__link', { 'hdr-nav__link--active': isActive(item.href) }]} aria-current={currentState(item.href)} aria-haspopup="true" aria-expanded="false">
-              {guia && i === 0 && <span class="hdr-mark" aria-hidden="true">2</span>}
+              {guia && i === 0 && <span class="hdr-mark" aria-hidden="true"></span>}
               {item.label}
               <Icon name="chevron-down" size={12} class="hdr-chevron" />
-              {guia && i === 1 && <span class="hdr-mark" aria-hidden="true">3</span>}
+              {guia && i === 1 && <span class="hdr-mark" aria-hidden="true"></span>}
             </a>
             {item.panel === 'dropdown' && (
               <div class="drop-panel" id={navId(item.label)} role="region" aria-label={item.label} aria-hidden="true">
@@ -108,7 +108,7 @@ const currentState = (href: string) =>
     </nav>
 
     <a href={headerWaUrl ?? '/contacto'} class="hdr-cta" target={headerWaUrl ? '_blank' : undefined} rel={headerWaUrl ? 'noopener noreferrer' : undefined} aria-label={headerCtaLabel}>
-      {guia && <span class="hdr-mark hdr-mark--cta" aria-hidden="true">4</span>}
+      {guia && <span class="hdr-mark hdr-mark--cta" aria-hidden="true"></span>}
       {headerWaUrl ? <Icon name="whatsapp" size={16} /> : <span class="hdr-cta__message" aria-hidden="true">✉</span>} {headerCtaLabel}
     </a>
 
@@ -148,7 +148,7 @@ const currentState = (href: string) =>
       <ol class="hbg__list">
         {PUNTOS.map((p) => (
           <li class="hbg__pt">
-            <span class="hbg__num">{p.n}</span>
+            <span class="hbg__num" aria-hidden="true"></span>
             <div class="hbg__pt-body">
               <p class="hbg__nombre">{p.nombre}</p>
               <p class="hbg__que">{p.que}</p>

@@ -87,7 +87,7 @@ const PUNTOS = [
             )}
             {index < DEMO.length - 1 && (
               <span class="breadcrumb__sepwrap">
-                {index === DEMO.length - 2 && <span class="bc-mark" aria-hidden="true">3</span>}
+                {index === DEMO.length - 2 && <span class="bc-mark" aria-hidden="true"></span>}
                 <Icon name="chevron-right" size={14} class="breadcrumb__sep" />
               </span>
             )}
@@ -129,7 +129,7 @@ const PUNTOS = [
       <ol class="bcg__list">
         {PUNTOS.map((p) => (
           <li class="bcg__pt">
-            <span class="bcg__num">{p.n}</span>
+            <span class="bcg__num" aria-hidden="true"></span>
             <div class="bcg__pt-body">
               <p class="bcg__nombre">{p.nombre}</p>
               <p class="bcg__que">{p.que}</p>

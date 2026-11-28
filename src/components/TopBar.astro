@@ -56,7 +56,7 @@ const PUNTOS = [
 <aside class:list={['topbar', { 'is-guia': guia }]} aria-label="Información de contacto">
   <div class="tb-inner">
     <p class="tb-promo">
-      {guia && <span class="tb-mark" aria-hidden="true">1</span>}
+      {guia && <span class="tb-mark" aria-hidden="true"></span>}
       <span class="tb-spark" aria-hidden="true"></span>
       <span class="tb-promo__txt">{SITE.tagline}</span>
     </p>
@@ -64,20 +64,20 @@ const PUNTOS = [
     <div class="tb-actions">
       {schedule && (
         <span class="tb-item tb-schedule">
-          {guia && <span class="tb-mark" aria-hidden="true">2</span>}
+          {guia && <span class="tb-mark" aria-hidden="true"></span>}
           <Icon name="clock" size={14} class="tb-ico" />
           <span class="tb-item__txt">{schedule}</span>
         </span>
       )}
 
       {telUrl() && <a href={telUrl()} class="tb-item tb-phone" aria-label={`Llamar al ${CONTACT.phone}`}>
-        {guia && <span class="tb-mark" aria-hidden="true">3</span>}
+        {guia && <span class="tb-mark" aria-hidden="true"></span>}
         <Icon name="phone" size={14} class="tb-ico" />
         <span class="tb-item__txt">{CONTACT.phone}</span>
       </a>}
 
       {waUrl(WA_MESSAGES.cotizar) && <a href={waUrl(WA_MESSAGES.cotizar)} class="tb-item tb-wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-        {guia && <span class="tb-mark" aria-hidden="true">4</span>}
+        {guia && <span class="tb-mark" aria-hidden="true"></span>}
         <Icon name="whatsapp" size={14} class="tb-ico" />
         <span class="tb-item__txt">WhatsApp</span>
       </a>}
@@ -96,7 +96,7 @@ const PUNTOS = [
       <ol class="tbg__list">
         {PUNTOS.map((p) => (
           <li class="tbg__pt">
-            <span class="tbg__num">{p.n}</span>
+            <span class="tbg__num" aria-hidden="true"></span>
             <div class="tbg__pt-body">
               <p class="tbg__nombre">{p.nombre}</p>
               <p class="tbg__que">{p.que}</p>
